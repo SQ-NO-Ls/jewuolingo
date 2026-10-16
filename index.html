@@ -41,11 +41,11 @@ header{text-align:center;padding:10px 0 8px;}
 .stats-bar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center;}
 .stat-pill{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:7px 14px;font-size:13px;display:flex;align-items:center;gap:6px;font-weight:500;}
 .stat-pill .num{color:var(--blue);font-weight:700;font-size:15px;}
-.toggle-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;font-family:'DM Sans',sans-serif;user-select:none;}
+.toggle-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:6px 14px;min-height:40px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;font-family:'DM Sans',sans-serif;user-select:none;}
 .toggle-btn:hover{border-color:var(--teal);color:var(--teal);}
 .toggle-btn.on{border-color:var(--teal);background:rgba(56,178,172,.12);color:var(--teal);box-shadow:0 0 14px rgba(56,178,172,.3);}
 .toggle-btn .he-icon{font-family:var(--he-font);font-size:16px;font-weight:700;}
-.analytics-btn{background:var(--surface);border:1px solid var(--blue-dim);border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;font-family:'DM Sans',sans-serif;margin-left:auto;}
+.analytics-btn{background:var(--surface);border:1px solid var(--blue-dim);border-radius:50px;padding:7px 14px;min-height:40px;font-size:12px;font-weight:600;color:var(--blue);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;font-family:'DM Sans',sans-serif;margin-left:auto;}
 .analytics-btn:hover{background:var(--blue-soft);box-shadow:0 0 12px var(--blue-glow);}
 
 /* MODE GRID */
@@ -65,10 +65,10 @@ header{text-align:center;padding:10px 0 8px;}
 
 /* CAT + LEVEL TABS */
 .category-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
-.cat-tab{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:5px 14px;font-size:11px;cursor:pointer;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.cat-tab{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:5px 14px;min-height:40px;display:inline-flex;align-items:center;font-size:11px;cursor:pointer;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .cat-tab.active{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);box-shadow:0 0 10px var(--blue-glow);}
 .level-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
-.level-tab{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:5px 14px;font-size:11px;cursor:pointer;color:var(--muted);font-weight:700;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:5px;}
+.level-tab{background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:5px 14px;min-height:40px;font-size:11px;cursor:pointer;color:var(--muted);font-weight:700;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:5px;}
 .level-tab:hover{border-color:var(--blue-dim);color:var(--text);}
 .lvl-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
 .level-tab.active{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);}
@@ -93,7 +93,7 @@ header{text-align:center;padding:10px 0 8px;}
 
 /* PRON BUTTON */
 .pron-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.pron-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.3);border-radius:50px;padding:4px 13px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--blue);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;user-select:none;}
+.pron-btn{display:inline-flex;align-items:center;min-height:40px;gap:5px;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.3);border-radius:50px;padding:4px 13px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--blue);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;user-select:none;}
 .pron-btn:hover{background:rgba(37,99,235,.18);border-color:var(--blue);box-shadow:0 0 10px var(--blue-glow);}
 .pron-reveal{font-size:14px;color:var(--blue);letter-spacing:1px;font-style:italic;opacity:0;max-height:0;overflow:hidden;transition:opacity .2s,max-height .25s;text-align:center;}
 .pron-reveal.show{opacity:1;max-height:44px;}
@@ -130,7 +130,7 @@ body.cursive-on .he-text{font-family:var(--he-cursive)!important;}
 .type-english{font-size:32px;font-weight:300;color:var(--text);text-align:center;margin-bottom:8px;}
 .type-hint{font-size:12px;color:var(--muted);text-align:center;margin-bottom:12px;}
 .type-input-wrap{display:flex;gap:10px;margin-bottom:8px;}
-.type-input{flex:1;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:16px 20px;color:var(--text);font-size:28px;font-family:var(--he-font);direction:rtl;outline:none;transition:all .2s;}
+.type-input{flex:1;min-width:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:16px 20px;color:var(--text);font-size:28px;font-family:var(--he-font);direction:rtl;outline:none;transition:all .2s;}
 .type-input:focus{border-color:var(--blue-dim);box-shadow:0 0 12px var(--blue-glow);}
 .type-input.good{border-color:var(--green);background:rgba(72,187,120,.08);}
 .type-input.bad{border-color:var(--rose);background:rgba(224,92,122,.08);}
@@ -150,7 +150,7 @@ body.cursive-on .match-item.he-side{font-family:var(--he-cursive)!important;}
 
 /* FILL IN */
 .sentence-box{font-size:24px;line-height:2;margin-bottom:16px;text-align:center;padding:24px;background:var(--surface2);border-radius:14px;border:1px solid var(--border);}
-.blank-slot{display:inline-block;min-width:130px;border-bottom:2px solid var(--blue);padding:2px 10px;font-size:28px;color:#fff;direction:rtl;background:transparent;border-top:none;border-left:none;border-right:none;outline:none;vertical-align:middle;text-align:center;font-family:var(--he-font);}
+.blank-slot{display:inline-block;min-width:90px;max-width:100%;border-bottom:2px solid var(--blue);padding:2px 10px;font-size:28px;color:#fff;direction:rtl;background:transparent;border-top:none;border-left:none;border-right:none;outline:none;vertical-align:middle;text-align:center;font-family:var(--he-font);}
 body.cursive-on .blank-slot{font-family:var(--he-cursive)!important;}
 .sentence-hint-line{color:var(--muted);font-size:13px;text-align:center;margin-bottom:14px;}
 .word-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px;}
@@ -247,8 +247,9 @@ body.cursive-on .aleph-quiz-letter{font-family:var(--he-cursive)!important;}
 
 /* GRAMMAR MODE */
 .gram-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
-.gram-tab{background:var(--surface2);border:1px solid var(--border);border-radius:50px;padding:6px 16px;font-size:12px;cursor:pointer;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.gram-tab{background:var(--surface2);border:1px solid var(--border);border-radius:50px;padding:6px 16px;min-height:40px;display:inline-flex;align-items:center;font-size:12px;cursor:pointer;color:var(--muted);font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .gram-tab.active{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);}
+.gram-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 .gram-table{width:100%;border-collapse:collapse;font-size:14px;}
 .gram-table th{background:var(--surface2);color:var(--blue);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 12px;text-align:left;border:1px solid var(--border);}
 .gram-table td{padding:10px 12px;border:1px solid var(--border);vertical-align:top;}
@@ -317,14 +318,14 @@ body.cursive-on .gram-he{font-family:var(--he-cursive)!important;}
 .test-inner{position:relative;max-width:760px;margin:0 auto;padding:28px 22px 60px;min-height:100vh;display:flex;flex-direction:column;}
 .test-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
 .test-head .th-logo{font-family:var(--he-font);font-size:30px;font-weight:900;color:var(--blue);text-shadow:0 0 24px var(--blue-glow);}
-.test-x{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.test-x{background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:8px 16px;min-height:40px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .test-x:hover{border-color:var(--rose);color:var(--rose);}
 .test-setup-title{font-family:var(--he-font);font-size:36px;color:var(--blue);text-align:center;margin-bottom:4px;}
 .test-setup-sub{font-size:13px;color:var(--muted);text-align:center;margin-bottom:30px;}
 .test-section{margin-bottom:24px;}
 .test-section-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 .test-opt-row{display:flex;gap:10px;flex-wrap:wrap;}
-.test-chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:13px 18px;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;flex:1;text-align:center;min-width:78px;}
+.test-chip{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:13px 18px;min-height:44px;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;flex:1;text-align:center;min-width:78px;}
 .test-chip:hover{border-color:var(--blue-dim);transform:translateY(-1px);}
 .test-chip.sel{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);box-shadow:0 0 16px var(--blue-glow);}
 .test-chip .tc-sub{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:3px;}
@@ -399,7 +400,7 @@ body.cursive-on .sicha-sug .sg-he{font-family:var(--he-cursive)!important;}
 body.cursive-on .sch-bank-w{font-family:var(--he-cursive)!important;}
 .sch-starter{font-size:13px;color:var(--teal);margin-top:10px;direction:rtl;text-align:right;font-family:var(--he-font);}
 .sch-input-row{display:flex;gap:8px;margin-top:12px;}
-.sch-input{flex:1;background:var(--surface2);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;font-size:18px;color:var(--text);direction:rtl;text-align:right;font-family:var(--he-font);outline:none;}
+.sch-input{flex:1;min-width:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:14px;padding:12px 14px;font-size:18px;color:var(--text);direction:rtl;text-align:right;font-family:var(--he-font);outline:none;}
 .sch-input:focus{border-color:var(--blue);}
 body.cursive-on .sch-input{font-family:var(--he-cursive)!important;}
 .sch-err{background:rgba(239,68,68,.1);border:1px solid var(--rose);border-radius:14px;padding:14px;margin-top:12px;}
@@ -1798,8 +1799,7 @@ const vocab=[
   {he:"רעב כמו זאב",level:5,heV:"רָעֵב כְּמוֹ זְאֵב",pron:"ra-EV kmo ze-EV",en:"hungry as a wolf / starving",cat:"Food",sentence:"אני ___",sentenceEn:"I'm ___",rank:1137},
   {he:"מפנק",level:5,heV:"מְפַנֵּק",pron:"me-fa-NEK",en:"indulgent / a real treat",cat:"Food",sentence:"קינוח ___",sentenceEn:"an ___ dessert",rank:1065},
   {he:"לטעום",level:5,heV:"לִטְעֹם",pron:"lit-OM",en:"to taste",cat:"Food",sentence:"רוצה ___?",sentenceEn:"want to ___?",rank:870},
-  {he:"בתאבון",level:4,heV:"בְּתֵאָבוֹן",pron:"be-te-a-VON",en:"bon appétit / enjoy your meal",cat:"Food",sentence:"הנה האוכל, ___!",sentenceEn:"here's the food, ___!",rank:578},
-
+  
   {he:"פלפל שחור",level:5,heV:"פִּלְפֵּל שָׁחֹר",pron:"PIL-pel sha-KHOR",en:"black pepper",cat:"Food",sentence:"תוסיף ___ למרק",sentenceEn:"add ___ to the soup",rank:953},
   {he:"כמון",level:5,heV:"כַּמּוֹן",pron:"ka-MON",en:"cumin",cat:"Food",sentence:"___ נותן טעם לחומוס",sentenceEn:"___ gives flavor to hummus",rank:837},
   {he:"כורכום",level:5,heV:"כֻּרְכּוּם",pron:"kur-KUM",en:"turmeric",cat:"Food",sentence:"___ צובע את האורז בצהוב",sentenceEn:"___ colors the rice yellow",rank:1083},
@@ -2059,7 +2059,7 @@ const vocab=[
 {he:"אך",level:3,heV:"אַךְ",pron:"AKH",en:"but (formal)",cat:"Conjunctions",sentence:"רציתי לבוא, ___ לא יכולתי",sentenceEn:"I wanted to come, ___ I could not",rank:320},
 {he:"ללא",level:3,heV:"לְלֹא",pron:"le-LO",en:"without",cat:"Essentials",sentence:"קפה ___ סוכר",sentenceEn:"coffee ___ sugar",rank:329},
 {he:"לגבי",level:3,heV:"לְגַבֵּי",pron:"le-ga-BEY",en:"regarding / about",cat:"Essentials",sentence:"מה דעתך ___ זה?",sentenceEn:"What do you think ___ this?",rank:324},
-{he:"ביותר",level:2,heV:"בְּיוֹתֵר",pron:"be-yo-TER",en:"the most (superlative)",cat:"Essentials",sentence:"זה הטוב ___",sentenceEn:"This is the best — lit. the good ___",rank:229},
+{he:"ביותר",level:2,heV:"בְּיוֹתֵר",pron:"be-yo-TER",en:"most (follows the adjective)",cat:"Essentials",sentence:"זה הטוב ___",sentenceEn:"This is the best — lit. the good ___",rank:229},
 {he:"במקום",level:3,heV:"בִּמְקוֹם",pron:"beem-KOM",en:"instead of",cat:"Essentials",sentence:"תה ___ קפה",sentenceEn:"tea ___ coffee",rank:348},
 {he:"מעולם",level:3,heV:"מֵעוֹלָם",pron:"me-o-LAM",en:"never (in the past)",cat:"Essentials",sentence:"___ לא הייתי שם",sentenceEn:"I was ___ there",rank:258},
 {he:"לעולם",level:3,heV:"לְעוֹלָם",pron:"le-o-LAM",en:"never (in the future)",cat:"Essentials",sentence:"___ לא אשכח",sentenceEn:"I will ___ forget",rank:287},
@@ -2078,7 +2078,7 @@ const vocab=[
 {he:"צדק",level:3,heV:"צֶדֶק",pron:"TSE-dek",en:"justice",cat:"Nouns",sentence:"אתה ___ גמור",sentenceEn:"you are completely right — lit. complete ___",rank:334},
 {he:"משטרה",level:3,heV:"מִשְׁטָרָה",pron:"meesh-ta-RAH",en:"police",cat:"Places",sentence:"תתקשר ל___",sentenceEn:"call the ___",rank:347},
 {he:"חזרה",level:3,heV:"חֲזָרָה",pron:"kha-za-RAH",en:"return / back",cat:"Getting Around",sentence:"כרטיס הלוך ו___",sentenceEn:"a round-trip ticket — lit. going and ___",rank:341},
-{he:"נהדר",level:3,heV:"נֶהְדָּר",pron:"neh-DAR",en:"wonderful",cat:"Adjectives",sentence:"היה ___!",sentenceEn:"it was ___!",rank:272},
+{he:"נהדר",level:3,heV:"נֶהְדָּר",pron:"neh-DAR",en:"great / splendid",cat:"Adjectives",sentence:"היה ___!",sentenceEn:"it was ___!",rank:272},
 {he:"יחיד",level:3,heV:"יָחִיד",pron:"ya-KHEED",en:"only / single",cat:"Adjectives",sentence:"הוא הבן ה___",sentenceEn:"he is the ___ son",rank:267},
 {he:"אמור",level:2,heV:"אָמוּר",pron:"a-MUR",en:"supposed to",cat:"Adjectives",sentence:"אני ___ להגיע מחר",sentenceEn:"I am ___ arrive tomorrow",rank:219},
 {he:"להגיע",level:1,heV:"לְהַגִּיעַ",pron:"le-ha-GEE-a",en:"to arrive / to reach",cat:"Verbs",sentence:"מתי אתה ___?",sentenceEn:"when are you going ___?",rank:74},
@@ -2093,7 +2093,7 @@ const vocab=[
 {he:"להפוך",level:2,heV:"לַהֲפֹךְ",pron:"la-ha-FOKH",en:"to turn / to become",cat:"Verbs",sentence:"זה יכול ___ לבעיה",sentenceEn:"this can ___ into a problem",rank:249},
 {he:"להספיק",level:3,heV:"לְהַסְפִּיק",pron:"le-has-PEEK",en:"to have enough time / to manage",cat:"Verbs",sentence:"לא אספיק ___ הכל",sentenceEn:"I will not manage ___ everything",rank:256},
 {he:"לבקש",level:6,heV:"לְבַקֵּשׁ",pron:"le-va-KESH",en:"to ask for / to request",cat:"Verbs",sentence:"אני רוצה ___ משהו",sentenceEn:"I want ___ something",rank:1442},
-{he:"להפסיק",level:3,heV:"לְהַפְסִיק",pron:"le-haf-SEEK",en:"to stop",cat:"Verbs",sentence:"תוכל ___ בבקשה?",sentenceEn:"can you ___ please?",rank:303},
+{he:"להפסיק",level:3,heV:"לְהַפְסִיק",pron:"le-haf-SEEK",en:"to stop doing / to cease",cat:"Verbs",sentence:"תוכל ___ בבקשה?",sentenceEn:"can you ___ please?",rank:303},
 {he:"להודות",level:3,heV:"לְהוֹדוֹת",pron:"le-ho-DOT",en:"to thank / to admit",cat:"Verbs",sentence:"אני רוצה ___ לך",sentenceEn:"I want ___ you",rank:306},
 {he:"להימצא",level:6,heV:"לְהִמָּצֵא",pron:"le-hee-ma-TSE",en:"to be located",cat:"Verbs",sentence:"איפה זה ___?",sentenceEn:"where is it ___?",rank:1441},
 {he:"להכיל",level:2,heV:"לְהָכִיל",pron:"le-ha-KHEEL",en:"to contain",cat:"Verbs",sentence:"זה יכול ___ הרבה",sentenceEn:"it can ___ a lot",rank:115},
@@ -2601,7 +2601,7 @@ var ANN={};
 function loadAnnotations(){
   return fetch('data/annotations.json')
     .then(function(r){ return r.ok?r.json():{}; })
-    .then(function(d){ ANN=d||{}; return ANN; })
+    .then(function(d){ ANN=d||{}; _fam=null; return ANN; })
     .catch(function(){ return {}; });
 }
 function annOf(he){ return ANN[he]||null; }
@@ -2665,6 +2665,7 @@ const MODES=[
   {id:'grammar',    icon:'📝', he:'דקדוק',     en:'Grammar'},
   {id:'test',       icon:'🎓', he:'מבחן',      en:'Test'},
   {id:'pattern',    icon:'🧩', he:'תבנית',     en:'Patterns'},
+  {id:'roots',      icon:'🌿', he:'משפחות',    en:'Word Families'},
   {id:'sicha',      icon:'🗣️', he:'שיחה',      en:'Sicha'},
 ];
 
@@ -2822,6 +2823,10 @@ function levelShape(lv){
   var ps=PATTERNS.filter(function(p){return p.level===lv;});
   // null, not 0: a level with no patterns authored yet has no Use score to show.
   out.U=ps.length?Math.round(100*ps.filter(function(p){return getCard(itemPattern(p.id),'U').reps>0;}).length/ps.length):null;
+  var fams=Object.keys(rootFamilies()).filter(function(r){
+    return (rootFamilies()[r]||[]).some(function(w){ return w.level===lv; });
+  });
+  out.C=fams.length?Math.round(100*fams.filter(function(r){return getCard(itemRoot(r),'C').reps>0;}).length/fams.length):null;
   out.secure=ws.length?Math.round(100*ws.filter(function(w){
     var s=wordState(w.he); return s==='secure'||s==='mastered';}).length/ws.length):0;
   return out;
@@ -2868,7 +2873,7 @@ function renderModes(){
       '<span class="mode-en">'+m.en+'</span></button>';
   }).join('');
 }
-function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='shoresh'||ST.mode==='test'||ST.mode==='sicha'||ST.mode==='pattern';}
+function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='shoresh'||ST.mode==='test'||ST.mode==='sicha'||ST.mode==='pattern'||ST.mode==='roots';}
 function renderCats(){
   var el=document.getElementById('catTabs');
   if(!el) return;
@@ -2948,6 +2953,7 @@ function newQ(){
   if(ST.mode==='test'){openTest();return;}
   if(ST.mode==='sicha'){renderSicha();return;}
   if(ST.mode==='pattern'){renderPattern();return;}
+  if(ST.mode==='roots'){renderRoots();return;}
   if(ST.mode==='conversation'){renderConv();return;}
   if(ST.mode==='alphabet'){renderAlphabet();return;}
   if(ST.mode==='grammar'){renderGrammar();return;}
@@ -3255,13 +3261,13 @@ function typeHTML(w){
   return '<div class="progress-label"><span>כתוב בעברית — Write in Hebrew</span><span>'+(ST.streak>0?'🔥 '+ST.streak:'')+'</span></div>'+
     '<div class="type-english">'+w.en+'</div>'+
     pronBtn(w,'margin-bottom:10px')+
-    '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" onkeydown="if(event.key===\'Enter\')checkType()"></div>'+
+    '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" inputmode="none" onkeydown="if(event.key===\'Enter\')checkType()"></div>'+
     '<div class="type-feedback" id="tfb"></div>'+
-    buildKbd()+
     '<div class="quiz-actions" style="margin-top:10px">'+
       '<button class="btn-ghost" onclick="advance()">Skip</button>'+
       '<button class="btn" onclick="checkType()">Check →</button>'+
-    '</div>';
+    '</div>'+
+    buildKbd();
 }
 function renderType(w){ document.getElementById('quizContent').innerHTML=typeHTML(w); }
 
@@ -3553,11 +3559,11 @@ function renderGrammar(){
     html+='<div class="gram-tab'+(_gramTab===t?' active':'')+'" onclick="setGramTab(\''+t+'\')">'+grammarSections[t].title.split(' ·')[0]+'</div>';
   });
   html+='</div><h3 style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px">'+sec.title+'</h3>'+
-    '<table class="gram-table"><tr><th>English</th><th>Hebrew</th><th>Pronunciation</th><th>Note</th></tr>';
+    '<div class="gram-wrap"><table class="gram-table"><tr><th>English</th><th>Hebrew</th><th>Pronunciation</th><th>Note</th></tr>';
   sec.rows.forEach(function(r){
     html+='<tr><td>'+r.label+'</td><td><span class="gram-he he-text">'+r.he+'</span></td><td><span class="gram-pron">'+r.pron+'</span></td><td style="font-size:12px;color:var(--muted)">'+r.note+'</td></tr>';
   });
-  html+='</table><div class="quiz-actions" style="margin-top:14px">'+
+  html+='</table></div><div class="quiz-actions" style="margin-top:14px">'+
     '<button class="btn" onclick="startGramQuiz()">🎯 Quiz This Section</button>'+
   '</div>';
   document.getElementById('quizContent').innerHTML=html;
@@ -3765,9 +3771,10 @@ function renderTestQ(){
   } else {
     body='<div class="test-style-tag">Fill the blank — type the Hebrew</div>'+
       '<div class="test-prompt-en">'+w.en+'</div>'+pronBtn(w,'margin:6px 0 16px')+
-      '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" onkeydown="if(event.key===\'Enter\')checkTestType()"></div>'+
-      '<div class="test-feedback" id="tfb"></div>'+buildKbd()+
-      '<div class="quiz-actions" style="margin-top:12px;justify-content:flex-end"><button class="btn" onclick="checkTestType()">Check →</button></div>';
+      '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" inputmode="none" onkeydown="if(event.key===\'Enter\')checkTestType()"></div>'+
+      '<div class="test-feedback" id="tfb"></div>'+
+      '<div class="quiz-actions" style="margin-top:12px;justify-content:flex-end"><button class="btn" onclick="checkTestType()">Check →</button></div>'+
+      buildKbd();
   }
   document.getElementById('testOverlay').innerHTML='<div class="test-inner">'+head+'<div class="test-q-wrap">'+body+'</div></div>';
   var ti=document.getElementById('ti'); if(ti) ti.focus();
@@ -4034,12 +4041,12 @@ function renderCheckpoint(){
     '<div class="type-english">'+esc(w.en)+'</div>'+
     '<div class="type-input-wrap"><input class="type-input he-text" id="ti" autocomplete="off" '+
       'autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" '+
-      'onkeydown="if(event.key===\'Enter\')checkCheckpoint()"></div>'+
+      'inputmode="none" onkeydown="if(event.key===\'Enter\')checkCheckpoint()"></div>'+
     '<div class="type-feedback" id="cfb"></div>'+
-    buildKbd()+
     '<div class="quiz-actions" style="margin-top:10px">'+
       '<button class="btn-ghost" onclick="abortCheckpoint()">Quit</button>'+
-      '<button class="btn" onclick="checkCheckpoint()">Check →</button></div>';
+      '<button class="btn" onclick="checkCheckpoint()">Check →</button></div>'+
+    buildKbd();
   var i=document.getElementById('ti'); if(i) i.focus();
 }
 function checkCheckpoint(){
@@ -4155,6 +4162,10 @@ function buildRound(){
   PATTERNS.filter(function(p){ return p.level<=activeLevel()+1 && patternFillers(p).length; })
     .sort(function(a,b){ return getCard(itemPattern(a.id),'U').reps-getCard(itemPattern(b.id),'U').reps; })
     .slice(0,3).forEach(function(p){ push('pattern',null,p); });
+  // One word-family item per round: the Connect dimension, and the only
+  // thing that makes Hebrew's morphology pay off.
+  var rk=rootDue();
+  if(rk) steps.push({kind:'root',root:rk});
   // Top up from words already met, never by adding more new ones.
   if(steps.length<ROUND_LEN){
     vocab.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; })
@@ -4185,14 +4196,16 @@ function roundBar(){
     var c=i<ROUND.i?(ROUND.steps[i].ok===false?'miss':'done'):(i===ROUND.i?'now':'');
     h+='<i class="'+c+'"></i>';
   }
-  return h+'</div>';
+  return h+'</div>'+
+    buildKbd();
 }
-var STEP_LABEL={mc:'recognise',type:'produce — type it',pattern:'use it in a sentence',intro:'new word'};
+var STEP_LABEL={mc:'recognise',type:'produce — type it',pattern:'use it in a sentence',intro:'new word',root:'word family'};
 function roundStep(){
   if(ROUND.i>=ROUND.steps.length){ return roundDone(); }
   var st=ROUND.steps[ROUND.i];
   ST.answered=false;
   if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=patternPickWord(st.p); PAT.answered=false; }
+  else if(st.kind==='root'){ /* rootHTML sets ROOTQ */ }
   else ST.cur=st.w;
   var body=document.getElementById('todayBody');
   body.innerHTML=roundBar()+'<div class="step-kind">'+STEP_LABEL[st.kind]+'</div><div id="stepBody"></div>';
@@ -4201,6 +4214,7 @@ function roundStep(){
   if(st.kind==='mc')      host.innerHTML=mcHTML(st.w);
   if(st.kind==='type')    host.innerHTML=typeHTML(st.w);
   if(st.kind==='pattern') host.innerHTML=patternHTML(PAT.p,PAT.w);
+  if(st.kind==='root')    host.innerHTML=rootHTML(st.root);
   var inp=document.getElementById('ti'); if(inp) inp.focus();
 }
 function roundNext(ok){
@@ -4277,7 +4291,7 @@ function renderLevelsView(){
       '<div class="lv-track"><div class="lv-fill" style="width:'+sh.secure+'%"></div></div>'+
       '<div class="lv-meta"><span>'+secure+' / '+n+' secure</span><span>'+sh.secure+'%</span></div>'+
       '<div class="dims">'+
-        ['R','P','U'].map(function(d){
+        ['R','P','U','C'].map(function(d){
           var v=sh[d];
           return '<div class="dim'+(v!==null&&v<40?' low':'')+'"><div class="dv">'+(v===null?'—':v+'%')+'</div>'+
                  '<div class="dl">'+DIMS[d]+'</div></div>';
@@ -4307,11 +4321,92 @@ function renderMe(){
     '<div class="compact-head"><span class="ch-title">אני</span></div>'+
     '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">'+
       '<div class="stat-pill">🔥 Days <span class="num">'+(ST.dayStreak||0)+'</span></div>'+
+      '<div class="stat-pill">🧊 Freezes <span class="num">'+(ST.freezes||0)+'</span></div>'+
       '<div class="stat-pill">📚 Learned <span class="num">'+ST.learned.size+'</span></div>'+
       '<div class="stat-pill">🎯 Accuracy <span class="num">'+(ST.total?Math.round(ST.correct/ST.total*100)+'%':'—')+'</span></div>'+
     '</div>'+
     '<button class="big-btn" style="background:var(--surface2);box-shadow:none;color:var(--text)" onclick="openSettings()">⚙ Settings &amp; backup</button>'+
     '<button class="big-btn" style="background:var(--surface2);box-shadow:none;color:var(--text)" onclick="openAnalytics()">📊 Analytics</button>';
+}
+
+// ── ROOT FAMILIES ─────────────────────────────────────────────
+// Semitic morphology is a force multiplier: one root unlocks a family, so
+// knowing כ־ת־ב makes כתב, מכתב and כתובת cohere instead of being three
+// unrelated strings. This is the Connect dimension.
+var _fam=null;
+// Only families whose connection a learner can actually SEE. The annotation
+// layer also yields etymologically-correct but useless ones — ב־ט־ח ties
+// watermelon to insurance, כ־ו־ן ties "yes" to "car" — and drilling those
+// teaches that roots are arbitrary, which is the opposite of the point.
+// Pure gender pairs (צריך/צריכה) are inflection, not family, and are free
+// guesses, so they are out too.
+var ROOT_OK={"ב־ו־א":1,"ל־מ־ד":1,"ה־ל־ך":1,"ח־ז־ר":1,"ב־ו־ן":1,"שׂ־מ־ח":1,"א־ה־ב":1,"שׁ־כ־ח":1,"שׁ־ב־ע":1,"א־כ־ל":1,"ק־ר־א":1,"ק־נ־ה":1,"י־שׁ־ב":1,"נ־ס־ע":1,"ח־ד־שׁ":1,"י־ו־ם":1,"ח־נ־ה":1,"ק־ו־ה":1,"ח־פ־שׂ":1,"ע־מ־ד":1,"ג־ו־ר":1,"י־ד־ה":1,"ב־ק־שׁ":1,"שׁ־ת־ה":1,"נ־ס־ה":1,"פ־ג־שׁ":1,"ב־ר־א":1,"צ־ל־ח":1,"ט־ו־ס":1,"ח־פ־שׁ":1,"ע־מ־ק":1,"ד־א־ג":1,"א־מ־ן":1,"א־פ־שׁ־ר":1,"מ־צ־א":1,"ק־שׁ־ר":1,"ח־ג־ג":1,"ט־ע־ם":1,"ה־פ־ך":1,"ק־ד־ם":1,"שׂ־ח־ק":1,"ט־י־ל":1,"כ־ע־ס":1,"נ־ק־ה":1,"א־ט־ט":1,"ס־ד־ר":1,"פ־ת־ח":1,"ז־ו־ר":1,"ס־כ־ן":1,"א־ד־ם":1,"ח־ו־ט":1,"ת־ח־ת":1,"נ־ג־ד":1,"ב־שׁ־ל":1,"ע־ו־ג":1,"ב־ק־ר":1,"צ־ע־ר":1};
+function rootFamilies(){
+  // Never cache an empty map: the annotation fetch is async, so an early
+  // caller would otherwise freeze {} in place and the mode would stay dead.
+  if(_fam && Object.keys(_fam).length) return _fam;
+  _fam={};
+  vocab.forEach(function(w){
+    var r=rootOf(w.he); if(!r) return;
+    (_fam[r]=_fam[r]||[]).push(w);
+  });
+  Object.keys(_fam).forEach(function(r){
+    if(_fam[r].length<2 || !ROOT_OK[r]) delete _fam[r];
+  });
+  return _fam;
+}
+function familyOf(he){
+  var r=rootOf(he); if(!r) return [];
+  return (rootFamilies()[r]||[]).filter(function(w){ return w.he!==he; });
+}
+var ROOTQ={root:null,answer:null,answered:false};
+function rootDue(){
+  var fams=rootFamilies(), keys=Object.keys(fams);
+  if(!keys.length) return null;
+  keys.sort(function(a,b){ return getCard(itemRoot(a),'C').reps-getCard(itemRoot(b),'C').reps; });
+  return keys[0];
+}
+function rootHTML(root){
+  var fam=rootFamilies()[root]||[];
+  // Anchor on a word the learner has actually met where possible, so the
+  // clue is a bridge from the known to the new rather than two unknowns.
+  var met=fam.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; });
+  var pool=met.length?met:fam;
+  var pick=pool[Math.floor(Math.random()*pool.length)];
+  var known=met.indexOf(pick)>=0;
+  var others=fam.filter(function(w){ return w!==pick; });
+  var answer=others[Math.floor(Math.random()*others.length)];
+  ROOTQ={root:root,answer:answer,answered:false};
+  var distract=vocab.filter(function(w){ return rootOf(w.he)!==root && w.he.indexOf(' ')<0; })
+    .sort(function(){ return Math.random()-.5; }).slice(0,3);
+  var opts=distract.concat([answer]).sort(function(){ return Math.random()-.5; });
+  return '<div class="progress-label"><span>שורש — same root?</span><span>'+esc(root)+'</span></div>'+
+    '<div class="pat-frame"><span class="pat-he he-text">'+esc(root)+'</span>'+
+      '<span class="pat-pron">'+(known?'you already know ':'from ')+esc(pick.he)+' — '+esc(pick.en)+'</span></div>'+
+    '<div class="pat-target">Which word comes from the same root?</div>'+
+    '<div class="mc-grid">'+opts.map(function(o,i){
+      return '<button class="mc-opt" id="rqo'+i+'" onclick="checkRoot(this,'+(o===answer)+')">'+
+        '<span class="he-text" style="font-size:19px">'+esc(o.he)+'</span>'+
+        '<span style="display:block;font-size:11px;color:var(--muted)">'+esc(o.en)+'</span></button>';
+    }).join('')+'</div>';
+}
+function checkRoot(btn,ok){
+  if(ROOTQ.answered) return;
+  ROOTQ.answered=true; ST.total++;
+  reviewItem(itemRoot(ROOTQ.root),'C',ok);
+  document.querySelectorAll('.mc-opt').forEach(function(b){ b.disabled=true; });
+  btn.classList.add(ok?'correct':'wrong');
+  if(!ok) document.querySelectorAll('.mc-opt').forEach(function(b){
+    if(b.textContent.indexOf(ROOTQ.answer.he)===0) b.classList.add('correct'); });
+  if(ok){ ST.correct++; ST.score+=15; ST.streak++; toast('✓ '+ROOTQ.root,'good'); }
+  else  { ST.streak=0; toast('✗ '+ROOTQ.answer.he,'bad'); }
+  updateStats();
+  setTimeout(function(){ advance(ok); }, ok?1100:2300);
+}
+function renderRoots(){
+  var r=rootDue();
+  document.getElementById('quizContent').innerHTML = r ? rootHTML(r)
+    : '<div class="sch-task"><div class="sch-task-title">No root families loaded yet</div></div>';
 }
 
 // ── PATTERN DRILL ─────────────────────────────────────────────
@@ -4321,7 +4416,7 @@ function renderMe(){
 var PAT={p:null,w:null,answered:false};
 // Every mode funnels through here, so a round can take over the flow without
 // each mode knowing anything about rounds.
-function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern') renderPattern(); else newQ(); }
+function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern') renderPattern(); else if(ST.mode==='roots') renderRoots(); else newQ(); }
 
 function patternDue(){
   var pool=PATTERNS.filter(function(p){return patternFillers(p).length>0;});
@@ -4355,7 +4450,7 @@ function patternHTML(p,w){
     '<div class="sch-input-row">'+
       '<input class="sch-input he-text" id="ti" placeholder="מילה אחת…" autocomplete="off" '+
         'autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" '+
-        'onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkPattern();}">'+
+        'inputmode="none" onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkPattern();}">'+
       '<button class="btn" style="padding:12px 18px" onclick="checkPattern()">בדוק</button>'+
     '</div>'+
     '<div id="pfb" style="margin-top:10px"></div>'+
@@ -5001,7 +5096,7 @@ function sichaInputUI(){
 }
 function sichaTypeUI(){
   return '<div class="sch-input-row">'+
-      '<input class="sch-input he-text" id="ti" placeholder="כתוב/כתבי בעברית…" onkeydown="if(event.key===\'Enter\'){event.preventDefault();sichaSendInput();}">'+
+      '<input class="sch-input he-text" id="ti" placeholder="כתוב/כתבי בעברית…" inputmode="none" onkeydown="if(event.key===\'Enter\'){event.preventDefault();sichaSendInput();}">'+
       '<button class="btn" style="padding:12px 18px" onclick="sichaSendInput()">שלח</button>'+
     '</div>'+ buildKbd();
 }
@@ -5301,7 +5396,7 @@ function saveProgress(){
       score:ST.score,streak:ST.streak,total:ST.total,correct:ST.correct,
       learned:[...ST.learned],srs:ST.srs,cards:ST.cards,wordStats:ST.wordStats,
       showVowels:ST.showVowels,cursiveOn:ST.cursiveOn,
-      dayStreak:ST.dayStreak||0,lastDay:ST.lastDay||'',
+      dayStreak:ST.dayStreak||0,lastDay:ST.lastDay||'',freezes:ST.freezes||0,
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
       userVocab:ST.userVocab||[],grammarErrors:ST.grammarErrors||{},
       sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{}
@@ -5329,7 +5424,7 @@ function loadProgress(){
         ST.cards[itemWord(he)+'|R']={n:o.level||0,due:o.nextAt||0,reps:Math.max(1,o.level||0),lapses:0};
       });
     }
-    ST.dayStreak=d.dayStreak||0;ST.lastDay=d.lastDay||'';
+    ST.dayStreak=d.dayStreak||0;ST.lastDay=d.lastDay||'';ST.freezes=d.freezes||0;
     ST.gender=d.gender||null;ST.sichaSupport=d.sichaSupport||{};
     ST.userVocab=d.userVocab||[];ST.grammarErrors=d.grammarErrors||{};
     ST.sichaMinutes=d.sichaMinutes||0;
@@ -5342,12 +5437,38 @@ function loadProgress(){
       var cl=document.getElementById('cursiveLbl');if(cl)cl.textContent='Cursive';}
   }catch(e){}
 }
+// Local calendar day. toISOString() is UTC, so an evening session west of
+// Greenwich was being filed under tomorrow — the streak advanced a day early
+// and then broke the next morning.
+function dayKey(d){
+  d=d||new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function daysBetween(a,b){
+  var pa=a.split('-'),pb=b.split('-');
+  var da=Date.UTC(+pa[0],+pa[1]-1,+pa[2]), db=Date.UTC(+pb[0],+pb[1]-1,+pb[2]);
+  return Math.round((db-da)/864e5);
+}
+// A streak you can lose to one bad day stops being motivating and starts
+// being a reason to quit. Freezes are earned by showing up, spent silently.
 function bumpDay(){
-  var today=new Date().toISOString().slice(0,10);
-  if(ST.lastDay===today)return;
-  var yest=new Date(Date.now()-864e5).toISOString().slice(0,10);
-  ST.dayStreak=(ST.lastDay===yest)?(ST.dayStreak||0)+1:1;
+  var today=dayKey();
+  if(ST.lastDay===today) return;
+  if(!ST.lastDay){ ST.dayStreak=1; ST.lastDay=today; ST.freezes=ST.freezes||0; return; }
+  var gap=daysBetween(ST.lastDay,today);
+  if(gap<=0){ ST.lastDay=today; return; }           // clock moved backwards
+  var missed=gap-1;
+  ST.freezes=ST.freezes||0;
+  if(missed>0){
+    if(missed<=ST.freezes){ ST.freezes-=missed; ST.frozeFor=missed; }
+    else { ST.dayStreak=0; ST.freezes=0; ST.frozeFor=0; }
+  } else ST.frozeFor=0;
+  ST.dayStreak=(ST.dayStreak||0)+1;
   ST.lastDay=today;
+  // One freeze per 5 consecutive days, capped at 3.
+  if(ST.dayStreak%5===0 && ST.freezes<3) ST.freezes++;
+  if(ST.frozeFor>0) setTimeout(function(){
+    toast('🧊 Streak freeze used — '+ST.dayStreak+' days still going','good'); }, 700);
 }
 function resetProgress(){
   if(confirm('Reset ALL saved progress (score, streaks, SRS, word stats)? This cannot be undone.')){
