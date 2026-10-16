@@ -441,6 +441,15 @@ body.cursive-on .sch-word .ww-he{font-family:var(--he-cursive)!important;}
 .set-input:focus{border-color:var(--blue);}
 .set-row-btns{display:flex;gap:8px;flex-wrap:wrap;}
 
+/* ── Pattern drill ──────────────────────────────────────────── */
+.pat-frame{background:var(--surface2);border:1px solid var(--border);border-radius:16px;
+  padding:22px 18px;text-align:center;margin-bottom:14px;}
+.pat-he{display:block;font-family:var(--he-font);font-size:34px;color:#fff;direction:rtl;line-height:1.5;}
+body.cursive-on .pat-he{font-family:var(--he-cursive)!important;}
+.pat-pron{display:block;font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:.5px;}
+.pat-target{text-align:center;font-size:19px;color:var(--text);margin-bottom:6px;}
+.pat-target b{color:var(--blue);font-weight:700;}
+
 /* ── PWA / iPhone ───────────────────────────────────────────── */
 /* Keep content clear of the notch, Dynamic Island and home indicator. */
 @supports (padding:max(0px)){
@@ -2374,6 +2383,76 @@ const grammarSections={
   },
 };
 
+// ══════════════════════════════════════════════════════════════
+// SENTENCE PATTERNS — slot frames, the bridge from word to utterance
+// ══════════════════════════════════════════════════════════════
+// A pattern is a frame with a typed slot. Drilling it fills the slot with a
+// word you already know, so every pattern review is ALSO vocabulary retrieval:
+// one review, two dimensions (U on the pattern, P on the word).
+// `slot` constrains what can go in: 'noun' | 'infinitive' | 'adj'.
+const PATTERNS=[
+ // ── Level 1 — I exist and I want things ──
+ {id:'want_n',   level:1, slot:'noun',       t:'אני רוצה ___',    tV:'אֲנִי רוֹצֶה',      pron:'a-NEE ro-TSEH',          en:'I want ___',              enPre:'I want ', pref:['Food','Things','Shopping','Wine']},
+ {id:'want_v',   level:1, slot:'infinitive', t:'אני רוצה ___',    tV:'אֲנִי רוֹצֶה',      pron:'a-NEE ro-TSEH',          en:'I want to ___',           enPre:'I want '},
+ {id:'have',     level:1, slot:'noun',       t:'יש לי ___',       tV:'יֵשׁ לִי',          pron:'yesh LEE',               en:'I have ___',              enPre:'I have ', pref:['Things','Family','Food','House']},
+ {id:'havenot',  level:1, slot:'noun',       t:'אין לי ___',      tV:'אֵין לִי',          pron:'eyn LEE',                en:"I don't have ___",        enPre:"I don't have ", pref:['Things','Food','Shopping']},
+ {id:'where',    level:1, slot:'noun',       t:'איפה ה___?',      tV:'אֵיפֹה הַ',         pron:'AY-foh ha-',             en:'Where is the ___?',       enPre:'Where is the ', pref:['Places','House','Getting Around','Things']},
+ {id:'this_is',  level:1, slot:'noun',       t:'זה ___',          tV:'זֶה',               pron:'zeh',                    en:'This is ___',             enPre:'This is ', pref:['Food','Things','Nouns','Animals']},
+ {id:'need',     level:1, slot:'noun',       t:'אני צריך ___',    tV:'אֲנִי צָרִיךְ',     pron:'a-NEE tsa-REEKH',        en:'I need ___',              enPre:'I need ', pref:['Things','Food','Health','Shopping']},
+ // ── Level 2 — I can handle a transaction ──
+ {id:'can_i',    level:2, bare:true, slot:'infinitive', t:'אפשר ___?',       tV:'אֶפְשָׁר',          pron:'ef-SHAR',                en:'Can I ___?',              enPre:'Can I '},
+ {id:'have_you', level:2, slot:'noun',       t:'יש לך ___?',      tV:'יֵשׁ לְךָ',         pron:'yesh le-KHA',            en:'Do you have ___?',        enPre:'Do you have ', pref:['Food','Things','Shopping','Wine']},
+ {id:'like_to',  level:2, slot:'infinitive', t:'אני אוהב ___',    tV:'אֲנִי אוֹהֵב',      pron:'a-NEE o-HEV',            en:'I like to ___',           enPre:'I like '},
+ {id:'cost',     level:2, slot:'noun',       t:'כמה עולה ה___?',  tV:'כַּמָּה עוֹלֶה הַ', pron:'KAH-mah o-LEH ha-',      en:'How much does the ___ cost?', enPre:'How much does the ', enPost:' cost', pref:['Food','Things','Shopping','Wine','Fashion']},
+ {id:'looking',  level:2, slot:'noun',       t:'אני מחפש ___',    tV:'אֲנִי מְחַפֵּשׂ',   pron:'a-NEE me-kha-PES',       en:'I am looking for ___',    enPre:'I am looking for ', pref:['Places','Things','People','House']},
+ {id:'when',     level:2, slot:'noun',       t:'מתי ה___?',       tV:'מָתַי הַ',          pron:'ma-TAI ha-',             en:'When is the ___?',        enPre:'When is the ', pref:['Travel','Jewish Life']},
+ {id:'very',     level:2, slot:'adj',        t:'זה מאוד ___',     tV:'זֶה מְאוֹד',        pron:'zeh me-OD',              en:'This is very ___',        enPre:'This is very '},
+];
+// Some frames already supply the "to", so the filler must appear bare:
+// "Can I " + "to open" would read "Can I to open".
+function fillerEn(p,w){
+  var e=w.en.split(' / ')[0].split(' — ')[0].trim();
+  if(p.bare&&e.indexOf('to ')===0) e=e.slice(3);
+  return e;
+}
+function patternById(id){ for(var i=0;i<PATTERNS.length;i++) if(PATTERNS[i].id===id) return PATTERNS[i]; return null; }
+
+// Which words may fill a slot. The app has no part-of-speech field, so the
+// existing categories stand in for one — imperfect but good enough, and it
+// keeps the slot honest (you cannot put a verb where a noun belongs).
+const NOUNISH={'Food':1,'Things':1,'Places':1,'House':1,'Body':1,'Animals':1,
+  'Nouns':1,'People':1,'Family':1,'Nature':1,'School':1,'Work':1,'Travel':1,
+  'Shopping':1,'Wine':1,'Fashion':1,'Health':1,'Jewish Life':1,'Getting Around':1};
+// Categories stand in for parts of speech, and they leak: adjectives and
+// adverbs are filed under Food, Adjectives holds adverbs. Without a `pos`
+// field on 1,391 words these blocklists are the cheap correction.
+const NOT_NOUN={'טעים':1,'חריף':1,'מתוק':1,'מלוח':1,'חם':1,'קר':1,'טרי':1,'בריא':1,
+  'רעב':1,'צמא':1,'מלא':1,'ריק':1,'זול':1,'יקר':1,
+  'קדימה':1,'אחורה':1,'מעל':1,'מתחת':1,'למעלה':1,'למטה':1,'בפנים':1,'בחוץ':1,
+  'ישר':1,'ימינה':1,'שמאלה':1,'ליד':1,'קרוב':1,'רחוק':1,'כאן':1,'פה':1,'שם':1};
+const NOT_ADJ={'קצת':1,'מאוד':1,'בהחלט':1,'כל':1,'מספיק':1,'אולי':1,'בדיוק':1,
+  'הרבה':1,'יותר':1,'פחות':1,'ממש':1,'תמיד':1,'אפשר':1,'כמעט':1};
+// An infinitive is not "starts with ל" — that also catches לומד and לוקחת.
+// Every infinitive in this dataset is glossed "to …", which is a clean test.
+function isInfinitive(w){ return w.cat==='Verbs'&&w.he.charAt(0)==='ל'&&w.en.indexOf('to ')===0; }
+function patternFillers(p){
+  var all=vocab.filter(function(w){
+    if(w.he.indexOf(' ')>-1) return false;            // single words only
+    if(w.level>p.level+2) return false;               // stay near the level
+    if(p.slot==='infinitive') return isInfinitive(w);
+    if(p.slot==='adj')        return w.cat==='Adjectives'&&!NOT_ADJ[w.he];
+    return !!NOUNISH[w.cat]&&!NOT_NOUN[w.he];
+  });
+  // A slot being grammatically fillable does not make the sentence sensible:
+  // "I want man" is valid Hebrew and useless practice. Prefer the categories
+  // that actually belong in this frame, and only widen if too few qualify.
+  if(p.pref){
+    var good=all.filter(function(w){return p.pref.indexOf(w.cat)>-1;});
+    if(good.length>=6) return good;
+  }
+  return all;
+}
+
 const MODES=[
   {id:'flashcard',  icon:'🃏', he:'כרטיסיות', en:'Flashcards'},
   {id:'multiple',   icon:'🎯', he:'בחירה',     en:'Multiple Choice'},
@@ -2385,6 +2464,7 @@ const MODES=[
   {id:'alphabet',   icon:'🔤', he:'אלף-בית',   en:'Aleph-Bet'},
   {id:'grammar',    icon:'📝', he:'דקדוק',     en:'Grammar'},
   {id:'test',       icon:'🎓', he:'מבחן',      en:'Test'},
+  {id:'pattern',    icon:'🧩', he:'תבנית',     en:'Patterns'},
   {id:'sicha',      icon:'🗣️', he:'שיחה',      en:'Sicha'},
 ];
 
@@ -2409,7 +2489,7 @@ function levelOf(w){ return w.level||6; }
 const ST={
   mode:'multiple', cat:'All', level:0,
   score:0, streak:0, total:0, correct:0,
-  learned:new Set(), srs:{},
+  learned:new Set(), srs:{}, cards:{},
   cur:null, answered:false,
   matchSel:null, matchPairs:[], matchDone:[],
   convIdx:0, convDone:0, convTotal:0, convRight:0,
@@ -2460,8 +2540,85 @@ function toggleCursive(){
   saveProgress();
 }
 
-// ── SRS ──────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════
+// CURRICULUM CONFIG — every tunable threshold lives here
+// ══════════════════════════════════════════════════════════════
+// These are design judgments, NOT sourced cut-offs. They are collected in one
+// place so the pending research run can retune them without touching logic.
+const CFG={
+  newPerDay: 7,            // 2 scheduled cards per word; 7/day ≈ 20 min/day
+  secureDays: 7,           // Produce stability before a word counts as Secure
+  masteredDays: 21,
+  gate:{ breadth:0.85, patterns:0.80, checkpoint:0.85, softUnlock:0.70 },
+  // The doc's "no dimension below 70%" hard gate is deliberately NOT enforced
+  // yet — four ways to be blocked risks deadlock. Surfaced as a shape chart
+  // first; revisit once there is real data.
+  minDimension:null
+};
+
+// ── DIMENSIONS ────────────────────────────────────────────────
+// A level is a bundle of competencies, not a word list. Each item carries a
+// profile across dimensions rather than one mastery flag.
+//   R  Recognize — see Hebrew, retrieve meaning
+//   P  Produce   — generate Hebrew from meaning, typed   (the real gate)
+//   U  Use       — deploy correctly inside a sentence pattern
+//   C  Connect   — link to root and relatives
+// Only R and P schedule cards on words. U belongs to the pattern and C to the
+// root, as items in their own right, rather than being duplicated onto every
+// word — which is what keeps the review load survivable.
+const DIMS={R:'Recognize',P:'Produce',U:'Use',C:'Connect'};
+
+function itemWord(he){ return 'w:'+he; }
+function itemPattern(id){ return 'p:'+id; }
+function itemRoot(r){ return 'r:'+r; }
+
+function getCard(id,dim){
+  var k=id+'|'+dim;
+  return ST.cards[k]||{n:0,due:0,reps:0,lapses:0};
+}
+// Interval ladder, kept deliberately swappable: FSRS drops in here once its
+// parameters can be verified rather than recalled.
 function srsInt(l){ return [0,60000,300000,1800000,864e5,6048e5][Math.min(l,5)]; }
+function schedule(c,ok){
+  var n=ok?Math.min(c.n+1,5):Math.max(c.n-1,0);
+  return {n:n,due:Date.now()+srsInt(n),reps:(c.reps||0)+1,
+          lapses:(c.lapses||0)+(ok?0:1)};
+}
+function reviewItem(id,dim,ok){
+  var nc=schedule(getCard(id,dim),ok);
+  ST.cards[id+'|'+dim]=nc;
+  return nc;
+}
+function cardDue(id,dim){ return getCard(id,dim).due<=Date.now(); }
+// Days of stability the card's current rung represents.
+function stabilityDays(id,dim){ return srsInt(getCard(id,dim).n)/864e5; }
+
+// A word is Secure on PRODUCTION evidence that survived spaced intervals —
+// not on recognition streaks, which multiple choice inflates by guessing.
+function wordState(he){
+  var id=itemWord(he), p=getCard(id,'P'), r=getCard(id,'R');
+  var pd=srsInt(p.n)/864e5;
+  if(pd>=CFG.masteredDays&&p.lapses<=1) return 'mastered';
+  if(pd>=CFG.secureDays&&p.reps>=2) return 'secure';
+  if(srsInt(r.n)/864e5>=2) return 'familiar';
+  if(r.reps||p.reps) return 'learning';
+  return 'new';
+}
+// Per-level shape across dimensions — the chart that makes a lagging
+// dimension visible instead of letting 2,000 words hide an inability to speak.
+function levelShape(lv){
+  var ws=vocab.filter(function(w){return w.level===lv;});
+  var out={};
+  ['R','P'].forEach(function(d){
+    var n=ws.filter(function(w){return getCard(itemWord(w.he),d).reps>0;}).length;
+    out[d]=ws.length?Math.round(100*n/ws.length):0;
+  });
+  var ps=PATTERNS.filter(function(p){return p.level===lv;});
+  out.U=ps.length?Math.round(100*ps.filter(function(p){return getCard(itemPattern(p.id),'U').reps>0;}).length/ps.length):0;
+  out.secure=ws.length?Math.round(100*ws.filter(function(w){
+    var s=wordState(w.he); return s==='secure'||s==='mastered';}).length/ws.length):0;
+  return out;
+}
 
 // ── FILTERING ────────────────────────────────────────────────
 function filteredVocab(){
@@ -2504,7 +2661,7 @@ function renderModes(){
       '<span class="mode-en">'+m.en+'</span></button>';
   }).join('');
 }
-function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='shoresh'||ST.mode==='test'||ST.mode==='sicha';}
+function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='shoresh'||ST.mode==='test'||ST.mode==='sicha'||ST.mode==='pattern';}
 function renderCats(){
   var el=document.getElementById('catTabs');
   if(!el) return;
@@ -2581,6 +2738,7 @@ function newQ(){
   _pid=0; ST.answered=false;
   if(ST.mode==='test'){openTest();return;}
   if(ST.mode==='sicha'){renderSicha();return;}
+  if(ST.mode==='pattern'){renderPattern();return;}
   if(ST.mode==='conversation'){renderConv();return;}
   if(ST.mode==='alphabet'){renderAlphabet();return;}
   if(ST.mode==='grammar'){renderGrammar();return;}
@@ -2629,6 +2787,7 @@ function flipCard(){
   document.getElementById('fcTip').style.display='none';
 }
 function gradeCard(knew){
+  reviewItem(itemWord(ST.cur.he),'R',knew);
   var s=ST.srs[ST.cur.he]||{level:0,nextAt:0};
   var lvl=knew?Math.min(s.level+1,5):Math.max(s.level-1,0);
   ST.srs[ST.cur.he]={level:lvl,nextAt:Date.now()+srsInt(lvl)};
@@ -2656,6 +2815,7 @@ function renderMultiple(w){
 }
 function checkMC(i,correct){
   if(ST.answered)return; ST.answered=true; ST.total++;
+  reviewItem(itemWord(ST.cur.he),'R',correct);
   trackW(ST.cur.he,correct);
   var btns=document.querySelectorAll('.mc-opt');
   btns.forEach(function(b){b.disabled=true;});
@@ -2898,7 +3058,9 @@ function checkType(){
   if(ST.answered)return;
   var inp=document.getElementById('ti');
   var typed=stripV(inp.value.trim()), correct=stripV(ST.cur.he);
-  ST.answered=true; ST.total++; trackW(ST.cur.he,typed===correct);
+  ST.answered=true; ST.total++;
+  reviewItem(itemWord(ST.cur.he),'P',typed===correct);
+  trackW(ST.cur.he,typed===correct);
   var fb=document.getElementById('tfb');
   if(typed===correct){
     inp.classList.add('good');
@@ -2972,6 +3134,8 @@ function pickBank(word,idx){
   if(bs) bs.value=word;
   ST.answered=true;ST.total++;
   var ok=stripV(ST.cur.he)===stripV(word);
+  // Cloze with a word bank is weak production but real USE.
+  reviewItem(itemWord(ST.cur.he),'U',ok);
   trackW(ST.cur.he,ok);
   var bw=document.getElementById('bw'+idx);
   if(bw) bw.classList.add('used');
@@ -3502,6 +3666,91 @@ function retestMissed(){
   TST.queue=mw.map(function(w){return {w:w,style:_testPickStyle()};});
   TST.idx=0; TST.correct=0; TST.wrong=0; TST.results=[]; TST.answered=false; TST.active=true;
   renderTestQ();
+}
+
+// ── PATTERN DRILL ─────────────────────────────────────────────
+// The frame is shown with its slot empty and the English spelled out; you type
+// the Hebrew filler. One answer, two items reviewed: U on the pattern and P on
+// the word. This is where vocabulary becomes an utterance instead of a list.
+var PAT={p:null,w:null,answered:false};
+
+function patternDue(){
+  var pool=PATTERNS.filter(function(p){return patternFillers(p).length>0;});
+  if(!pool.length) return null;
+  var due=pool.filter(function(p){return cardDue(itemPattern(p.id),'U');});
+  var pick=(due.length?due:pool);
+  // Least-practised first, so a pattern you keep dodging surfaces.
+  pick.sort(function(a,b){
+    return getCard(itemPattern(a.id),'U').reps-getCard(itemPattern(b.id),'U').reps;
+  });
+  return pick[0];
+}
+function patternPickWord(p){
+  var f=patternFillers(p);
+  // Prefer a word already met in recognition — the pattern is the new thing
+  // here, not the vocabulary.
+  var seen=f.filter(function(w){return getCard(itemWord(w.he),'R').reps>0;});
+  var pool=seen.length>=4?seen:f;
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+
+function renderPattern(){
+  PAT.p=patternDue();
+  if(!PAT.p){
+    document.getElementById('quizContent').innerHTML=
+      '<div class="progress-label"><span>תבנית — Patterns</span><span></span></div>'+
+      '<div class="sch-task"><div class="sch-task-title">No patterns available yet</div></div>';
+    return;
+  }
+  PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
+  var p=PAT.p, w=PAT.w;
+  var frame=ST.showVowels?(p.tV+' ___'+(p.t.slice(-1)==='?'?'?':'')):p.t;
+  var reps=getCard(itemPattern(p.id),'U').reps;
+  document.getElementById('quizContent').innerHTML=
+    '<div class="progress-label"><span>בנה את המשפט — build the sentence</span>'+
+      '<span>'+esc(p.en)+' · '+reps+'×</span></div>'+
+    '<div class="pat-frame"><span class="pat-he he-text">'+esc(frame)+'</span>'+
+      '<span class="pat-pron">'+esc(p.pron)+' …</span></div>'+
+    '<div class="pat-target">'+esc(p.enPre)+'<b>'+esc(fillerEn(p,w))+'</b>'+
+      esc(p.enPost||'')+(p.t.slice(-1)==='?'?'?':'')+'</div>'+
+    '<div class="sch-input-row">'+
+      '<input class="sch-input he-text" id="ti" placeholder="מילה אחת…" autocomplete="off" '+
+        'autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" '+
+        'onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkPattern();}">'+
+      '<button class="btn" style="padding:12px 18px" onclick="checkPattern()">בדוק</button>'+
+    '</div>'+
+    '<div id="pfb" style="margin-top:10px"></div>'+
+    buildKbd();
+  var i=document.getElementById('ti'); if(i) i.focus();
+}
+
+function checkPattern(){
+  if(PAT.answered) return;
+  var inp=document.getElementById('ti'); if(!inp) return;
+  var typed=stripV(inp.value.trim()), want=stripV(PAT.w.he);
+  if(!typed) return;
+  PAT.answered=true; ST.answered=true; ST.total++;
+  var ok=(typed===want);
+  // One answer, two dimensions.
+  reviewItem(itemPattern(PAT.p.id),'U',ok);
+  reviewItem(itemWord(PAT.w.he),'P',ok);
+  trackW(PAT.w.he,ok);
+  var full=PAT.p.t.replace('___',PAT.w.he);
+  var fb=document.getElementById('pfb');
+  if(ok){
+    inp.classList.add('good');
+    ST.correct++; ST.score+=25+ST.streak; ST.streak++; ST.learned.add(PAT.w.he);
+    if(fb) fb.innerHTML='<div class="conv-result good">✓ <span class="heb" style="font-size:19px">'+esc(full)+'</span></div>';
+    toast('✓ נכון!','good');
+  } else {
+    inp.classList.add('bad'); ST.streak=0;
+    if(fb) fb.innerHTML='<div class="conv-result bad">'+
+      '<span class="heb" style="font-size:19px">'+esc(full)+'</span><br>'+
+      '<em style="font-size:12px">'+esc(PAT.w.pron)+'</em></div>';
+    toast('✗ '+PAT.w.he,'bad');
+  }
+  updateStats();
+  setTimeout(renderPattern, ok?1200:2600);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -4383,7 +4632,7 @@ function saveProgress(){
   try{
     localStorage.setItem('jw_progress',JSON.stringify({
       score:ST.score,streak:ST.streak,total:ST.total,correct:ST.correct,
-      learned:[...ST.learned],srs:ST.srs,wordStats:ST.wordStats,
+      learned:[...ST.learned],srs:ST.srs,cards:ST.cards,wordStats:ST.wordStats,
       showVowels:ST.showVowels,cursiveOn:ST.cursiveOn,
       dayStreak:ST.dayStreak||0,lastDay:ST.lastDay||'',
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
@@ -4402,6 +4651,17 @@ function loadProgress(){
     if(!d)return;
     ST.score=d.score||0;ST.streak=d.streak||0;ST.total=d.total||0;ST.correct=d.correct||0;
     ST.learned=new Set(d.learned||[]);ST.srs=d.srs||{};ST.wordStats=d.wordStats||{};
+    ST.cards=d.cards||{};
+    // One-time migration: the old single SRS store measured RECOGNITION
+    // (flashcards and multiple choice drove it), so it seeds the R card only.
+    // Production starts fresh on purpose — typing is a different skill and
+    // must not inherit stability it never earned.
+    if(!d.cards && d.srs){
+      Object.keys(d.srs).forEach(function(he){
+        var o=d.srs[he];
+        ST.cards[itemWord(he)+'|R']={n:o.level||0,due:o.nextAt||0,reps:Math.max(1,o.level||0),lapses:0};
+      });
+    }
     ST.dayStreak=d.dayStreak||0;ST.lastDay=d.lastDay||'';
     ST.gender=d.gender||null;ST.sichaSupport=d.sichaSupport||{};
     ST.userVocab=d.userVocab||[];ST.grammarErrors=d.grammarErrors||{};
