@@ -505,6 +505,21 @@ body.cursive-on .intro-card .ic-he{font-family:var(--he-cursive)!important;}
 .dim .dl{font-size:9px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;}
 .dim.low .dv{color:var(--teal);}
 
+/* ── Quests & can-dos ───────────────────────────────────────── */
+.qlist{margin-bottom:6px;}
+.q-row{display:flex;align-items:center;gap:9px;background:var(--surface2);
+  border:1px solid var(--border);border-radius:12px;padding:10px 12px;margin-bottom:7px;font-size:13px;}
+.q-row.done{border-color:var(--green);color:var(--green);}
+.q-box{flex:0 0 auto;width:16px;height:16px;border-radius:5px;border:1.5px solid var(--border);
+  font-size:11px;line-height:14px;text-align:center;}
+.q-row.done .q-box,.cando.done .q-box{border-color:var(--green);background:var(--green);color:#000;}
+.q-txt{flex:1;} .q-n{color:var(--muted);font-size:12px;font-weight:700;}
+.q-row.done .q-n{color:var(--green);}
+.cando-list{margin-top:10px;}
+.cando{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);
+  line-height:1.45;margin-bottom:5px;}
+.cando.done{color:var(--green);}
+
 /* ── Pattern drill ──────────────────────────────────────────── */
 .pat-frame{background:var(--surface2);border:1px solid var(--border);border-radius:16px;
   padding:22px 18px;text-align:center;margin-bottom:14px;}
@@ -2641,6 +2656,7 @@ const ST={
   grammarErrors:{},     // {type: count} from debrief corrections
   sichaMinutes:0,       // cumulative conversation practice time
   focusList:null,       // temporary drill pool (debrief → Type It)
+  quests:{}, checkpoints:{},
 };
 
 // ── DISPLAY HELPERS ─────────────────────────────────────────
@@ -2717,13 +2733,18 @@ function getCard(id,dim){
 // Interval ladder, kept deliberately swappable: FSRS drops in here once its
 // parameters can be verified rather than recalled.
 function srsInt(l){ return [0,60000,300000,1800000,864e5,6048e5][Math.min(l,5)]; }
-function schedule(c,ok){
-  var n=ok?Math.min(c.n+1,5):Math.max(c.n-1,0);
+// grade: true|'good' advances, 'hard' holds the rung, false|'again' drops it.
+function schedule(c,grade){
+  var n;
+  if(grade===false||grade==='again') n=Math.max(c.n-1,0);
+  else if(grade==='hard')            n=Math.max(c.n,1);
+  else                               n=Math.min(c.n+1,5);
+  var bad=(grade===false||grade==='again');
   return {n:n,due:Date.now()+srsInt(n),reps:(c.reps||0)+1,
-          lapses:(c.lapses||0)+(ok?0:1)};
+          lapses:(c.lapses||0)+(bad?1:0)};
 }
-function reviewItem(id,dim,ok){
-  var nc=schedule(getCard(id,dim),ok);
+function reviewItem(id,dim,grade){
+  var nc=schedule(getCard(id,dim),grade);
   ST.cards[id+'|'+dim]=nc;
   return nc;
 }
@@ -3201,9 +3222,11 @@ function checkType(){
   if(ST.answered)return;
   var inp=document.getElementById('ti');
   var typed=stripV(inp.value.trim()), correct=stripV(ST.cur.he);
+  var m=matchAnswer(inp.value,ST.cur.he);
   ST.answered=true; ST.total++;
-  reviewItem(itemWord(ST.cur.he),'P',typed===correct);
-  trackW(ST.cur.he,typed===correct);
+  reviewItem(itemWord(ST.cur.he),'P', m==='wrong'?false:(m==='close'?'hard':true));
+  trackW(ST.cur.he,m!=='wrong');
+  if(m==='close') typed=correct;   // accept the near-miss, flag it below
   var fb=document.getElementById('tfb');
   if(typed===correct){
     inp.classList.add('good');
@@ -3812,6 +3835,199 @@ function retestMissed(){
 }
 
 // ══════════════════════════════════════════════════════════════
+// ANSWER MATCHING — typo tolerance
+// ══════════════════════════════════════════════════════════════
+// Exact-match-or-wrong is brutal on a phone keyboard in a script you are
+// still learning, and it punishes a motor slip as if it were a memory
+// failure. A single-character slip on a longer word counts, but only as
+// "hard" — it still advances, just less far.
+function lev(a,b){
+  if(a===b) return 0;
+  var m=a.length,n=b.length,prev=[],cur=[],i,j;
+  for(j=0;j<=n;j++) prev[j]=j;
+  for(i=1;i<=m;i++){
+    cur[0]=i;
+    for(j=1;j<=n;j++){
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));
+    }
+    prev=cur.slice();
+  }
+  return prev[n];
+}
+// A real-word index, so a one-letter slip can be told apart from a different
+// word. חלון "window" and חלום "dream" differ by one letter and are BOTH real;
+// accepting one for the other would teach the wrong thing.
+var _vocabSet=null;
+function vocabSet(){
+  if(_vocabSet) return _vocabSet;
+  _vocabSet={};
+  vocab.forEach(function(w){ _vocabSet[stripV(w.he)]=1; });
+  return _vocabSet;
+}
+function matchAnswer(typed,want){
+  var t=stripV(typed||'').trim(), w=stripV(want||'').trim();
+  if(!t) return 'wrong';
+  if(t===w) return 'exact';
+  // 4, not 5: Hebrew drops its vowels, so a 4-letter word is already
+  // substantial. Below that a single character is too much of the word.
+  if(w.length>=4 && lev(t,w)===1 && !vocabSet()[t]) return 'close';
+  return 'wrong';
+}
+
+// ══════════════════════════════════════════════════════════════
+// CAN-DOS — what a level is actually FOR
+// ══════════════════════════════════════════════════════════════
+// Words and patterns are selected because they serve these, not the other
+// way round. A can-do is demonstrated when the pieces it needs are secure.
+const CANDOS=[
+ {id:'c1a',level:1,text:'Greet someone and say who I am',      words:['שלום','אני','שם','מה'],      patterns:[]},
+ {id:'c1b',level:1,text:'Say what I want and what I do not',   words:['רוצה','לא'],                 patterns:['want_n','want_v']},
+ {id:'c1c',level:1,text:'Say what I have and have not',        words:['יש','אין'],                  patterns:['have','havenot']},
+ {id:'c1d',level:1,text:'Ask where something is',              words:['איפה'],                      patterns:['where']},
+ {id:'c1e',level:1,text:'Say what I need',                     words:['צריך'],                      patterns:['need']},
+ {id:'c2a',level:2,text:'Ask the price of something',          words:['כמה','כסף'],                 patterns:['cost']},
+ {id:'c2b',level:2,text:'Ask permission to do something',      words:['אפשר'],                      patterns:['can_i']},
+ {id:'c2c',level:2,text:'Ask whether a shop has something',    words:['יש'],                        patterns:['have_you']},
+ {id:'c2d',level:2,text:'Say what I like doing',               words:['אוהב'],                      patterns:['like_to']},
+ {id:'c2e',level:2,text:'Ask when something happens',          words:['מתי'],                       patterns:['when']},
+ {id:'c2f',level:2,text:'Describe something with an adjective',words:['טוב','גדול'],                patterns:['very']},
+];
+function candoDone(c){
+  var wOk=c.words.every(function(h){
+    var w=vocab.filter(function(v){return v.he===h;})[0];
+    if(!w) return true;                       // not in the app yet: do not block
+    var s=wordState(h); return s==='secure'||s==='mastered';
+  });
+  var pOk=c.patterns.every(function(id){ return getCard(itemPattern(id),'U').n>=3; });
+  return wOk&&pOk;
+}
+
+// ══════════════════════════════════════════════════════════════
+// LOAD GOVERNOR — the reason people quit spaced repetition
+// ══════════════════════════════════════════════════════════════
+// A backlog compounds: miss a week, open the app, see 600 cards, never
+// open it again. New words stop arriving while you are behind, and a
+// catch-up day is capped rather than dumped on you.
+const LOAD={pauseNewAt:60, catchUpCap:40};
+function dueTotal(){ return dueList('R').length+dueList('P').length; }
+function newPaused(){ return dueTotal()>=LOAD.pauseNewAt; }
+
+// ══════════════════════════════════════════════════════════════
+// QUESTS — name a number and a thing; never reward opening the app
+// ══════════════════════════════════════════════════════════════
+// Goal-setting research is consistent that specific and difficult beats
+// vague. "Complete 5 lessons" trains you to open the app; "secure 3 words"
+// trains you in Hebrew. Everything here counts demonstrated ability.
+function isoWeek(d){
+  d=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));
+  var y=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return d.getUTCFullYear()+'-W'+Math.ceil(((d-y)/864e5+1)/7);
+}
+function secureCount(){
+  return vocab.filter(function(w){var s=wordState(w.he);return s==='secure'||s==='mastered';}).length;
+}
+function patternSecureCount(){
+  return PATTERNS.filter(function(p){return getCard(itemPattern(p.id),'U').n>=3;}).length;
+}
+const QUEST_DEFS={
+  secure3  :{scope:'daily', target:3,  label:'Secure 3 words',          read:secureCount},
+  clearDue :{scope:'daily', target:0,  label:'Clear every due review',  read:dueTotal, countDown:true},
+  pattern1 :{scope:'daily', target:1,  label:'Secure a sentence pattern', read:patternSecureCount},
+  secure15 :{scope:'weekly',target:15, label:'Secure 15 words',         read:secureCount},
+  pattern3 :{scope:'weekly',target:3,  label:'Secure 3 sentence patterns', read:patternSecureCount},
+  cando2   :{scope:'weekly',target:2,  label:'Unlock 2 can-dos',        read:function(){return CANDOS.filter(candoDone).length;}}
+};
+function refreshQuests(){
+  var today=new Date().toISOString().slice(0,10), wk=isoWeek(new Date());
+  ST.quests=ST.quests||{};
+  if(ST.quests.day!==today){
+    ST.quests.day=today;
+    ST.quests.daily=['secure3','clearDue','pattern1'].map(function(k){
+      return {k:k,base:QUEST_DEFS[k].read()};
+    });
+  }
+  if(ST.quests.week!==wk){
+    ST.quests.week=wk;
+    ST.quests.weekly=['secure15','pattern3','cando2'].map(function(k){
+      return {k:k,base:QUEST_DEFS[k].read()};
+    });
+  }
+}
+function questProgress(q){
+  var d=QUEST_DEFS[q.k];
+  if(d.countDown) return {now:d.read(), target:0, done:d.read()===0, label:d.label};
+  var gained=Math.max(0,d.read()-q.base);
+  return {now:Math.min(gained,d.target), target:d.target, done:gained>=d.target, label:d.label};
+}
+
+// ══════════════════════════════════════════════════════════════
+// LEVEL CHECKPOINT — the hard gate
+// ══════════════════════════════════════════════════════════════
+// Production only, sampled across the level. Breadth alone can be reached
+// by drilling a convenient subset; a sampled test cannot.
+var CHK={active:false,level:0,queue:[],i:0,right:0,answered:false};
+const CHK_LEN=20;
+function checkpointReady(l){ return levelShape(l).secure>=CFG.gate.breadth*100; }
+function checkpointPassed(l){ return (ST.checkpoints||{})['L'+l]===true; }
+function levelCleared(l){ return checkpointPassed(l); }
+
+function startCheckpoint(l){
+  var pool=vocab.filter(function(w){return w.level===l;}).sort(function(){return Math.random()-.5;});
+  CHK={active:true,level:l,queue:pool.slice(0,CHK_LEN),i:0,right:0,answered:false};
+  showView('Levels'); renderCheckpoint();
+}
+function renderCheckpoint(){
+  if(CHK.i>=CHK.queue.length) return finishCheckpoint();
+  var w=CHK.queue[CHK.i]; CHK.answered=false; ST.cur=w;
+  document.getElementById('levelsBody').innerHTML=
+    '<div class="compact-head"><span class="ch-title">מבחן רמה '+CHK.level+'</span>'+
+      '<span class="mini-pill">'+(CHK.i+1)+' / '+CHK.queue.length+'</span></div>'+
+    '<div class="step-kind">type it in Hebrew — no hints</div>'+
+    '<div class="type-english">'+esc(w.en)+'</div>'+
+    '<div class="type-input-wrap"><input class="type-input he-text" id="ti" autocomplete="off" '+
+      'autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" '+
+      'onkeydown="if(event.key===\'Enter\')checkCheckpoint()"></div>'+
+    '<div class="type-feedback" id="cfb"></div>'+
+    buildKbd()+
+    '<div class="quiz-actions" style="margin-top:10px">'+
+      '<button class="btn-ghost" onclick="abortCheckpoint()">Quit</button>'+
+      '<button class="btn" onclick="checkCheckpoint()">Check →</button></div>';
+  var i=document.getElementById('ti'); if(i) i.focus();
+}
+function checkCheckpoint(){
+  if(CHK.answered) return;
+  var inp=document.getElementById('ti'); if(!inp) return;
+  var w=CHK.queue[CHK.i], m=matchAnswer(inp.value,w.he);
+  if(m==='wrong'&&!inp.value.trim()) return;
+  CHK.answered=true;
+  if(m!=='wrong') CHK.right++;
+  // The checkpoint is formative: a miss feeds straight back into review.
+  reviewItem(itemWord(w.he),'P', m==='wrong'?false:(m==='close'?'hard':true));
+  var fb=document.getElementById('cfb');
+  fb.innerHTML = m==='exact' ? '<span style="color:var(--green)">✓</span>'
+    : m==='close' ? '<span style="color:var(--teal)">almost — '+esc(w.he)+'</span>'
+    : '<span style="color:var(--rose)">'+esc(w.he)+'</span>';
+  CHK.i++;
+  setTimeout(renderCheckpoint, m==='exact'?650:1600);
+}
+function abortCheckpoint(){ CHK.active=false; renderLevelsView(); }
+function finishCheckpoint(){
+  var pct=Math.round(100*CHK.right/CHK.queue.length);
+  var pass=pct>=CFG.gate.checkpoint*100;
+  CHK.active=false;
+  if(pass){ ST.checkpoints=ST.checkpoints||{}; ST.checkpoints['L'+CHK.level]=true; }
+  saveProgress();
+  document.getElementById('levelsBody').innerHTML=
+    '<div class="today-hero"><div class="th-n">'+pct+'%</div>'+
+      '<div class="th-l">'+(pass?'level '+CHK.level+' cleared':'not yet')+'</div>'+
+      '<div class="th-sub">'+CHK.right+' of '+CHK.queue.length+' produced correctly.<br>'+
+      (pass?'Level '+(CHK.level+1)+' is open.':'You need '+Math.round(CFG.gate.checkpoint*100)+'%. The ones you missed are back in review.')+
+      '</div></div>'+
+    '<button class="big-btn" onclick="renderLevelsView()">Back to levels</button>';
+}
+
+// ══════════════════════════════════════════════════════════════
 // SHELL — Today / Levels / Practice / Me
 // ══════════════════════════════════════════════════════════════
 var VIEW='Today';
@@ -3830,12 +4046,16 @@ function showView(v){
 
 // The level you are actually working on: the first one not yet cleared.
 function activeLevel(){
-  for(var l=1;l<=6;l++){ if(levelShape(l).secure < CFG.gate.breadth*100) return l; }
+  // A level opens the next one only when its checkpoint is passed. Breadth
+  // alone can be reached by drilling a convenient subset of the level.
+  for(var l=1;l<=6;l++){ if(!levelCleared(l)) return l; }
   return 6;
 }
+// Locked means NEW WORDS from this level are not yet introduced. Practice is
+// never blocked — you can always drill anything from the Practice tab.
 function levelLocked(l){
   if(l<=1) return false;
-  // Soft unlock: the next level starts feeding once the previous is mostly done.
+  if(levelCleared(l-1)) return false;
   return levelShape(l-1).secure < CFG.gate.softUnlock*100;
 }
 
@@ -3856,6 +4076,9 @@ function dueList(dim){
   });
 }
 function freshList(){
+  // Nothing new while a backlog is building — this is the single rule that
+  // stops the review queue running away from you.
+  if(newPaused()) return [];
   var lv=activeLevel();
   return vocab.filter(function(w){
     return w.level<=lv && getCard(itemWord(w.he),'R').reps===0;
@@ -3955,32 +4178,54 @@ function roundDone(){
 // ── Today landing ─────────────────────────────────────────────
 function renderToday(){
   if(ROUND.active) return roundStep();
+  refreshQuests();
   var c=roundCounts(), lv=activeLevel(), sh=levelShape(lv);
-  var total=c.dueR+c.dueP;
-  var line = total? (total+' due for review')
-                  : (c.fresh? 'Nothing due — time for new words' : 'All caught up');
+  var n=buildRound().length;
+  var line = newPaused()
+      ? 'Catching up first — new words resume once the backlog clears'
+      : (c.dueR+c.dueP ? (c.dueR+c.dueP)+' due for review'
+                       : (c.fresh ? 'Nothing due — time for new words' : 'All caught up'));
+  var quests=(ST.quests.daily||[]).map(function(q){
+    var pr=questProgress(q);
+    return '<div class="q-row'+(pr.done?' done':'')+'">'+
+      '<span class="q-box">'+(pr.done?'✓':'')+'</span>'+
+      '<span class="q-txt">'+esc(pr.label)+'</span>'+
+      '<span class="q-n">'+(pr.target===0?pr.now:(pr.now+'/'+pr.target))+'</span></div>';
+  }).join('');
   document.getElementById('todayBody').innerHTML=
     '<div class="today-hero">'+
-      '<div class="th-n">'+buildRound().length+'</div>'+
+      '<div class="th-n">'+n+'</div>'+
       '<div class="th-l">items in your next round</div>'+
       '<div class="th-sub">'+esc(line)+'<br>Level '+lv+' · '+sh.secure+'% secure</div>'+
     '</div>'+
-    '<button class="big-btn" onclick="startRound()">Start round →</button>'+
-    '<div class="lv-meta" style="margin-top:16px">'+
+    (n?'<button class="big-btn" onclick="startRound()">Start round →</button>'
+      :'<div class="set-help" style="text-align:center">Nothing to do right now. Come back when reviews are due.</div>')+
+    '<div class="sch-sec-lbl">Today</div><div class="qlist">'+quests+'</div>'+
+    '<div class="lv-meta" style="margin-top:14px">'+
       '<span>'+c.dueR+' recognise · '+c.dueP+' produce</span><span>'+c.fresh+' unseen</span></div>';
 }
 
 // ── Levels view ───────────────────────────────────────────────
 function renderLevelsView(){
+  if(CHK.active) return renderCheckpoint();
+  refreshQuests();
   var cur=activeLevel();
   var html='<div class="compact-head"><span class="ch-title">רמות</span>'+
     '<span class="mini-pill">Level <b>'+cur+'</b></span></div>';
+  var wq=(ST.quests.weekly||[]).map(function(q){
+    var pr=questProgress(q);
+    return '<div class="q-row'+(pr.done?' done':'')+'"><span class="q-box">'+(pr.done?'✓':'')+'</span>'+
+      '<span class="q-txt">'+esc(pr.label)+'</span><span class="q-n">'+pr.now+'/'+pr.target+'</span></div>';
+  }).join('');
+  html+='<div class="sch-sec-lbl">This week</div><div class="qlist">'+wq+'</div>';
+
   LEVELS.filter(function(l){return l.n>0;}).forEach(function(l){
-    var sh=levelShape(l.n), locked=levelLocked(l.n);
+    var sh=levelShape(l.n), locked=levelLocked(l.n), cleared=levelCleared(l.n);
     var n=vocab.filter(function(w){return w.level===l.n;}).length;
     var secure=Math.round(sh.secure*n/100);
+    var cds=CANDOS.filter(function(c){return c.level===l.n;});
     html+='<div class="lv-card'+(l.n===cur?' cur':'')+(locked?' locked':'')+'">'+
-      '<div class="lv-top"><span class="lv-name">'+l.lbl+(locked?' 🔒':'')+'</span>'+
+      '<div class="lv-top"><span class="lv-name">'+l.lbl+(cleared?' ✓':'')+'</span>'+
         '<span class="lv-rng">'+l.sub+'</span></div>'+
       '<div class="lv-track"><div class="lv-fill" style="width:'+sh.secure+'%"></div></div>'+
       '<div class="lv-meta"><span>'+secure+' / '+n+' secure</span><span>'+sh.secure+'%</span></div>'+
@@ -3990,9 +4235,22 @@ function renderLevelsView(){
           return '<div class="dim'+(v!==null&&v<40?' low':'')+'"><div class="dv">'+(v===null?'—':v+'%')+'</div>'+
                  '<div class="dl">'+DIMS[d]+'</div></div>';
         }).join('')+
-      '</div></div>';
+      '</div>'+
+      (cds.length?'<div class="cando-list">'+cds.map(function(c){
+         var done=candoDone(c);
+         return '<div class="cando'+(done?' done':'')+'"><span class="q-box">'+(done?'✓':'')+'</span>'+
+                esc(c.text)+'</div>';
+       }).join('')+'</div>':'')+
+      (locked
+        ? '<div class="set-help" style="margin-top:8px">New words from this level start arriving once Level '+(l.n-1)+' reaches '+Math.round(CFG.gate.softUnlock*100)+'%. You can still practise it any time from Practice.</div>'
+        : cleared
+          ? '<div class="set-help" style="margin-top:8px">Checkpoint passed.</div>'
+          : checkpointReady(l.n)
+            ? '<button class="big-btn" style="margin-top:10px;padding:13px;font-size:15px" onclick="startCheckpoint('+l.n+')">Take the Level '+l.n+' checkpoint →</button>'
+            : '<div class="set-help" style="margin-top:8px">Checkpoint unlocks at '+Math.round(CFG.gate.breadth*100)+'% secure — '+CHK_LEN+' words, typed, no hints.</div>')+
+    '</div>';
   });
-  html+='<div class="set-help">A word counts as <b>secure</b> only on production — typing it from the English, surviving spaced reviews. Recognising it is not enough.</div>';
+  html+='<div class="set-help">A word is <b>secure</b> only on production: typed from the English and surviving spaced reviews. Recognising it does not count.</div>';
   document.getElementById('levelsBody').innerHTML=html;
 }
 
@@ -4091,10 +4349,11 @@ function checkPattern(){
   var typed=stripV(inp.value.trim()), want=stripV(PAT.w.he);
   if(!typed) return;
   PAT.answered=true; ST.answered=true; ST.total++;
-  var ok=(typed===want);
+  var m=matchAnswer(inp.value,PAT.w.he), ok=(m!=='wrong');
+  var g=(m==='wrong')?false:(m==='close'?'hard':true);
   // One answer, two dimensions.
-  reviewItem(itemPattern(PAT.p.id),'U',ok);
-  reviewItem(itemWord(PAT.w.he),'P',ok);
+  reviewItem(itemPattern(PAT.p.id),'U',g);
+  reviewItem(itemWord(PAT.w.he),'P',g);
   trackW(PAT.w.he,ok);
   var full=PAT.p.t.replace('___',PAT.w.he);
   var fb=document.getElementById('pfb');
@@ -4998,7 +5257,7 @@ function saveProgress(){
       dayStreak:ST.dayStreak||0,lastDay:ST.lastDay||'',
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
       userVocab:ST.userVocab||[],grammarErrors:ST.grammarErrors||{},
-      sichaMinutes:ST.sichaMinutes||0
+      sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{}
     }));
   }catch(e){}
 }
@@ -5027,6 +5286,7 @@ function loadProgress(){
     ST.gender=d.gender||null;ST.sichaSupport=d.sichaSupport||{};
     ST.userVocab=d.userVocab||[];ST.grammarErrors=d.grammarErrors||{};
     ST.sichaMinutes=d.sichaMinutes||0;
+    ST.quests=d.quests||{};ST.checkpoints=d.checkpoints||{};
     if(d.showVowels){ST.showVowels=true;
       var b=document.getElementById('vowelBtn');if(b)b.classList.add('on');
       var l=document.getElementById('vowelLbl');if(l)l.textContent='ON';}
