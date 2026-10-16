@@ -441,6 +441,70 @@ body.cursive-on .sch-word .ww-he{font-family:var(--he-cursive)!important;}
 .set-input:focus{border-color:var(--blue);}
 .set-row-btns{display:flex;gap:8px;flex-wrap:wrap;}
 
+/* ── MOBILE SHELL: bottom tab bar + compact header ──────────── */
+/* The old layout spent half a phone screen on chrome before the question. */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;
+  background:rgba(8,10,15,.94);backdrop-filter:blur(14px);
+  border-top:1px solid var(--border);
+  padding-bottom:env(safe-area-inset-bottom);}
+.tabbar button{flex:1;background:none;border:none;color:var(--muted);
+  font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:.5px;
+  padding:9px 2px 7px;cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:3px;transition:color .15s;}
+.tabbar button .ti{font-size:19px;line-height:1;}
+.tabbar button.on{color:var(--blue);}
+body{padding-bottom:64px;}
+.app{padding-top:10px;}
+.compact-head{display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:12px;}
+.compact-head .ch-title{font-family:var(--he-font);font-size:21px;font-weight:900;
+  color:var(--blue);letter-spacing:-.5px;}
+.compact-head .ch-right{display:flex;gap:7px;align-items:center;}
+.mini-pill{background:var(--surface2);border:1px solid var(--border);border-radius:20px;
+  padding:4px 10px;font-size:11px;color:var(--muted);white-space:nowrap;}
+.mini-pill b{color:var(--text);font-weight:700;}
+.view{display:none;} .view.on{display:block;}
+
+/* ── Today / the round ──────────────────────────────────────── */
+.round-bar{display:flex;gap:4px;margin-bottom:14px;}
+.round-bar i{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .25s;}
+.round-bar i.done{background:var(--green);} .round-bar i.now{background:var(--blue);}
+.round-bar i.miss{background:var(--rose);}
+.today-hero{text-align:center;padding:30px 16px 24px;}
+.today-hero .th-n{font-size:58px;font-weight:900;color:var(--blue);line-height:1;}
+.today-hero .th-l{font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:1px;text-transform:uppercase;}
+.today-hero .th-sub{font-size:14px;color:var(--text);margin-top:14px;line-height:1.5;}
+.big-btn{display:block;width:100%;background:var(--blue);color:#fff;border:none;
+  border-radius:16px;padding:18px;font-size:17px;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;box-shadow:0 0 24px var(--blue-glow);margin-top:18px;}
+.big-btn:active{transform:scale(.985);}
+.step-kind{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  text-align:center;margin-bottom:10px;}
+.intro-card{background:var(--surface2);border:1px solid var(--blue-dim);border-radius:18px;
+  padding:28px 18px;text-align:center;}
+.intro-card .ic-he{font-family:var(--he-font);font-size:46px;color:#fff;direction:rtl;line-height:1.35;}
+body.cursive-on .intro-card .ic-he{font-family:var(--he-cursive)!important;}
+.intro-card .ic-pron{font-size:13px;color:var(--blue);margin-top:8px;letter-spacing:.5px;}
+.intro-card .ic-en{font-size:20px;color:var(--text);margin-top:14px;}
+.intro-card .ic-rank{font-size:11px;color:var(--muted);margin-top:12px;}
+
+/* ── Levels ─────────────────────────────────────────────────── */
+.lv-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;
+  padding:14px;margin-bottom:10px;}
+.lv-card.cur{border-color:var(--blue);box-shadow:0 0 18px var(--blue-glow);}
+.lv-card.locked{opacity:.45;}
+.lv-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.lv-name{font-size:16px;font-weight:700;}
+.lv-rng{font-size:11px;color:var(--muted);}
+.lv-track{height:7px;border-radius:4px;background:var(--surface2);margin:9px 0 7px;overflow:hidden;}
+.lv-fill{height:100%;background:var(--green);transition:width .4s;}
+.lv-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}
+.dims{display:flex;gap:6px;margin-top:10px;}
+.dim{flex:1;text-align:center;background:var(--surface2);border-radius:8px;padding:6px 2px;}
+.dim .dv{font-size:14px;font-weight:700;color:var(--text);}
+.dim .dl{font-size:9px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;}
+.dim.low .dv{color:var(--teal);}
+
 /* ── Pattern drill ──────────────────────────────────────────── */
 .pat-frame{background:var(--surface2);border:1px solid var(--border);border-radius:16px;
   padding:22px 18px;text-align:center;margin-bottom:14px;}
@@ -475,10 +539,25 @@ html,body{ overscroll-behavior-y:none; -webkit-tap-highlight-color:transparent; 
 <body class="">
 
 <div class="app">
-  <header>
-    <div class="logo-he">Jewuolingo</div>
-    <div class="logo-en">Hebrew Mastery · Science-Based Learning</div>
-  </header>
+  <div class="compact-head">
+    <span class="ch-title">Jewuolingo</span>
+    <span class="ch-right">
+      <span class="mini-pill">🔥 <b id="miniStreak">0</b></span>
+      <span class="mini-pill">📚 <b id="miniLearned">0</b></span>
+    </span>
+  </div>
+
+  <!-- ══ TODAY ══ -->
+  <div class="view on" id="viewToday"><div id="todayBody"></div></div>
+
+  <!-- ══ LEVELS ══ -->
+  <div class="view" id="viewLevels"><div id="levelsBody"></div></div>
+
+  <!-- ══ ME ══ -->
+  <div class="view" id="viewMe"><div id="meBody"></div></div>
+
+  <!-- ══ PRACTICE (the original free-play UI) ══ -->
+  <div class="view" id="viewPractice">
   <div class="stats-bar">
     <div class="stat-pill">🔥 Streak <span class="num" id="streakNum">0</span></div>
     <div class="stat-pill">⭐ Score <span class="num" id="scoreNum">2542</span></div>
@@ -503,6 +582,7 @@ html,body{ overscroll-behavior-y:none; -webkit-tap-highlight-color:transparent; 
   <div class="sel-panel" id="panelCat"><div class="category-tabs" id="catTabs"></div></div>
   <div class="sel-panel" id="panelLevel"><div class="level-tabs" id="levelTabs"></div></div>
   <div class="quiz-card"><div id="quizContent"><div class="progress-label"><span>מה המשמעות? — What does it mean?</span><span></span></div><div class="mc-question"><span class="mc-he he-text">לראות</span><div class="pron-wrap"><button class="pron-btn" onclick="event.stopPropagation();togglePron(&#39;p1&#39;)">👁 הגייה</button><div class="pron-reveal" id="p1">lir-OT</div></div></div><div class="mc-grid"><button class="mc-opt" id="mco0" onclick="checkMC(0,true)">to see</button><button class="mc-opt" id="mco1" onclick="checkMC(1,false)">bee</button><button class="mc-opt" id="mco2" onclick="checkMC(2,false)">glove</button><button class="mc-opt" id="mco3" onclick="checkMC(3,false)">fashion / trend</button></div><div class="quiz-actions" style="margin-top:14px"><span style="color:var(--muted);font-size:12px">Multiple Choice</span><div class="streak-badge">Score: 2542</div></div></div></div>
+  </div>
 </div>
 
 <div class="analytics-overlay" id="analyticsOverlay">
@@ -520,6 +600,13 @@ html,body{ overscroll-behavior-y:none; -webkit-tap-highlight-color:transparent; 
     <button class="btn-ghost" style="margin-top:16px;margin-left:10px;padding:10px 20px;font-size:13px" onclick="resetProgress()">🗑 Reset Progress</button>
   </div>
 </div>
+
+<nav class="tabbar">
+  <button id="tabToday"    class="on" onclick="showView('Today')"><span class="ti">◎</span>Today</button>
+  <button id="tabLevels"            onclick="showView('Levels')"><span class="ti">▦</span>Levels</button>
+  <button id="tabPractice"          onclick="showView('Practice')"><span class="ti">⌘</span>Practice</button>
+  <button id="tabMe"                onclick="showView('Me')"><span class="ti">☰</span>Me</button>
+</nav>
 
 <div class="test-overlay" id="testOverlay"></div>
 
@@ -2614,7 +2701,8 @@ function levelShape(lv){
     out[d]=ws.length?Math.round(100*n/ws.length):0;
   });
   var ps=PATTERNS.filter(function(p){return p.level===lv;});
-  out.U=ps.length?Math.round(100*ps.filter(function(p){return getCard(itemPattern(p.id),'U').reps>0;}).length/ps.length):0;
+  // null, not 0: a level with no patterns authored yet has no Use score to show.
+  out.U=ps.length?Math.round(100*ps.filter(function(p){return getCard(itemPattern(p.id),'U').reps>0;}).length/ps.length):null;
   out.secure=ws.length?Math.round(100*ws.filter(function(w){
     var s=wordState(w.he); return s==='secure'||s==='mastered';}).length/ws.length):0;
   return out;
@@ -2726,6 +2814,8 @@ function updateStats(){
   document.getElementById('learnedNum').textContent=ST.learned.size;
   document.getElementById('accNum').textContent=ST.total?Math.round(ST.correct/ST.total*100)+'%':'—';
   var dn=document.getElementById('daysNum'); if(dn) dn.textContent=ST.dayStreak||0;
+  var ms=document.getElementById('miniStreak'); if(ms) ms.textContent=ST.dayStreak||0;
+  var ml=document.getElementById('miniLearned'); if(ml) ml.textContent=ST.learned.size;
   saveProgress();
 }
 function setMode(m){if(m==='test'&&ST.mode!=='test')_preTestMode=ST.mode;ST.mode=m;renderModes();renderCats();renderLevels();closeAllSel();updateSelLabels();newQ();}
@@ -2794,13 +2884,14 @@ function gradeCard(knew){
   ST.total++; trackW(ST.cur.he,knew);
   if(knew){ST.correct++;ST.score+=10+lvl*5;ST.streak++;ST.learned.add(ST.cur.he);toast('✓ '+(lvl===5?'Mastered!':'Got it!'),'good');}
   else{ST.streak=0;toast('Reviewing soon','bad');}
-  updateStats();setTimeout(newQ,600);
+  updateStats();setTimeout(function(){advance(knew);},600);
 }
 
 // ── MULTIPLE CHOICE ───────────────────────────────────────────
-function renderMultiple(w){
-  var pool=filteredVocab();
-  var opts=[...pool.filter(function(x){return x!==w;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
+function mcHTML(w){
+  var pool=ROUND.active?vocab.filter(function(x){return x.level<=Math.max(2,w.level);}):filteredVocab();
+  if(pool.length<6) pool=vocab;
+  var opts=[...pool.filter(function(x){return x!==w&&x.en!==w.en;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
   var html='<div class="progress-label"><span></span><span>'+(ST.streak>0?'🔥 '+ST.streak:'')+'</span></div>'+
     '<div class="mc-question">'+
       '<span class="mc-he he-text">'+dHe(w)+'</span>'+
@@ -2810,9 +2901,10 @@ function renderMultiple(w){
   opts.forEach(function(o,i){
     html+='<button class="mc-opt" id="mco'+i+'" onclick="checkMC('+i+','+(o===w)+')">'+o.en+'</button>';
   });
-  html+='</div><div class="quiz-actions" style="margin-top:14px"><span style="color:var(--muted);font-size:11px">keys 1–4 = answer</span><div class="streak-badge">Score: '+ST.score+'</div></div>';
-  document.getElementById('quizContent').innerHTML=html;
+  return html+'</div><div class="quiz-actions" style="margin-top:14px"><span style="color:var(--muted);font-size:11px">keys 1–4 = answer</span><div class="streak-badge">Score: '+ST.score+'</div></div>';
 }
+function renderMultiple(w){ document.getElementById('quizContent').innerHTML=mcHTML(w); }
+
 function checkMC(i,correct){
   if(ST.answered)return; ST.answered=true; ST.total++;
   reviewItem(itemWord(ST.cur.he),'R',correct);
@@ -2823,7 +2915,7 @@ function checkMC(i,correct){
   if(!correct) btns.forEach(function(b){if(b.textContent.trim()===ST.cur.en)b.classList.add('correct');});
   if(correct){ST.correct++;ST.score+=10+ST.streak;ST.streak++;ST.learned.add(ST.cur.he);toast('✓ Correct!','good');}
   else{ST.streak=0;toast('✗ '+ST.cur.en,'bad');}
-  updateStats();setTimeout(newQ,correct?1100:2300);
+  updateStats();setTimeout(function(){advance(correct);},correct?1100:2300);
 }
 
 // ── KEYBOARD ─────────────────────────────────────────────────
@@ -3040,20 +3132,20 @@ function checkShoresh(i,correct){
 }
 
 // ── GRAMMAR MODE ──────────────────────────────────────────────
-function renderType(w){
-  document.getElementById('quizContent').innerHTML=
-    '<div class="progress-label"><span>כתוב בעברית — Write in Hebrew</span><span>'+(ST.streak>0?'🔥 '+ST.streak:'')+'</span></div>'+
+function typeHTML(w){
+  return '<div class="progress-label"><span>כתוב בעברית — Write in Hebrew</span><span>'+(ST.streak>0?'🔥 '+ST.streak:'')+'</span></div>'+
     '<div class="type-english">'+w.en+'</div>'+
-    '<div class="type-hint">Use keyboard below — toggle עב/EN for language · tap pronunciation for a hint</div>'+
     pronBtn(w,'margin-bottom:10px')+
-    '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" onkeydown="if(event.key===\'Enter\')checkType()"></div>'+
+    '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" onkeydown="if(event.key===\'Enter\')checkType()"></div>'+
     '<div class="type-feedback" id="tfb"></div>'+
     buildKbd()+
     '<div class="quiz-actions" style="margin-top:10px">'+
-      '<button class="btn-ghost" onclick="newQ()">Skip</button>'+
+      '<button class="btn-ghost" onclick="advance()">Skip</button>'+
       '<button class="btn" onclick="checkType()">Check →</button>'+
     '</div>';
 }
+function renderType(w){ document.getElementById('quizContent').innerHTML=typeHTML(w); }
+
 function checkType(){
   if(ST.answered)return;
   var inp=document.getElementById('ti');
@@ -3072,7 +3164,7 @@ function checkType(){
     fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:22px;color:var(--blue)">'+dHe(ST.cur)+'</span> <em style="color:var(--blue);font-size:12px">('+ST.cur.pron+')</em>';
     toast('✗ See answer','bad');
   }
-  updateStats(); setTimeout(newQ,2000);
+  updateStats(); setTimeout(function(){advance(typed===correct);},2000);
 }
 
 // ── MATCH ─────────────────────────────────────────────────────
@@ -3152,7 +3244,7 @@ function pickBank(word,idx){
     if(fb) fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:22px;color:var(--blue)">'+dHe(ST.cur)+'</span> <em style="color:var(--blue);font-size:12px">('+ST.cur.pron+')</em>';
     toast('✗ '+ST.cur.en,'bad');
   }
-  updateStats();setTimeout(newQ,1800);
+  updateStats();setTimeout(function(){advance(ok);},1800);
 }
 
 // ── CONVERSATION ──────────────────────────────────────────────
@@ -3668,11 +3760,212 @@ function retestMissed(){
   renderTestQ();
 }
 
+// ══════════════════════════════════════════════════════════════
+// SHELL — Today / Levels / Practice / Me
+// ══════════════════════════════════════════════════════════════
+var VIEW='Today';
+function showView(v){
+  VIEW=v;
+  ['Today','Levels','Practice','Me'].forEach(function(n){
+    var el=document.getElementById('view'+n); if(el) el.classList.toggle('on',n===v);
+    var tb=document.getElementById('tab'+n);  if(tb) tb.classList.toggle('on',n===v);
+  });
+  if(v==='Today')    renderToday();
+  if(v==='Levels')   renderLevelsView();
+  if(v==='Me')       renderMe();
+  if(v==='Practice') newQ();
+  window.scrollTo(0,0);
+}
+
+// The level you are actually working on: the first one not yet cleared.
+function activeLevel(){
+  for(var l=1;l<=6;l++){ if(levelShape(l).secure < CFG.gate.breadth*100) return l; }
+  return 6;
+}
+function levelLocked(l){
+  if(l<=1) return false;
+  // Soft unlock: the next level starts feeding once the previous is mostly done.
+  return levelShape(l-1).secure < CFG.gate.softUnlock*100;
+}
+
+// ══════════════════════════════════════════════════════════════
+// THE DAILY ROUND — one tap, ~12 items, mixed
+// ══════════════════════════════════════════════════════════════
+// Interleaved by design: mixing item types and directions within a session
+// feels worse and retains better than running blocks of one mode.
+var ROUND={active:false,steps:[],i:0,right:0,wrong:0,started:0};
+var ROUND_LEN=12;
+
+function dueList(dim){
+  return vocab.filter(function(w){
+    var c=getCard(itemWord(w.he),dim);
+    return c.reps>0 && c.due<=Date.now();
+  }).sort(function(a,b){
+    return getCard(itemWord(a.he),dim).due-getCard(itemWord(b.he),dim).due;
+  });
+}
+function freshList(){
+  var lv=activeLevel();
+  return vocab.filter(function(w){
+    return w.level<=lv && getCard(itemWord(w.he),'R').reps===0;
+  }).sort(function(a,b){ return a.rank-b.rank; });   // most frequent first
+}
+function roundCounts(){
+  return {dueR:dueList('R').length, dueP:dueList('P').length, fresh:freshList().length};
+}
+
+function buildRound(){
+  var steps=[], seen={};
+  function push(kind,w,pat){
+    var k=kind+':'+(w?w.he:pat.id);
+    if(seen[k]) return; seen[k]=1;
+    steps.push({kind:kind,w:w,p:pat});
+  }
+  // Reviews carry the round; new material is strictly rationed.
+  dueList('P').slice(0,5).forEach(function(w){ push('type',w); });
+  dueList('R').slice(0,5).forEach(function(w){ push('mc',w); });
+  // Production unlocks once recognition is established. Without this the gate
+  // dimension can never start: a word only gets a P card by being typed, and
+  // it is only typed if it already has a due P card.
+  vocab.filter(function(w){
+    return getCard(itemWord(w.he),'R').n>=2 && getCard(itemWord(w.he),'P').reps===0;
+  }).sort(function(a,b){ return a.rank-b.rank; })
+    .slice(0,3).forEach(function(w){ push('type',w); });
+  PATTERNS.filter(function(p){ return p.level<=activeLevel()+1 && patternFillers(p).length; })
+    .sort(function(a,b){ return getCard(itemPattern(a.id),'U').reps-getCard(itemPattern(b.id),'U').reps; })
+    .slice(0,3).forEach(function(p){ push('pattern',null,p); });
+  // Top up from words already met, never by adding more new ones.
+  if(steps.length<ROUND_LEN){
+    vocab.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; })
+      .sort(function(a,b){ return getCard(itemWord(a.he),'R').due-getCard(itemWord(b.he),'R').due; })
+      .forEach(function(w){ if(steps.length<ROUND_LEN) push('mc',w); });
+  }
+  var rest=steps.sort(function(){ return Math.random()-.5; });
+
+  // At most 3 genuinely new words per round. Each is introduced and then
+  // tested later in the SAME round — the study card is shown once, after
+  // which the word is retrieved rather than re-read.
+  var intros=freshList().slice(0,3);
+  var echoes=intros.map(function(w){ return {kind:'mc',w:w,echo:true}; });
+  var out=intros.map(function(w){ return {kind:'intro',w:w}; });
+  // Intros first guarantees every echo lands after its own introduction.
+  out=out.concat(rest.concat(echoes).sort(function(){ return Math.random()-.5; }));
+  return out.slice(0,ROUND_LEN);
+}
+
+function startRound(){
+  ROUND={active:true,steps:buildRound(),i:0,right:0,wrong:0,started:Date.now()};
+  if(!ROUND.steps.length){ ROUND.active=false; renderToday(); return; }
+  showView('Today'); roundStep();
+}
+function roundBar(){
+  var h='<div class="round-bar">';
+  for(var i=0;i<ROUND.steps.length;i++){
+    var c=i<ROUND.i?(ROUND.steps[i].ok===false?'miss':'done'):(i===ROUND.i?'now':'');
+    h+='<i class="'+c+'"></i>';
+  }
+  return h+'</div>';
+}
+var STEP_LABEL={mc:'recognise',type:'produce — type it',pattern:'use it in a sentence',intro:'new word'};
+function roundStep(){
+  if(ROUND.i>=ROUND.steps.length){ return roundDone(); }
+  var st=ROUND.steps[ROUND.i];
+  ST.answered=false;
+  if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=patternPickWord(st.p); PAT.answered=false; }
+  else ST.cur=st.w;
+  var body=document.getElementById('todayBody');
+  body.innerHTML=roundBar()+'<div class="step-kind">'+STEP_LABEL[st.kind]+'</div><div id="stepBody"></div>';
+  var host=document.getElementById('stepBody');
+  if(st.kind==='intro')   host.innerHTML=introHTML(st.w);
+  if(st.kind==='mc')      host.innerHTML=mcHTML(st.w);
+  if(st.kind==='type')    host.innerHTML=typeHTML(st.w);
+  if(st.kind==='pattern') host.innerHTML=patternHTML(PAT.p,PAT.w);
+  var inp=document.getElementById('ti'); if(inp) inp.focus();
+}
+function roundNext(ok){
+  if(ROUND.steps[ROUND.i]) ROUND.steps[ROUND.i].ok=(ok!==false);
+  if(ok===false) ROUND.wrong++; else ROUND.right++;
+  ROUND.i++; roundStep();
+}
+function roundDone(){
+  ROUND.active=false;
+  var mins=Math.max(1,Math.round((Date.now()-ROUND.started)/60000));
+  var acc=ROUND.right+ROUND.wrong?Math.round(100*ROUND.right/(ROUND.right+ROUND.wrong)):0;
+  bumpDay(); saveProgress();
+  document.getElementById('todayBody').innerHTML=
+    '<div class="today-hero"><div class="th-n">'+acc+'%</div>'+
+    '<div class="th-l">round complete</div>'+
+    '<div class="th-sub">'+ROUND.right+' right · '+ROUND.wrong+' to revisit · '+mins+' min</div></div>'+
+    '<button class="big-btn" onclick="startRound()">Another round</button>'+
+    '<button class="big-btn" style="background:var(--surface2);box-shadow:none;color:var(--text)" '+
+      'onclick="showView(\'Levels\')">See my levels</button>';
+}
+
+// ── Today landing ─────────────────────────────────────────────
+function renderToday(){
+  if(ROUND.active) return roundStep();
+  var c=roundCounts(), lv=activeLevel(), sh=levelShape(lv);
+  var total=c.dueR+c.dueP;
+  var line = total? (total+' due for review')
+                  : (c.fresh? 'Nothing due — time for new words' : 'All caught up');
+  document.getElementById('todayBody').innerHTML=
+    '<div class="today-hero">'+
+      '<div class="th-n">'+buildRound().length+'</div>'+
+      '<div class="th-l">items in your next round</div>'+
+      '<div class="th-sub">'+esc(line)+'<br>Level '+lv+' · '+sh.secure+'% secure</div>'+
+    '</div>'+
+    '<button class="big-btn" onclick="startRound()">Start round →</button>'+
+    '<div class="lv-meta" style="margin-top:16px">'+
+      '<span>'+c.dueR+' recognise · '+c.dueP+' produce</span><span>'+c.fresh+' unseen</span></div>';
+}
+
+// ── Levels view ───────────────────────────────────────────────
+function renderLevelsView(){
+  var cur=activeLevel();
+  var html='<div class="compact-head"><span class="ch-title">רמות</span>'+
+    '<span class="mini-pill">Level <b>'+cur+'</b></span></div>';
+  LEVELS.filter(function(l){return l.n>0;}).forEach(function(l){
+    var sh=levelShape(l.n), locked=levelLocked(l.n);
+    var n=vocab.filter(function(w){return w.level===l.n;}).length;
+    var secure=Math.round(sh.secure*n/100);
+    html+='<div class="lv-card'+(l.n===cur?' cur':'')+(locked?' locked':'')+'">'+
+      '<div class="lv-top"><span class="lv-name">'+l.lbl+(locked?' 🔒':'')+'</span>'+
+        '<span class="lv-rng">'+l.sub+'</span></div>'+
+      '<div class="lv-track"><div class="lv-fill" style="width:'+sh.secure+'%"></div></div>'+
+      '<div class="lv-meta"><span>'+secure+' / '+n+' secure</span><span>'+sh.secure+'%</span></div>'+
+      '<div class="dims">'+
+        ['R','P','U'].map(function(d){
+          var v=sh[d];
+          return '<div class="dim'+(v!==null&&v<40?' low':'')+'"><div class="dv">'+(v===null?'—':v+'%')+'</div>'+
+                 '<div class="dl">'+DIMS[d]+'</div></div>';
+        }).join('')+
+      '</div></div>';
+  });
+  html+='<div class="set-help">A word counts as <b>secure</b> only on production — typing it from the English, surviving spaced reviews. Recognising it is not enough.</div>';
+  document.getElementById('levelsBody').innerHTML=html;
+}
+
+// ── Me view ───────────────────────────────────────────────────
+function renderMe(){
+  document.getElementById('meBody').innerHTML=
+    '<div class="compact-head"><span class="ch-title">אני</span></div>'+
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">'+
+      '<div class="stat-pill">🔥 Days <span class="num">'+(ST.dayStreak||0)+'</span></div>'+
+      '<div class="stat-pill">📚 Learned <span class="num">'+ST.learned.size+'</span></div>'+
+      '<div class="stat-pill">🎯 Accuracy <span class="num">'+(ST.total?Math.round(ST.correct/ST.total*100)+'%':'—')+'</span></div>'+
+    '</div>'+
+    '<button class="big-btn" style="background:var(--surface2);box-shadow:none;color:var(--text)" onclick="openSettings()">⚙ Settings &amp; backup</button>'+
+    '<button class="big-btn" style="background:var(--surface2);box-shadow:none;color:var(--text)" onclick="openAnalytics()">📊 Analytics</button>';
+}
+
 // ── PATTERN DRILL ─────────────────────────────────────────────
 // The frame is shown with its slot empty and the English spelled out; you type
 // the Hebrew filler. One answer, two items reviewed: U on the pattern and P on
 // the word. This is where vocabulary becomes an utterance instead of a list.
 var PAT={p:null,w:null,answered:false};
+// Every mode funnels through here, so a round can take over the flow without
+// each mode knowing anything about rounds.
+function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern') renderPattern(); else newQ(); }
 
 function patternDue(){
   var pool=PATTERNS.filter(function(p){return patternFillers(p).length>0;});
@@ -3694,20 +3987,10 @@ function patternPickWord(p){
   return pool[Math.floor(Math.random()*pool.length)];
 }
 
-function renderPattern(){
-  PAT.p=patternDue();
-  if(!PAT.p){
-    document.getElementById('quizContent').innerHTML=
-      '<div class="progress-label"><span>תבנית — Patterns</span><span></span></div>'+
-      '<div class="sch-task"><div class="sch-task-title">No patterns available yet</div></div>';
-    return;
-  }
-  PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
-  var p=PAT.p, w=PAT.w;
+function patternHTML(p,w){
   var frame=ST.showVowels?(p.tV+' ___'+(p.t.slice(-1)==='?'?'?':'')):p.t;
   var reps=getCard(itemPattern(p.id),'U').reps;
-  document.getElementById('quizContent').innerHTML=
-    '<div class="progress-label"><span>בנה את המשפט — build the sentence</span>'+
+  return '<div class="progress-label"><span>בנה את המשפט — build the sentence</span>'+
       '<span>'+esc(p.en)+' · '+reps+'×</span></div>'+
     '<div class="pat-frame"><span class="pat-he he-text">'+esc(frame)+'</span>'+
       '<span class="pat-pron">'+esc(p.pron)+' …</span></div>'+
@@ -3721,8 +4004,35 @@ function renderPattern(){
     '</div>'+
     '<div id="pfb" style="margin-top:10px"></div>'+
     buildKbd();
+}
+function introHTML(w){
+  return '<div class="intro-card">'+
+      '<div class="ic-he">'+dHe(w)+'</div>'+
+      '<div class="ic-pron">'+esc(w.pron)+'</div>'+
+      '<div class="ic-en">'+esc(w.en)+'</div>'+
+      '<div class="ic-rank">#'+w.rank+' most frequent · Level '+w.level+'</div>'+
+    '</div>'+
+    '<button class="big-btn" onclick="introDone()">Got it →</button>';
+}
+function introDone(){
+  var w=ST.cur; if(!w) return;
+  // First exposure is a learning step, not a pass: it comes back inside the round.
+  reviewItem(itemWord(w.he),'R',true);
+  saveProgress(); advance(true);
+}
+function renderPattern(){
+  PAT.p=patternDue();
+  if(!PAT.p){
+    document.getElementById('quizContent').innerHTML=
+      '<div class="progress-label"><span>תבנית — Patterns</span><span></span></div>'+
+      '<div class="sch-task"><div class="sch-task-title">No patterns available yet</div></div>';
+    return;
+  }
+  PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
+  document.getElementById('quizContent').innerHTML=patternHTML(PAT.p,PAT.w);
   var i=document.getElementById('ti'); if(i) i.focus();
 }
+
 
 function checkPattern(){
   if(PAT.answered) return;
@@ -3750,7 +4060,7 @@ function checkPattern(){
     toast('✗ '+PAT.w.he,'bad');
   }
   updateStats();
-  setTimeout(renderPattern, ok?1200:2600);
+  setTimeout(function(){advance(ok);}, ok?1200:2600);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -4710,7 +5020,8 @@ document.addEventListener('keydown',function(e){
 });
 
 // ── INIT ───────────────────────────────────────────────────────
-loadProgress(); loadApiKey(); renderModes(); renderCats(); renderLevels(); updateSelLabels(); newQ(); updateStats();
+loadProgress(); loadApiKey(); renderModes(); renderCats(); renderLevels(); updateSelLabels(); updateStats();
+showView('Today');
 
 // ── PWA ───────────────────────────────────────────────────────
 if('serviceWorker' in navigator){
