@@ -858,6 +858,23 @@ body.kbd-hints .kbd-key .klat{display:block;position:absolute;bottom:3px;right:4
 .pr-filters .fv{color:var(--text);font-size:14px;}
 #viewPractice .quiz-card{padding-top:10px;}
 
+
+.today-grid{display:block;min-height:0;}
+.t-slice{display:block;padding:10px 0 20px;}
+.t-slice canvas{margin:0;}
+/* Pinned above the tab bar: the action is always one thumb-reach away,
+   whatever the content length. */
+.t-cta{position:sticky;bottom:0;background:var(--bg);padding:14px 0 10px;
+  box-shadow:0 -12px 16px -8px var(--bg);}
+
+/* Full-height column so the action sits in the thumb zone whatever the
+   content length, with the journey breathing above it. */
+.today-grid{display:flex;flex-direction:column;
+  /* viewport minus the compact header (58) and the tab-bar allowance the
+     .app already reserves (76), so the action lands just above the bar. */
+  min-height:calc(100dvh - 58px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+.t-cta{margin-top:auto;position:static;box-shadow:none;padding:20px 0 6px;}
+.t-slice{padding:14px 0 22px;}
 </style>
 </head>
 <body class="">
@@ -4679,7 +4696,7 @@ function dotState(w){
   if(r.n>0||ST.learned.has(w.he)) return 'met';
   return 'unseen';
 }
-function drawMap(id,onlyLevel,pitchArg){
+function drawMap(id,onlyLevel,pitchArg,dimBeyond){
   var cv=document.getElementById(id); if(!cv) return;
   var words=vocab.slice().sort(function(a,b){return a.rank-b.rank;});
   if(onlyLevel) words=words.filter(function(w){return w.level===onlyLevel;});
@@ -4716,6 +4733,8 @@ function drawMap(id,onlyLevel,pitchArg){
       var px=cssW-(c+1)*pitch+(pitch-dot)/2;      // RTL
       var py=b.y+r*pitch;
       var st=dotState(w);
+      var ahead=dimBeyond && w.level>dimBeyond;
+      x.globalAlpha = ahead ? 0.32 : 1;
       if(st==='unseen'){ x.strokeStyle='#2E3140'; x.lineWidth=1;
         x.strokeRect(px+.5,py+.5,dot-1,dot-1); }
       else {
@@ -4724,10 +4743,11 @@ function drawMap(id,onlyLevel,pitchArg){
                     : '#8A8D9A';
         x.fillRect(px,py,dot,dot);
       }
-      if(dueNow(itemWord(w.he),'R')||dueNow(itemWord(w.he),'P')){
+      if(!ahead && (dueNow(itemWord(w.he),'R')||dueNow(itemWord(w.he),'P'))){
         x.strokeStyle='#D9B46A'; x.lineWidth=1;
         x.strokeRect(px-1.5,py-1.5,dot+3,dot+3);
       }
+      x.globalAlpha=1;
     });
   });
   return bands;
@@ -4759,7 +4779,7 @@ function renderToday(){
         ((ST.freezes||0)?' <svg class="i" style="width:14px;height:14px"><use href="#i-freeze"/></svg><span class="num">'+ST.freezes+'</span>':'')+
         '</span></div>'+
       '<div class="t-count">'+line+'</div>'+
-      '<div class="t-slice"><div class="t-slice-lbl">Level '+lv+' · '+sh.secure+'% secure</div>'+
+      '<div class="t-slice"><div class="t-slice-lbl">Level '+lv+' of 6 · '+sh.secure+'% secure</div>'+
         '<canvas id="todayMap"></canvas></div>'+
       '<div class="qlist">'+quests+'</div>'+
       '<div class="t-cta">'+
@@ -4767,7 +4787,7 @@ function renderToday(){
           :'<div class="fs-reveal">Nothing due. Come back when reviews are ready.</div>')+
       '</div>'+
     '</div>';
-  requestAnimationFrame(function(){ drawMap('todayMap',lv,'fit'); });
+  requestAnimationFrame(function(){ drawMap('todayMap',lv,12); });
 }
 
 // ── Levels view ───────────────────────────────────────────────
