@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Jewuolingo</title>
+<title>Jewolingo</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0E0F14">
 <meta name="description" content="Hebrew vocabulary trainer — spaced repetition, 11 practice modes, live AI conversation.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Jewuolingo">
+<meta name="apple-mobile-web-app-title" content="Jewolingo">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -906,7 +906,7 @@ body.kbd-hints .kbd-key .klat{display:block;position:absolute;bottom:3px;right:4
 
 <div class="app">
   <div class="compact-head">
-    <span class="ch-title">Jewuolingo</span>
+    <span class="ch-title">Jewolingo</span>
     <span class="ch-right">
       <span class="mini-pill"><svg class="i" aria-hidden="true"><use href="#i-ember"/></svg> <b id="miniStreak" class="num">0</b></span>
       <span class="mini-pill"><svg class="i" aria-hidden="true"><use href="#i-stats"/></svg> <b id="miniLearned" class="num">0</b></span>
@@ -5893,15 +5893,15 @@ function sichaReplay(){ var id=SCH.scen.id; SCH.debrief=null; startSicha(id); }
 // The API key is deliberately NOT included — it is a credential, and a backup
 // file syncs to iCloud in the clear.
 function exportProgress(){
-  var payload={app:'jewuolingo',version:1,exportedAt:new Date().toISOString(),
+  var payload={app:'jewolingo',version:1,exportedAt:new Date().toISOString(),
                progress:JSON.parse(localStorage.getItem('jw_progress')||'{}')};
-  var name='jewuolingo-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  var name='jewolingo-backup-'+new Date().toISOString().slice(0,10)+'.json';
   var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   var file=null;
   try{ file=new File([blob],name,{type:'application/json'}); }catch(e){}
   // On iOS the share sheet is how you get a file into Files / iCloud Drive.
   if(file&&navigator.canShare&&navigator.canShare({files:[file]})){
-    navigator.share({files:[file],title:'Jewuolingo backup'}).catch(function(){});
+    navigator.share({files:[file],title:'Jewolingo backup'}).catch(function(){});
     return;
   }
   var a=document.createElement('a');
@@ -5916,7 +5916,7 @@ function importProgress(input){
     var p=null;
     try{ var d=JSON.parse(r.result); p=d&&d.progress?d.progress:d; }catch(e){}
     if(!p||typeof p!=='object'||Array.isArray(p)){
-      toast('That is not a Jewuolingo backup','bad'); input.value=''; return;
+      toast('That is not a Jewolingo backup','bad'); input.value=''; return;
     }
     if(!confirm('Replace your current progress with this backup? This cannot be undone.')){ input.value=''; return; }
     try{ localStorage.setItem('jw_progress',JSON.stringify(p)); }catch(e){}

@@ -1,6 +1,6 @@
 {
-  "name": "Jewuolingo — Hebrew Mastery",
-  "short_name": "Jewuolingo",
+  "name": "Jewolingo — Hebrew Mastery",
+  "short_name": "Jewolingo",
   "description": "Hebrew vocabulary trainer with spaced repetition and live AI conversation practice.",
   "start_url": "./index.html",
   "scope": "./",

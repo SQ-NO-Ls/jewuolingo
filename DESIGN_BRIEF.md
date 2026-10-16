@@ -1,4 +1,4 @@
-# Jewuolingo — Design Brief
+# Jewolingo — Design Brief
 
 A brief for redesigning the interface of an existing, working Hebrew-learning
 PWA. **The logic, data and learning systems described here already work and

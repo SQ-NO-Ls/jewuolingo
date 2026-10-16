@@ -1,4 +1,4 @@
-# Jewuolingo
+# Jewolingo
 
 A Hebrew vocabulary trainer that installs to an iPhone home screen as a PWA. Single HTML file, no build step, works fully offline.
 
