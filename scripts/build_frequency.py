@@ -59,13 +59,14 @@ SURVIVAL = {"Food","Numbers","Time","Time Talk","Greetings","Getting Around",
             "Shopping","Body","Family","Health","Colors","House","Questions",
             "Essentials","Pronouns","Conjunctions","Small Talk","Phrases",
             "Travel","Places","Weather","Work","School"}
-BASE_SURVIVAL = {1:450, 2:800, 3:1400, 4:2200}
-BASE_OTHER    = {1:700, 2:1300, 3:2000, 4:2800}
+BASE_SURVIVAL = {1:450, 2:800, 3:1400, 4:2200, 5:2600, 6:3000}
+BASE_OTHER    = {1:700, 2:1300, 3:2000, 4:2800, 5:3200, 6:3600}
 
-FIELDS = ['he','level','heV','pron','en','cat','sentence','sentenceEn']
+FIELDS = ['he','level','heV','pron','en','cat','sentence','sentenceEn','rank']
+# `rank` is optional: absent on a first run, present on every re-run.
 OBJ_RE = re.compile(
   r'\{he:"(.*?)",level:(\d+),heV:"(.*?)",pron:"(.*?)",en:"(.*?)",'
-  r'cat:"(.*?)",sentence:"(.*?)",sentenceEn:"(.*?)"\}')
+  r'cat:"(.*?)",sentence:"(.*?)",sentenceEn:"(.*?)"(?:,rank:(\d+))?\}')
 
 
 def load_fdosh():
@@ -149,9 +150,18 @@ def main():
     words = [dict(zip(FIELDS, m)) for m in OBJ_RE.findall(src)]
     print("FDOSH lemmas: %d | app words: %d" % (len(fd), len(words)))
 
+    # Rank is assigned ONCE per word. Re-running must not re-rank the whole
+    # list: `level` is now DERIVED from rank, so feeding it back into the
+    # imputation would be circular. Words that already carry a real rank keep
+    # their position; only new arrivals (rank 9999 / absent) get resolved and
+    # slotted in.
     srcs = collections.Counter()
     for w in words:
-        w['rank'], w['src'] = resolve(w, fd)
+        prior = w.get('rank')
+        if prior and int(prior) != 9999:
+            w['rank'], w['src'] = int(prior), 'kept'
+        else:
+            w['rank'], w['src'] = resolve(w, fd)
         srcs[w['src']] += 1
 
     # Stable ordering: rank, then present-tense verbs before infinitives
@@ -178,9 +188,14 @@ def main():
 
     out = src
     for w in words:
-        old = ('{he:"%(he)s",level:%(level)s,heV:"%(heV)s",pron:"%(pron)s",'
-               'en:"%(en)s",cat:"%(cat)s",sentence:"%(sentence)s",'
-               'sentenceEn:"%(sentenceEn)s"}' % w)
+        base = ('{he:"%(he)s",level:%(level)s,heV:"%(heV)s",pron:"%(pron)s",'
+                'en:"%(en)s",cat:"%(cat)s",sentence:"%(sentence)s",'
+                'sentenceEn:"%(sentenceEn)s"' % w)
+        # Match the object whether or not it already carries a rank.
+        m = re.search(re.escape(base) + r'(?:,rank:\d+)?\}', out)
+        old = m.group(0) if m else None
+        if old is None:
+            print("!! no match for %s" % w['he']); continue
         new = ('{he:"%s",level:%d,heV:"%s",pron:"%s",en:"%s",cat:"%s",'
                'sentence:"%s",sentenceEn:"%s",rank:%d}' % (
                w['he'], w['newlevel'], w['heV'], w['pron'], w['en'],
