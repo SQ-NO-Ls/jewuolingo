@@ -1,6 +1,6 @@
 // Jewuolingo service worker — offline app shell.
 // Bump CACHE_VERSION on every deploy so clients pick the new build up.
-const CACHE_VERSION = 'jw-v14';
+const CACHE_VERSION = 'jw-v16';
 const SHELL = 'shell-' + CACHE_VERSION;
 const FONTS = 'fonts-' + CACHE_VERSION;
 
@@ -8,6 +8,7 @@ const SHELL_FILES = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './data/annotations.json',
   './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png',

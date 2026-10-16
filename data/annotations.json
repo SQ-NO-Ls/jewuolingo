@@ -81,11 +81,12 @@
 "root": "א־ד־ם"
 },
 "אהבה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לאהוב",
+"gender": "f",
 "key": "K1",
-"pos": "verb",
+"pattern": "קַטְלָה",
+"plural": "אֲהָבוֹת",
+"pos": "noun",
 "root": "א־ה־ב"
 },
 "או": {
@@ -1693,11 +1694,12 @@
 "pos": "particle"
 },
 "הליכה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לָלֶכֶת",
+"gender": "f",
 "key": "K1",
-"pos": "verb",
+"pattern": "קְטִילָה",
+"plural": "הליכות",
+"pos": "noun",
 "root": "ה־ל־ך"
 },
 "הלילה": {
@@ -1738,12 +1740,12 @@
 "root": "ה־פ־ך"
 },
 "הפתעה": {
-"binyan": "hif'il",
 "confidence": "high",
-"infinitive": "לְהַפְתִּיעַ",
+"gender": "f",
 "key": "K1",
-"pos": "verb",
-"root": "פ־ת־ע"
+"pattern": "הַקְטָלָה",
+"plural": "הַפְתָּעוֹת",
+"pos": "noun"
 },
 "הר": {
 "confidence": "high",
@@ -2085,12 +2087,10 @@
 "root": "ח־ו־ל"
 },
 "חולה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לַחֲלוֹת",
 "key": "K1",
-"pos": "verb",
-"root": "ח־ל־ה"
+"pattern": "קֹטֵל",
+"pos": "adj"
 },
 "חולצה": {
 "confidence": "medium",
@@ -2245,11 +2245,10 @@
 "root": "ח־ו־ל"
 },
 "חיים": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לִחְיוֹת",
+"gender": "m-p",
 "key": "K1",
-"pos": "verb"
+"pos": "noun"
 },
 "חינם": {
 "confidence": "high",
@@ -5154,11 +5153,11 @@
 "root": "נ־ס־ה"
 },
 "מנקה": {
-"binyan": "pi'el",
 "confidence": "low",
-"infinitive": "לְנַקּוֹת",
+"gender": "m",
 "key": "K1",
-"pos": "verb",
+"pattern": "מְקַטֵּל",
+"pos": "noun",
 "root": "נ־ק־ה"
 },
 "מסדר": {
@@ -5715,11 +5714,12 @@
 "root": "פ־ל־א"
 },
 "נצרת": {
-"binyan": "pa'al",
 "confidence": "low",
-"infinitive": "לנצור",
+"gender": "f",
 "key": "K3",
-"pos": "verb",
+"pattern": "קִטְלָה",
+"plural": "נְצָרוֹת",
+"pos": "noun",
 "root": "נ־צ־ר"
 },
 "נקי": {
@@ -5864,11 +5864,12 @@
 "pos": "noun"
 },
 "סיפור": {
-"binyan": "pi'el",
 "confidence": "high",
-"infinitive": "לְסַפֵּר",
+"gender": "m",
 "key": "K1",
-"pos": "verb",
+"pattern": "קִטּוּל",
+"plural": "סיפורים",
+"pos": "noun",
 "root": "ס־פ־ר"
 },
 "סכין": {
@@ -5895,11 +5896,9 @@
 "pos": "noun"
 },
 "סליחה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לסלוח",
 "key": "K1",
-"pos": "verb",
+"pos": "intj",
 "root": "ס־ל־ח"
 },
 "סנדל": {
@@ -5959,11 +5958,12 @@
 "pos": "adj"
 },
 "עבודה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לעבוד",
+"gender": "f",
 "key": "K1",
-"pos": "verb"
+"pattern": "קְטוֹלָה",
+"plural": "עֲבוֹדוֹת",
+"pos": "noun"
 },
 "עבור": {
 "confidence": "high",
@@ -6102,11 +6102,12 @@
 "root": "ע־שׂ־ה"
 },
 "עזרה": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לעזור",
+"gender": "f",
 "key": "K1",
-"pos": "verb"
+"pattern": "קִטְלָה",
+"plural": "עֶזְרוֹת",
+"pos": "noun"
 },
 "עט": {
 "confidence": "high",
@@ -6632,11 +6633,11 @@
 "pos": "noun"
 },
 "צמא": {
-"binyan": "pa'al",
 "confidence": "high",
-"infinitive": "לצמוא",
 "key": "K1",
-"pos": "verb"
+"pattern": "קָטֵל",
+"pos": "adj",
+"root": "צ־מ־א"
 },
 "צמחוני": {
 "confidence": "high",
@@ -6863,11 +6864,11 @@
 "pos": "noun"
 },
 "קם": {
-"binyan": "pa'al",
 "confidence": "low",
-"infinitive": "לָקוּם",
+"gender": "m",
 "key": "K1",
-"pos": "verb"
+"plural": "קמים",
+"pos": "noun"
 },
 "קמה": {
 "binyan": "pa'al",
@@ -7222,11 +7223,11 @@
 "pos": "adv"
 },
 "רתמה": {
-"binyan": "pa'al",
 "confidence": "medium",
-"infinitive": "לרתום",
+"gender": "f",
 "key": "K3",
-"pos": "verb",
+"plural": "רְתָמוֹת",
+"pos": "noun",
 "root": "ר־ת־ם"
 },
 "שאלה": {
@@ -8051,11 +8052,12 @@
 "root": "פ־ר־ט"
 },
 "תקווה": {
-"binyan": "pi'el",
 "confidence": "high",
-"infinitive": "לְקַוּוֹת",
+"gender": "f",
 "key": "K1",
-"pos": "verb",
+"pattern": "תַּקְטֵלָה",
+"plural": "תִּקְווֹת",
+"pos": "noun",
 "root": "ק־ו־ה"
 },
 "תקרה": {

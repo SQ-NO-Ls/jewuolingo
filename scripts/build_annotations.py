@@ -184,7 +184,20 @@ def main():
             stats['nomatch'] += 1; continue
 
         confirmed = [h for h in hits if gloss_overlap(w['en'], h['glosses'])]
-        pick = confirmed[0] if confirmed else hits[0]
+        # Gloss overlap on a shared token confirms the wrong part of speech:
+        # עבודה "work / job" matched a verb sense "to work". The app's own
+        # gloss shape is the tiebreaker — "to …" means verb, anything else
+        # means prefer a non-verb reading.
+        wants_verb = w['en'].strip().lower().startswith('to ')
+        def score(h):
+            v = 2 if h in confirmed else 0
+            if h.get('pos') == 'verb':
+                v += 1 if wants_verb else -1
+            elif wants_verb:
+                v -= 1
+            return v
+        pool = confirmed or hits
+        pick = max(pool, key=score)
         # The KEY tells you the join is sound; the GLOSS tells you it is the
         # right sense. Without gloss agreement we genuinely do not know which
         # homograph we landed on — מדבר matched "desert" for an entry meaning

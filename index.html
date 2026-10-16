@@ -2560,6 +2560,25 @@ const PATTERNS=[
  {id:'looking',  level:2, slot:'noun',       t:'אני מחפש ___',    tV:'אֲנִי מְחַפֵּשׂ',   pron:'a-NEE me-kha-PES',       en:'I am looking for ___',    enPre:'I am looking for ', pref:['Places','Things','People','House']},
  {id:'when',     level:2, slot:'noun',       t:'מתי ה___?',       tV:'מָתַי הַ',          pron:'ma-TAI ha-',             en:'When is the ___?',        enPre:'When is the ', pref:['Travel','Jewish Life']},
  {id:'very',     level:2, slot:'adj',        t:'זה מאוד ___',     tV:'זֶה מְאוֹד',        pron:'zeh me-OD',              en:'This is very ___',        enPre:'This is very '},
+ // ── Level 3 — I can talk about the past and give an opinion ──
+ {id:'past_i',   level:3, slot:'infinitive', t:'אתמול רציתי ___',  tV:'אֶתְמוֹל רָצִיתִי', pron:'et-MOL ra-TSEE-tee',     en:'Yesterday I wanted to ___', enPre:'Yesterday I wanted '},
+ {id:'think_th', level:3, slot:'adj',        t:'אני חושב שזה ___', tV:'אֲנִי חוֹשֵׁב שֶׁזֶּה', pron:'a-NEE kho-SHEV she-ZEH', en:'I think it is ___',      enPre:'I think it is '},
+ {id:'because',  level:3, slot:'infinitive', t:'באתי כדי ___',     tV:'בָּאתִי כְּדֵי',     pron:'BA-tee kdey',            en:'I came in order to ___',  enPre:'I came in order '},
+ {id:'must',     level:3, slot:'infinitive', t:'אני חייב ___',     tV:'אֲנִי חַיָּב',       pron:'a-NEE kha-YAV',          en:'I have to ___',           enPre:'I have '},
+ {id:'know_how', level:3, slot:'infinitive', t:'אני יודע ___',     tV:'אֲנִי יוֹדֵעַ',      pron:'a-NEE yo-DE-a',          en:'I know how to ___',       enPre:'I know how '},
+ {id:'there_is', level:3, slot:'noun',       t:'יש כאן ___',       tV:'יֵשׁ כָּאן',         pron:'yesh KAN',               en:'There is ___ here',       enPre:'There is ', enPost:' here', pref:['Places','Things','Food','House']},
+ {id:'not_adj',  level:3, slot:'adj',        t:'זה לא ___',        tV:'זֶה לֹא',            pron:'zeh LO',                 en:'This is not ___',         enPre:'This is not '},
+ {id:'with_me',  level:3, slot:'noun',       t:'יש איתי ___',      tV:'יֵשׁ אִתִּי',        pron:'yesh ee-TEE',            en:'I have ___ with me',      enPre:'I have ', enPost:' with me', pref:['Things','Food','Shopping']},
+ // ── Level 4 — extended description and arrangement ──
+ {id:'want_you', level:4, slot:'infinitive', t:'אתה רוצה ___?',    tV:'אַתָּה רוֹצֶה',      pron:'a-TAH ro-TSEH',          en:'Do you want to ___?',     enPre:'Do you want '},
+ {id:'too_adj',  level:4, slot:'adj',        t:'זה יותר מדי ___',  tV:'זֶה יוֹתֵר מִדַּי',  pron:'zeh yo-TER mee-DAI',     en:'This is too ___',         enPre:'This is too '},
+ {id:'need_to',  level:4, slot:'infinitive', t:'צריך ___ קודם',    tV:'צָרִיךְ',            pron:'tsa-REEKH',              en:'You need to ___ first',   enPre:'You need ', enPost:' first'},
+ {id:'better',   level:4, slot:'infinitive', t:'עדיף ___',         tV:'עָדִיף',             pron:'a-DEEF',                 en:'It is better to ___',     enPre:'It is better '},
+ {id:'instead',  level:4, slot:'noun',       t:'במקום ___',        tV:'בִּמְקוֹם',          pron:'beem-KOM',               en:'Instead of ___',          enPre:'Instead of ', pref:['Food','Things','Shopping','Places']},
+ // ── Levels 5-6 — nuance ──
+ {id:'without',  level:5, slot:'noun',       t:'בלי ___ בבקשה',    tV:'בְּלִי',             pron:'blee',                   en:'Without ___ please',      enPre:'Without ', enPost:' please', pref:['Food','Things','Wine']},
+ {id:'maybe_v',  level:5, slot:'infinitive', t:'אולי כדאי ___',    tV:'אוּלַי כְּדַאי',     pron:'u-LAI kday',             en:'Maybe it is worth ___',   enPre:'Maybe it is worth '},
+ {id:'most_adj', level:6, slot:'adj',        t:'זה הכי ___',       tV:'זֶה הֲכִי',          pron:'zeh ha-KHEE',            en:'This is the most ___',    enPre:'This is the most '},
 ];
 // Some frames already supply the "to", so the filler must appear bare:
 // "Can I " + "to open" would read "Can I to open".
@@ -2573,6 +2592,23 @@ function patternById(id){ for(var i=0;i<PATTERNS.length;i++) if(PATTERNS[i].id==
 // Which words may fill a slot. The app has no part-of-speech field, so the
 // existing categories stand in for one — imperfect but good enough, and it
 // keeps the slot honest (you cannot put a verb where a noun belongs).
+// ── LEXICAL ANNOTATIONS ───────────────────────────────────────
+// data/annotations.json: part of speech, gender, plural, root, binyan,
+// derived from Wiktionary. Loaded async and allowed to be absent — the
+// category heuristics below stay as a fallback so nothing breaks offline
+// or on a first load.
+var ANN={};
+function loadAnnotations(){
+  return fetch('data/annotations.json')
+    .then(function(r){ return r.ok?r.json():{}; })
+    .then(function(d){ ANN=d||{}; return ANN; })
+    .catch(function(){ return {}; });
+}
+function annOf(he){ return ANN[he]||null; }
+function posOf(w){ var a=ANN[w.he]; return (a&&a.confidence!=='low')?a.pos:null; }
+function rootOf(he){ var a=ANN[he]; return a?a.root:null; }
+function genderOf(he){ var a=ANN[he]; return a?a.gender:null; }
+
 const NOUNISH={'Food':1,'Things':1,'Places':1,'House':1,'Body':1,'Animals':1,
   'Nouns':1,'People':1,'Family':1,'Nature':1,'School':1,'Work':1,'Travel':1,
   'Shopping':1,'Wine':1,'Fashion':1,'Health':1,'Jewish Life':1,'Getting Around':1};
@@ -2592,8 +2628,19 @@ function patternFillers(p){
   var all=vocab.filter(function(w){
     if(w.he.indexOf(' ')>-1) return false;            // single words only
     if(w.level>p.level+2) return false;               // stay near the level
+    var pos=posOf(w);
     if(p.slot==='infinitive') return isInfinitive(w);
-    if(p.slot==='adj')        return w.cat==='Adjectives'&&!NOT_ADJ[w.he];
+    // Annotated POS beats the category heuristic: categories leak badly
+    // (adjectives filed under Food, adverbs under Adjectives).
+    // Hebrew present participles double as adjectives (כועס "angry/angers",
+    // רועש "noisy/makes noise"). Wiktionary files them as verbs, so an
+    // adjective slot accepts a participle the app itself calls an adjective.
+    if(p.slot==='adj'){
+      if(pos==='adj') return true;
+      if(pos==='verb') return w.cat==='Adjectives'&&w.en.indexOf('to ')!==0;
+      return pos?false:(w.cat==='Adjectives'&&!NOT_ADJ[w.he]);
+    }
+    if(pos)             return pos==='noun';
     return !!NOUNISH[w.cat]&&!NOT_NOUN[w.he];
   });
   // A slot being grammatically fillable does not make the sentence sensible:
@@ -5333,6 +5380,8 @@ document.addEventListener('keydown',function(e){
 // ── INIT ───────────────────────────────────────────────────────
 loadProgress(); loadApiKey(); renderModes(); renderCats(); renderLevels(); updateSelLabels(); updateStats();
 showView('Today');
+// Repaint once annotations land, so slot quality improves without blocking boot.
+loadAnnotations().then(function(){ if(!ROUND.active&&!CHK.active) showView(VIEW); });
 
 // ── PWA ───────────────────────────────────────────────────────
 if('serviceWorker' in navigator){
