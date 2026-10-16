@@ -1,8 +1,11 @@
 // Jewolingo service worker — offline app shell.
 // Bump CACHE_VERSION on every deploy so clients pick the new build up.
-const CACHE_VERSION = 'jw-v39';
+const CACHE_VERSION = 'jw-v43';
 const SHELL = 'shell-' + CACHE_VERSION;
-const FONTS = 'fonts-' + CACHE_VERSION;
+// Deliberately NOT versioned: fonts do not change between builds, and
+// tying them to CACHE_VERSION re-downloads ~200KB on every deploy and
+// leaves the app briefly unstyled offline straight after an update.
+const FONTS = 'jw-fonts-v1';
 
 const SHELL_FILES = [
   './',
@@ -62,9 +65,15 @@ self.addEventListener('fetch', function (e) {
 
   // Google Fonts: cache-first, filled on first online load.
   if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+    const swr = url.hostname === 'fonts.googleapis.com';
     e.respondWith(
       caches.match(req).then(function (hit) {
-        if (hit) return hit;
+        if (hit) {
+          if (swr) fetch(req).then(function (res) {
+            if (res && res.ok) caches.open(FONTS).then(function (c) { c.put(req, res); });
+          }).catch(function () {});
+          return hit;
+        }
         return fetch(req).then(function (res) {
           const copy = res.clone();
           caches.open(FONTS).then(function (c) { c.put(req, copy); });
