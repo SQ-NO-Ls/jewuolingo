@@ -1,0 +1,8108 @@
+{
+"אבא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אָבוֹת",
+"pos": "noun"
+},
+"אבוקדו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אָבוֹקָדוֹאִים",
+"pos": "noun"
+},
+"אבזם": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"plural": "אַבְזָמִים",
+"pos": "noun",
+"root": "א־ב־ז־ם"
+},
+"אבטיח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֲבַטִּיחִים",
+"pos": "noun",
+"root": "ב־ט־ח"
+},
+"אבל": {
+"confidence": "high",
+"key": "K1",
+"pos": "conj"
+},
+"אבן": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "אֲבָנִים",
+"pos": "noun",
+"root": "א־ב־ן"
+},
+"אגם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֲגַמִּים",
+"pos": "noun"
+},
+"אדום": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj",
+"root": "א־ד־ם"
+},
+"אדון": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"plural": "אדונים",
+"pos": "noun"
+},
+"אדם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "noun"
+},
+"אדמה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "אֲדָמוֹת",
+"pos": "noun",
+"root": "א־ד־ם"
+},
+"אהבה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאהוב",
+"key": "K1",
+"pos": "verb",
+"root": "א־ה־ב"
+},
+"או": {
+"confidence": "low",
+"key": "K1",
+"pos": "conj"
+},
+"אוהב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאהוב",
+"key": "K1",
+"pos": "verb",
+"root": "א־ה־ב"
+},
+"אוהבת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאהוב",
+"key": "K1",
+"pos": "verb",
+"root": "א־ה־ב"
+},
+"אוזן": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "אוזניים",
+"pos": "noun",
+"root": "א־ז־ן"
+},
+"אוטובוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אוֹטוֹבּוּסִים",
+"pos": "noun"
+},
+"אוי": {
+"confidence": "low",
+"key": "K1",
+"pos": "intj",
+"root": "א־ב־ה"
+},
+"אוי ואבוי": {
+"confidence": "low",
+"key": "K1",
+"pos": "intj"
+},
+"אוכל": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאכול",
+"key": "K1",
+"pos": "verb",
+"root": "א־כ־ל"
+},
+"אוכלת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאכול",
+"key": "K1",
+"pos": "verb",
+"root": "א־כ־ל"
+},
+"אולי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"אומר": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לוֹמַר",
+"key": "K1",
+"pos": "verb"
+},
+"אומרת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לוֹמַר",
+"key": "K1",
+"pos": "verb"
+},
+"אוניברסיטה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "אוּנִיבֶרְסִיטָאוֹת",
+"pos": "noun"
+},
+"אופן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "אופנים",
+"pos": "noun"
+},
+"אופנה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "אופנות<dwv:אׇפְנוֹת>",
+"pos": "noun"
+},
+"אוקיי": {
+"confidence": "low",
+"key": "K3",
+"pos": "intj"
+},
+"אורז": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "noun"
+},
+"אורח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אורחים",
+"pos": "noun",
+"root": "א־ר־ח"
+},
+"אז": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"אז מה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"אזור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֲזוֹרִים",
+"pos": "noun"
+},
+"אח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אַחִים",
+"pos": "noun"
+},
+"אחד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "num"
+},
+"אחורה": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adv",
+"root": "א־ח־ר"
+},
+"אחות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "אֲחָיוֹת",
+"pos": "noun"
+},
+"אחי": {
+"confidence": "high",
+"key": "K1",
+"pos": "noun"
+},
+"אחלה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"אחר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"אחר כך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"אחרון": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קִטְלוֹן",
+"pos": "adj"
+},
+"אחרי": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"אחרת": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "א־ח־ר"
+},
+"אחת": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "num"
+},
+"איזה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "det"
+},
+"איזו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "det"
+},
+"איטי": {
+"confidence": "high",
+"key": "K2",
+"pos": "adj",
+"root": "א־ט־ט"
+},
+"איך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"אילו": {
+"confidence": "high",
+"gender": "p",
+"key": "K1",
+"pos": "pron"
+},
+"אילת": {
+"confidence": "low",
+"gender": "m",
+"key": "K3",
+"pattern": "קַטָּל",
+"plural": "איילים",
+"pos": "noun",
+"root": "א־י־ל"
+},
+"אין": {
+"confidence": "high",
+"key": "K1",
+"pos": "particle"
+},
+"אין בעד מה": {
+"confidence": "low",
+"key": "K1",
+"pos": "phrase"
+},
+"אין מצב": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"איפה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"איש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֲנָשִׁים",
+"pos": "noun"
+},
+"אישה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "נָשִׁים",
+"pos": "noun",
+"root": "א־נ־שׁ"
+},
+"אך": {
+"confidence": "high",
+"key": "K1",
+"pos": "conj"
+},
+"אלה": {
+"confidence": "low",
+"key": "K1",
+"pos": "det"
+},
+"אלו": {
+"confidence": "high",
+"gender": "f-p",
+"key": "K1",
+"pos": "pron"
+},
+"אלון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטְלוֹן",
+"plural": "אַלּוֹנִים",
+"pos": "noun"
+},
+"אם": {
+"confidence": "low",
+"key": "K1",
+"pos": "conj"
+},
+"אם כבר אז כבר": {
+"confidence": "low",
+"key": "K1",
+"pos": "phrase"
+},
+"אמא": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "אִמָּהוֹת",
+"pos": "noun"
+},
+"אמבולנס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אַמְבּוּלַנְסִים",
+"pos": "noun"
+},
+"אמבטיה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"אמור": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj",
+"root": "א־מ־ר"
+},
+"אמיתי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "א־מ־ן"
+},
+"אמת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "אֲמִתּוֹת",
+"pos": "noun",
+"root": "א־מ־ן"
+},
+"אנחנו": {
+"confidence": "low",
+"gender": "m-p",
+"key": "K1",
+"pos": "pron"
+},
+"אני": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"אני אוהב אותך": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"אני רעב": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "phrase"
+},
+"אנשים": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"plural": "אֲנָשִׁים",
+"pos": "noun"
+},
+"אסור": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj",
+"root": "א־ס־ר"
+},
+"אף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "אַפִּים",
+"pos": "noun",
+"root": "א־נ־ף"
+},
+"אף אחד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"אף פעם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"אפור": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"אפילו": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"אפשר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "א־פ־שׁ־ר"
+},
+"אפשרי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "א־פ־שׁ־ר"
+},
+"אצבע": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "אֶקְטָל",
+"plural": "אֶצְבָּעוֹת",
+"pos": "noun"
+},
+"ארבע": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num"
+},
+"ארוחה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטוּלָה",
+"plural": "ארוחות",
+"pos": "noun",
+"root": "א־ר־ח"
+},
+"ארוחת בוקר": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"ארוחת ערב": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"ארוחת צהריים": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"ארוך": {
+"confidence": "medium",
+"key": "K3",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"ארון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֲרוֹנוֹת",
+"pos": "noun",
+"root": "א־ר־ן"
+},
+"אריה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "ארייות",
+"pos": "noun"
+},
+"ארנב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אַרְנָבִים",
+"pos": "noun"
+},
+"ארנק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אַרְנָקִים",
+"pos": "noun"
+},
+"ארץ": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "אֲרָצוֹת",
+"pos": "noun"
+},
+"אש": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "אִשִּׁים",
+"pos": "noun"
+},
+"אשכול": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "אֶשְׁכּוֹלוֹת",
+"pos": "noun",
+"root": "שׁ־כ־ל"
+},
+"אשלח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשלוח",
+"key": "K1",
+"pos": "verb"
+},
+"אשמח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׂ־מ־ח"
+},
+"את": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"אתה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"אתמול": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָבוֹא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"באה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָבוֹא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"באמת": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"באסה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "בָּאסוֹת",
+"pos": "noun"
+},
+"בבקשה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj",
+"root": "ב־ק־שׁ"
+},
+"בגד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "בְּגָדִים",
+"pos": "noun"
+},
+"בגדול": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"בגלל": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"בד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "בַּדִּים",
+"pos": "noun"
+},
+"בדיוק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בדיחה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "בדיחות",
+"pos": "noun",
+"root": "ב־ד־ח"
+},
+"בדרך כלל": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בהחלט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בהצלחה": {
+"confidence": "low",
+"key": "K1",
+"pos": "intj",
+"root": "צ־ל־ח"
+},
+"בהרט": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun"
+},
+"בוא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָבוֹא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"בוא הנה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"בואי": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָבוֹא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"בובה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בובות",
+"pos": "noun"
+},
+"בודד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"בוהן": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"בוטנים": {
+"confidence": "low",
+"gender": "m",
+"key": "K3",
+"pattern": "קֹטֶל",
+"plural": "בוטנים",
+"pos": "noun"
+},
+"בוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בּוֹסִים",
+"pos": "noun"
+},
+"בוקר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "בקרים",
+"pos": "noun",
+"root": "ב־ק־ר"
+},
+"בוקר טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"בורקס": {
+"confidence": "low",
+"gender": "m",
+"key": "K3",
+"plural": "בורקסים",
+"pos": "noun"
+},
+"בזיליקום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "-",
+"pos": "noun"
+},
+"בזמן": {
+"confidence": "high",
+"key": "K2",
+"pos": "adv"
+},
+"בחוץ": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בחור": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בַּחוּרוֹת",
+"pos": "noun",
+"root": "ב־ח־ר"
+},
+"בטוח": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj"
+},
+"בטח": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adv"
+},
+"בטטה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בָּטָטוֹת",
+"pos": "noun"
+},
+"בטן": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun",
+"root": "ב־ט־ן"
+},
+"ביותר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"ביחד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "י־ח־ד"
+},
+"ביטוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"pos": "noun",
+"root": "ב־ט־ח"
+},
+"ביי": {
+"confidence": "medium",
+"key": "K3",
+"pos": "intj"
+},
+"בין": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"בינתיים": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adv"
+},
+"ביצה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "בֵּיצִים",
+"pos": "noun",
+"root": "ב־י־ץ"
+},
+"בירה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בִּירוֹת",
+"pos": "noun",
+"root": "ב־ו־ר"
+},
+"בית": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "בָּתִּים",
+"pos": "noun"
+},
+"בית חולים": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בתי חולים",
+"pos": "noun"
+},
+"בית כנסת": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בָּתֵּי כְּנֶסֶת",
+"pos": "noun"
+},
+"בית מרקחת": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בָּתֵּי־מִרְקַחַת",
+"pos": "noun"
+},
+"בית ספר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בָּתֵּי סֵפֶר",
+"pos": "noun"
+},
+"בכיף": {
+"confidence": "low",
+"key": "K2",
+"pos": "phrase"
+},
+"בכל מקרה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בכלל": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בלגן": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun"
+},
+"בלי": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "prep"
+},
+"בלי עין הרע": {
+"confidence": "medium",
+"key": "K3",
+"pos": "intj"
+},
+"במה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "במות",
+"pos": "noun",
+"root": "ב־י־ם"
+},
+"במקום": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"בן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בָּנִים",
+"pos": "noun"
+},
+"בננה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בָּנָנוֹת",
+"pos": "noun"
+},
+"בנק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בַּנְקִים",
+"pos": "noun"
+},
+"בסדר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ס־ד־ר"
+},
+"בסדר גמור": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"בסוף": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"בעזרת השם": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"בעיה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "בְּעָיוֹת",
+"pos": "noun",
+"root": "ב־ע־ה"
+},
+"בעל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "בְּעָלִים",
+"pos": "noun"
+},
+"בעצם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בערך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בפנים": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "פ־נ־ה"
+},
+"בצורת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun",
+"root": "ב־צ־ר"
+},
+"בצל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "בְּצָלִים",
+"pos": "noun",
+"root": "ב־צ־ל"
+},
+"בקבוק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטוּל",
+"plural": "בַּקְבּוּקִים",
+"pos": "noun",
+"root": "ב־ק־ב־ק"
+},
+"בקר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "noun"
+},
+"בקרוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ק־ר־ב"
+},
+"ברד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "בְּרָדִים",
+"pos": "noun"
+},
+"ברוך הבא": {
+"confidence": "high",
+"gender": "m-s",
+"key": "K1",
+"pos": "intj"
+},
+"ברוך השם": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"ברוקולי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "-",
+"pos": "noun"
+},
+"ברור": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ב־ר־ר"
+},
+"ברוש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "בְּרוֹשִׁים",
+"pos": "noun",
+"root": "ב־ר־שׁ"
+},
+"בריא": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "ב־ר־א"
+},
+"בריאות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילוּת",
+"plural": "בְּרִיאוּיוֹת",
+"pos": "noun",
+"root": "ב־ר־א"
+},
+"ברך": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "ברכיים",
+"pos": "noun",
+"root": "ב־ר־ך"
+},
+"ברצינות": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"בשל": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ב־שׁ־ל"
+},
+"בשלות": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"pos": "noun",
+"root": "ב־שׁ־ל"
+},
+"בשר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "בְּשָׂרִים",
+"pos": "noun",
+"root": "ב־שׂ־ר"
+},
+"בשרי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "בְּשָׂרִים",
+"pos": "noun",
+"root": "ב־שׂ־ר"
+},
+"בת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "בָּנוֹת",
+"pos": "noun"
+},
+"בתאבון": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj",
+"root": "ת־א־ב"
+},
+"בתיאבון": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj",
+"root": "ת־א־ב"
+},
+"גאה": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קִטָּל",
+"pos": "adj",
+"root": "ג־א־ה"
+},
+"גבה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "גַּבּוֹת",
+"pos": "noun"
+},
+"גבוה": {
+"confidence": "medium",
+"key": "K3",
+"pattern": "קָטֹל",
+"pos": "adj",
+"root": "ג־ב־ה"
+},
+"גבול": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטוּל",
+"plural": "גְּבוּלוֹת",
+"pos": "noun",
+"root": "ג־ב־ל"
+},
+"גבינה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "גְּבִינוֹת",
+"pos": "noun",
+"root": "ג־ב־ן"
+},
+"גבר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גְּבָרִים",
+"pos": "noun",
+"root": "ג־ב־ר"
+},
+"גג": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גַּגּוֹת",
+"pos": "noun",
+"root": "ג־ג־ג"
+},
+"גדול": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוֹל",
+"pos": "adj"
+},
+"גזר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גְּזָרִים",
+"pos": "noun",
+"root": "ג־ז־ר"
+},
+"גל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גַּלִּים",
+"pos": "noun"
+},
+"גלידה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "גְּלִידוֹת",
+"pos": "noun",
+"root": "ג־ל־ד"
+},
+"גם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ג־מ־ם"
+},
+"גן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גַּנִּים",
+"pos": "noun"
+},
+"געגוע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "געגועים",
+"pos": "noun",
+"root": "ג־ע־ג־ע"
+},
+"גפן": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גְּפָנִים",
+"pos": "noun"
+},
+"גר": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָגוּר",
+"key": "K1",
+"pos": "verb",
+"root": "ג־ו־ר"
+},
+"גרב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גרביים",
+"pos": "noun"
+},
+"גרה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָגוּר",
+"key": "K1",
+"pos": "verb",
+"root": "ג־ו־ר"
+},
+"גרעין": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "גרעינים",
+"pos": "noun"
+},
+"גרעינים": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"plural": "גרעינים",
+"pos": "noun"
+},
+"גשם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "גְּשָׁמִים",
+"pos": "noun"
+},
+"ג׳ינס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "גִ׳ינְסִים",
+"pos": "noun"
+},
+"דאגה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "דאגות",
+"pos": "noun",
+"root": "ד־א־ג"
+},
+"דבורה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטוֹלָה",
+"plural": "דְּבוֹרִים",
+"pos": "noun"
+},
+"דבר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "דְּבָרִים",
+"pos": "noun",
+"root": "ד־ב־ר"
+},
+"דבש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטַל",
+"pos": "noun"
+},
+"דג": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "דָּגִים",
+"pos": "noun"
+},
+"דוב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "דובים",
+"pos": "noun"
+},
+"דוגרי": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adj"
+},
+"דוד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "דּוֹדִים",
+"pos": "noun"
+},
+"דודה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "דּוֹדוֹת",
+"pos": "noun",
+"root": "ד־ו־ד"
+},
+"דווקא": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"דומה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"די": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adv"
+},
+"דלת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "דְּלָתוֹת",
+"pos": "noun"
+},
+"דקה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "דַּקּוֹת",
+"pos": "noun"
+},
+"דרישת שלום": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"דרך": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "דְּרָכִים",
+"pos": "noun"
+},
+"דרכון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "דרכונים",
+"pos": "noun",
+"root": "ד־ר־ך"
+},
+"דשא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "דְּשָׁאִים",
+"pos": "noun",
+"root": "ד־שׁ־א"
+},
+"האם": {
+"confidence": "high",
+"key": "K1",
+"pos": "particle"
+},
+"הבוקר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "בקרים",
+"pos": "noun",
+"root": "ב־ק־ר"
+},
+"הביתה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"הבנתי": {
+"binyan": "hif'il",
+"confidence": "low",
+"infinitive": "לְהָבִין",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־ן"
+},
+"הגזמת": {
+"binyan": "hif'il",
+"confidence": "low",
+"infinitive": "לְהַגְזִים",
+"key": "K1",
+"pos": "verb",
+"root": "ג־ז־ם"
+},
+"הגליל": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"plural": "גְּלִילִים",
+"pos": "noun"
+},
+"הוא": {
+"confidence": "low",
+"gender": "m-s",
+"key": "K1",
+"pos": "pron"
+},
+"הודעה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "הַקְטָלָה",
+"plural": "הוֹדָעוֹת",
+"pos": "noun",
+"root": "י־ד־ע"
+},
+"הולך": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָלֶכֶת",
+"key": "K1",
+"pos": "verb",
+"root": "ה־ל־ך"
+},
+"הולכת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָלֶכֶת",
+"key": "K1",
+"pos": "verb",
+"root": "ה־ל־ך"
+},
+"הזדמנות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "הִתְקַטְּלוּת",
+"plural": "הִזְדַּמְּנוּיוֹת",
+"pos": "noun",
+"root": "ז־מ־ן"
+},
+"הזוי": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj",
+"root": "ה־ז־ה"
+},
+"הזמנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "הַקְטָלָה",
+"plural": "הַזְמָנוֹת",
+"pos": "noun"
+},
+"היא": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "pron"
+},
+"היה": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לִהְיוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"היום": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"הכי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"הכל": {
+"binyan": "hif'il",
+"confidence": "low",
+"infinitive": "לְהָכִיל",
+"key": "K3",
+"pos": "verb",
+"root": "כ־ו־ל"
+},
+"הל": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun"
+},
+"הלוואי": {
+"confidence": "high",
+"key": "K1",
+"pos": "particle"
+},
+"הליכה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָלֶכֶת",
+"key": "K1",
+"pos": "verb",
+"root": "ה־ל־ך"
+},
+"הלילה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"הם": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "pron"
+},
+"הן": {
+"confidence": "high",
+"gender": "f-p",
+"key": "K1",
+"pos": "pron"
+},
+"הנחה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "הַקְטָלָה",
+"plural": "הֲנָחוֹת",
+"pos": "noun",
+"root": "נ־ו־ח"
+},
+"הערב": {
+"confidence": "high",
+"key": "K1",
+"pos": "noun"
+},
+"הפוך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ה־פ־ך"
+},
+"הפתעה": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַפְתִּיעַ",
+"key": "K1",
+"pos": "verb",
+"root": "פ־ת־ע"
+},
+"הר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "הָרִים",
+"pos": "noun",
+"root": "ה־ר־ר"
+},
+"הרבה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ר־ב־ה"
+},
+"הרגע": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"הרכבה": {
+"binyan": "hif'il",
+"confidence": "low",
+"infinitive": "לְהַרְכִּיב",
+"key": "K1",
+"pos": "verb",
+"root": "ר־כ־ב"
+},
+"השבוע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטוּל",
+"plural": "שָׁבוּעוֹת",
+"pos": "noun",
+"root": "שׁ־ב־ע"
+},
+"השקיה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "הַשְׁקָיוֹת",
+"pos": "noun"
+},
+"ו": {
+"confidence": "high",
+"key": "K1",
+"pos": "conj"
+},
+"וואו": {
+"confidence": "medium",
+"key": "K3",
+"pos": "intj"
+},
+"וואלה": {
+"confidence": "medium",
+"key": "K3",
+"pos": "intj"
+},
+"וילון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "וילונות",
+"pos": "noun"
+},
+"וניל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"ורוד": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"זאת": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"זה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "det"
+},
+"זהב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "noun"
+},
+"זהו": {
+"confidence": "high",
+"key": "K1",
+"pos": "particle"
+},
+"זו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"זוכר": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לזכור",
+"key": "K1",
+"pos": "verb"
+},
+"זוכרת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לזכור",
+"key": "K1",
+"pos": "verb"
+},
+"זול": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ז־ו־ל"
+},
+"זזתי": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לָזוּז",
+"key": "K1",
+"pos": "verb",
+"root": "ז־ו־ז"
+},
+"זיקוק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"pos": "noun",
+"root": "ז־ק־ק"
+},
+"זית": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "זֵיתִים",
+"pos": "noun",
+"root": "ז־ו־ת"
+},
+"זכוכית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "זְכוּכִיּוֹת",
+"pos": "noun",
+"root": "ז־כ־ך"
+},
+"זמן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "זְמַנִּים",
+"pos": "noun"
+},
+"זן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "זַנִּים",
+"pos": "noun",
+"root": "ז־ו־ן"
+},
+"זנגביל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"זעתר": {
+"confidence": "low",
+"gender": "m",
+"key": "K3",
+"pos": "noun"
+},
+"זקן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"זר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ז־ו־ר"
+},
+"זרע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "זְרָעִים",
+"pos": "noun"
+},
+"חבית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חביות",
+"pos": "noun"
+},
+"חבל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטוֹל",
+"pos": "noun"
+},
+"חבל על הזמן": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"חבר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "חֲבֵרִים",
+"pos": "noun"
+},
+"חברה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "חֲבֵרִים",
+"pos": "noun"
+},
+"חג": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "חַגִּים",
+"pos": "noun",
+"root": "ח־ג־ג"
+},
+"חג שמח": {
+"confidence": "low",
+"key": "K1",
+"pos": "phrase"
+},
+"חגורה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטוֹלָה",
+"plural": "חֲגוֹרוֹת",
+"pos": "noun",
+"root": "ח־ג־ר"
+},
+"חדר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "חֲדָרִים",
+"pos": "noun"
+},
+"חדר שינה": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"plural": "חדרי שינה",
+"pos": "noun"
+},
+"חדש": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj",
+"root": "ח־ד־שׁ"
+},
+"חדשות": {
+"confidence": "high",
+"gender": "f-p",
+"key": "K1",
+"pos": "noun"
+},
+"חודש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "חודשים",
+"pos": "noun",
+"root": "ח־ד־שׁ"
+},
+"חודשי": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adj"
+},
+"חוזר": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחזור",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ז־ר"
+},
+"חוזרת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחזור",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ז־ר"
+},
+"חוט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "חוטים",
+"pos": "noun",
+"root": "ח־ו־ט"
+},
+"חול": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "חולות",
+"pos": "noun",
+"root": "ח־ו־ל"
+},
+"חולה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לַחֲלוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ל־ה"
+},
+"חולצה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "חולצות",
+"pos": "noun",
+"root": "ח־ל־ץ"
+},
+"חום": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־מ־ם"
+},
+"חומוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K2",
+"pos": "noun"
+},
+"חומציות": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"pos": "noun",
+"root": "ח־מ־ץ"
+},
+"חוף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "חוֹפִים",
+"pos": "noun",
+"root": "ח־ו־ף"
+},
+"חופר": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לחפור",
+"key": "K1",
+"pos": "verb"
+},
+"חופשה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֻטְלָה",
+"plural": "חופשות",
+"pos": "noun",
+"root": "ח־פ־שׁ"
+},
+"חופשי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־פ־שׁ"
+},
+"חוצפה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"חושב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחשוב",
+"key": "K1",
+"pos": "verb"
+},
+"חושבת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחשוב",
+"key": "K1",
+"pos": "verb"
+},
+"חזה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "חָזוֹת",
+"pos": "noun",
+"root": "ח־ז־ה"
+},
+"חזיר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטִיל",
+"plural": "חֲזִירִים",
+"pos": "noun"
+},
+"חזק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־ז־ק"
+},
+"חזרה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "חֲזָרוֹת",
+"pos": "noun",
+"root": "ח־ז־ר"
+},
+"חחח": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"חטיף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטִיל",
+"plural": "חֲטִיפִים",
+"pos": "noun",
+"root": "ח־ט־ף"
+},
+"חיטה": {
+"confidence": "high",
+"gender": "f",
+"key": "K2",
+"pattern": "קִטְלָה",
+"plural": "חיטים",
+"pos": "noun"
+},
+"חייב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־י־ב"
+},
+"חייבת": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־י־ב"
+},
+"חייל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטָּל",
+"plural": "חיילים",
+"pos": "noun",
+"root": "ח־ו־ל"
+},
+"חיים": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִחְיוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"חינם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"חיפה": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְחַפּוֹת",
+"key": "K3",
+"pos": "verb",
+"root": "ח־פ־ה"
+},
+"חכם": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj",
+"root": "ח־כ־ם"
+},
+"חלאס": {
+"confidence": "medium",
+"key": "K3",
+"pos": "intj"
+},
+"חלב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "חֲלָבִים",
+"pos": "noun"
+},
+"חלבה": {
+"confidence": "high",
+"gender": "f",
+"key": "K2",
+"pos": "noun"
+},
+"חלבי": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "חֲלָבִים",
+"pos": "noun"
+},
+"חלה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "חַלּוֹת",
+"pos": "noun",
+"root": "ח־ל־ל"
+},
+"חלון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "חַלּוֹנוֹת",
+"pos": "noun",
+"root": "ח־ל־ן"
+},
+"חלק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "חֲלָקִים",
+"pos": "noun",
+"root": "ח־ל־ק"
+},
+"חלש": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־ל־שׁ"
+},
+"חם": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adj"
+},
+"חמאה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חֲמָאוֹת",
+"pos": "noun",
+"root": "ח־מ־א"
+},
+"חמוד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ח־מ־ד"
+},
+"חמוצים": {
+"confidence": "low",
+"key": "K1",
+"pos": "adj",
+"root": "ח־מ־ץ"
+},
+"חמין": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun",
+"root": "ח־מ־ם"
+},
+"חממה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "חֲמָמוֹת",
+"pos": "noun",
+"root": "ח־מ־ם"
+},
+"חמש": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num",
+"root": "ח־מ־שׁ"
+},
+"חנוכה": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטֻלָּה",
+"plural": "חנוכות",
+"pos": "noun"
+},
+"חנוכייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חנוכיות",
+"pos": "noun",
+"root": "ח־נ־ך"
+},
+"חנות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חנויות",
+"pos": "noun",
+"root": "ח־נ־ה"
+},
+"חניה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"pos": "noun",
+"root": "ח־נ־ה"
+},
+"חס וחלילה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"חסה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חסות",
+"pos": "noun"
+},
+"חצאית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "חֲצָאִיּוֹת",
+"pos": "noun",
+"root": "ח־צ־ה"
+},
+"חצות": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "-",
+"pos": "noun",
+"root": "ח־צ־ה"
+},
+"חצי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "חֲצָאִים",
+"pos": "noun",
+"root": "ח־צ־ה"
+},
+"חצילים": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"plural": "חֲצִילִים",
+"pos": "noun"
+},
+"חקלאות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"חרדל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "חַרְדָּלִים",
+"pos": "noun"
+},
+"חריף": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "ח־ר־ף"
+},
+"חשבון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטְלוֹן",
+"plural": "חֶשְׁבּוֹנוֹת",
+"pos": "noun",
+"root": "ח־שׁ־ב"
+},
+"חשוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"חתול": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטוּל",
+"plural": "חֲתוּלִים",
+"pos": "noun",
+"root": "ח־ת־ל"
+},
+"טבעוני": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"טבעת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטֶּלֶת",
+"plural": "טַבָּעוֹת",
+"pos": "noun"
+},
+"טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ט־ו־ב"
+},
+"טחינה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"טיול": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"plural": "טיולים",
+"pos": "noun",
+"root": "ט־י־ל"
+},
+"טיסה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "טיסות",
+"pos": "noun",
+"root": "ט־י־ס"
+},
+"טיפ": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "טיפים",
+"pos": "noun"
+},
+"טלפון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "טֶלֶפוֹנִים",
+"pos": "noun"
+},
+"טעים": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "ט־ע־ם"
+},
+"טעם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "טְעָמִים",
+"pos": "noun"
+},
+"טרי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"יאללה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"יבש": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֵל",
+"pos": "adj",
+"root": "י־ב־שׁ"
+},
+"יבשת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטֶּלֶת",
+"plural": "יַבָּשׁוֹת",
+"pos": "noun"
+},
+"יד": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "יָדוֹת",
+"pos": "noun",
+"root": "י־ד"
+},
+"יוגורט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "יוֹגוּרְטִים",
+"pos": "noun"
+},
+"יודע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָדַעַת",
+"key": "K1",
+"pos": "verb"
+},
+"יודעת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָדַעַת",
+"key": "K1",
+"pos": "verb"
+},
+"יום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יָמִים",
+"pos": "noun",
+"root": "י־ו־ם"
+},
+"יום טוב": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"plural": "יָמִים טוֹבִים",
+"pos": "noun"
+},
+"יומי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "י־ו־ם"
+},
+"יומיים": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יָמִים",
+"pos": "noun",
+"root": "י־ו־ם"
+},
+"יופי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "intj",
+"root": "י־פ־ה"
+},
+"יושב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָשֶׁבֶת",
+"key": "K1",
+"pos": "verb",
+"root": "י־שׁ־ב"
+},
+"יושבת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָשֶׁבֶת",
+"key": "K1",
+"pos": "verb",
+"root": "י־שׁ־ב"
+},
+"יותר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "י־ת־ר"
+},
+"יותר מדי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"יחד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"יחיד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"יין": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יֵינוֹת",
+"pos": "noun",
+"root": "י־י־ן"
+},
+"יין אדום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "יינות אדומים",
+"pos": "noun"
+},
+"יכול": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִהְיוֹת יָכוֹל",
+"key": "K1",
+"pos": "verb",
+"root": "י־כ־ל"
+},
+"יכולה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִהְיוֹת יָכוֹל",
+"key": "K1",
+"pos": "verb",
+"root": "י־כ־ל"
+},
+"ילד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יְלָדִים",
+"pos": "noun"
+},
+"ילדה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "יְלָדוֹת",
+"pos": "noun"
+},
+"ים": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יַמִּים",
+"pos": "noun",
+"root": "י־מ־ם"
+},
+"ימינה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"pattern": "קָטִיל",
+"pos": "noun",
+"root": "י־מ־ן"
+},
+"יער": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "יְעָרוֹת",
+"pos": "noun"
+},
+"יפה": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj"
+},
+"יקב": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "ליקוב",
+"key": "K3",
+"pos": "verb"
+},
+"יקר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "י־ק־ר"
+},
+"ירוק": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"ירח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "יְרֵחִים",
+"pos": "noun",
+"root": "י־ר־ח"
+},
+"ירקות": {
+"confidence": "low",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun"
+},
+"יש": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"יש לי שאלה": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"ישן": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj"
+},
+"ישנה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לישון",
+"key": "K1",
+"pos": "verb"
+},
+"ישר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj"
+},
+"כאב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטֵל",
+"plural": "כאבים",
+"pos": "noun"
+},
+"כאילו": {
+"confidence": "high",
+"key": "K1",
+"pos": "conj"
+},
+"כאן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"כבד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "כְּבֵדִים",
+"pos": "noun"
+},
+"כביש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטִיל",
+"plural": "כְּבִישִׁים",
+"pos": "noun"
+},
+"כבר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"כדאי": {
+"confidence": "low",
+"key": "K1",
+"pos": "adj"
+},
+"כדור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטּוּל",
+"plural": "כַּדּוּרִים",
+"pos": "noun",
+"root": "כ־ד־ר"
+},
+"כדורגל": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun"
+},
+"כדי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"כובע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "כּוֹבָעִים",
+"pos": "noun",
+"root": "כ־ב־ע"
+},
+"כוכב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "כּוֹכָבִים",
+"pos": "noun",
+"root": "כ־כ־ב"
+},
+"כוס": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "כּוֹסוֹת",
+"pos": "noun",
+"root": "כ־א־ס"
+},
+"כוסברה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"כועס": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לכעוס",
+"key": "K1",
+"pos": "verb",
+"root": "כ־ע־ס"
+},
+"כורכום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"כותב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לכתוב",
+"key": "K1",
+"pos": "verb"
+},
+"כותבת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לכתוב",
+"key": "K1",
+"pos": "verb"
+},
+"כותנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֻטְלָה",
+"plural": "כותנות",
+"pos": "noun",
+"root": "כ־ת־ן"
+},
+"כחול": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"כי": {
+"confidence": "high",
+"key": "K1",
+"pos": "conj"
+},
+"כיכר": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטָּל",
+"plural": "כיכרות",
+"pos": "noun",
+"root": "כ־כ־ר"
+},
+"כיסא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטֵּל",
+"plural": "כיסאות",
+"pos": "noun",
+"root": "כ־ס־א"
+},
+"כיף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "-",
+"pos": "noun",
+"root": "כ־י־ף"
+},
+"כיפה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "כיפות",
+"pos": "noun",
+"root": "כ־פ־ף"
+},
+"כיצד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"ככה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"ככה ככה": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"כל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "noun",
+"root": "כ־ל־ל"
+},
+"כל הכבוד": {
+"confidence": "low",
+"key": "K1",
+"pos": "intj"
+},
+"כלב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "כְּלָבִים",
+"pos": "noun"
+},
+"כלום": {
+"confidence": "low",
+"key": "K1",
+"pos": "pron"
+},
+"כמה": {
+"confidence": "high",
+"key": "K1",
+"pos": "det"
+},
+"כמו": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"כמובן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"כמון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "כ־מ־ן"
+},
+"כמעט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"כן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "כ־ו־ן"
+},
+"כנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "כַּנּוֹת",
+"pos": "noun",
+"root": "כ־נ־ן"
+},
+"כנראה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"כסף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "כְּסָפִים",
+"pos": "noun",
+"root": "כ־ס־ף"
+},
+"כעס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "כְּעָסִים",
+"pos": "noun",
+"root": "כ־ע־ס"
+},
+"כפית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלִית",
+"plural": "כַּפִּיּוֹת",
+"pos": "noun"
+},
+"כפפה": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"pattern": "קְטָלָה",
+"plural": "כְּפָפוֹת",
+"pos": "noun",
+"root": "כ־פ־ף"
+},
+"כפר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "כְּפָרִים",
+"pos": "noun"
+},
+"כרובית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun",
+"root": "כ־ר־ב"
+},
+"כרטיס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "כַּרְטִיסִים",
+"pos": "noun"
+},
+"כרטיס אשראי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "כַּרְטִיסֵי אַשְׁרַאי",
+"pos": "noun"
+},
+"כריך": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "noun",
+"root": "כ־ר־ך"
+},
+"כרית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "כְּרִיּוֹת",
+"pos": "noun"
+},
+"כרם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "כְּרָמִים",
+"pos": "noun",
+"root": "כ־ר־ם"
+},
+"כשר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֵל",
+"pos": "adj",
+"root": "כ־שׁ־ר"
+},
+"כתום": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"כתישה": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לכתוש",
+"key": "K1",
+"pos": "verb",
+"root": "כ־ת־שׁ"
+},
+"כתף": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "כְּתֵפוֹת",
+"pos": "noun",
+"root": "כ־ת־ף"
+},
+"לא": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"לאבד": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְאַבֵּד",
+"key": "K1",
+"pos": "verb",
+"root": "א־ב־ד"
+},
+"לאהוב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאהוב",
+"key": "K1",
+"pos": "verb",
+"root": "א־ה־ב"
+},
+"לאט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "א־ט־ט"
+},
+"לאט לאט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"לאכול": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לאכול",
+"key": "K1",
+"pos": "verb",
+"root": "א־כ־ל"
+},
+"לאן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"לאפה": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"לאפות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לֶאֱפוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "א־פ־ה"
+},
+"לב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "לְבָבוֹת",
+"pos": "noun",
+"root": "ל־ב־ב"
+},
+"לבד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ב־ד־ד"
+},
+"לבדוק": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לבדוק",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ד־ק"
+},
+"לבוא": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "לָבוֹא",
+"key": "K3",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"לבחור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לבחור",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ח־ר"
+},
+"לביבה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "לְבִיבוֹת",
+"pos": "noun",
+"root": "ל־ב־ב"
+},
+"לבכות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִבְכּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ב־כ־ה"
+},
+"לבלוע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לבלוע",
+"key": "K1",
+"pos": "verb"
+},
+"לבלות": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְבַלּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ל־ה"
+},
+"לבן": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj"
+},
+"לבנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"לבקר": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְבַקֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ק־ר"
+},
+"לבקש": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְבַקֵּשׁ",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ק־שׁ"
+},
+"לבריאות": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"לבשל": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְבַשֵּׁל",
+"key": "K1",
+"pos": "verb",
+"root": "ב־שׁ־ל"
+},
+"לגבי": {
+"confidence": "high",
+"infinitive": "לְגַבֵּי",
+"key": "K1",
+"pos": "prep"
+},
+"לגור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָגוּר",
+"key": "K1",
+"pos": "verb",
+"root": "ג־ו־ר"
+},
+"לגמור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לגמור",
+"key": "K1",
+"pos": "verb"
+},
+"לגמרי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ג־מ־ר"
+},
+"לגרום": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לגרום",
+"key": "K1",
+"pos": "verb"
+},
+"לדאוג": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לדאוג",
+"key": "K1",
+"pos": "verb",
+"root": "ד־א־ג"
+},
+"לדבר": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְדַבֵּר",
+"key": "K1",
+"pos": "verb"
+},
+"לדעת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָדַעַת",
+"key": "K1",
+"pos": "verb"
+},
+"להאמין": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַאֲמִין",
+"key": "K1",
+"pos": "verb"
+},
+"להבטיח": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַבְטִיחַ",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ט־ח"
+},
+"להביא": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִיא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"להבין": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִין",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־ן"
+},
+"להגיד": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַגִּיד",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ג־ד"
+},
+"להגיע": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַגִּיעַ",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ג־ע"
+},
+"להודות": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהוֹדוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "י־ד־ה"
+},
+"להזמין": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַזְמִין",
+"key": "K1",
+"pos": "verb",
+"root": "ז־מ־ן"
+},
+"להחליט": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַחְלִיט",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ל־ט"
+},
+"להיכנס": {
+"binyan": "nif'al",
+"confidence": "high",
+"infinitive": "להיכנס",
+"key": "K2",
+"pos": "verb",
+"root": "כ־נ־ס"
+},
+"להימצא": {
+"binyan": "nif'al",
+"confidence": "high",
+"infinitive": "להימצא",
+"key": "K1",
+"pos": "verb",
+"root": "מ־צ־א"
+},
+"להישאר": {
+"binyan": "nif'al",
+"confidence": "high",
+"infinitive": "לְהִשָּׁאֵר",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־א־ר"
+},
+"להכיל": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָכִיל",
+"key": "K1",
+"pos": "verb",
+"root": "כ־ו־ל"
+},
+"להכיר": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַכִּיר",
+"key": "K1",
+"pos": "verb",
+"root": "נ־כ־ר"
+},
+"להמשיך": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַמְשִׁיךְ",
+"key": "K1",
+"pos": "verb",
+"root": "מ־שׁ־ך"
+},
+"להניח": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָנִיחַ",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ו־ח"
+},
+"להסביר": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַסְבִּיר",
+"key": "K1",
+"pos": "verb",
+"root": "ס־ב־ר"
+},
+"להספיק": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַסְפִּיק",
+"key": "K1",
+"pos": "verb",
+"root": "ס־פ־ק"
+},
+"להפוך": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "להפוך",
+"key": "K1",
+"pos": "verb",
+"root": "ה־פ־ך"
+},
+"להפסיד": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַפְסִיד",
+"key": "K1",
+"pos": "verb",
+"root": "פ־ס־ד"
+},
+"להפסיק": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַפְסִיק",
+"key": "K1",
+"pos": "verb",
+"root": "פ־ס־ק"
+},
+"להצטער": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִצְטַעֵר",
+"key": "K1",
+"pos": "verb",
+"root": "צ־ע־ר"
+},
+"להצליח": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַצְלִיחַ",
+"key": "K1",
+"pos": "verb",
+"root": "צ־ל־ח"
+},
+"להראות": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַרְאוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"להרגיש": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַרְגִּישׁ",
+"key": "K1",
+"pos": "verb"
+},
+"להרוג": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "להרוג",
+"key": "K1",
+"pos": "verb",
+"root": "ה־ר־ג"
+},
+"להשתמש": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִשְׁתַּמֵּשׁ",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־מ־שׁ"
+},
+"להתחיל": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַתְחִיל",
+"key": "K1",
+"pos": "verb",
+"root": "ת־ח־ל"
+},
+"להתכוון": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִתְכַּוֵּן",
+"key": "K1",
+"pos": "verb",
+"root": "כ־ו־ן"
+},
+"להתעורר": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִתְעוֹרֵר",
+"key": "K1",
+"pos": "verb",
+"root": "ע־ו־ר"
+},
+"להתקשר": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִתְקַשֵּׁר",
+"key": "K1",
+"pos": "verb",
+"root": "ק־שׁ־ר"
+},
+"להתראות": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"לומד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ללמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ל־מ־ד"
+},
+"לומדת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ללמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ל־מ־ד"
+},
+"לוקח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָקַחַת",
+"key": "K1",
+"pos": "verb"
+},
+"לוקחת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָקַחַת",
+"key": "K1",
+"pos": "verb"
+},
+"לזכור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לזכור",
+"key": "K1",
+"pos": "verb"
+},
+"לחגוג": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחגוג",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ג־ג"
+},
+"לחזור": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "לחזור",
+"key": "K3",
+"pos": "verb",
+"root": "ח־ז־ר"
+},
+"לחייך": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַיֵּךְ",
+"key": "K1",
+"pos": "verb",
+"root": "ח־י־ך"
+},
+"לחיים": {
+"confidence": "low",
+"key": "K1",
+"pos": "phrase"
+},
+"לחכות": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַכּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ח־כ־ה"
+},
+"לחלום": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחלום",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ל־ם"
+},
+"לחם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun"
+},
+"לחפש": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַפֵּשׂ",
+"key": "K1",
+"pos": "verb",
+"root": "ח־פ־שׂ"
+},
+"לחרטט": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַרְטֵט",
+"key": "K1",
+"pos": "verb"
+},
+"לחשוב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לחשוב",
+"key": "K1",
+"pos": "verb"
+},
+"לטגן": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְטַגֵּן",
+"key": "K1",
+"pos": "verb"
+},
+"לטוס": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָטוּס",
+"key": "K1",
+"pos": "verb",
+"root": "ט־ו־ס"
+},
+"לטייל": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְטַיֵּל",
+"key": "K1",
+"pos": "verb",
+"root": "ט־י־ל"
+},
+"לטעום": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לטעום",
+"key": "K1",
+"pos": "verb",
+"root": "ט־ע־ם"
+},
+"ליד": {
+"confidence": "high",
+"infinitive": "לְיַד",
+"key": "K1",
+"pos": "prep"
+},
+"לילה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "לֵילוֹת",
+"pos": "noun"
+},
+"לילה טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"לימון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "לִימוֹנִים",
+"pos": "noun"
+},
+"ליפול": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ליפול",
+"key": "K1",
+"pos": "verb",
+"root": "נ־פ־ל"
+},
+"לישון": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "לישון",
+"key": "K3",
+"pos": "verb"
+},
+"לכן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"לכתוב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לכתוב",
+"key": "K1",
+"pos": "verb"
+},
+"ללא": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"ללבוש": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ללבוש",
+"key": "K1",
+"pos": "verb"
+},
+"ללכת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָלֶכֶת",
+"key": "K1",
+"pos": "verb",
+"root": "ה־ל־ך"
+},
+"ללמד": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְלַמֵּד",
+"key": "K1",
+"pos": "verb",
+"root": "ל־מ־ד"
+},
+"ללמוד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ללמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ל־מ־ד"
+},
+"ללעוס": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "ללעוס",
+"key": "K1",
+"pos": "verb",
+"root": "ל־ע־ס"
+},
+"למה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"למה זה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"למזוג": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "למזוג",
+"key": "K3",
+"pos": "verb",
+"root": "מ־ז־ג"
+},
+"למטה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"למכור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "למכור",
+"key": "K1",
+"pos": "verb",
+"root": "מ־כ־ר"
+},
+"למעלה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"למען": {
+"confidence": "high",
+"infinitive": "לְמַעַן",
+"key": "K1",
+"pos": "prep"
+},
+"למעשה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"למצוא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "למצוא",
+"key": "K1",
+"pos": "verb",
+"root": "מ־צ־א"
+},
+"למרות": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"לנהוג": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לנהוג",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ה־ג"
+},
+"לנוח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָנוּחַ",
+"key": "K1",
+"pos": "verb"
+},
+"לנסוע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לנסוע",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ס־ע"
+},
+"לנסות": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְנַסּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ס־ה"
+},
+"לנצח": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְנַצֵּחַ",
+"key": "K1",
+"pos": "verb",
+"root": "נ־צ־ח"
+},
+"לסגור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לסגור",
+"key": "K1",
+"pos": "verb"
+},
+"לסדר": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְסַדֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "ס־ד־ר"
+},
+"לסיים": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְסַיֵּם",
+"key": "K1",
+"pos": "verb",
+"root": "ס־י־ם"
+},
+"לספר": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְסַפֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "ס־פ־ר"
+},
+"לעבור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעבור",
+"key": "K1",
+"pos": "verb",
+"root": "ע־ב־ר"
+},
+"לעולם": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"לעזוב": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעזוב",
+"key": "K1",
+"pos": "verb",
+"root": "ע־ז־ב"
+},
+"לעזור": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "לעזור",
+"key": "K3",
+"pos": "verb"
+},
+"לעלות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לַעֲלוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"לעמוד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ע־מ־ד"
+},
+"לענות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לַעֲנוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ע־נ־ה"
+},
+"לעצור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעצור",
+"key": "K1",
+"pos": "verb",
+"root": "ע־צ־ר"
+},
+"לפגוש": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לפגוש",
+"key": "K1",
+"pos": "verb",
+"root": "פ־ג־שׁ"
+},
+"לפחד": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְפַחֵד",
+"key": "K1",
+"pos": "verb"
+},
+"לפחות": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"לפני": {
+"confidence": "high",
+"infinitive": "לִפְנֵי",
+"key": "K1",
+"pos": "prep",
+"root": "פ־נ־ה"
+},
+"לפעמים": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"לפרגן": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְפַרְגֵּן",
+"key": "K1",
+"pos": "verb",
+"root": "פ־ר־ג־ן"
+},
+"לפתוח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לפתוח",
+"key": "K1",
+"pos": "verb"
+},
+"לצאת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָצֵאת",
+"key": "K1",
+"pos": "verb",
+"root": "י־צ־א"
+},
+"לצחוק": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לצחוק",
+"key": "K1",
+"pos": "verb",
+"root": "צ־ח־ק"
+},
+"לצייר": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְצַיֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "צ־י־ר"
+},
+"לצלצל": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְצַלְצֵל",
+"key": "K1",
+"pos": "verb"
+},
+"לקבל": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְקַבֵּל",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ב־ל"
+},
+"לקוות": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְקַוּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ו־ה"
+},
+"לקוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "לָקוֹחוֹת",
+"pos": "noun",
+"root": "ל־ק־ח"
+},
+"לקום": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לָקוּם",
+"key": "K1",
+"pos": "verb"
+},
+"לקחת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָקַחַת",
+"key": "K1",
+"pos": "verb"
+},
+"לקנות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִקְנוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ק־נ־ה"
+},
+"לקפוץ": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לקפוץ",
+"key": "K1",
+"pos": "verb"
+},
+"לקרוא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לקרוא",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ר־א"
+},
+"לראות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִרְאוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ר־א־ה"
+},
+"לרדת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָרֶדֶת",
+"key": "K1",
+"pos": "verb",
+"root": "י־ר־ד"
+},
+"לרוץ": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָרוּץ",
+"key": "K1",
+"pos": "verb"
+},
+"לרצות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִרְצוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"לרקוד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לרקוד",
+"key": "K1",
+"pos": "verb"
+},
+"לשאול": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשאול",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־א־ל"
+},
+"לשבור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשבור",
+"key": "K1",
+"pos": "verb",
+"root": "שׂ־ב־ר"
+},
+"לשבת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָשֶׁבֶת",
+"key": "K1",
+"pos": "verb",
+"root": "י־שׁ־ב"
+},
+"לשון": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קָטוֹל",
+"plural": "לְשׁוֹנוֹת",
+"pos": "noun",
+"root": "ל־שׁ־ן"
+},
+"לשחות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִשְׂחוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "שׂ־ח־ה"
+},
+"לשחק": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְשַׂחֵק",
+"key": "K1",
+"pos": "verb",
+"root": "שׂ־ח־ק"
+},
+"לשטוף": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשטוף",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־ט־ף"
+},
+"לשים": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָשִׂים",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־ו־ם"
+},
+"לשיר": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָשִׁיר",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־י־ר"
+},
+"לשכוח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשכוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־כ־ח"
+},
+"לשלוח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשלוח",
+"key": "K1",
+"pos": "verb"
+},
+"לשלם": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְשַׁלֵּם",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־ל־ם"
+},
+"לשמוח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׂ־מ־ח"
+},
+"לשמוע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמוע",
+"key": "K1",
+"pos": "verb"
+},
+"לשמור": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמור",
+"key": "K1",
+"pos": "verb"
+},
+"לשנות": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְשַׁנּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־נ־ה"
+},
+"לשתות": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִשְׁתּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־ת־ה"
+},
+"לתקן": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְתַקֵּן",
+"key": "K1",
+"pos": "verb",
+"root": "ת־ק־ן"
+},
+"לתת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָתֵת",
+"key": "K1",
+"pos": "verb"
+},
+"מאוד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מאוחר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "א־ח־ר"
+},
+"מאוכזב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מאז": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"מאחורי": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep",
+"root": "א־ח־ר"
+},
+"מאין": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מאיפה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מאמי": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"מבולבל": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ב־ל־ב־ל"
+},
+"מבושל": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ב־שׁ־ל"
+},
+"מבחן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִבְחָנִים",
+"pos": "noun",
+"root": "ב־ח־ן"
+},
+"מביא": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִיא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"מביאה": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִיא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"מבין": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִין",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־ן"
+},
+"מבינה": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהָבִין",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־ן"
+},
+"מבצע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִבְצָעִים",
+"pos": "noun"
+},
+"מבשל": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְבַשֵּׁל",
+"key": "K1",
+"pos": "verb",
+"root": "ב־שׁ־ל"
+},
+"מגבת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטֶלֶת",
+"plural": "מַגָּבוֹת",
+"pos": "noun",
+"root": "נ־ג־ב"
+},
+"מגניב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מגעיל": {
+"confidence": "high",
+"key": "K1",
+"pattern": "מַקְטִיל",
+"pos": "adj",
+"root": "ג־ע־ל"
+},
+"מדבר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִדְבָּרִים",
+"pos": "noun"
+},
+"מדברת": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְדַבֵּר",
+"key": "K1",
+"pos": "verb"
+},
+"מדהים": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מדוע": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מדינה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מדינות",
+"pos": "noun",
+"root": "ד־י־ן"
+},
+"מדף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטָל",
+"plural": "מַדָּפִים",
+"pos": "noun",
+"root": "ד־פ־ף"
+},
+"מדרגות": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטֵלָה",
+"plural": "מַדְרֵגוֹת",
+"pos": "noun",
+"root": "ד־ר־ג"
+},
+"מה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"מה אתה אומר": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"מה המצב": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"מה יש": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"מה נשמע": {
+"confidence": "medium",
+"key": "K3",
+"pos": "phrase"
+},
+"מה פתאום": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adv"
+},
+"מה קורה": {
+"confidence": "high",
+"key": "K2",
+"pos": "phrase"
+},
+"מה שלומך": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"מהו": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"מהיר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj"
+},
+"מהמם": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְהַמֵּם",
+"key": "K3",
+"pos": "verb",
+"root": "ה־מ־ם"
+},
+"מהר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מוות": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun"
+},
+"מוזיקה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מוזיקות",
+"pos": "noun"
+},
+"מוזר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ז־ו־ר"
+},
+"מוכן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מול": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"מונית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מוֹנִיּוֹת",
+"pos": "noun",
+"root": "מ־נ־ה"
+},
+"מוקדם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ק־ד־ם"
+},
+"מורה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מוֹרִים",
+"pos": "noun"
+},
+"מושלם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "שׁ־ל־ם"
+},
+"מותק": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "noun",
+"root": "מ־ת־ק"
+},
+"מותר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "מֻקְטָל",
+"pos": "adj",
+"root": "נ־ת־ר"
+},
+"מזג אוויר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"מזגן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטְלָן",
+"plural": "מַזְגָנִים",
+"pos": "noun"
+},
+"מזוודה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָלָה",
+"plural": "מזוודות",
+"pos": "noun",
+"root": "ז־ו־ד"
+},
+"מזוזה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מְזוּזוֹת",
+"pos": "noun",
+"root": "ז־ו־ז"
+},
+"מזומן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מְקֻטָּל",
+"plural": "מזומנים",
+"pos": "noun",
+"root": "ז־מ־ן"
+},
+"מזון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מְזוֹנוֹת",
+"pos": "noun",
+"root": "ז־ו־ן"
+},
+"מזל טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"מזלג": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"plural": "מַזְלְגוֹת",
+"pos": "noun",
+"root": "ז־ל־ג"
+},
+"מחברת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטֶלֶת",
+"plural": "מַחְבָּרוֹת",
+"pos": "noun"
+},
+"מחט": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "מְחָטִים",
+"pos": "noun",
+"root": "ח־ו־ט"
+},
+"מחפש": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַפֵּשׂ",
+"key": "K1",
+"pos": "verb",
+"root": "ח־פ־שׂ"
+},
+"מחפשת": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְחַפֵּשׂ",
+"key": "K1",
+"pos": "verb",
+"root": "ח־פ־שׂ"
+},
+"מחר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מחרתיים": {
+"confidence": "high",
+"gender": "m-d",
+"key": "K1",
+"pos": "noun"
+},
+"מחשב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"plural": "מַחְשֵׁבִים",
+"pos": "noun"
+},
+"מטבח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִטְבָּחִים",
+"pos": "noun"
+},
+"מטומטם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מטוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מְטוֹסִים",
+"pos": "noun",
+"root": "ט־ו־ס"
+},
+"מטורף": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ט־ר־ף"
+},
+"מטרייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מִטְרִיּוֹת",
+"pos": "noun"
+},
+"מי": {
+"confidence": "high",
+"key": "K1",
+"pos": "pron"
+},
+"מיד": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"מידה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "מידות",
+"pos": "noun",
+"root": "מ־ד־ד"
+},
+"מיהו": {
+"confidence": "high",
+"key": "K1",
+"pos": "particle"
+},
+"מיוחד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מיטה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָלָה",
+"plural": "מיטות",
+"pos": "noun",
+"root": "נ־ט־ה"
+},
+"מיכל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מיכלים",
+"pos": "noun",
+"root": "כ־ו־ל"
+},
+"מילה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "מילים",
+"pos": "noun",
+"root": "מ־ל־ל"
+},
+"מים": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun",
+"root": "מ־י־ם"
+},
+"מיץ": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "מ־ו־ץ"
+},
+"מישהו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"מכבש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"pos": "noun",
+"root": "כ־ב־שׁ"
+},
+"מכונית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מְכוֹנִיוֹת",
+"pos": "noun",
+"root": "כ־ו־ן"
+},
+"מכוער": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adj",
+"root": "כ־ע־ר"
+},
+"מכנסיים": {
+"confidence": "high",
+"gender": "m-d",
+"key": "K1",
+"pattern": "מִקְטָל",
+"pos": "noun"
+},
+"מלא": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מלאכה": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"plural": "מְלָאכוֹת",
+"pos": "noun",
+"root": "ל־א־ך"
+},
+"מלוכלך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מלון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מְלוֹנוֹת",
+"pos": "noun",
+"root": "ל־ו־ן"
+},
+"מלח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "מְלָחִים",
+"pos": "noun",
+"root": "מ־ל־ח"
+},
+"מלך": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "מְלָכִים",
+"pos": "noun"
+},
+"מלפפון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מְלָפְפוֹנִים",
+"pos": "noun"
+},
+"מלצר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מֶלְצָרִים",
+"pos": "noun"
+},
+"ממנה": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"ממנו": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"ממרח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מִמְרָחִים",
+"pos": "noun",
+"root": "מ־ר־ח"
+},
+"ממש": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מן": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"מנגל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטָל",
+"plural": "מַנְגָּלִים",
+"pos": "noun",
+"root": "מ־נ־ג־ל"
+},
+"מנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "מָנוֹת",
+"pos": "noun"
+},
+"מנהל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מְקַטֵּל",
+"plural": "מְנַהֲלִים",
+"pos": "noun"
+},
+"מנורה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מְנוֹרוֹת",
+"pos": "noun",
+"root": "נ־י־ר"
+},
+"מנסה": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְנַסּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ס־ה"
+},
+"מנקה": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְנַקּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ק־ה"
+},
+"מסדר": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְסַדֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "ס־ד־ר"
+},
+"מסוכן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ס־כ־ן"
+},
+"מסטיק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מסטיקים",
+"pos": "noun"
+},
+"מסכים": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַסְכִּים",
+"key": "K1",
+"pos": "verb",
+"root": "ס־כ־ם"
+},
+"מסכימה": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַסְכִּים",
+"key": "K1",
+"pos": "verb",
+"root": "ס־כ־ם"
+},
+"מסעדה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָלָה",
+"plural": "מִסְעָדוֹת",
+"pos": "noun",
+"root": "ס־ע־ד"
+},
+"מספיק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מספר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִסְפָּרִים",
+"pos": "noun"
+},
+"מספריים": {
+"confidence": "high",
+"gender": "m-d",
+"key": "K1",
+"pattern": "מִקְטָל",
+"pos": "noun",
+"root": "ס־פ־ר"
+},
+"מעולה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ע־ל־ה"
+},
+"מעולם": {
+"confidence": "low",
+"key": "K1",
+"pos": "adv"
+},
+"מעיל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטִיל",
+"plural": "מעילים",
+"pos": "noun",
+"root": "מ־ע־ל"
+},
+"מעל": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"מעלית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטֶלֶת",
+"plural": "מעליות",
+"pos": "noun"
+},
+"מעניין": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מפה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטֵלָה",
+"plural": "מַפּוֹת",
+"pos": "noun"
+},
+"מפורסם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "פ־ר־ס־ם"
+},
+"מפית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "מַפִּיּוֹת",
+"pos": "noun"
+},
+"מפנק": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְפַנֵּק",
+"key": "K1",
+"pos": "verb",
+"root": "פ־נ־ק"
+},
+"מפתח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"plural": "מַפְתְּחוֹת",
+"pos": "noun",
+"root": "פ־ת־ח"
+},
+"מצה": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "מַצּוֹת",
+"pos": "noun"
+},
+"מצווה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מצוות",
+"pos": "noun"
+},
+"מצחיק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"מצטער": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִצְטַעֵר",
+"key": "K1",
+"pos": "verb",
+"root": "צ־ע־ר"
+},
+"מצלם": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְצַלֵּם",
+"key": "K1",
+"pos": "verb",
+"root": "צ־ל־ם"
+},
+"מקווה": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְקַוּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ו־ה"
+},
+"מקום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטָל",
+"plural": "מְקוֹמוֹת",
+"pos": "noun"
+},
+"מקרה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִקְרִים",
+"pos": "noun",
+"root": "ק־ר־ה"
+},
+"מקרר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "מקררים",
+"pos": "noun",
+"root": "ק־ר־ר"
+},
+"מראה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטָלָה",
+"plural": "מַרְאוֹת",
+"pos": "noun"
+},
+"מראש": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מרגיש": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַרְגִּישׁ",
+"key": "K1",
+"pos": "verb"
+},
+"מרגישה": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַרְגִּישׁ",
+"key": "K1",
+"pos": "verb"
+},
+"מרוצה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ר־צ־ה"
+},
+"מרפסת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטֶלֶת",
+"plural": "מִרְפָּסוֹת",
+"pos": "noun",
+"root": "ר־פ־ס"
+},
+"מרפק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"plural": "מַרְפְּקִים",
+"pos": "noun",
+"root": "ר־פ־ק"
+},
+"מרק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "מְרָקִים",
+"pos": "noun",
+"root": "מ־ר־ק"
+},
+"מרקם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ר־ק־ם"
+},
+"מרתף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מַקְטֵל",
+"plural": "מרתפים",
+"pos": "noun",
+"root": "ר־ת־ף"
+},
+"משהו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "pron"
+},
+"משחק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִשְׂחָקִים",
+"pos": "noun",
+"root": "שׂ־ח־ק"
+},
+"משטרה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָלָה",
+"plural": "מִשְׁטָרוֹת",
+"pos": "noun",
+"root": "שׁ־ט־ר"
+},
+"משי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"משכורת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "משכורות",
+"pos": "noun",
+"root": "שׂ־כ־ר"
+},
+"משלוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "משלוחים",
+"pos": "noun",
+"root": "שׁ־ל־ח"
+},
+"משעמם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"משפחה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מִקְטָלָה",
+"plural": "מִשְׁפָּחוֹת",
+"pos": "noun",
+"root": "שׁ־פ־ח"
+},
+"משקע": {
+"confidence": "low",
+"key": "K3",
+"pos": "adj",
+"root": "שׁ־ק־ע"
+},
+"משקפיים": {
+"confidence": "high",
+"gender": "m-d",
+"key": "K1",
+"pattern": "מִקְטָל",
+"pos": "noun"
+},
+"משרד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "מִקְטָל",
+"plural": "מִשְׂרָדִים",
+"pos": "noun",
+"root": "שׂ־ר־ד"
+},
+"מתוק": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"מתחת": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep",
+"root": "ת־ח־ת"
+},
+"מתי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"מתנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "מַקְטָלָה",
+"plural": "מַתָּנוֹת",
+"pos": "noun",
+"root": "נ־ת־ן"
+},
+"מתרגש": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִתְרַגֵּשׁ",
+"key": "K1",
+"pos": "verb",
+"root": "ר־ג־שׁ"
+},
+"נהדר": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adj"
+},
+"נהר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "נְהָרוֹת",
+"pos": "noun"
+},
+"נו": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"נוסע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לנסוע",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ס־ע"
+},
+"נוסעת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לנסוע",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ס־ע"
+},
+"נותן": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָתֵת",
+"key": "K1",
+"pos": "verb"
+},
+"נותנת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָתֵת",
+"key": "K1",
+"pos": "verb"
+},
+"נזכרתי": {
+"binyan": "nif'al",
+"confidence": "high",
+"infinitive": "להיזכר",
+"key": "K1",
+"pos": "verb",
+"root": "ז־כ־ר"
+},
+"נחמד": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"נחש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "נְחָשִׁים",
+"pos": "noun"
+},
+"נכד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "נְכָדִים",
+"pos": "noun",
+"root": "נ־כ־ד"
+},
+"נכון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "adj",
+"root": "כ־ו־ן"
+},
+"נמוך": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "נ־מ־ך"
+},
+"נמל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "נְמֵלִים",
+"pos": "noun"
+},
+"נמלה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "נְמָלִים",
+"pos": "noun"
+},
+"נסיכה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "נסיכות",
+"pos": "noun",
+"root": "נ־ס־ך"
+},
+"נעים": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "נ־ע־ם"
+},
+"נעים מאוד": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"נעל": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "נְעָלִים",
+"pos": "noun"
+},
+"נענע": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"pos": "noun",
+"root": "נ־ע־נ־ע"
+},
+"נפלא": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "פ־ל־א"
+},
+"נצרת": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לנצור",
+"key": "K3",
+"pos": "verb",
+"root": "נ־צ־ר"
+},
+"נקי": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "נ־ק־ה"
+},
+"נקניקייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "נַקְנִיקִיּוֹת",
+"pos": "noun"
+},
+"נשמה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "נְשָׁמוֹת",
+"pos": "noun",
+"root": "נ־שׁ־ם"
+},
+"סבא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"סבבה": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adj"
+},
+"סבון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סַבּוֹנִים",
+"pos": "noun"
+},
+"סבתא": {
+"confidence": "medium",
+"gender": "f",
+"key": "K3",
+"plural": "סָבְתוֹת",
+"pos": "noun"
+},
+"סגול": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"סגור": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj"
+},
+"סוכה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "סוכות",
+"pos": "noun",
+"root": "ס־כ־ך"
+},
+"סוכר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ס־כ־ר"
+},
+"סוכריה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "סוכריות",
+"pos": "noun"
+},
+"סומק": {
+"confidence": "low",
+"gender": "m",
+"key": "K3",
+"pos": "noun",
+"root": "ס־מ־ק"
+},
+"סוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סוּסִים",
+"pos": "noun",
+"root": "ס־ו־ס"
+},
+"סוף סוף": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"סוף שבוע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סוֹפֵי שָׁבוּעַ",
+"pos": "noun"
+},
+"סופגנייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "סופגניות",
+"pos": "noun",
+"root": "ס־פ־ג"
+},
+"סופר": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"סופ״ש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"סחתיין": {
+"confidence": "low",
+"key": "K3",
+"pos": "intj"
+},
+"סיבה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "סיבות",
+"pos": "noun"
+},
+"סיפור": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְסַפֵּר",
+"key": "K1",
+"pos": "verb",
+"root": "ס־פ־ר"
+},
+"סכין": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטִּיל",
+"plural": "סַכִּינִים",
+"pos": "noun",
+"root": "ס־כ־ן"
+},
+"סלון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סָלוֹנִים",
+"pos": "noun"
+},
+"סלט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סָלָטִים",
+"pos": "noun"
+},
+"סליחה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לסלוח",
+"key": "K1",
+"pos": "verb",
+"root": "ס־ל־ח"
+},
+"סנדל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סַנְדָּלִים",
+"pos": "noun"
+},
+"סנטר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "סַנְטֵרִים",
+"pos": "noun",
+"root": "ס־נ־ט־ר"
+},
+"סערה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "סְעָרוֹת",
+"pos": "noun",
+"root": "ס־ע־ר"
+},
+"ספה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "סַפּוֹת",
+"pos": "noun",
+"root": "ס־פ־ף"
+},
+"ספר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "סְפָרִים",
+"pos": "noun"
+},
+"סרט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "סְרָטִים",
+"pos": "noun",
+"root": "ס־ר־ט"
+},
+"סתם": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קְטָל",
+"pos": "adj"
+},
+"עבודה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעבוד",
+"key": "K1",
+"pos": "verb"
+},
+"עבור": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"עגבנייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "עַגְבָנִיּוֹת",
+"pos": "noun"
+},
+"עד": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"עדיין": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"עדיף": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ע־ד־ף"
+},
+"עדשים": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"plural": "עֲדָשִׁים",
+"pos": "noun",
+"root": "ע־ד־שׁ"
+},
+"עובד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעבוד",
+"key": "K1",
+"pos": "verb"
+},
+"עובדת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעבוד",
+"key": "K1",
+"pos": "verb"
+},
+"עוגה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֻטְלָה",
+"plural": "עוגות",
+"pos": "noun",
+"root": "ע־ו־ג"
+},
+"עוגייה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "עוּגִיּוֹת",
+"pos": "noun",
+"root": "ע־ו־ג"
+},
+"עוד": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adv",
+"root": "ע־ו־ד"
+},
+"עוד מעט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"עודף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "noun",
+"root": "ע־ד־ף"
+},
+"עולם": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קוֹטָל",
+"plural": "עוֹלָמִים",
+"pos": "noun",
+"root": "ע־ל־ם"
+},
+"עומד": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ע־מ־ד"
+},
+"עומדת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעמוד",
+"key": "K1",
+"pos": "verb",
+"root": "ע־מ־ד"
+},
+"עוף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "עוֹפוֹת",
+"pos": "noun",
+"root": "ע־ו־ף"
+},
+"עור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עוֹרוֹת",
+"pos": "noun"
+},
+"עושה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לַעֲשׂוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ע־שׂ־ה"
+},
+"עזרה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לעזור",
+"key": "K1",
+"pos": "verb"
+},
+"עט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "עֵטִים",
+"pos": "noun",
+"root": "ע־ו־ט"
+},
+"עיבוד": {
+"binyan": "pi'el",
+"confidence": "low",
+"infinitive": "לְעַבֵּד",
+"key": "K1",
+"pos": "verb",
+"root": "ע־ב־ד"
+},
+"עייף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"pos": "adj"
+},
+"עין": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun"
+},
+"עיפרון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטָּלוֹן",
+"plural": "עֶפְרוֹנוֹת",
+"pos": "noun"
+},
+"עיר": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "עָרִים",
+"pos": "noun"
+},
+"עכביש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עַכְּבִישִׁים",
+"pos": "noun"
+},
+"עכבר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עַכְבָּרִים",
+"pos": "noun"
+},
+"עכשיו": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adv"
+},
+"על": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"על הפנים": {
+"confidence": "low",
+"key": "K1",
+"pos": "adj"
+},
+"עלה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עָלִים",
+"pos": "noun"
+},
+"עלה דפנה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עֲלֵי דַּפְנָה",
+"pos": "noun"
+},
+"עם": {
+"confidence": "high",
+"key": "K1",
+"pos": "prep"
+},
+"עמוק": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj",
+"root": "ע־מ־ק"
+},
+"עמק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "עֲמָקִים",
+"pos": "noun",
+"root": "ע־מ־ק"
+},
+"ענב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטָל",
+"plural": "עֲנָבִים",
+"pos": "noun",
+"root": "ע־נ־ב"
+},
+"ענבים": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "עֲנָבִים",
+"pos": "noun",
+"root": "ע־נ־ב"
+},
+"עני": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj"
+},
+"עניין": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עניינים",
+"pos": "noun",
+"root": "ע־נ־ה"
+},
+"ענן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "עֲנָנִים",
+"pos": "noun",
+"root": "ע־נ־ן"
+},
+"עסוק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ע־ס־ק"
+},
+"עסק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עֲסָקִים",
+"pos": "noun"
+},
+"עפעף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ע־פ־ע־ף"
+},
+"עץ": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "עֵצִים",
+"pos": "noun"
+},
+"עצוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ע־צ־ב"
+},
+"עצמו": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "עֲצָמִים",
+"pos": "noun"
+},
+"עקב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "עֲקֵבִים",
+"pos": "noun"
+},
+"ערב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "עֲרָבִים",
+"pos": "noun",
+"root": "ע־ר־ב"
+},
+"ערב טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"עשיר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "ע־שׁ־ר"
+},
+"עשר": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num",
+"root": "ע־שׁ־ר"
+},
+"פגישה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "פְּגִישׁוֹת",
+"pos": "noun",
+"root": "פ־ג־שׁ"
+},
+"פה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"פה ושם": {
+"confidence": "medium",
+"key": "K3",
+"pos": "adv"
+},
+"פחד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"פחות": {
+"confidence": "high",
+"key": "K1",
+"pos": "det",
+"root": "פ־ח־ת"
+},
+"פטרוזיליה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"פטריות": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"plural": "פִּטְרִיּוֹת",
+"pos": "noun",
+"root": "פ־ט־ר"
+},
+"פיל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פִּילִים",
+"pos": "noun"
+},
+"פיסטוק": {
+"confidence": "high",
+"gender": "m",
+"key": "K2",
+"plural": "פִיסְטוּקִים",
+"pos": "noun"
+},
+"פיצה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "פִּיצוֹת",
+"pos": "noun"
+},
+"פיתה": {
+"confidence": "high",
+"gender": "f",
+"key": "K2",
+"plural": "פִּיתוֹת",
+"pos": "noun"
+},
+"פלאפל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פלאפלים",
+"pos": "noun"
+},
+"פלפל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פִּלְפְּלִים",
+"pos": "noun"
+},
+"פלפל שחור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פלפלים שחורים",
+"pos": "noun"
+},
+"פסח": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "פְּסָחִים",
+"pos": "noun"
+},
+"פעם": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "פְּעָמִים",
+"pos": "noun",
+"root": "פ־ע־ם"
+},
+"פצצה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "פְּצָצוֹת",
+"pos": "noun",
+"root": "פ־צ־ץ"
+},
+"פקק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פְּקָקִים",
+"pos": "noun",
+"root": "פ־ק־ק"
+},
+"פראייר": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"plural": "פראיירים",
+"pos": "noun"
+},
+"פרה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטְלָה",
+"plural": "פָּרוֹת",
+"pos": "noun"
+},
+"פרווה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"פרות": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטִי",
+"plural": "פירות",
+"pos": "noun",
+"root": "פ־ר־ה"
+},
+"פרח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "פְּרָחִים",
+"pos": "noun",
+"root": "פ־ר־ח"
+},
+"פרפר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "פַּרְפָּרִים",
+"pos": "noun",
+"root": "פ־ר־פ־ר"
+},
+"פרק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "פְּרָקִים",
+"pos": "noun"
+},
+"פשוט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"פתאום": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"פתוח": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "פ־ת־ח"
+},
+"צבע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "צְבָעִים",
+"pos": "noun"
+},
+"צדק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "צְדָקִים",
+"pos": "noun"
+},
+"צדקה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "צְדָקוֹת",
+"pos": "noun",
+"root": "צ־ד־ק"
+},
+"צהוב": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj"
+},
+"צהריים": {
+"confidence": "high",
+"gender": "m-d",
+"key": "K1",
+"pos": "noun",
+"root": "צ־ה־ר"
+},
+"צוואר": {
+"confidence": "high",
+"gender": "m",
+"key": "K2",
+"pattern": "קַטָּל",
+"plural": "צווארות",
+"pos": "noun",
+"root": "צ־ו־ר"
+},
+"צומת": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "צמתים",
+"pos": "noun",
+"root": "צ־מ־ת"
+},
+"ציון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"plural": "צִיּוּנִים",
+"pos": "noun"
+},
+"צימוקים": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"plural": "צימוקים",
+"pos": "noun",
+"root": "צ־מ־ק"
+},
+"ציפור": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטּוֹל",
+"plural": "ציפורים",
+"pos": "noun"
+},
+"ציפורן": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "ציפורניים",
+"pos": "noun",
+"root": "צ־פ־ר"
+},
+"צלחת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטֶּלֶת",
+"plural": "צַלָּחוֹת",
+"pos": "noun"
+},
+"צמא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לצמוא",
+"key": "K1",
+"pos": "verb"
+},
+"צמחוני": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "צִמְחוֹנִים",
+"pos": "noun",
+"root": "צ־מ־ח"
+},
+"צמיגות": {
+"confidence": "low",
+"key": "K3",
+"pos": "adj"
+},
+"צמר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun"
+},
+"צנצנת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "צנצנות",
+"pos": "noun",
+"root": "צ־נ־צ־ן"
+},
+"צעיף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"plural": "צְעִיפִים",
+"pos": "noun",
+"root": "צ־ע־ף"
+},
+"צעיר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "צ־ע־ר"
+},
+"צפרדע": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "צְפַרְדְּעִים",
+"pos": "noun"
+},
+"צפת": {
+"confidence": "low",
+"gender": "f",
+"key": "K3",
+"plural": "ציפות",
+"pos": "noun"
+},
+"צר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adj"
+},
+"צריך": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "צ־ר־ך"
+},
+"צריכה": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "צ־ר־ך"
+},
+"קבלה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטָּלָה",
+"plural": "קַבָּלוֹת",
+"pos": "noun"
+},
+"קדימה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv",
+"root": "ק־ד־ם"
+},
+"קו": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "קווים",
+"pos": "noun"
+},
+"קודם": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "prep"
+},
+"קומבינה": {
+"confidence": "low",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"קונה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִקְנוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ק־נ־ה"
+},
+"קוסקוס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"קוף": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "קוֹפִים",
+"pos": "noun"
+},
+"קופה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "קופות",
+"pos": "noun",
+"root": "ק־פ־ף"
+},
+"קורא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לקרוא",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ר־א"
+},
+"קוראת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לקרוא",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ר־א"
+},
+"קטן": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ק־ט־ן"
+},
+"קטע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "קְטָעִים",
+"pos": "noun",
+"root": "ק־ט־ע"
+},
+"קידוש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"pos": "noun",
+"root": "ק־ד־שׁ"
+},
+"קינוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"pos": "noun",
+"root": "ק־נ־ח"
+},
+"קינמון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"קיר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "קִירוֹת",
+"pos": "noun"
+},
+"קישוא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "קישואים",
+"pos": "noun",
+"root": "ק־שׁ־א"
+},
+"קל": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adj",
+"root": "ק־ל־ל"
+},
+"קליפה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "קליפות",
+"pos": "noun"
+},
+"קם": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לָקוּם",
+"key": "K1",
+"pos": "verb"
+},
+"קמה": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לָקוּם",
+"key": "K1",
+"pos": "verb"
+},
+"קמח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun",
+"root": "ק־מ־ח"
+},
+"קמצן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ק־מ־ץ"
+},
+"קניון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "קַנְיוֹנִים",
+"pos": "noun",
+"root": "ק־נ־ה"
+},
+"קפה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"קציר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"plural": "קְצִירִים",
+"pos": "noun",
+"root": "ק־צ־ר"
+},
+"קצפת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "קַצָּפוֹת",
+"pos": "noun"
+},
+"קצת": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"קר": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adj"
+},
+"קרוב": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוֹל",
+"pos": "adj"
+},
+"קרום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun",
+"root": "ק־ר־ם"
+},
+"קשה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ק־שׁ־ה"
+},
+"קשר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "קְשָׁרִים",
+"pos": "noun",
+"root": "ק־שׁ־ר"
+},
+"קשת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "קְשָׁתוֹת",
+"pos": "noun"
+},
+"ראיון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטָּלוֹן",
+"plural": "רַאֲיוֹנוֹת",
+"pos": "noun",
+"root": "ר־א־ה"
+},
+"ראש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "רָאשִׁים",
+"pos": "noun"
+},
+"ראשון": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קִטְלוֹן",
+"pos": "adj"
+},
+"רב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "רַבָּנִים",
+"pos": "noun"
+},
+"רגיל": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adj",
+"root": "ר־ג־ל"
+},
+"רגל": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "רְגָלִים",
+"pos": "noun",
+"root": "ר־ג־ל"
+},
+"רגע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "רְגָעִים",
+"pos": "noun"
+},
+"רואה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִרְאוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ר־א־ה"
+},
+"רוב": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"רוזמרין": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"רוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "רוּחוֹת",
+"pos": "noun",
+"root": "ר־ו־ח"
+},
+"רועש": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לרעוש",
+"key": "K1",
+"pos": "verb",
+"root": "ר־ע־שׁ"
+},
+"רופא": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "רוֹפְאִים",
+"pos": "noun"
+},
+"רוצה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִרְצוֹת",
+"key": "K1",
+"pos": "verb"
+},
+"רזה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ר־ז־ה"
+},
+"רחב": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטָל",
+"pos": "adj"
+},
+"רחוב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קְטוֹל",
+"plural": "רְחוֹבוֹת",
+"pos": "noun"
+},
+"רחוק": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטוֹל",
+"pos": "adj"
+},
+"ריאות": {
+"confidence": "high",
+"gender": "f",
+"key": "K2",
+"pattern": "קֵטָל",
+"plural": "ריאות",
+"pos": "noun",
+"root": "ר־א־ה"
+},
+"ריבה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "ריבות",
+"pos": "noun",
+"root": "ר־ב־ב"
+},
+"ריח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "רֵיחוֹת",
+"pos": "noun",
+"root": "ר־י־ח"
+},
+"רימון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "רמונים",
+"pos": "noun",
+"root": "ר־מ־ם"
+},
+"ריק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ר־ו־ק"
+},
+"רך": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "adj",
+"root": "ר־כ־ך"
+},
+"רכבת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטֶּלֶת",
+"plural": "רַכָּבוֹת",
+"pos": "noun",
+"root": "ר־כ־ב"
+},
+"רמזור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "רַמְזוֹרִים",
+"pos": "noun"
+},
+"רע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "noun",
+"root": "ר־ע־ה"
+},
+"רעב": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"pos": "adj",
+"root": "ר־ע־ב"
+},
+"רעיון": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pattern": "קִטְלוֹן",
+"plural": "רַעֲיוֹנוֹת",
+"pos": "noun",
+"root": "ר־ע־ה"
+},
+"רפואה שלמה": {
+"confidence": "low",
+"key": "K1",
+"pos": "phrase"
+},
+"רצועה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "רצועות",
+"pos": "noun",
+"root": "ר־צ־ע"
+},
+"רציני": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "ר־צ־ן"
+},
+"רצפה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "רְצָפוֹת",
+"pos": "noun",
+"root": "ר־צ־ף"
+},
+"רק": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"רתמה": {
+"binyan": "pa'al",
+"confidence": "medium",
+"infinitive": "לרתום",
+"key": "K3",
+"pos": "verb",
+"root": "ר־ת־ם"
+},
+"שאלה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטֵלָה",
+"plural": "שאלות",
+"pos": "noun"
+},
+"שבוע": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטוּל",
+"plural": "שָׁבוּעוֹת",
+"pos": "noun",
+"root": "שׁ־ב־ע"
+},
+"שבוע טוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"שבועי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "שׁ־ב־ע"
+},
+"שבע": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num",
+"root": "שׁ־ב־ע"
+},
+"שבת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "שַׁבָּתוֹת",
+"pos": "noun",
+"root": "שׁ־ב־ת"
+},
+"שבת שלום": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"שדה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "שָׂדוֹת",
+"pos": "noun",
+"root": "שׂ־ד־ה"
+},
+"שדה תעופה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"שוב": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"שווה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"שוכח": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשכוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־כ־ח"
+},
+"שוכחת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשכוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־כ־ח"
+},
+"שולחן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֻטְלָן",
+"plural": "שולחנות",
+"pos": "noun",
+"root": "שׁ־ל־ח"
+},
+"שום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"pos": "noun"
+},
+"שום דבר": {
+"confidence": "low",
+"key": "K1",
+"pos": "pron"
+},
+"שומע": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמוע",
+"key": "K1",
+"pos": "verb"
+},
+"שומעת": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לשמוע",
+"key": "K1",
+"pos": "verb"
+},
+"שומשום": {
+"confidence": "medium",
+"gender": "m",
+"key": "K3",
+"pos": "noun",
+"root": "שׁ־מ־שׁ־ם"
+},
+"שונה": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"שופר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שׁוֹפָרוֹת",
+"pos": "noun",
+"root": "שׁ־פ־ר"
+},
+"שוק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שווקים",
+"pos": "noun",
+"root": "שׁ־ו־ק"
+},
+"שוקולד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"שורש": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֹטֶל",
+"plural": "שורשים<dwv:שׇׁרָשִׁים>",
+"pos": "noun"
+},
+"שותה": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לִשְׁתּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־ת־ה"
+},
+"שחור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֹל",
+"pos": "adj",
+"root": "שׁ־ח־ר"
+},
+"שטויות": {
+"confidence": "low",
+"gender": "f-p",
+"key": "K1",
+"pos": "noun",
+"root": "שׁ־ט־ה"
+},
+"שטיח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטִיל",
+"plural": "שְׁטִיחִים",
+"pos": "noun"
+},
+"שיהיה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj"
+},
+"שיניים": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"שיעור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קִטּוּל",
+"plural": "שיעורים",
+"pos": "noun",
+"root": "שׁ־ע־ר"
+},
+"שיעורי בית": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun"
+},
+"שיער": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֵטָל",
+"pos": "noun",
+"root": "שׂ־ע־ר"
+},
+"שיר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שִׁירִים",
+"pos": "noun"
+},
+"שירותים": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun",
+"root": "שׁ־ר־ת"
+},
+"שכחתי": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לשכוח",
+"key": "K1",
+"pos": "verb",
+"root": "שׁ־כ־ח"
+},
+"שכן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטֵל",
+"plural": "שכנים",
+"pos": "noun",
+"root": "שׁ־כ־ן"
+},
+"שלג": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁלָגִים",
+"pos": "noun"
+},
+"שלה": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלהם": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלו": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלום": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטוֹל",
+"plural": "-",
+"pos": "noun"
+},
+"שלוש": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num"
+},
+"שלושה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "num"
+},
+"שלי": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלישי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "שׁ־ל־שׁ"
+},
+"שלך": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלכם": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלנו": {
+"confidence": "low",
+"key": "K1",
+"pos": "prep"
+},
+"שלשום": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"שם": {
+"confidence": "high",
+"key": "K1",
+"pos": "adv"
+},
+"שמאלה": {
+"confidence": "high",
+"gender": "m",
+"key": "K2",
+"pos": "noun"
+},
+"שמונה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "num",
+"root": "שׁ־מ־ן"
+},
+"שמח": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "שׂ־מ־ח"
+},
+"שמחה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "שְׂמָחוֹת",
+"pos": "noun",
+"root": "שׂ־מ־ח"
+},
+"שמיים": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun"
+},
+"שמיכה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "שְׂמִיכוֹת",
+"pos": "noun",
+"root": "שׂ־מ־ך"
+},
+"שמיר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"שמלה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קִטְלָה",
+"plural": "שְׂמָלוֹת",
+"pos": "noun",
+"root": "שׂ־מ־ל"
+},
+"שמן": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁמָנִים",
+"pos": "noun"
+},
+"שמרים": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁמָרִים",
+"pos": "noun"
+},
+"שמש": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁמָשׁוֹת",
+"pos": "noun"
+},
+"שן": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קֵטֶל",
+"plural": "שיניים",
+"pos": "noun",
+"root": "שׁ־נ־ן"
+},
+"שנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטָלָה",
+"plural": "שָׁנִים",
+"pos": "noun",
+"root": "שׁ־נ־ה"
+},
+"שנה טובה": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"שני": {
+"confidence": "high",
+"key": "K1",
+"pos": "num",
+"root": "שׁ־נ־ה"
+},
+"שנייה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "adj"
+},
+"שניים": {
+"confidence": "high",
+"key": "K1",
+"pos": "num",
+"root": "שׁ־נ־ה"
+},
+"שניצל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שניצלים",
+"pos": "noun"
+},
+"שנתי": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj"
+},
+"שעה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "שָׁעוֹת",
+"pos": "noun"
+},
+"שעון": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שְׁעוֹנִים",
+"pos": "noun"
+},
+"שעתיים": {
+"confidence": "high",
+"key": "K1",
+"pos": "noun"
+},
+"שפעת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קַטֶּלֶת",
+"pos": "noun"
+},
+"שקדים": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "שקדים",
+"pos": "noun",
+"root": "שׁ־ק־ד"
+},
+"שקט": {
+"confidence": "high",
+"key": "K1",
+"pos": "adj",
+"root": "שׁ־ק־ט"
+},
+"שקית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "שקיות",
+"pos": "noun",
+"root": "שׂ־ק־ק"
+},
+"שקל": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁקָלִים",
+"pos": "noun",
+"root": "שׁ־ק־ל"
+},
+"שקר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "שְׁקָרִים",
+"pos": "noun"
+},
+"שקשוקה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"שרשרת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "שַׁרְשְׁרָאוֹת",
+"pos": "noun"
+},
+"שש": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num",
+"root": "שׂ־י־שׂ"
+},
+"שתיים": {
+"confidence": "high",
+"key": "K1",
+"pos": "num",
+"root": "שׁ־נ־ה"
+},
+"תבוא": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָבוֹא",
+"key": "K1",
+"pos": "verb",
+"root": "ב־ו־א"
+},
+"תגיד": {
+"binyan": "hif'il",
+"confidence": "high",
+"infinitive": "לְהַגִּיד",
+"key": "K1",
+"pos": "verb",
+"root": "נ־ג־ד"
+},
+"תה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"תודה": {
+"confidence": "high",
+"key": "K1",
+"pos": "intj",
+"root": "י־ד־ה"
+},
+"תודה רבה": {
+"confidence": "high",
+"key": "K1",
+"pos": "phrase"
+},
+"תוכי": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תוכים",
+"pos": "noun"
+},
+"תוכנית": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תוכניות<dwv:תׇּכְנִיּוֹת>",
+"pos": "noun",
+"root": "ת־כ־ן"
+},
+"תורה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "תַּקְטָלָה",
+"plural": "תּוֹרוֹת",
+"pos": "noun",
+"root": "י־ר־ה"
+},
+"תות": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תּוּתִים",
+"pos": "noun",
+"root": "ת־ו־ת"
+},
+"תחנה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תַּחֲנוֹת",
+"pos": "noun",
+"root": "ח־נ־ה"
+},
+"תחת": {
+"confidence": "low",
+"key": "K1",
+"pattern": "קֶטֶל",
+"pos": "prep",
+"root": "ת־ח־ת"
+},
+"תחתונים": {
+"confidence": "high",
+"gender": "m-p",
+"key": "K1",
+"pos": "noun"
+},
+"תיזהר": {
+"binyan": "nif'al",
+"confidence": "high",
+"infinitive": "להיזהר",
+"key": "K1",
+"pos": "verb",
+"root": "ז־ה־ר"
+},
+"תינוק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תִּינוֹקוֹת",
+"pos": "noun",
+"root": "י־נ־ק"
+},
+"תיק": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תִּיקִים",
+"pos": "noun",
+"root": "ת־י־ק"
+},
+"תירס": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"תכלס": {
+"confidence": "low",
+"key": "K3",
+"pos": "adv"
+},
+"תכף": {
+"confidence": "low",
+"key": "K3",
+"pos": "adv",
+"root": "ת־כ־ף"
+},
+"תכשיט": {
+"confidence": "low",
+"gender": "m",
+"key": "K1",
+"plural": "תַּכְשִׁיטִים",
+"pos": "noun"
+},
+"תלוי": {
+"confidence": "low",
+"key": "K1",
+"pattern": "קָטוּל",
+"pos": "adj"
+},
+"תלמיד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "תַּקְטִיל",
+"plural": "תַּלְמִידִים",
+"pos": "noun"
+},
+"תמונה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תְּמוּנוֹת",
+"pos": "noun",
+"root": "מ־ו־ן"
+},
+"תמיד": {
+"confidence": "high",
+"key": "K1",
+"pattern": "קָטִיל",
+"pos": "adv"
+},
+"תמר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קָטָל",
+"plural": "תְּמָרִים",
+"pos": "noun"
+},
+"תן": {
+"binyan": "pa'al",
+"confidence": "high",
+"infinitive": "לָתֵת",
+"key": "K1",
+"pos": "verb"
+},
+"תנור": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תַּנּוּרִים",
+"pos": "noun",
+"root": "נ־י־ר"
+},
+"תסיסה": {
+"binyan": "pa'al",
+"confidence": "low",
+"infinitive": "לתסוס",
+"key": "K1",
+"pos": "verb",
+"root": "ת־ס־ס"
+},
+"תערובת": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "noun"
+},
+"תפוז": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תַּפּוּזִים",
+"pos": "noun"
+},
+"תפוח": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קַטּוּל",
+"plural": "תַּפּוּחִים",
+"pos": "noun",
+"root": "נ־פ־ח"
+},
+"תפוח אדמה": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"plural": "תַּפּוּחֵי אֲדָמָה",
+"pos": "noun"
+},
+"תפילה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תפילות",
+"pos": "noun",
+"root": "פ־ל־ל"
+},
+"תפירה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "קְטִילָה",
+"plural": "תפירות",
+"pos": "noun",
+"root": "ת־פ־ר"
+},
+"תפר": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pos": "noun"
+},
+"תפריט": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "תַּקְטִיל",
+"plural": "תַּפְרִיטִים",
+"pos": "noun",
+"root": "פ־ר־ט"
+},
+"תקווה": {
+"binyan": "pi'el",
+"confidence": "high",
+"infinitive": "לְקַוּוֹת",
+"key": "K1",
+"pos": "verb",
+"root": "ק־ו־ה"
+},
+"תקרה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תִּקְרוֹת",
+"pos": "noun"
+},
+"תרד": {
+"confidence": "high",
+"gender": "m",
+"key": "K1",
+"pattern": "קֶטֶל",
+"plural": "תְּרָדִים",
+"pos": "noun",
+"root": "ת־ר־ד"
+},
+"תרופה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"plural": "תְּרוּפוֹת",
+"pos": "noun",
+"root": "ר־פ־א"
+},
+"תשובה": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pattern": "תַּקְטֵלָה",
+"plural": "תְּשׁוּבוֹת",
+"pos": "noun",
+"root": "שׁ־ו־ב"
+},
+"תשע": {
+"confidence": "high",
+"gender": "f",
+"key": "K1",
+"pos": "num"
+},
+"תתחדש": {
+"binyan": "hitpa'el",
+"confidence": "high",
+"infinitive": "לְהִתְחַדֵּשׁ",
+"key": "K1",
+"pos": "verb",
+"root": "ח־ד־שׁ"
+}
+}
