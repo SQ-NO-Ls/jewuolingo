@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v44`
+- **Deployed version:** service-worker `jw-v45`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -257,6 +257,16 @@ Order within a step: prompt (flex) → answer field → **reserved** feedback sl
 Rank, root family and the example sentence appear **after** the answer, where
 they help encoding instead of competing with retrieval.
 
+**Practice uses the same layer.** Tapping a mode calls `openPractice(id)`:
+`body.focus.pfocus` turns `#viewPractice .quiz-card` into a fixed
+full-screen layer (close strip + `#quizContent`). Modes built from the shared
+step bodies are listed in `FSQ_MODES` and get the round's no-scroll grid;
+the rest (grammar, aleph-bet, scripted conversation…) scroll inside the
+layer. `setMode()` calls `prFrame()` so switches made from inside the layer
+(Sicha → "practice these now") update its title and grid. `closePractice()`
+restores the list's scroll position. Showing the Practice tab renders the
+list only; nothing renders a question until a mode is opened.
+
 Wrong answers show the correct form **beside** the attempt with differing
 letters underlined (`diffMark()`). No shake, no red flood. "Again" is
 information, not punishment.
@@ -272,8 +282,14 @@ its own (English) keyboard on top of the app's Hebrew one. **If you add a new
 Hebrew input, it needs `inputmode="none"` and `buildKbd()`, and the submit
 control must come BEFORE the keyboard in source order.**
 
-Visual keys are ~32px wide; hit areas tile the gaps via `.kbd-key::after`
-`inset:-4px -2.5px` the way system keyboards do.
+Proportioned like the system keyboard (2026-10-16): a **full-bleed tray**
+(`margin-inline:-16px`, 4px outer inset, `--surface`, top hairline). Letter
+keys are equal-width, sized off the widest row (10 keys → ~31px at 375), so
+the 8- and 9-key rows sit centred. 46px tall, 6px gaps, 10px row gap, keys
+`--surface3` with a 1px base shadow. Hit areas tile the gaps via
+`.kbd-key::after`. Pressing a letter shows a callout above the thumb
+(`data-ch` + `:active::before`); iOS only applies `:active` because of the
+passive `touchstart` listener at the bottom of the script — keep it.
 
 ### Information architecture
 Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
@@ -314,7 +330,10 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 3. **`buildRound()` returns; it does not assign.** Reading `ROUND.steps` after
    calling it gives stale data and looks like "empty round" bug.
 
-4. **CSS specificity vs the legacy sheet.** ~550 lines of pre-redesign CSS are
+4. **CSS specificity vs the legacy sheet.** Cleaned 2026-10-16: 66 dead rules
+   deleted, 69 duplicate selectors merged, old blue/gradients/glows/`#fff`
+   removed (948 → 736 CSS lines), verified by a computed-style diff of 21
+   screen states. Pre-redesign rules for older modes (flashcard, match…) are
    still present. New rules appended at the end of `<style>` win on equal
    specificity, but older rules that set `background`/`border`/`border-radius`
    will persist unless you explicitly reset them. Check with
@@ -345,6 +364,16 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 11. **Font cache was keyed to `CACHE_VERSION`** — every deploy deleted it and
     re-downloaded ~200KB, leaving the app briefly unstyled offline right after
     an update. Now `jw-fonts-v1`, unversioned. Keep it that way.
+
+12. **iOS keeps `:hover` applied after a tap.** A tapped key stayed lit in the
+    accent until you tapped elsewhere. Every `:hover` rule is now wrapped in
+    `@media (hover:hover) and (pointer:fine)`. New hover rules must be too.
+
+13. **A full-bleed child is clipped by an `overflow` ancestor.** The keyboard's
+    `-16px` margins vanished inside `#quizContent{overflow:hidden}` while
+    `getBoundingClientRect()` still reported 0–375. Overflow clips at the
+    padding edge, so the 16px side padding lives on the scroll container, not
+    on the card around it. Check with a screenshot, not rects.
 
 ---
 
