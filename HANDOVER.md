@@ -326,6 +326,14 @@ is `touch-action:none`, backspace repeats when held, and a mouse still uses
 plain click. Keep key actions in the button's inline onclick — the pointer
 handler calls `k.onclick`.
 
+### Spacing (2026-10-17)
+One scale for every gap: `--s1..--s7` = 4, 8, 12, 16, 24, 32, 48px, and a
+**20px side gutter** (`--gutter`) on every screen (the keyboard tray stays
+full-bleed via `calc(-1 * var(--gutter))`). Space between groups is always
+larger than space inside them. Short screens (`max-height:700px`, iPhone SE)
+tighten the question screen one step so nothing clips. New CSS should use
+the tokens, not literals.
+
 ### Paper — the light theme (2026-10-17)
 `:root[data-theme="paper"]` overrides the tokens; Me → Display →
 **Appearance: Dark · Paper · Auto** (Auto follows the iPhone). The choice
@@ -485,6 +493,12 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     a tap that overlaps another finger or slides slightly, and arrives after
     lift-off. Anything tapped in rapid succession (keyboard keys) must act on
     `pointerdown`. Testing with the preview's mouse clicks will never show it.
+
+16. **There are TWO `<style>` blocks** since the fonts were self-hosted: the
+    first holds only `@font-face`. `s.index('</style>')` finds THAT one, so a
+    script appending CSS "at the end of the stylesheet" lands before the main
+    sheet and loses every equal-specificity contest. Append before the
+    `</style>` that follows `<style>\n\n:root`.
 
 ---
 

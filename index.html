@@ -58,14 +58,6 @@
   src:url(fonts/gveret-latin.woff2) format('woff2');
   unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
 
-/* ── TODAY, simplified: progress · what's next · one button ── */
-.today-grid .t-lv{padding:20px 0 8px;}
-.today-grid .t-next{flex:1;justify-content:center;padding:24px 0;}
-.t-next-note{font-size:13px;color:var(--text3);padding-top:6px;}
-.today-grid .t-cta{padding:12px 0 8px;}
-.today-grid .t-cta .btn{min-height:60px;font-size:18px;}
-.today-grid .t-next-he{font-size:26px;}
-.today-grid .t-next-en{font-size:15px;}
 </style>
 <style>
 
@@ -176,7 +168,7 @@ header{text-align:center;padding:10px 0 8px;}
 /* QUIZ CARD */
 .quiz-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:48px 56px;min-height:64vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
 @media(max-width:640px){.quiz-card{padding:32px 22px;min-height:60vh;}}
-.progress-label{font-size:11px;color:var(--muted);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+.progress-label{font-size:11px;color:var(--muted);margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
 
 /* PRON BUTTON */
 .pron-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;}
@@ -333,7 +325,7 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .btn:disabled{background:var(--surface3);color:var(--text3);cursor:default;}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:var(--r-md);padding:12px 26px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);}
 @media (hover:hover) and (pointer:fine){.btn-ghost:hover{color:var(--text);border-color:var(--muted);}}
-.quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px;}
+.quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:var(--s5);gap:var(--s3);}
 
 /* ANALYTICS */
 .analytics-overlay.open{display:flex;}
@@ -367,7 +359,7 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .test-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
 .test-head .th-logo{font-family:var(--he-font);font-size:30px;font-weight:900;color:var(--text2);}
 @media (hover:hover) and (pointer:fine){.test-x:hover{border-color:var(--rose);color:var(--rose);}}
-.test-section{margin-bottom:24px;}
+.test-section{margin-bottom:var(--s6);}
 .test-section-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
 .test-opt-row{display:flex;gap:10px;flex-wrap:wrap;}
 @media (hover:hover) and (pointer:fine){.test-chip:hover{border-color:var(--blue-dim);}}
@@ -466,12 +458,12 @@ body.cursive-on .sch-db-said,body.cursive-on .sch-db-better{font-family:var(--he
 body.cursive-on .sch-word .ww-he{font-family:var(--he-cursive);}
 .sch-word .ww-en{color:var(--muted);font-size:12px;}
 .sch-add{background:none;border:none;color:var(--blue);cursor:pointer;font-size:14px;font-family:var(--ui-font);white-space:nowrap;}
-.set-row{margin-bottom:20px;}
-.set-lbl{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.set-help{font-size:12px;color:var(--muted);line-height:1.5;margin-top:7px;}
+.set-row{margin-bottom:var(--s6);}
+.set-lbl{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:var(--s3);}
+.set-help{font-size:12px;color:var(--muted);line-height:1.55;margin-top:var(--s3);}
 .set-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:11px 13px;font-size:14px;color:var(--text);font-family:var(--ui-font);outline:none;}
 .set-input:focus{border-color:var(--blue);}
-.set-row-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.set-row-btns{display:flex;gap:var(--s3);flex-wrap:wrap;}
 
 /* ── MOBILE SHELL: bottom tab bar + compact header ──────────── */
 /* The old layout spent half a phone screen on chrome before the question. */
@@ -547,7 +539,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
   padding-top:env(safe-area-inset-top);
   /* no bottom inset here: the last row (keyboard tray or action row) carries
      it, so the tray can run to the bottom edge like the system keyboard */
-  padding-inline:16px;
+  padding-inline:var(--gutter);
 }
 .focus-strip{display:flex;align-items:center;gap:12px;height:44px;}
 .focus-exit{width:44px;height:44px;margin-inline-start:-10px;background:none;border:none;
@@ -558,7 +550,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .seg.done{background:var(--text3);}
 .seg.now{background:var(--accent);}
 .focus-kind{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--text3);text-align:center;padding:6px 0 2px;}
+  color:var(--text3);text-align:center;padding:var(--s2) 0 var(--s1);}
 /* Fixed line box: toggling niqqud must never move the layout. */
 /* Reserved so nothing jumps when feedback arrives */
 
@@ -571,7 +563,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
    Visual keys are ~31px wide, under the 44px guide, so hit areas tile the
    6px gaps the way system keyboards do, and pressing a letter lifts it into
    a callout above the thumb. */
-.kbd{touch-action:none;margin:8px -16px 0;padding:8px 4px calc(6px + env(safe-area-inset-bottom));
+.kbd{touch-action:none;margin:var(--s2) calc(-1 * var(--gutter)) 0;padding:8px 4px calc(6px + env(safe-area-inset-bottom));
   background:var(--surface);border-top:1px solid var(--border);user-select:none;-webkit-user-select:none;}
 .kbd-rows{display:flex;flex-direction:column;gap:10px;}
 .kbd-row{display:flex;gap:6px;justify-content:center;}
@@ -601,7 +593,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 /* ── FOCUS STEP BODIES ───────────────────────────────────────*/
 #stepBody{display:grid;grid-template-rows:1fr auto auto auto;min-height:0;}
 .fs-prompt{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;text-align:center;min-height:0;padding:8px 0;}
+  gap:var(--s4);text-align:center;min-height:0;padding:var(--s4) 0;}
 .fs-he{font-family:var(--he-font);font-size:42px;font-weight:500;line-height:1.9;
   min-block-size:1.9em;display:flex;align-items:center;color:var(--text);}
 .fs-he.sm{font-size:30px;}
@@ -609,10 +601,10 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 /* italic = how it sounds, roman = what it means. Shape tells you which. */
 .fs-translit{font-style:italic;font-size:14px;color:var(--text3);letter-spacing:.01em;}
 .fs-note{font-size:13px;color:var(--text3);}
-.fs-opts{display:flex;flex-direction:column;gap:8px;padding:8px 0;}
-.fs-opt{min-height:52px;background:var(--surface);border:1px solid var(--border);
+.fs-opts{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s4) 0 var(--s2);}
+.fs-opt{min-height:56px;background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-sm);color:var(--text);font-family:var(--ui-font);font-size:16px;
-  padding:12px 16px;text-align:start;cursor:pointer;transition:background .1s var(--ease);}
+  padding:14px var(--s4);text-align:start;cursor:pointer;transition:background .1s var(--ease);}
 .fs-opt:active:not(:disabled){background:var(--surface2);}
 .fs-opt.correct{border-color:var(--green);color:var(--green);}
 .fs-opt.wrong{border-color:var(--rose);color:var(--rose);}
@@ -625,12 +617,12 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .fs-field:focus{border-color:var(--accent-ink);}
 .fs-field.good{border-color:var(--green);}
 .fs-field.bad{border-color:var(--rose);}
-.fs-fb{min-height:32px;display:flex;align-items:center;justify-content:center;
+.fs-fb{min-height:40px;display:flex;align-items:center;justify-content:center;
   font-size:14px;text-align:center;gap:8px;flex-wrap:wrap;padding:0 4px;}
 .fs-fb .was{font-family:var(--he-font);font-size:20px;color:var(--text);}
 /* Hebrew underlines must clear the niqqud below the letters */
 .fs-fb u{text-decoration-color:var(--rose);text-decoration-thickness:1.5px;text-underline-offset:.3em;}
-.fs-row{display:flex;gap:8px;padding:6px 0 calc(10px + env(safe-area-inset-bottom));}
+.fs-row{display:flex;gap:var(--s3);padding:var(--s3) 0 calc(var(--s4) + env(safe-area-inset-bottom));}
 .fs-row .btn{flex:1;}
 .btn-quiet{flex:1;min-height:44px;background:none;border:1px solid var(--border);
   border-radius:var(--r-sm);color:var(--text2);font-family:var(--ui-font);font-size:15px;cursor:pointer;}
@@ -662,23 +654,23 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 
 
 /* ── MAP ─────────────────────────────────────────────────────*/
-.map-head{padding:4px 0 16px;}
+.map-head{padding:var(--s5) 0 var(--s4);}
 .map-title{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
-.map-full{padding:4px 0 20px;border-bottom:1px solid var(--border);margin-bottom:4px;}
+.map-full{padding:var(--s2) 0 var(--s6);border-bottom:1px solid var(--border);margin-bottom:0;}
 .map-full canvas{width:100%;display:block;}
-.map-key{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--text3);padding-top:12px;}
+.map-key{display:flex;gap:var(--s4);flex-wrap:wrap;font-size:11px;color:var(--text3);padding-top:var(--s4);}
 .map-key span{display:inline-flex;align-items:center;gap:5px;}
 .mk{width:8px;height:8px;display:inline-block;}
-.lv-row{padding:16px 0;border-bottom:1px solid var(--border);}
+.lv-row{padding:28px 0;border-bottom:1px solid var(--border);}
 .lv-row.cur{border-inline-start:2px solid var(--accent);padding-inline-start:12px;margin-inline-start:-14px;}
 .lv-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
 .lv-name{font-weight:700;font-size:17px;color:var(--text);}
 .lv-rng{font-size:12px;color:var(--text3);}
-.lv-sec{font-size:13px;color:var(--text2);padding-top:3px;}
+.lv-sec{font-size:13px;color:var(--text2);padding-top:6px;}
 /* Four labelled bars, fixed order. No radar: with four axes the area
    exaggerates differences and the shape depends on axis order. */
-.dimbars{display:flex;flex-direction:column;gap:5px;padding:12px 0 4px;}
-.dimbar{display:grid;grid-template-columns:76px 1fr 34px;align-items:center;gap:10px;
+.dimbars{display:flex;flex-direction:column;gap:10px;padding:20px 0 var(--s3);}
+.dimbar{display:grid;grid-template-columns:76px 1fr 34px;align-items:center;gap:var(--s3);
   font-size:12px;color:var(--text3);}
 .dimbar .dt{background:var(--border);height:3px;border-radius:2px;overflow:hidden;}
 .dimbar .df{height:100%;background:var(--accent-line);}
@@ -689,14 +681,14 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .dg.half{background:var(--accent-muted);}
 .dg.full{background:var(--accent);border-color:var(--accent-ink);}
 .dg.sec::after{content:'';position:absolute;left:1px;right:1px;bottom:-3px;height:1px;background:var(--accent-line);}
-.cando{line-height:1.45;margin-bottom:5px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);padding:7px 0;}
+.cando{line-height:1.45;margin-bottom:5px;display:flex;align-items:center;gap:var(--s3);font-size:14px;color:var(--text2);padding:10px 0;}
 .cando.done{color:var(--text3);}
-.lv-lock{font-size:12px;color:var(--text3);padding-top:8px;line-height:1.6;}
+.lv-lock{font-size:12px;color:var(--text3);padding-top:var(--s3);line-height:1.6;}
 
 
 /* ── CHROME ──────────────────────────────────────────────────*/
-.app{position:relative;z-index:1;margin:0 auto;padding-top:10px;max-width:560px;padding:0 16px calc(76px + env(safe-area-inset-bottom));}
-.compact-head{gap:10px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) 0 14px;}
+.app{position:relative;z-index:1;margin:0 auto;padding-top:10px;max-width:560px;padding:0 var(--gutter) calc(80px + env(safe-area-inset-bottom));}
+.compact-head{gap:10px;margin-bottom:0;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--s4) + env(safe-area-inset-top)) 0 var(--s4);}
 .ch-title{font-size:15px;letter-spacing:.02em;color:var(--text2);font-weight:400;}
 .mini-pill .i{width:15px;height:15px;}
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;background:var(--bg);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom);}
@@ -706,9 +698,9 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .tabbar button.on{color:var(--accent-ink);}
 
 /* ── PRACTICE, organised by the app's own R/P/U/C model ──────*/
-.pr-group{padding-top:18px;}
+.pr-group{padding-top:var(--s6);}
 .pr-gl{display:flex;align-items:baseline;gap:8px;font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--text3);padding-bottom:4px;}
+  text-transform:uppercase;color:var(--text3);padding-bottom:var(--s2);}
 .pr-gl .pct{letter-spacing:0;text-transform:none;font-size:12px;}
 .pr-item{display:flex;align-items:center;gap:14px;padding:13px 0;
   border-bottom:1px solid var(--border);cursor:pointer;}
@@ -727,7 +719,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
    Hairline rules replace card backgrounds: it is the contrast between a
    tight group and a loose separation that makes a layout look designed. */
 .mini-pill{white-space:nowrap;display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--text3);background:none;border:none;border-radius:0;padding:0;}
-.q-row{margin-bottom:7px;display:flex;align-items:center;gap:12px;padding:13px 0;font-size:15px;background:none;border:none;border-bottom:1px solid var(--border);border-radius:0;}
+.q-row{margin-bottom:0;display:flex;align-items:center;gap:12px;padding:var(--s4) 0;font-size:15px;background:none;border:none;border-bottom:1px solid var(--border);border-radius:0;}
 .q-row:first-child{border-top:1px solid var(--border);}
 .q-row.done .q-box{background:none;border-color:var(--green);color:var(--green);}
 .qlist{margin-bottom:6px;display:flex;flex-direction:column;gap:0;}
@@ -759,7 +751,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 #viewPractice #panelMode{display:block!important;max-height:none;overflow:visible;
   background:none;border:none;padding:0;margin:0;opacity:1;}
 .pr-nm,.pr-ds{display:block;}
-.pr-filters{display:flex;gap:8px;padding:2px 0 6px;}
+.pr-filters{display:flex;gap:var(--s3);padding:var(--s2) 0;}
 .pr-filters button{flex:1;min-height:44px;background:none;border:1px solid var(--border);
   border-radius:var(--r-sm);color:var(--text2);font-family:var(--ui-font);font-size:13px;
   display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
@@ -777,11 +769,11 @@ body.pfocus #viewPractice .quiz-card{position:fixed;inset:0;z-index:150;display:
   height:100dvh;min-height:0;margin:0;border:0;border-radius:0;overflow:hidden;
   padding:env(safe-area-inset-top) 0 0;background:var(--bg);}
 .pr-strip{display:none;}
-body.pfocus .pr-strip{display:flex;padding-inline:16px;}
+body.pfocus .pr-strip{display:flex;padding-inline:var(--gutter);}
 .pr-ttl{flex:1;text-align:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
 .pr-strip::after{content:'';flex:none;width:34px;}  /* balances the close button so the title centres */
 body.pfocus #quizContent{min-height:0;overflow-y:auto;overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;padding:4px 16px calc(16px + env(safe-area-inset-bottom));}
+  -webkit-overflow-scrolling:touch;padding:var(--s2) var(--gutter) calc(var(--s5) + env(safe-area-inset-bottom));}
 /* side padding lives HERE, not on the card: overflow clips at the padding
    edge, so the keyboard's -16px full-bleed margin stays visible */
 /* short content sits optically centred; the spacers collapse to nothing
@@ -790,7 +782,7 @@ body.pfocus #quizContent:not(.fsq){display:flex;flex-direction:column;}
 body.pfocus #quizContent:not(.fsq)>*{flex-shrink:0;}
 body.pfocus #quizContent:not(.fsq)::before{content:'';flex:1 1 0;max-height:12vh;}
 body.pfocus #quizContent:not(.fsq)::after{content:'';flex:2 1 0;}
-body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;overflow:hidden;padding:0 16px;}
+body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;overflow:hidden;padding:0 var(--gutter);}
 
 
 .t-slice canvas{width:100%;display:block;flex:none;margin:0;}
@@ -799,9 +791,9 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 
 /* Full-height column so the action sits in the thumb zone whatever the
    content length, with the journey breathing above it. */
-.today-grid{gap:0;grid-template-rows:auto auto 1fr auto auto;min-height:0;display:flex;flex-direction:column;/* viewport minus the compact header (51 + 12 margin) and the tab-bar allowance the
+.today-grid{gap:0;grid-template-rows:auto auto 1fr auto auto;min-height:0;display:flex;flex-direction:column;/* viewport minus the compact header (59) and the tab-bar allowance the
      .app already reserves (76), so the action lands just above the bar. */
-  min-height:calc(100dvh - 63px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+  min-height:calc(100dvh - 59px - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
 .t-cta{bottom:0;background:var(--bg);margin-top:auto;position:static;box-shadow:none;padding:20px 0 6px;}
 .t-slice{flex-direction:column;min-height:0;justify-content:center;display:block;padding:14px 0 22px;}
 
@@ -809,18 +801,17 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
    These are full screens, so they follow the same rules: no accent
    headline competing with content, hairlines instead of card stacks,
    one accent per screen reserved for the action. */
-.test-inner{position:relative;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;max-width:560px;padding:calc(20px + env(safe-area-inset-top)) 16px
-  calc(40px + env(safe-area-inset-bottom));}
-.sch-sec-lbl{margin:16px 0 8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);padding:22px 0 8px;}
+.test-inner{position:relative;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;max-width:560px;padding:calc(var(--s5) + env(safe-area-inset-top)) var(--gutter) calc(var(--s7) + env(safe-area-inset-bottom));}
+.sch-sec-lbl{margin:16px 0 8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);padding:40px 0 var(--s3);}
 .test-chip{padding:13px 18px;min-height:44px;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);flex:1;text-align:center;min-width:78px;border:1px solid var(--border);border-radius:var(--r-sm);font-weight:400;font-size:15px;color:var(--text2);background:none;}
 .test-chip.sel{border-color:var(--accent-ink);background:var(--accent-muted);color:var(--text);}
 .test-chip .tc-sub{display:block;font-weight:400;margin-top:3px;color:var(--text3);font-size:11px;}
 .test-chip.sel .tc-sub{color:var(--text2);}
 .test-x{padding:8px 16px;min-height:40px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);border:1px solid var(--border);background:none;color:var(--text2);border-radius:var(--r-sm);}
-.analytics-panel{width:100%;overflow-y:auto;position:relative;background:var(--bg);border:none;border-radius:0;max-width:560px;padding:calc(20px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom));max-height:100dvh;}
+.analytics-panel{width:100%;overflow-y:auto;position:relative;background:var(--bg);border:none;border-radius:0;max-width:560px;padding:calc(var(--s5) + env(safe-area-inset-top)) var(--gutter) calc(var(--s7) + env(safe-area-inset-bottom));max-height:100dvh;}
 .analytics-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;padding:20px;background:var(--bg);}
-.an-title{margin-bottom:6px;font-family:var(--ui-font);font-size:22px;font-weight:400;color:var(--text);}
-.an-sub{margin-bottom:22px;font-size:13px;color:var(--text3);}
+.an-title{margin-bottom:var(--s2);font-family:var(--ui-font);font-size:22px;font-weight:400;color:var(--text);}
+.an-sub{margin-bottom:var(--s6);font-size:13px;color:var(--text3);}
 .an-close{position:absolute;top:16px;right:18px;font-size:22px;cursor:pointer;background:none;border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text2);min-height:40px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;}
 .atab{padding:5px 16px;font-size:12px;cursor:pointer;font-weight:500;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text3);background:none;}
 .atab.active{border-color:var(--accent-ink);color:var(--text);background:var(--accent-muted);}
@@ -842,14 +833,14 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 /* ── ROUND SUMMARY ───────────────────────────────────────────*/
 .done-wrap{display:flex;flex-direction:column;align-items:center;
   text-align:center;gap:6px;
-  min-height:calc(100dvh - 63px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+  min-height:calc(100dvh - 59px - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
 .done-n{font-size:56px;color:var(--text);line-height:1;}
 .done-l{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
 .done-sub{font-size:14px;color:var(--text2);padding-top:6px;}
 .done-dims{display:flex;align-items:center;gap:10px;padding:22px 0 4px;}
 .dg-lbl{font-size:11px;letter-spacing:.12em;color:var(--text3);}
 .done-mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
-.done-actions{display:flex;flex-direction:column;gap:10px;width:100%;max-width:320px;padding-bottom:10px;}
+.done-actions{display:flex;flex-direction:column;gap:var(--s3);width:100%;max-width:320px;padding-bottom:10px;}
 .done-actions .btn,.done-actions .btn-quiet{width:100%;}
 /* Long lists: content-visibility beats hand-rolled virtualisation at this
    scale and keeps the file dependency-free. */
@@ -894,21 +885,21 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
    the next round will introduce, so the screen is never empty space. */
 .t-lv{padding:18px 0 20px;}
 .t-lv-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
-.t-lv-name{font-size:17px;color:var(--text);}
+.t-lv-name{font-size:20px;color:var(--text);}
 .t-lv-name span{color:var(--text3);}
 .t-lv-n{font-size:13px;color:var(--text3);}
-.t-bar{position:relative;height:6px;margin-top:10px;background:var(--surface2);
+.t-bar{position:relative;height:8px;margin-top:var(--s3);background:var(--surface2);
   border-radius:var(--r-sm);overflow:hidden;}
 .t-bar i{position:absolute;inset:0;transform-origin:right;}
 .t-bar .met{background:var(--lv3);}
 .t-bar .sec{background:var(--text2);}
-.t-lv-key{display:flex;gap:16px;padding-top:9px;font-size:12px;color:var(--text3);}
+.t-lv-key{display:flex;gap:20px;padding-top:var(--s3);font-size:12px;color:var(--text3);}
 .t-lv-key span{display:inline-flex;align-items:center;gap:6px;}
 .t-lv-key i{width:8px;height:8px;border-radius:1px;display:inline-block;}
 .t-next{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 0 0;}
-.t-next-lbl{font-size:13px;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--text3);padding-bottom:4px;}
+.t-next-lbl{font-size:13px;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--text3);padding-bottom:var(--s3);}
 .t-next-row{display:flex;align-items:center;justify-content:space-between;gap:16px;
-  border-bottom:1px solid var(--border);}
+  border-bottom:1px solid var(--border);padding:6px 0;min-height:56px;}
 .t-next-he{font-family:var(--he-font);font-size:22px;line-height:1.9;color:var(--text);}
 body.cursive-on .t-next-he{font-family:var(--he-cursive);}
 .t-next-en{font-size:14px;color:var(--text3);}
@@ -930,7 +921,7 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 .intro-ex .gap{display:inline-block;width:2.2em;border-bottom:1px solid var(--text3);vertical-align:.1em;}
 
 /* ── PRACTICE ROWS ───────────────────────────────────────────*/
-.pr-item{min-height:56px;}
+.pr-item{min-height:64px;padding:var(--s4) 0;gap:var(--s4);}
 .pr-mark{width:32px;height:32px;border:none;color:var(--text3);}
 .pr-mark .i{width:22px;height:22px;}
 .pr-item.on .pr-mark{color:var(--accent-ink);}
@@ -942,7 +933,7 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 /* ── ME: iOS inset grouped lists ─────────────────────────────
    Grouped rows on one surface with inset hairlines; headers are running
    heads, not chips. Real switches for binary settings. */
-.me-id{padding:6px 0 4px;}
+.me-id{padding:var(--s5) 0 var(--s2);}
 .me-big{font-size:24px;color:var(--text);line-height:1.25;}
 .me-of{font-size:17px;color:var(--text2);}
 .me-sub{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text3);padding-top:6px;line-height:1.5;}
@@ -953,13 +944,13 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 .ml-k{flex:none;width:22px;height:22px;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--border);border-radius:var(--r-sm);font-size:12px;color:var(--text2);
   font-variant-numeric:tabular-nums;}
-.group{margin-top:24px;}
-.group-h{margin:0 0 8px 16px;font-size:13px;font-weight:400;font-variant-caps:all-small-caps;
+.group{margin-top:var(--s6);}
+.group-h{margin:0 0 10px var(--s4);font-size:13px;font-weight:400;font-variant-caps:all-small-caps;
   letter-spacing:.06em;color:var(--text3);}
 .group-b{background:var(--surface);border-radius:var(--r-md);overflow:hidden;}
 .group-f{margin:8px 16px 0;font-size:13px;line-height:1.45;color:var(--text3);}
-.group-b .row{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;
-  padding:12px 16px;font:400 16px/1.3 var(--ui-font);color:var(--text);background:none;border:0;
+.group-b .row{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:52px;
+  padding:14px var(--s4);font:400 16px/1.3 var(--ui-font);color:var(--text);background:none;border:0;
   text-align:start;cursor:pointer;}
 .group-b .row>span:first-child{flex:1;}
 .group-b .row+.row::before{content:'';position:absolute;top:0;inset-inline:16px 0;border-top:1px solid var(--border);}
@@ -999,10 +990,9 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
    backgrounded tab) can stall a round. Transform and opacity only, all
    under 300ms, one house curve. No bounce, no shake, no count-ups. The
    keyboard never animates — it is touched hundreds of times a day. */
-:root{--d-press:80ms;--d-step:200ms;--d-screen:280ms;}
+:root{--d-press:80ms;--d-step:200ms;--d-screen:280ms;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--gutter:20px;}
 @keyframes step-in{from{opacity:0;transform:translateY(6px);}}
 @keyframes fb-in{from{opacity:0;transform:translateY(4px);}}
-@keyframes layer-in{from{opacity:0;transform:translateY(12px);}}
 @keyframes fade-out{to{opacity:0;}}
 /* a new step / question */
 #stepBody>:not(.kbd),
@@ -1011,8 +1001,8 @@ body.pfocus #quizContent:not(.fsq):not([data-mode="sicha"]):not([data-mode="conv
   animation:step-in var(--d-step) var(--ease) both;}
 /* feedback arrives beside the answer, never as a flash */
 .fs-fb>*{animation:fb-in var(--d-step) var(--ease) both;}
-/* opening a Practice mode lifts the layer in; closing is instant */
-body.pfocus #viewPractice .quiz-card{animation:layer-in 240ms var(--ease) both;}
+/* the Practice layer itself appears solid and instantly (anything that moves
+   or fades would show the list behind it); its content gets the step entrance */
 /* press states: instant on press, 80ms release, no lift and no glow */
 .btn,.btn-quiet,.fs-opt,.big-btn{transition:transform var(--d-press) var(--ease),
   background-color var(--d-press) var(--ease),border-color .12s var(--ease),color .12s var(--ease);}
@@ -1047,6 +1037,28 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
 .group-b .segc-row:active{background:none;}
 
 ::placeholder{color:var(--text3);opacity:1;}
+
+/* ── TODAY, simplified: progress · what's next · one button ── */
+.today-grid .t-lv{padding:var(--s5) 0 0;}
+.today-grid .t-next{flex:1;justify-content:center;padding:var(--s6) 0;}
+.t-next-note{font-size:13px;color:var(--text3);padding-top:var(--s2);}
+.today-grid .t-cta{padding:var(--s4) 0 var(--s5);}
+.today-grid .t-cta .btn{min-height:60px;font-size:18px;}
+.today-grid .t-next-he{font-size:26px;}
+.today-grid .t-next-en{font-size:15px;}
+
+/* A Practice layer covers the list; the list itself must not reflow underneath
+   it (focus mode zeroes .app padding for the round, which lives inside .app). */
+body.focus.pfocus .app{max-width:560px;margin:0 auto;padding:0 var(--gutter) calc(80px + env(safe-area-inset-bottom));}
+
+/* Short screens (iPhone SE, 667pt): the same scale one step tighter, so a
+   question never clips at the bottom. Normal-height iPhones keep full room. */
+@media (max-height:700px){
+  .fs-prompt{padding:var(--s2) 0;gap:var(--s3);}
+  .fs-opts{gap:var(--s2);padding:var(--s3) 0 var(--s1);}
+  .fs-opt{min-height:52px;padding:12px var(--s4);}
+  .fs-fb{min-height:32px;}
+}
 </style>
 </head>
 <body class="">
@@ -5040,6 +5052,8 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
   // 8px cells with 2px gaps: big enough to read as data, not texture.
   var dot=pitch-2, gap=10, labelH=onlyLevel?0:22;
   var cols=Math.max(12,Math.floor(cssW/pitch));
+  // the leftover sub-cell width splits evenly, so both side margins match
+  var off=Math.max(0,(cssW-cols*pitch)/2);
   var bands=[], cur=null;
   words.forEach(function(w){
     if(!cur||cur.lv!==w.level){ cur={lv:w.level,items:[]}; bands.push(cur); }
@@ -5058,14 +5072,14 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
     // Each band names itself, read from the right like the cells.
     x.font='12px "Source Serif 4", Georgia, serif'; x.fillStyle=cssv('--text3');
     x.textAlign='right'; x.textBaseline='alphabetic';
-    bands.forEach(function(b){ x.fillText('Level '+b.lv+' · '+b.items.length+' words', cssW, b.y-8); });
+    bands.forEach(function(b){ x.fillText('Level '+b.lv+' · '+b.items.length+' words', cssW-off-(pitch-dot)/2, b.y-8); });
   }
   var C={unseen:cssv('--map-unseen'), met:cssv('--map-met'), seen:cssv('--map-seen'),
           secure:cssv('--map-secure'), due:cssv('--warning')};
   bands.forEach(function(b){
     b.items.forEach(function(w,i){
       var r=Math.floor(i/cols), c=i%cols;
-      var px=cssW-(c+1)*pitch+(pitch-dot)/2;      // RTL
+      var px=cssW-off-(c+1)*pitch+(pitch-dot)/2;      // RTL
       var py=b.y+r*pitch;
       var st=dotState(w);
       var ahead=dimBeyond && w.level>dimBeyond;
