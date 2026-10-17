@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v50`
+- **Deployed version:** service-worker `jw-v51`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
