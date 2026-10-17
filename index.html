@@ -50,6 +50,9 @@
   --on-accent:#0E0F14; --accent-ink:#9AA3E8;
   --key-shadow:rgba(0,0,0,.35); --thumb-shadow:rgba(0,0,0,.4);
   --status-band:transparent; --map-unseen:#1E2029;
+  /* map states by lightness: unseen < met < recognised < secure, in each theme */
+  --map-met:#8A8D9A; --map-seen:#505693; --map-secure:#9AA3E8;
+  --accent-line:#9AA3E8;   /* thin progress fills and markers */
   color-scheme:dark;
 }
 /* ── PAPER: the light theme ──────────────────────────────────
@@ -64,7 +67,7 @@
   --accent:#9AA3E8; --accent-hi:#B3BAF0; --accent-muted:#E3E5F7; --accent-ink:#3D479E;
   --blue:#3D479E; --blue-dim:#D9D3C6; --blue-soft:#E3E5F7;
   --green:#2F7550; --rose:#A8423F; --red:#A8423F;
-  --warning:#84661C; --teal:#84661C; --orange:#84661C; --yellow:#84661C;
+  --warning:#7A5E18; --teal:#7A5E18; --orange:#7A5E18; --yellow:#7A5E18;
   /* on paper the ramp darkens with level: more contrast = further along */
   --lv1:#DCDDF0; --lv2:#C3C6EA; --lv3:#A6AADF; --lv4:#8188CC; --lv5:#5E66B3; --lv6:#3D479E;
   --on-accent:#1D1C1A;
@@ -73,6 +76,9 @@
      icons), so on paper a dark band sits behind the status bar to keep the
      clock and battery legible. */
   --status-band:#1D1C1A; --map-unseen:#E2DCCF;
+  /* on paper progress DARKENS: more learned = more ink */
+  --map-met:#B5AFA3; --map-seen:#8188CC; --map-secure:#3D479E;
+  --accent-line:#5E66B3;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
@@ -84,7 +90,7 @@ button{color:inherit;}
 /* Hebrew always declares itself and never changes line box when niqqud toggles */
 .he-text,.he{font-family:var(--he-font);line-height:1.9;}
 .num,.rank{font-variant-numeric:tabular-nums lining-nums;unicode-bidi:isolate;direction:ltr;}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 header{text-align:center;padding:10px 0 8px;}
 
@@ -203,7 +209,7 @@ body.cursive-on .conv-bubble .heb{font-family:var(--he-cursive);}
 .conv-opt{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:12px 15px;cursor:pointer;transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);font-size:14px;font-family:var(--ui-font);color:var(--text);}
 .conv-opt .opt-he{font-size:18px;direction:rtl;display:block;margin-bottom:3px;color:var(--text);font-family:var(--he-font);}
 body.cursive-on .conv-opt .opt-he{font-family:var(--he-cursive);}
-.conv-opt .opt-pron{font-size:11px;color:var(--text3);font-style:italic;display:block;opacity:.7;}
+.conv-opt .opt-pron{font-size:11px;color:var(--text3);font-style:italic;display:block;}
 @media (hover:hover) and (pointer:fine){.conv-opt:hover:not(:disabled){border-color:var(--blue-dim);background:var(--blue-soft);}}
 .conv-opt.correct{border-color:var(--green);}
 .conv-opt.wrong{border-color:var(--rose);}
@@ -279,7 +285,7 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .analytics-overlay.open{display:flex;}
 .an-tabs{display:flex;gap:8px;margin-bottom:18px;}
 .bar-en{font-size:11px;color:var(--muted);min-width:90px;}
-.bar-good{height:100%;border-radius:4px;background:var(--accent);transition:width .28s var(--ease);}
+.bar-good{height:100%;border-radius:4px;background:var(--accent-line);transition:width .28s var(--ease);}
 .bar-cnt{font-size:12px;color:var(--muted);min-width:50px;text-align:right;}
 .an-missed-btn{background:var(--accent);color:var(--on-accent);border:none;border-radius:var(--r-md);padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--ui-font);margin-top:16px;}
 
@@ -318,7 +324,7 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .test-start{width:100%;background:var(--accent);color:var(--on-accent);border:none;border-radius:var(--r-md);padding:18px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);}
 .test-start:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;}
 .test-prog-bar{height:6px;background:var(--surface2);border-radius:var(--r-sm);overflow:hidden;margin-bottom:7px;}
-.test-prog-fill{height:100%;background:var(--accent);border-radius:var(--r-sm);transition:width .28s var(--ease);}
+.test-prog-fill{height:100%;background:var(--accent-line);border-radius:var(--r-sm);transition:width .28s var(--ease);}
 .test-prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:30px;}
 .test-q-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;}
 .test-style-tag{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
@@ -621,14 +627,14 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .dimbar{display:grid;grid-template-columns:76px 1fr 34px;align-items:center;gap:10px;
   font-size:12px;color:var(--text3);}
 .dimbar .dt{background:var(--border);height:3px;border-radius:2px;overflow:hidden;}
-.dimbar .df{height:100%;background:var(--accent);}
+.dimbar .df{height:100%;background:var(--accent-line);}
 .dimbar .dn{text-align:end;}
 /* Compact four-slot glyph: R P U C by POSITION, never by hue. */
 .dimglyph{display:inline-flex;gap:3px;vertical-align:middle;}
 .dg{width:11px;height:11px;border:1px solid var(--border);border-radius:1px;position:relative;}
 .dg.half{background:var(--accent-muted);}
 .dg.full{background:var(--accent);border-color:var(--accent-ink);}
-.dg.sec::after{content:'';position:absolute;left:1px;right:1px;bottom:-3px;height:1px;background:var(--accent);}
+.dg.sec::after{content:'';position:absolute;left:1px;right:1px;bottom:-3px;height:1px;background:var(--accent-line);}
 .cando{line-height:1.45;margin-bottom:5px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2);padding:7px 0;}
 .cando.done{color:var(--text3);}
 .lv-lock{font-size:12px;color:var(--text3);padding-top:8px;line-height:1.6;}
@@ -773,7 +779,7 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 .sch-task-title{font-size:15px;color:var(--text);margin-bottom:3px;font-weight:400;}
 .sch-task-lbl{font-size:10px;text-transform:uppercase;margin-bottom:4px;letter-spacing:.16em;color:var(--text3);}
 .empty-state{text-align:center;padding:32px;font-size:14px;color:var(--text3);}
-.toast{position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--surface2);border-radius:var(--r-sm);padding:11px 22px;font-size:14px;border:1px solid var(--border);transition:transform .2s var(--ease);z-index:200;pointer-events:none;font-weight:400;font-family:var(--ui-font);}
+.toast{position:fixed;top:calc(env(safe-area-inset-top) + 12px);left:50%;transform:translateX(-50%) translateY(-80px);background:var(--surface2);border-radius:var(--r-sm);padding:11px 22px;font-size:14px;border:1px solid var(--border);transition:transform .2s var(--ease);z-index:200;pointer-events:none;font-weight:400;font-family:var(--ui-font);}
 .bar-track{flex:1;height:8px;border-radius:4px;overflow:hidden;background:var(--border);}
 .bar-bad{height:100%;border-radius:4px;transition:width .28s var(--ease);background:var(--rose);}
 .bar-lbl{font-size:16px;direction:rtl;color:var(--text);min-width:70px;text-align:right;font-family:var(--he-font);}
@@ -921,7 +927,7 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
   transition:transform .2s var(--ease),background-color .2s var(--ease);}
 .switch:checked{background:var(--accent);}
 .switch:checked::after{transform:translateX(20px);background:var(--on-accent);}
-.switch:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px;}
+.switch:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px;}
 
 .map-cap{font-size:14px;color:var(--text2);line-height:1.5;padding-top:8px;}
 
@@ -975,12 +981,18 @@ body.pfocus #viewPractice .quiz-card{animation:layer-in 240ms var(--ease) both;}
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);
   background:var(--status-band);z-index:1000;pointer-events:none;}
 /* segmented control: Dark · Paper · Auto */
-.segc{display:inline-flex;flex:none;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
-.segc button{min-height:32px;padding:4px 12px;border:0;background:none;color:var(--text2);
+.segc{display:inline-flex;flex:none;border:1px solid var(--border);border-radius:var(--r-sm);}
+.segc button{min-height:44px;padding:4px 13px;border:0;background:none;color:var(--text2);
   font:400 14px/1 var(--ui-font);cursor:pointer;}
+.segc button:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm);}
+.segc button:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0;}
 .segc button+button{border-inline-start:1px solid var(--border);}
-.segc button.on{background:var(--accent-muted);color:var(--text);}
-.segc-row{cursor:default;}
+/* selected = tint AND an ink rule, so it never relies on the tint alone */
+.segc button.on{background:var(--accent-muted);color:var(--text);box-shadow:inset 0 -2px 0 var(--accent-ink);}
+.group-b .segc-row{cursor:default;padding-block:6px;}
+.group-b .segc-row:active{background:none;}
+
+::placeholder{color:var(--text3);opacity:1;}
 </style>
 </head>
 <body class="">
@@ -1029,7 +1041,8 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
 (function(){ try{
   var t=localStorage.getItem('jw_theme')||'dark';
   if(t==='auto') t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'paper':'dark';
-  if(t==='paper') document.documentElement.setAttribute('data-theme','paper');
+  if(t==='paper'){ document.documentElement.setAttribute('data-theme','paper');
+    var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content','#F4F1EA'); }
 }catch(e){} })();
 </script>
 <div class="app">
@@ -3216,7 +3229,8 @@ function toggleVowels(){
   if(document.getElementById('viewPractice').classList.contains('on')) newQ();
 }
 // ── THEME: Ledger (dark) · Paper (light) · Auto ──────────────
-function themePref(){ try{ return localStorage.getItem('jw_theme')||'dark'; }catch(e){ return 'dark'; } }
+var _themeMem=null;   // used when storage is unavailable (private mode, full disk)
+function themePref(){ try{ return localStorage.getItem('jw_theme')||_themeMem||'dark'; }catch(e){ return _themeMem||'dark'; } }
 var _lightMQ=window.matchMedia?window.matchMedia('(prefers-color-scheme: light)'):null;
 function applyTheme(){
   var t=themePref();
@@ -3227,14 +3241,15 @@ function applyTheme(){
   if(m) m.setAttribute('content', t==='paper'?'#F4F1EA':'#0E0F14');
 }
 function setTheme(t){
+  _themeMem=t;
   try{ localStorage.setItem('jw_theme',t); }catch(e){}
   applyTheme();
   if(VIEW==='Me') renderMe();
   if(VIEW==='Levels') renderLevelsView();     // the map canvas reads colours once per paint
 }
-if(_lightMQ&&_lightMQ.addEventListener) _lightMQ.addEventListener('change',function(){
-  if(themePref()==='auto'){ applyTheme(); if(VIEW==='Levels') renderLevelsView(); }
-});
+function _onSchemeChange(){ if(themePref()==='auto'){ applyTheme(); if(VIEW==='Levels') renderLevelsView(); } }
+if(_lightMQ&&_lightMQ.addEventListener) _lightMQ.addEventListener('change',_onSchemeChange);
+else if(_lightMQ&&_lightMQ.addListener) _lightMQ.addListener(_onSchemeChange);   // iOS < 14
 // Canvas cannot use CSS variables, so it reads the resolved token values.
 function cssv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 function toggleCursive(){
@@ -3784,7 +3799,7 @@ function renderShorashQuiz(){
   } else if(qtype===1){
     // Show meaning, pick the root letters
     html+='<div style="text-align:center;margin-bottom:6px;font-size:13px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Meaning</div>'+
-      '<div style="font-size:36px;font-weight:700;color:#fff;text-align:center;margin-bottom:20px">'+correct.meaning+'</div>'+
+      '<div style="font-size:36px;font-weight:700;color:var(--text);text-align:center;margin-bottom:20px">'+correct.meaning+'</div>'+
       '<div class="shoresh-quiz-prompt">Which root (שורש) gives this meaning?</div>'+
       '<div class="shoresh-opts">';
     opts.forEach(function(o,i){
@@ -4184,7 +4199,7 @@ function startGramQuiz(){
     '<div class="mc-grid">';
   opts.forEach(function(o,i){
     html+='<button class="mc-opt" id="go'+i+'" onclick="checkGram('+i+','+(o===row)+')">'+
-      '<span class="gram-he he-text" style="color:#fff">'+o.he+'</span><br><span class="gram-pron">'+o.pron+'</span>'+
+      '<span class="gram-he he-text">'+dHe(o)+'</span><br><span class="gram-pron">'+o.pron+'</span>'+
     '</button>';
   });
   html+='</div><div class="quiz-actions" style="margin-top:14px"><span style="color:var(--muted);font-size:12px">Grammar Quiz</span><div class="streak-badge">'+ST.score+' pts</div></div>';
@@ -4475,7 +4490,7 @@ function renderTestResults(){
     missedHtml+
     '<div class="test-res-actions">'+
       '<button class="btn" onclick="startTest()">↻ Retake</button>'+
-      (missed.length?'<button class="btn" style="background:var(--rose)" onclick="retestMissed()">Review Missed</button>':'')+
+      (missed.length?'<button class="btn-quiet" style="border-color:var(--rose);color:var(--rose)" onclick="retestMissed()">Review missed</button>':'')+
       '<button class="btn-ghost" onclick="renderTestSetup()">New Test</button>'+
       '<button class="btn-ghost" onclick="closeTest()">Done</button>'+
     '</div>'+
@@ -4959,8 +4974,8 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
     x.textAlign='right'; x.textBaseline='alphabetic';
     bands.forEach(function(b){ x.fillText('Level '+b.lv+' · '+b.items.length+' words', cssW, b.y-8); });
   }
-  var C={unseen:cssv('--map-unseen'), met:cssv('--text3'), seen:cssv('--lv3'),
-          secure:cssv('--accent'), due:cssv('--warning')};
+  var C={unseen:cssv('--map-unseen'), met:cssv('--map-met'), seen:cssv('--map-seen'),
+          secure:cssv('--map-secure'), due:cssv('--warning')};
   bands.forEach(function(b){
     b.items.forEach(function(w,i){
       var r=Math.floor(i/cols), c=i%cols;
@@ -5080,9 +5095,9 @@ function renderLevelsView(){
     '<div class="map-full"><canvas id="fullMap"></canvas>'+
       '<div class="map-key">'+
         '<span><i class="mk" style="background:var(--map-unseen)"></i>unseen</span>'+
-        '<span><i class="mk" style="background:var(--text3)"></i>met</span>'+
-        '<span><i class="mk" style="background:var(--lv3)"></i>recognised</span>'+
-        '<span><i class="mk" style="background:var(--accent)"></i>secure</span>'+
+        '<span><i class="mk" style="background:var(--map-met)"></i>met</span>'+
+        '<span><i class="mk" style="background:var(--map-seen)"></i>recognised</span>'+
+        '<span><i class="mk" style="background:var(--map-secure)"></i>secure</span>'+
         '<span><i class="mk" style="box-shadow:0 0 0 1px var(--warning)"></i>due</span>'+
       '</div></div>';
   var wq=(ST.quests.weekly||[]).map(function(q){
