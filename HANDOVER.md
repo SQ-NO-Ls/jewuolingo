@@ -365,12 +365,13 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 
 - **Header** — one labelled line, `renderHead()`: "12 due · 4-day streak ·
   1 freeze". Zero parts are omitted (first run shows nothing).
-- **Today** — date, due/new count, the current level as a labelled bar
-  (secure over met, `scaleX`, read right-to-left), 3 quests, then **"New in
-  your next round"** (`upNextHTML`) sitting directly above **Start round**,
-  pinned in the thumb zone. New words are previewed by name; due reviews are
-  shown only as counts — previewing a word right before testing it would
-  turn retrieval into re-reading.
+- **Today** — deliberately three things only (user's call, 2026-10-17):
+  the current level's bar with all its info (Level N of 6, secure count,
+  secure/met bar and key), the **upcoming words** (`upNextHTML`: new words by
+  name, or review counts — never review words, which would turn retrieval
+  into re-reading), and one large **Start round** button (60px) in the thumb
+  zone. No date, no due/new line, no daily quests (weekly quests stay on the
+  Map). Keep it this simple.
 - **New-word step** (`introHTML`) — 60px hero (44/34px for long phrases),
   gloss, then the example with the word filled in on the Hebrew side. The
   English keeps a drawn gap: filling it from the gloss produced broken

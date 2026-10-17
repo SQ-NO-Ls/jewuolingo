@@ -57,6 +57,15 @@
 @font-face{font-family:'Gveret Levin';font-style:normal;font-weight:400;font-display:swap;
   src:url(fonts/gveret-latin.woff2) format('woff2');
   unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
+/* ── TODAY, simplified: progress · what's next · one button ── */
+.today-grid .t-lv{padding:20px 0 8px;}
+.today-grid .t-next{flex:1;justify-content:center;padding:24px 0;}
+.t-next-note{font-size:13px;color:var(--text3);padding-top:6px;}
+.today-grid .t-cta{padding:12px 0 8px;}
+.today-grid .t-cta .btn{min-height:60px;font-size:18px;}
+.today-grid .t-next-he{font-size:26px;}
+.today-grid .t-next-en{font-size:15px;}
 </style>
 <style>
 
@@ -5100,31 +5109,15 @@ function learnNew(){ startRound(); }
 function renderToday(){
   if(ROUND.active) return roundStep();
   document.body.classList.remove('focus');
-  refreshQuests();
-  var c=roundCounts(), lv=activeLevel(), sh=levelShape(lv);
+  refreshQuests();                        // weekly quests still live on the Map
+  var c=roundCounts(), lv=activeLevel();
   var n=buildRound().length;
-  var line = newPaused()
-      ? 'Catching up first — new words resume once the backlog clears'
-      : '<b>'+(c.dueR+c.dueP)+'</b> due · <b>'+Math.min(3,c.fresh)+'</b> new';
-  var quests=(ST.quests.daily||[]).map(function(q){
-    var pr=questProgress(q);
-    return '<div class="q-row'+(pr.done?' done':pr.idle?' idle':'')+'">'+
-      '<span class="q-box">'+(pr.done?'<svg class="i" style="width:12px;height:12px"><use href="#i-check"/></svg>':'')+'</span>'+
-      '<span class="q-txt">'+esc(pr.label)+'</span>'+
-      '<span class="q-n'+(pr.idle?'':' num')+'">'+(pr.idle?'none due':pr.target===0?(pr.done?'cleared':pr.now+' left'):(pr.now+'/'+pr.target))+'</span></div>';
-  }).join('');
-  var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   var lw=vocab.filter(function(w){ return w.level===lv; }), met=0, sec=0;
   lw.forEach(function(w){ var st=dotState(w); if(st==='secure') sec++; else if(st!=='unseen') met++; });
   var tot=lw.length||1;
-  // First run: say what is about to happen instead of a row of zeros.
-  var first=!vocab.some(function(w){ return dotState(w)!=='unseen'; });
-  if(first) line='<span class="t-first">Your first words</span>'+
-    '<span class="t-first-sub">Three of the most frequent words in spoken Hebrew, each one tested again before the round ends.</span>';
+  // Today is three things: where you are, what's next, and one button.
   document.getElementById('todayBody').innerHTML=
     '<div class="today-grid">'+
-      '<div class="t-date"><span>'+esc(d)+'</span></div>'+
-      '<div class="t-count">'+line+'</div>'+
       '<div class="t-lv">'+
         '<div class="t-lv-top"><span class="t-lv-name">Level '+lv+' <span>of 6</span></span>'+
           '<span class="t-lv-n num">'+sec+' / '+lw.length+' secure</span></div>'+
@@ -5133,12 +5126,10 @@ function renderToday(){
         ((sec||met)?'<div class="t-lv-key"><span><i style="background:var(--text2)"></i>secure</span>'+
           '<span><i style="background:var(--lv3)"></i>met <span class="num">'+met+'</span></span></div>':'')+
       '</div>'+
-      '<div class="qlist">'+quests+'</div>'+
       upNextHTML(c)+
       '<div class="t-cta">'+
-        (n?'<button class="btn" onclick="startRound()">'+(first?'Begin':'Start round')+'</button>'
-          :'<div class="empty-line">Nothing due'+nextDueLine()+'.</div>'+
-            (c.fresh?'<button class="btn-quiet" onclick="learnNew()">Learn 3 new words</button>':''))+
+        (n?'<button class="btn" onclick="startRound()">Start round</button>'
+          :'<div class="empty-line">Nothing due'+nextDueLine()+'.</div>')+
       '</div>'+
     '</div>';
   renderHead();
@@ -5155,7 +5146,8 @@ function upNextHTML(c){
     }).join('')+'</div>';
   if(c.dueR||c.dueP) return '<div class="t-next"><div class="t-next-lbl">Waiting for review</div>'+
     '<div class="t-next-sum"><span class="num">'+c.dueR+'</span> to recognise · '+
-    '<span class="num">'+c.dueP+'</span> to type</div></div>';
+    '<span class="num">'+c.dueP+'</span> to type</div>'+
+    (newPaused()?'<div class="t-next-note">New words resume once these are cleared.</div>':'')+'</div>';
   return '<div class="t-next"></div>';
 }
 
