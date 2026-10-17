@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v45`
+- **Deployed version:** service-worker `jw-v46`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -295,14 +295,25 @@ passive `touchstart` listener at the bottom of the script — keep it.
 Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 `viewLevels` internally; the tab is labelled Map).
 
-- **Today** — date + streak, due/new count, the current level's dot slice,
-  3 quests, **Start round pinned in the thumb zone**.
+- **Header** — one labelled line, `renderHead()`: "12 due · 4-day streak ·
+  1 freeze". Zero parts are omitted (first run shows nothing).
+- **Today** — date, due/new count, the current level as a labelled bar
+  (secure over met, `scaleX`, read right-to-left), 3 quests, then **"New in
+  your next round"** (`upNextHTML`) sitting directly above **Start round**,
+  pinned in the thumb zone. New words are previewed by name; due reviews are
+  shown only as counts — previewing a word right before testing it would
+  turn retrieval into re-reading.
+- **New-word step** (`introHTML`) — 60px hero (44/34px for long phrases),
+  gloss, then the example with the word filled in on the Hebrew side. The
+  English keeps a drawn gap: filling it from the gloss produced broken
+  English in 35+ entries ("I to love you").
 - **Map** — the 1,441-word journey canvas (all words as dots by frequency,
   read right-to-left, state by **lightness only** so it survives any
   colour-vision deficiency), weekly quests, then per-level rows with four
   labelled R/P/U/C bars, can-dos and the checkpoint.
 - **Practice** — grouped by dimension (`MODE_DIM`), weakest first, with two
-  quiet filter buttons. The stat pills and three dropdowns were removed.
+  quiet filter buttons. Each mode has a line icon (`#i-m-<id>` in the
+  sprite, drawn in-house — no third-party set) instead of a Hebrew letter. The stat pills and three dropdowns were removed.
 - **Me** — plain labelled list, vowel/script toggles, analytics, settings.
 
 ---

@@ -387,7 +387,7 @@ body.cursive-on .sch-word .ww-he{font-family:var(--he-cursive);}
 
 /* ── MOBILE SHELL: bottom tab bar + compact header ──────────── */
 /* The old layout spent half a phone screen on chrome before the question. */
-body{background:var(--bg);color:var(--text);font-family:var(--ui-font);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-bottom:64px;}
+body{background:var(--bg);color:var(--text);font-family:var(--ui-font);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 .compact-head .ch-title{font-family:var(--he-font);font-size:21px;font-weight:900;
   color:var(--text2);letter-spacing:-.5px;}
 .compact-head .ch-right{display:flex;gap:7px;align-items:center;}
@@ -711,9 +711,9 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 
 /* Full-height column so the action sits in the thumb zone whatever the
    content length, with the journey breathing above it. */
-.today-grid{gap:0;grid-template-rows:auto auto 1fr auto auto;min-height:0;display:flex;flex-direction:column;/* viewport minus the compact header (58) and the tab-bar allowance the
+.today-grid{gap:0;grid-template-rows:auto auto 1fr auto auto;min-height:0;display:flex;flex-direction:column;/* viewport minus the compact header (51 + 12 margin) and the tab-bar allowance the
      .app already reserves (76), so the action lands just above the bar. */
-  min-height:calc(100dvh - 58px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+  min-height:calc(100dvh - 63px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
 .t-cta{bottom:0;background:var(--bg);margin-top:auto;position:static;box-shadow:none;padding:20px 0 6px;}
 .t-slice{flex-direction:column;min-height:0;justify-content:center;display:block;padding:14px 0 22px;}
 
@@ -754,7 +754,7 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 /* ── ROUND SUMMARY ───────────────────────────────────────────*/
 .done-wrap{display:flex;flex-direction:column;align-items:center;
   text-align:center;gap:6px;
-  min-height:calc(100dvh - 58px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+  min-height:calc(100dvh - 63px - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
 .done-n{font-size:56px;color:var(--text);line-height:1;}
 .done-l{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);}
 .done-sub{font-size:14px;color:var(--text2);padding-top:6px;}
@@ -791,6 +791,64 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 .test-setup-sub{text-align:center;margin-bottom:30px;font-size:13px;color:var(--text3);}
 .th-logo{font-size:18px;}
 .sch-head .sch-gloss-btn,.sch-add{border-radius:var(--r-sm);}
+
+
+/* ── LABELLED HEADER STATS ───────────────────────────────────
+   Words, not icon + bare number. Zero values are omitted, so a first run
+   shows no stats at all rather than a row of zeros. */
+.h-stats{font-size:13px;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--text2);
+  font-variant-numeric:tabular-nums lining-nums;white-space:nowrap;}
+.h-stats:empty{display:none;}
+
+/* ── TODAY ───────────────────────────────────────────────────
+   Level progress is a labelled bar (secure over met), filled by scaleX and
+   read right-to-left like the map. The slack above Start holds the words
+   the next round will introduce, so the screen is never empty space. */
+.t-lv{padding:18px 0 20px;}
+.t-lv-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.t-lv-name{font-size:17px;color:var(--text);}
+.t-lv-name span{color:var(--text3);}
+.t-lv-n{font-size:13px;color:var(--text3);}
+.t-bar{position:relative;height:6px;margin-top:10px;background:var(--surface2);
+  border-radius:var(--r-sm);overflow:hidden;}
+.t-bar i{position:absolute;inset:0;transform-origin:right;}
+.t-bar .met{background:var(--lv3);}
+.t-bar .sec{background:var(--text2);}
+.t-lv-key{display:flex;gap:16px;padding-top:9px;font-size:12px;color:var(--text3);}
+.t-lv-key span{display:inline-flex;align-items:center;gap:6px;}
+.t-lv-key i{width:8px;height:8px;border-radius:1px;display:inline-block;}
+.t-next{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 0 0;}
+.t-next-lbl{font-size:13px;font-variant-caps:all-small-caps;letter-spacing:.06em;color:var(--text3);padding-bottom:4px;}
+.t-next-row{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  border-bottom:1px solid var(--border);}
+.t-next-he{font-family:var(--he-font);font-size:22px;line-height:1.9;color:var(--text);}
+body.cursive-on .t-next-he{font-family:var(--he-cursive);}
+.t-next-en{font-size:14px;color:var(--text3);}
+.t-next-sum{font-size:15px;color:var(--text2);}
+
+/* ── NEW WORD ────────────────────────────────────────────────
+   The word is the hero; gloss, then the example with the word in place.
+   Nothing small is stranded at the bottom of the screen. */
+.fs-prompt.intro{padding-bottom:6vh;gap:6px;}
+.fs-he.hero{font-size:60px;font-weight:500;}
+.fs-he.hero.long{font-size:44px;}
+.fs-he.hero.xlong{font-size:34px;}
+.intro-gloss{font-size:21px;color:var(--text);line-height:1.3;padding-top:6px;}
+.intro-ex{margin-top:26px;padding-top:18px;border-top:1px solid var(--border);width:100%;max-width:320px;}
+.intro-ex .exh{font-family:var(--he-font);font-size:22px;line-height:1.9;color:var(--text2);}
+body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
+.intro-ex .exe{font-size:15px;color:var(--text3);line-height:1.45;}
+.intro-ex b{font-weight:inherit;color:var(--text);}
+.intro-ex .gap{display:inline-block;width:2.2em;border-bottom:1px solid var(--text3);vertical-align:.1em;}
+
+/* ── PRACTICE ROWS ───────────────────────────────────────────*/
+.pr-item{min-height:56px;}
+.pr-mark{width:32px;height:32px;border:none;color:var(--text3);}
+.pr-mark .i{width:22px;height:22px;}
+.pr-item.on .pr-mark{color:var(--accent);}
+.pr-nm{font-size:17px;}
+.pr-ds{font-size:13px;}
+.pr-gl .pct.weak{color:var(--text2);font-style:italic;}
 </style>
 </head>
 <body class="">
@@ -817,16 +875,26 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></symbol>
 <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+<symbol id="i-m-flashcard" viewBox="0 0 24 24"><rect x="3" y="8" width="14" height="12" rx="2"/><path d="M7 5h11a3 3 0 013 3v9"/></symbol>
+<symbol id="i-m-multiple" viewBox="0 0 24 24"><circle cx="5" cy="7" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="5" cy="17" r="1.5"/><path d="M9.5 7H20M9.5 12H20M9.5 17H20"/></symbol>
+<symbol id="i-m-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M10 7h2.5a3 3 0 013 3v4"/></symbol>
+<symbol id="i-m-alphabet" viewBox="0 0 24 24"><path d="M6 5l12 14.5M4.5 5h3"/><path d="M17.5 4.5v1.8c0 2.2-1.6 3.5-4.2 4.1"/><path d="M10.6 13.4c-2.2.7-3.6 2-3.6 4.2v1.9M5.5 19.5h3.5"/></symbol>
+<symbol id="i-m-type" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7.5 14h9"/></symbol>
+<symbol id="i-m-sentence" viewBox="0 0 24 24"><path d="M3 13h4M17 13h4"/><path d="M10 6h4M12 6v12M10 18h4"/></symbol>
+<symbol id="i-m-pattern" viewBox="0 0 24 24"><path d="M8 4H5v16h3M16 4h3v16h-3"/><path d="M9.5 12h5"/></symbol>
+<symbol id="i-m-grammar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9.5 10v10"/></symbol>
+<symbol id="i-m-conversation" viewBox="0 0 24 24"><path d="M4 5h11v8H8.5L4 16.5z"/><path d="M15 9h5v8.5L16.5 15H11v-2"/></symbol>
+<symbol id="i-m-sicha" viewBox="0 0 24 24"><path d="M4 5h16v11H9.5L4 20z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/></symbol>
+<symbol id="i-m-shoresh" viewBox="0 0 24 24"><path d="M12 3v8M12 11c-1 4-3 6-6 9M12 11v9M12 11c1 4 3 6 6 9"/></symbol>
+<symbol id="i-m-roots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v10M12 11l-5.6 6.4M12 11l5.6 6.4"/></symbol>
+<symbol id="i-m-test" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/></symbol>
 </defs></svg>
 
 
 <div class="app">
   <div class="compact-head">
     <span class="ch-title">Jewolingo</span>
-    <span class="ch-right">
-      <span class="mini-pill"><svg class="i" aria-hidden="true"><use href="#i-ember"/></svg> <b id="miniStreak" class="num">0</b></span>
-      <span class="mini-pill"><svg class="i" aria-hidden="true"><use href="#i-stats"/></svg> <b id="miniLearned" class="num">0</b></span>
-    </span>
+    <span class="h-stats" id="headStats"></span>
   </div>
 
   <!-- ══ TODAY ══ -->
@@ -2928,8 +2996,8 @@ const MODES=[
   {id:'multiple',   icon:'', he:'בחירה',     en:'Multiple Choice'},
   {id:'type',       icon:'⌨️', he:'כתיבה',     en:'Type It'},
   {id:'match',      icon:'🔗', he:'התאמה',     en:'Match'},
-  {id:'sentence',   icon:'📖', he:'מילוי',     en:'Fill-In'},
-  {id:'conversation',icon:'',he:'תרגול',     en:'Convo (scripted)'},
+  {id:'sentence',   icon:'📖', he:'מילוי',     en:'Fill the Gap'},
+  {id:'conversation',icon:'',he:'תרגול',     en:'Dialogue'},
   {id:'shoresh',    icon:'', he:'שורש',      en:'Roots'},
   {id:'alphabet',   icon:'🔤', he:'אלף-בית',   en:'Aleph-Bet'},
   {id:'grammar',    icon:'', he:'דקדוק',     en:'Grammar'},
@@ -3148,8 +3216,6 @@ var MODE_DIM={
   sentence:'U', pattern:'U', grammar:'U', conversation:'U', sicha:'U',
   shoresh:'C', roots:'C'
 };
-var MODE_MARK={flashcard:'כ',multiple:'מ',match:'ה',alphabet:'א',type:'כ',
-  sentence:'מ',pattern:'ת',grammar:'ד',conversation:'ש',sicha:'ח',shoresh:'ש',roots:'מ'};
 var MODE_DESC={
   flashcard:'flip and self-grade', multiple:'pick the meaning',
   match:'pair Hebrew to English', alphabet:'letters and sounds',
@@ -3170,12 +3236,12 @@ function renderModes(){
     var ms=MODES.filter(function(m){return MODE_DIM[m.id]===d;});
     if(!ms.length) return;
     h+='<div class="pr-group"><div class="pr-gl"><span>'+DIMS[d]+'</span>'+
-       (d===weakest?'<span class="pct" style="color:var(--accent)">weakest — start here</span>':
+       (d===weakest?'<span class="pct weak">weakest — start here</span>':
          (sh[d]===null?'':'<span class="pct">'+sh[d]+'%</span>'))+'</div>';
     ms.forEach(function(m){
       var off=(m.id==='sicha');
       h+='<div class="pr-item'+(ST.mode===m.id?' on':'')+'" onclick="openPractice(\''+m.id+'\')">'+
-         '<span class="pr-mark he-text">'+(MODE_MARK[m.id]||'')+'</span>'+
+         '<span class="pr-mark"><svg class="i" aria-hidden="true"><use href="#i-m-'+m.id+'"/></svg></span>'+
          '<span class="pr-txt"><span class="pr-nm">'+esc(m.en)+'</span>'+
            '<span class="pr-ds">'+esc(MODE_DESC[m.id]||'')+'</span></span>'+
          (off?'<span class="pr-off">online</span>':'')+
@@ -3247,14 +3313,22 @@ function updateSelLabels(){
   var lv=document.getElementById('selValLevel'); if(lv) lv.textContent=lm?(lm.n?lm.lbl+' · '+lm.sub:lm.lbl):'All Levels';
 }
 
+// Labelled, and silent about zeros: "12 due · 4-day streak · 1 freeze".
+function renderHead(){
+  var el=document.getElementById('headStats'); if(!el) return;
+  var due=dueTotal(), ds=ST.dayStreak||0, fz=ST.freezes||0, bits=[];
+  if(due) bits.push(due+' due');
+  if(ds) bits.push(ds+'-day streak');
+  if(fz) bits.push(fz+(fz===1?' freeze':' freezes'));
+  el.textContent=bits.join(' · ');
+}
 function updateStats(){
   document.getElementById('streakNum').textContent=ST.streak;
   document.getElementById('scoreNum').textContent=ST.score;
   document.getElementById('learnedNum').textContent=ST.learned.size;
   document.getElementById('accNum').textContent=ST.total?Math.round(ST.correct/ST.total*100)+'%':'—';
   var dn=document.getElementById('daysNum'); if(dn) dn.textContent=ST.dayStreak||0;
-  var ms=document.getElementById('miniStreak'); if(ms) ms.textContent=ST.dayStreak||0;
-  var ml=document.getElementById('miniLearned'); if(ml) ml.textContent=ST.learned.size;
+  renderHead();
   saveProgress();
 }
 function setMode(m){if(m==='test'&&ST.mode!=='test')_preTestMode=ST.mode;ST.mode=m;renderModes();renderCats();renderLevels();closeAllSel();updateSelLabels();prFrame();newQ();}
@@ -4454,6 +4528,7 @@ function showView(v){
     var el=document.getElementById('view'+n); if(el) el.classList.toggle('on',n===v);
     var tb=document.getElementById('tab'+n);  if(tb) tb.classList.toggle('on',n===v);
   });
+  renderHead();
   if(v==='Today')    renderToday();
   if(v==='Levels')   renderLevelsView();
   if(v==='Me')       renderMe();
@@ -4739,24 +4814,45 @@ function renderToday(){
       '<span class="q-n num">'+(pr.target===0?pr.now:(pr.now+'/'+pr.target))+'</span></div>';
   }).join('');
   var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+  var lw=vocab.filter(function(w){ return w.level===lv; }), met=0, sec=0;
+  lw.forEach(function(w){ var st=dotState(w); if(st==='secure') sec++; else if(st!=='unseen') met++; });
+  var tot=lw.length||1;
   document.getElementById('todayBody').innerHTML=
     '<div class="today-grid">'+
-      '<div class="t-date"><span>'+esc(d)+'</span>'+
-        '<span class="st"><svg class="i" style="width:15px;height:15px"><use href="#i-ember"/></svg>'+
-        '<span class="num">'+(ST.dayStreak||0)+'</span>'+
-        ((ST.freezes||0)?' <svg class="i" style="width:14px;height:14px"><use href="#i-freeze"/></svg><span class="num">'+ST.freezes+'</span>':'')+
-        '</span></div>'+
+      '<div class="t-date"><span>'+esc(d)+'</span></div>'+
       '<div class="t-count">'+line+'</div>'+
-      '<div class="t-slice"><div class="t-slice-lbl">Level '+lv+' of 6 · '+sh.secure+'% secure</div>'+
-        '<canvas id="todayMap"></canvas></div>'+
+      '<div class="t-lv">'+
+        '<div class="t-lv-top"><span class="t-lv-name">Level '+lv+' <span>of 6</span></span>'+
+          '<span class="t-lv-n num">'+sec+' / '+lw.length+' secure</span></div>'+
+        '<div class="t-bar"><i class="met" style="transform:scaleX('+((sec+met)/tot).toFixed(4)+')"></i>'+
+          '<i class="sec" style="transform:scaleX('+(sec/tot).toFixed(4)+')"></i></div>'+
+        ((sec||met)?'<div class="t-lv-key"><span><i style="background:var(--text2)"></i>secure</span>'+
+          '<span><i style="background:var(--lv3)"></i>met <span class="num">'+met+'</span></span></div>':'')+
+      '</div>'+
       '<div class="qlist">'+quests+'</div>'+
+      upNextHTML(c)+
       '<div class="t-cta">'+
         (n?'<button class="btn" onclick="startRound()">Start round</button>'
           :'<div class="empty-line">Nothing due'+nextDueLine()+'.</div>'+
             (c.fresh?'<button class="btn-quiet" onclick="learnNew()">Learn 3 new words</button>':''))+
       '</div>'+
     '</div>';
-  requestAnimationFrame(function(){ drawMap('todayMap',lv,12); });
+  renderHead();
+}
+// What the next round holds. New words are previewed by name — the intro card
+// shows them anyway. Reviews are NOT: showing a due word and its meaning just
+// before it is tested would turn retrieval back into re-reading.
+function upNextHTML(c){
+  var fresh=newPaused()?[]:freshList().slice(0,3);
+  if(fresh.length) return '<div class="t-next"><div class="t-next-lbl">New in your next round</div>'+
+    fresh.map(function(w){
+      return '<div class="t-next-row"><span class="t-next-en" lang="en" dir="ltr">'+esc(w.en)+'</span>'+
+        '<span class="t-next-he" lang="he" dir="rtl">'+esc(dHe(w))+'</span></div>';
+    }).join('')+'</div>';
+  if(c.dueR||c.dueP) return '<div class="t-next"><div class="t-next-lbl">Waiting for review</div>'+
+    '<div class="t-next-sum"><span class="num">'+c.dueR+'</span> to recognise · '+
+    '<span class="num">'+c.dueP+'</span> to type</div></div>';
+  return '<div class="t-next"></div>';
 }
 
 // ── Levels view ───────────────────────────────────────────────
@@ -4974,14 +5070,22 @@ function patternHTML(p,w){
     buildKbd('checkPattern()');
 }
 function introHTML(w){
-  return '<div class="fs-prompt">'+
-      '<div class="fs-he" lang="he" dir="rtl">'+dHe(w)+'</div>'+
+  var n=stripV(w.he).replace(/\s/g,'').length, sz=n>11?' xlong':n>7?' long':'';
+  // The Hebrew example shows the word IN PLACE: a cloze blank on a first
+  // exposure asks for something the learner has not met yet. The English
+  // keeps a quiet gap — the gloss does not slot in grammatically ("I to love
+  // you"), and inventing English would teach the wrong thing.
+  var wordHe=esc(dHe(w));
+  var exHe=w.sentence?esc(w.sentence).replace('___','<b>'+wordHe+'</b>'):'';
+  var exEn=w.sentenceEn?esc(w.sentenceEn).replace('___','<span class="gap"></span>'):'';
+  return '<div class="fs-prompt intro">'+
+      '<div class="fs-he hero'+sz+'" lang="he" dir="rtl">'+wordHe+'</div>'+
       '<div class="fs-translit" lang="he-Latn" dir="ltr">'+esc(w.pron)+'</div>'+
-      '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
+      '<div class="intro-gloss" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
       '<div class="fs-note"><span class="rank">#'+w.rank+'</span> most frequent · Level '+w.level+'</div>'+
+      (exHe?'<div class="intro-ex"><div class="exh" lang="he" dir="rtl">'+exHe+'</div>'+
+        '<div class="exe" lang="en" dir="ltr">'+exEn+'</div></div>':'')+
     '</div>'+
-    '<div class="fs-reveal" lang="he" dir="rtl">'+dHe({he:w.sentence,heV:w.sentence})+
-      '<div lang="en" dir="ltr" style="margin-top:4px">'+esc(w.sentenceEn)+'</div></div>'+
     '<div class="fs-fb"></div>'+
     '<div class="fs-row"><button class="btn" onclick="introDone()">Got it</button></div>';
 }
