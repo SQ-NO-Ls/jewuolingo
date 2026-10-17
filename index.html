@@ -6442,6 +6442,21 @@ if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('sw.js').catch(function(){});
   });
+  // Show a new build as soon as it takes over, instead of on the SECOND launch
+  // (which looks exactly like a failed deploy). Never mid-answer: a round,
+  // checkpoint or open Practice question lives only in memory, so then the
+  // new version simply opens next time. A first install has nothing stale.
+  var _hadSW=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange',function(){
+    if(!_hadSW) return;
+    if(ROUND.active||CHK.active||document.body.classList.contains('pfocus')) return;
+    location.reload();
+  });
+  // Standalone apps resume without navigating, so check for updates on return.
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState!=='visible') return;
+    navigator.serviceWorker.getRegistration().then(function(r){ if(r) r.update(); }).catch(function(){});
+  });
 }
 // Ask the browser not to evict our storage. Home-screen web apps are already
 // exempt from WebKit's 7-day cap, but this is free insurance elsewhere.

@@ -493,7 +493,19 @@ git add -A && git commit -m "..." && git push origin main
 # 3. wait for GitHub Pages, then verify
 until curl -s https://sq-no-ls.github.io/jewuolingo/sw.js | grep -q "jw-vNN"; do sleep 5; done
 ```
-GitHub Pages takes ~1–3 minutes. **Verify the deployed build actually runs**,
+Also wait until the CDN serves the new page, not just the new sw.js:
+`until curl -s https://sq-no-ls.github.io/jewuolingo/index.html | grep -q "<something new>"; do sleep 5; done`
+(the SW fetches the page with `?v=CACHE_VERSION`, which bypasses a stale CDN
+edge, but checking both is cheap). GitHub Pages takes ~1–3 minutes.
+
+**How the installed app updates (since jw-v50):** the old SW serves the old
+page; the new SW installs in the background (`./` and `./index.html` are
+REQUIRED — if either fails, install fails and the old version keeps its full
+offline shell); on activate the page reloads itself into the new build —
+unless a round, checkpoint or Practice question is open, in which case the
+new build opens on the next launch. Updates are also checked whenever the
+app returns to the foreground. If a shell ever loses its page, the
+navigation handler re-stores it the next time the network serves it. **Verify the deployed build actually runs**,
 not just that the bytes are present — load it and check `vocab.length`,
 `Object.keys(ANN).length` and that a round builds.
 

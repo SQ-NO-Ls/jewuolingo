@@ -7,6 +7,13 @@ const SHELL = 'shell-' + CACHE_VERSION;
 // v2 = the self-hosted files in fonts/; activate drops v1 (Google Fonts).
 const FONTS = 'jw-fonts-v2';
 
+// The two entries a navigation is served from are REQUIRED: if either fails,
+// install fails and the previous version — with its complete shell — stays in
+// charge, rather than activating a shell with no page in it (a blank offline
+// launch until the next deploy). They are fetched with a version query so a
+// CDN edge still holding the old HTML cannot be stored as the new shell.
+const REQUIRED = ['./', './index.html'];
+
 const SHELL_FILES = [
   './',
   './index.html',
@@ -33,8 +40,15 @@ const FONT_FILES = [
 self.addEventListener('install', function (e) {
   e.waitUntil(Promise.all([
     caches.open(SHELL)
-      // Individual adds so one 404 can't fail the whole install.
       .then(function (c) { return Promise.all(SHELL_FILES.map(function (u) {
+        if (REQUIRED.indexOf(u) !== -1) {
+          return fetch(new Request(u + '?v=' + CACHE_VERSION, { cache: 'reload' }))
+            .then(function (res) {
+              if (!res.ok) throw new Error('shell ' + u + ' ' + res.status);
+              return c.put(u, res);
+            });
+        }
+        // Everything else is optional: one 404 must not fail the install.
         return c.add(new Request(u, { cache: 'reload' })).catch(function () {});
       })); }),
     // Fonts: only fetch what the unversioned cache does not already hold.
@@ -75,7 +89,15 @@ self.addEventListener('fetch', function (e) {
   if (req.mode === 'navigate') {
     e.respondWith(
       caches.match('./index.html').then(function (hit) {
-        return hit || fetch(req).catch(function () { return caches.match('./'); });
+        return hit || fetch(req).then(function (res) {
+          // Heal a shell that lost its page: store the app page when the
+          // network serves it, so the next offline launch works again.
+          if (res && res.ok && !res.redirected && /\/(index\.html)?$/.test(url.pathname)) {
+            const copy = res.clone();
+            caches.open(SHELL).then(function (c) { c.put('./index.html', copy); });
+          }
+          return res;
+        }).catch(function () { return caches.match('./'); });
       })
     );
     return;
