@@ -3,9 +3,9 @@
 const CACHE_VERSION = 'jw-v49';
 const SHELL = 'shell-' + CACHE_VERSION;
 // Deliberately NOT versioned: fonts do not change between builds, and
-// tying them to CACHE_VERSION re-downloads ~200KB on every deploy and
-// leaves the app briefly unstyled offline straight after an update.
-const FONTS = 'jw-fonts-v1';
+// tying them to CACHE_VERSION would re-download ~550KB on every deploy.
+// v2 = the self-hosted files in fonts/; activate drops v1 (Google Fonts).
+const FONTS = 'jw-fonts-v2';
 
 const SHELL_FILES = [
   './',
@@ -18,15 +18,33 @@ const SHELL_FILES = [
   './icons/icon-512-maskable.png'
 ];
 
+// Precached at install, so the very first offline launch has the real faces.
+const FONT_FILES = [
+  './fonts/frl-hebrew.woff2',
+  './fonts/frl-latin.woff2',
+  './fonts/ss4-latin.woff2',
+  './fonts/ss4-latin-ext.woff2',
+  './fonts/ss4-italic-latin.woff2',
+  './fonts/ss4-italic-latin-ext.woff2',
+  './fonts/gveret-hebrew.woff2',
+  './fonts/gveret-latin.woff2'
+];
+
 self.addEventListener('install', function (e) {
-  e.waitUntil(
+  e.waitUntil(Promise.all([
     caches.open(SHELL)
       // Individual adds so one 404 can't fail the whole install.
       .then(function (c) { return Promise.all(SHELL_FILES.map(function (u) {
         return c.add(new Request(u, { cache: 'reload' })).catch(function () {});
+      })); }),
+    // Fonts: only fetch what the unversioned cache does not already hold.
+    caches.open(FONTS)
+      .then(function (c) { return Promise.all(FONT_FILES.map(function (u) {
+        return c.match(u).then(function (hit) {
+          return hit || c.add(new Request(u, { cache: 'reload' })).catch(function () {});
+        });
       })); })
-      .then(function () { return self.skipWaiting(); })
-  );
+  ]).then(function () { return self.skipWaiting(); }));
 });
 
 self.addEventListener('activate', function (e) {
@@ -63,35 +81,15 @@ self.addEventListener('fetch', function (e) {
     return;
   }
 
-  // Google Fonts: cache-first, filled on first online load.
-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    const swr = url.hostname === 'fonts.googleapis.com';
-    e.respondWith(
-      caches.match(req).then(function (hit) {
-        if (hit) {
-          if (swr) fetch(req).then(function (res) {
-            if (res && res.ok) caches.open(FONTS).then(function (c) { c.put(req, res); });
-          }).catch(function () {});
-          return hit;
-        }
-        return fetch(req).then(function (res) {
-          const copy = res.clone();
-          caches.open(FONTS).then(function (c) { c.put(req, copy); });
-          return res;
-        }).catch(function () { return hit; });
-      })
-    );
-    return;
-  }
-
-  // Same-origin assets: cache-first, fall back to network.
+  // Same-origin assets (fonts included): cache-first, fall back to network.
   if (url.origin === self.location.origin) {
+    const store = url.pathname.indexOf('/fonts/') !== -1 ? FONTS : SHELL;
     e.respondWith(
       caches.match(req).then(function (hit) {
         return hit || fetch(req).then(function (res) {
           if (res && res.status === 200) {
             const copy = res.clone();
-            caches.open(SHELL).then(function (c) { c.put(req, copy); });
+            caches.open(store).then(function (c) { c.put(req, copy); });
           }
           return res;
         });
