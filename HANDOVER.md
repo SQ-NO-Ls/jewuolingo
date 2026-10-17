@@ -296,6 +296,21 @@ the 8- and 9-key rows sit centred. 46px tall, 6px gaps, 10px row gap, keys
 (`data-ch` + `:active::before`); iOS only applies `:active` because of the
 passive `touchstart` listener at the bottom of the script — keep it.
 
+### Paper — the light theme (2026-10-17)
+`:root[data-theme="paper"]` overrides the tokens; Me → Display →
+**Appearance: Dark · Paper · Auto** (Auto follows the iPhone). The choice
+lives in its own key `jw_theme` (display only; `jw_progress` is untouched)
+and is applied by a tiny inline script at the top of `<body>` so Paper never
+flashes dark. Rules carried over: warm paper not white, near-black ink not
+black, **dark ink on the accent fill** (`--on-accent`), the accent as TEXT
+uses `--accent-ink` (#3D479E on paper), levels still by lightness (the ramp
+darkens with level on paper). All paper text pairs pass WCAG AA (lowest:
+warning 4.8:1). The map canvas reads colours from tokens via `cssv()`, so
+**never hard-code a colour in canvas or inline styles again**. iOS fixes
+the status-bar style at install (white icons), so Paper paints a dark band
+behind the status bar (`--status-band`). Dark was verified unchanged by a
+computed-style diff and a pixel-identical map.
+
 ### Motion (2026-10-17)
 Entrance-only, transform + opacity, house curve `--ease`, all under 300ms:
 a new step settles in (`step-in`, 200ms; the keyboard never animates),
