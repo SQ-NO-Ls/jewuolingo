@@ -161,8 +161,17 @@ Round composition, in order of priority:
 3. **Production unlock**: words with `R.n>=2 && P.reps===0` (max 3). Without
    this the P dimension can never start — chicken-and-egg: a word only gets a
    P card by being typed, and was only typed if it had a due P card.
-4. Patterns at `level <= activeLevel()+1` (max 3) → `U`
-5. **One** root-family step → `C`
+4. Patterns at `level <= activeLevel()+1` (max 3) → `U`, **only patterns
+   with a filler you already know, and only asking for known fillers**
+   (`patternKnownFillers`). A pattern makes you TYPE the filler, so an
+   unknown filler is a test of something never taught.
+5. **One** root-family step → `C`, **only for a family with a word you
+   know** (`rootDue`), used as the anchor. The sibling may be new: the task
+   is spotting the shared root letters, with English shown.
+
+**Rule: nothing is tested before it is taught.** Until 2026-10-17 a first
+round taught three words and then asked for לעבור, סבא and שקל. A brand-new
+learner's first round is now intro ×3 then each word retrieved (6 steps).
 6. Top up from words already met, never by adding new ones
 7. **Max 3 genuine new words** (`intro`), each echoed later in the same round
    so it is retrieved, not just re-read. Intros are placed first so every echo

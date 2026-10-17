@@ -4855,7 +4855,7 @@ function buildRound(){
     return getCard(itemWord(w.he),'R').n>=2 && getCard(itemWord(w.he),'P').reps===0;
   }).sort(function(a,b){ return a.rank-b.rank; })
     .slice(0,3).forEach(function(w){ push('type',w); });
-  PATTERNS.filter(function(p){ return p.level<=activeLevel()+1 && patternFillers(p).length; })
+  PATTERNS.filter(function(p){ return p.level<=activeLevel()+1 && patternKnownFillers(p).length; })
     .sort(function(a,b){ return getCard(itemPattern(a.id),'U').reps-getCard(itemPattern(b.id),'U').reps; })
     .slice(0,3).forEach(function(p){ push('pattern',null,p); });
   // One word-family item per round: the Connect dimension, and the only
@@ -5277,7 +5277,9 @@ function familyOf(he){
 }
 var ROOTQ={root:null,answer:null,answered:false};
 function rootDue(){
-  var fams=rootFamilies(), keys=Object.keys(fams);
+  // Only families with a word you already know: the step bridges from the
+  // known word to its relative. A family of strangers teaches nothing.
+  var fams=rootFamilies(), keys=Object.keys(fams).filter(function(r){ return fams[r].some(knownWord); });
   if(!keys.length) return null;
   keys.sort(function(a,b){ return getCard(itemRoot(a),'C').reps-getCard(itemRoot(b),'C').reps; });
   return keys[0];
@@ -5324,7 +5326,8 @@ function checkRoot(btn,ok){
 function renderRoots(){
   var r=rootDue();
   document.getElementById('quizContent').innerHTML = r ? rootHTML(r)
-    : '<div class="sch-task"><div class="sch-task-title">No root families loaded yet</div></div>';
+    : '<div class="sch-task"><div class="sch-task-title">Word families open up once you know a word from one</div>'+
+      '<div class="sch-task-sub">Do a round from Today first; families appear as you meet their words.</div></div>';
 }
 
 // ── PATTERN DRILL ─────────────────────────────────────────────
@@ -5336,8 +5339,14 @@ var PAT={p:null,w:null,answered:false};
 // each mode knowing anything about rounds.
 function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern') renderPattern(); else if(ST.mode==='roots') renderRoots(); else newQ(); }
 
+// NOTHING IS TESTED BEFORE IT IS TAUGHT. A pattern asks you to TYPE the
+// filler, so it may only use words you have already met; a pattern with no
+// known filler waits until you know one. (Before this, a first round taught
+// three words and then asked you to type לעבור, סבא and שקל.)
+function knownWord(w){ return getCard(itemWord(w.he),'R').reps>0; }
+function patternKnownFillers(p){ return patternFillers(p).filter(knownWord); }
 function patternDue(){
-  var pool=PATTERNS.filter(function(p){return patternFillers(p).length>0;});
+  var pool=PATTERNS.filter(function(p){return patternKnownFillers(p).length>0;});
   if(!pool.length) return null;
   var due=pool.filter(function(p){return cardDue(itemPattern(p.id),'U');});
   var pick=(due.length?due:pool);
@@ -5348,11 +5357,9 @@ function patternDue(){
   return pick[0];
 }
 function patternPickWord(p){
-  var f=patternFillers(p);
-  // Prefer a word already met in recognition — the pattern is the new thing
-  // here, not the vocabulary.
-  var seen=f.filter(function(w){return getCard(itemWord(w.he),'R').reps>0;});
-  var pool=seen.length>=4?seen:f;
+  // Only words already met: the pattern is the new thing here, not the word.
+  var pool=patternKnownFillers(p);
+  if(!pool.length) pool=patternFillers(p);   // unreachable via patternDue/buildRound
   return pool[Math.floor(Math.random()*pool.length)];
 }
 
@@ -5404,7 +5411,8 @@ function renderPattern(){
   if(!PAT.p){
     document.getElementById('quizContent').innerHTML=
       '<div class="progress-label"><span>תבנית — Patterns</span><span></span></div>'+
-      '<div class="sch-task"><div class="sch-task-title">No patterns available yet</div></div>';
+      '<div class="sch-task"><div class="sch-task-title">Patterns open up once you know a word that fits one</div>'+
+      '<div class="sch-task-sub">Do a round from Today first; each pattern only ever asks for words you have met.</div></div>';
     return;
   }
   PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
