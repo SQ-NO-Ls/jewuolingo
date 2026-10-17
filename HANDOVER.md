@@ -37,6 +37,11 @@ If the clean URL is ever wanted, it needs: export progress → rename → re-ins
 ```
 index.html              6,202 lines — THE APP. Everything: markup, CSS, JS, vocab.
 sw.js                   Service worker. Offline shell + font cache.
+fonts/                  Self-hosted woff2 (Google Fonts subsets, unmodified) + OFL.txt.
+                        frl-* Frank Ruhl Libre, ss4-* Source Serif 4 (roman+italic,
+                        latin+latin-ext), gveret-* Gveret Levin. ~546KB total.
+splash/                 iOS launch screens (apple-touch-startup-image), 7 iPhone
+                        sizes, ~63KB total. make_splash.py regenerates them.
 manifest.webmanifest    PWA manifest (name: "Jewolingo — Hebrew Mastery").
 icons/                  180 / 192 / 512 / 512-maskable PNGs. Full-bleed (no baked-in
                         corners: iOS masks it), dark א on accent #9AA3E8.
@@ -241,6 +246,16 @@ radii: --r-sm 4px, --r-md 8px     ease: cubic-bezier(.2,.8,.2,1)
   distinguish ב/כ, ד/ר, ה/ח/ת, ו/ז/ן, ם/ס.
 - Latin/UI: **Source Serif 4** (`--ui-font`).
 - Cursive: **Gveret Levin** (`--he-cursive`), a real Israeli *ktav yad* hand.
+- **All three are self-hosted** in `fonts/` (2026-10-17): no request goes to
+  Google. The `@font-face` block is a small `<style>` in `<head>`, before the
+  main sheet, with Google's subsets and unicode-ranges. Only
+  `ss4-latin` and `frl-hebrew` are preloaded (the faces on screen at
+  launch); italic, latin-ext and Gveret load on first use. If a face is ever
+  added, add its file to `FONT_FILES` in `sw.js` too.
+- **Launch screen** is the header wordmark ("Jewolingo", Frank Ruhl Libre 900,
+  `--text2` on `--bg`), so launch hands over to the app with no flash. iOS
+  only picks a startup image whose `media` matches the device exactly; a new
+  iPhone size needs a new PNG and `<link>`.
 - Transliteration is *italic*, `--text3`, 0.8× — so shape alone tells you
   "how it sounds" vs "what it means".
 - **Niqqud is VERIFIED.** Frank Ruhl Libre positions every problem case
@@ -408,7 +423,13 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 
 11. **Font cache was keyed to `CACHE_VERSION`** — every deploy deleted it and
     re-downloaded ~200KB, leaving the app briefly unstyled offline right after
-    an update. Now `jw-fonts-v1`, unversioned. Keep it that way.
+    an update. Fonts now live in their own **unversioned** cache, `jw-fonts-v2`
+    (the self-hosted `fonts/` files; `v1` held Google's responses and is
+    deleted on activate). They are precached at **install**, so even the first
+    offline launch has the real faces, and install skips files the cache
+    already holds, so a deploy re-downloads only the shell (verified: zero
+    font requests on a version bump). Do not move them into `SHELL`, and do
+    not bump the `jw-fonts-vN` name unless the font files themselves change.
 
 12. **iOS keeps `:hover` applied after a tap.** A tapped key stayed lit in the
     accent until you tapped elsewhere. Every `:hover` rule is now wrapped in
@@ -465,6 +486,16 @@ not just that the bytes are present — load it and check `vocab.length`,
 deploy till we redesign" after an unprompted deploy. Ask, unless they have
 clearly asked for it to go live.
 
+A worktree's preview needs its own entry in `.claude/launch.json` (another
+port, `--directory` set to the worktree). Do not commit that entry.
+
+### Regenerate launch screens (rarely needed)
+```bash
+python3 -I splash/make_splash.py <FrankRuhlLibre[wght].ttf>
+```
+The TTF is a build input only (github.com/google/fonts, `ofl/frankruhllibre`);
+PIL cannot read the woff2 in `fonts/`.
+
 ### Regenerate data (rarely needed)
 ```bash
 python3 -I scripts/build_frequency.py            # dry run
@@ -488,7 +519,7 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
 - Annotation layer: 1,149 words, ~80% POS coverage
 - Ledger redesign: focus mode, journey map, SI-1452 keyboard, dimension glyph,
   Practice by dimension, Me rebuilt, overlays restyled
-- Offline verified with fonts intact
+- Offline verified with fonts intact; fonts self-hosted, iOS launch screens
 - Niqqud verified in both print and cursive
 
 ### Open / deliberately deferred
