@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v47`
+- **Deployed version:** service-worker `jw-v48`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -174,7 +174,12 @@ exceeds 60. `newPaused()` reports it and Today says so in words.
   decorative — only drawing an icon — which was worse than no gate at all).
 - Checkpoint: `CHK_LEN = 20` words, typed, no hints. Unlocks at 85% secure.
 - `CANDOS` — 11 plain-language goals, L1–L2.
-- `QUEST_DEFS` — daily and weekly.
+- `QUEST_DEFS` — daily and weekly. Daily quests key on `dayKey()` (local
+  date; they used `toISOString()` until 2026-10-16 and rolled over
+  mid-evening). "Clear every due review" is **earned**: it completes only
+  when at least one due review was answered today (`questReviewed()`,
+  called from `reviewItem`) and none remain. With nothing due and nothing
+  answered it shows "none due" rather than a free tick.
 
 ### Streak with banked freezes
 `dayKey()` uses **local** date parts. **Never use `toISOString()`** for this:

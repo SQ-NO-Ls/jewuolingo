@@ -899,6 +899,10 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 
 .t-first{display:block;font-size:24px;color:var(--text);line-height:1.25;padding-top:4px;}
 .t-first-sub{display:block;font-size:15px;color:var(--text2);line-height:1.5;padding-top:6px;}
+
+/* a quest with nothing to do today: neither pending nor done */
+.q-row.idle .q-txt,.q-row.idle .q-n{color:var(--text3);}
+.q-row.idle .q-box{border-style:dashed;}
 </style>
 </head>
 <body class="">
@@ -3184,7 +3188,9 @@ function schedule(c,grade){
           lapses:(c.lapses||0)+(bad?1:0)};
 }
 function reviewItem(id,dim,grade){
-  var nc=schedule(getCard(id,dim),grade);
+  var was=getCard(id,dim);
+  if((dim==='R'||dim==='P') && was.reps>0 && was.due<=Date.now()) questReviewed();
+  var nc=schedule(was,grade);
   ST.cards[id+'|'+dim]=nc;
   return nc;
 }
@@ -4480,12 +4486,14 @@ const QUEST_DEFS={
   cando2   :{scope:'weekly',target:2,  label:'Unlock 2 can-dos',        read:function(){return CANDOS.filter(candoDone).length;}}
 };
 function refreshQuests(){
-  var today=new Date().toISOString().slice(0,10), wk=isoWeek(new Date());
+  // dayKey(), not toISOString(): UTC rolled the daily quests over mid-evening
+  // west of Greenwich (the same trap the streak hit).
+  var today=dayKey(), wk=isoWeek(new Date());
   ST.quests=ST.quests||{};
   if(ST.quests.day!==today){
     ST.quests.day=today;
     ST.quests.daily=['secure3','clearDue','pattern1'].map(function(k){
-      return {k:k,base:QUEST_DEFS[k].read()};
+      return {k:k,base:QUEST_DEFS[k].read(),did:0};
     });
   }
   if(ST.quests.week!==wk){
@@ -4495,9 +4503,22 @@ function refreshQuests(){
     });
   }
 }
+// Counts a DUE review answered today, for the clear-reviews quest.
+function questReviewed(){
+  var qs=ST.quests&&ST.quests.daily; if(!qs || ST.quests.day!==dayKey()) return;
+  qs.forEach(function(q){ if(q.k==='clearDue') q.did=(q.did||0)+1; });
+}
 function questProgress(q){
   var d=QUEST_DEFS[q.k];
-  if(d.countDown) return {now:d.read(), target:0, done:d.read()===0, label:d.label};
+  // "Clear every due review" is earned, not granted: it completes only once
+  // at least one due review was actually answered today and none remain.
+  // With nothing due and nothing answered there is nothing to clear, so it
+  // says so instead of showing a free tick.
+  if(d.countDown){
+    var left=d.read(), did=q.did||0;
+    if(!left && !did) return {now:0, target:0, done:false, idle:true, label:d.label};
+    return {now:left, target:0, done:!left && did>0, label:d.label};
+  }
   var gained=Math.max(0,d.read()-q.base);
   return {now:Math.min(gained,d.target), target:d.target, done:gained>=d.target, label:d.label};
 }
@@ -4866,10 +4887,10 @@ function renderToday(){
       : '<b>'+(c.dueR+c.dueP)+'</b> due · <b>'+Math.min(3,c.fresh)+'</b> new';
   var quests=(ST.quests.daily||[]).map(function(q){
     var pr=questProgress(q);
-    return '<div class="q-row'+(pr.done?' done':'')+'">'+
+    return '<div class="q-row'+(pr.done?' done':pr.idle?' idle':'')+'">'+
       '<span class="q-box">'+(pr.done?'<svg class="i" style="width:12px;height:12px"><use href="#i-check"/></svg>':'')+'</span>'+
       '<span class="q-txt">'+esc(pr.label)+'</span>'+
-      '<span class="q-n num">'+(pr.target===0?pr.now:(pr.now+'/'+pr.target))+'</span></div>';
+      '<span class="q-n'+(pr.idle?'':' num')+'">'+(pr.idle?'none due':pr.target===0?(pr.done?'cleared':pr.now+' left'):(pr.now+'/'+pr.target))+'</span></div>';
   }).join('');
   var d=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
   var lw=vocab.filter(function(w){ return w.level===lv; }), met=0, sec=0;
@@ -6080,7 +6101,7 @@ function sichaReplay(){ var id=SCH.scen.id; SCH.debrief=null; startSicha(id); }
 function exportProgress(){
   var payload={app:'jewolingo',version:1,exportedAt:new Date().toISOString(),
                progress:JSON.parse(localStorage.getItem('jw_progress')||'{}')};
-  var name='jewolingo-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  var name='jewolingo-backup-'+dayKey()+'.json';
   var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   var file=null;
   try{ file=new File([blob],name,{type:'application/json'}); }catch(e){}
