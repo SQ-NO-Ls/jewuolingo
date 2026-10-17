@@ -1070,6 +1070,34 @@ html{font-synthesis-weight:none;font-synthesis-style:none;}
 body{text-rendering:optimizeLegibility;font-kerning:normal;font-optical-sizing:auto;}
 .he-text,.he,[lang="he"]{font-weight:500;}
 .t-next-lbl,.focus-kind,.pr-gl,.map-title,.sch-sec-lbl,.test-sec-lbl,.group-h,.done-l,.sel-cap,.fl,.t-slice-lbl{font-weight:500;}
+
+/* hint ladder */
+.hint-btn{min-height:44px;padding:6px var(--s4);background:none;border:1px solid var(--border);
+  border-radius:var(--r-sm);color:var(--text2);font:400 15px/1 var(--ui-font);cursor:pointer;}
+.hint-btn:disabled{opacity:.5;}
+.hint-out{min-block-size:1.9em;font-family:var(--he-font);font-size:22px;line-height:1.9;color:var(--text2);}
+/* round summary: what to review */
+.done-miss{width:100%;max-width:340px;text-align:start;padding-top:var(--s5);}
+.done-miss-h{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding-bottom:var(--s2);}
+.dm-row{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);
+  padding:var(--s2) 0;border-bottom:1px solid var(--border);}
+.dm-l{display:flex;flex-direction:column;align-items:flex-start;}
+.dm-typed{font-family:var(--he-font);font-size:15px;line-height:1.6;color:var(--text3);}
+.dm-he{font-family:var(--he-font);font-size:22px;line-height:1.6;color:var(--text);}
+.dm-en{font-size:15px;color:var(--text2);text-align:end;}
+
+/* days-studied calendar (Me) */
+.cal-b{padding:var(--s4);}
+.cal-h{font-size:15px;color:var(--text2);padding-bottom:var(--s3);}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:10px 0;justify-items:center;align-items:center;}
+.cal-dow{font-size:12px;color:var(--text3);}
+.cal-d{width:14px;height:14px;border-radius:var(--r-sm);background:var(--surface3);}
+.cal-d.on{background:var(--text2);}
+.cal-d.today{box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--accent-ink);}
+.cal-d.future{background:none;box-shadow:inset 0 0 0 1px var(--border);}
+
+/* the root line under a typed answer gets its own line in the feedback slot */
+.fs-fb .fs-reveal{flex-basis:100%;padding:var(--s1) 0 0;}
 </style>
 </head>
 <body class="">
@@ -3573,11 +3601,11 @@ function updateSelLabels(){
 // Labelled, and silent about zeros: "12 due · 4-day streak · 1 freeze".
 function renderHead(){
   var el=document.getElementById('headStats'); if(!el) return;
-  var due=dueTotal(), ds=ST.dayStreak||0, fz=ST.freezes||0, bits=[];
-  if(due) bits.push(due+' due');
-  if(ds) bits.push(ds+'-day streak');
-  if(fz) bits.push(fz+(fz===1?' freeze':' freezes'));
-  el.textContent=bits.join(' · ');
+  // Due count only. A streak counter motivates while intact and drives people
+  // away once broken (Silverman & Barasch 2023): days studied live in Me as a
+  // calendar instead, with no consecutive count and no "broken" state.
+  var due=dueTotal();
+  el.textContent=due?due+' due':'';
 }
 function updateStats(){
   document.getElementById('streakNum').textContent=ST.streak;
@@ -3609,6 +3637,7 @@ function prFrame(){
   qc.classList.toggle('fsq',!!FSQ_MODES[ST.mode]); qc.setAttribute('data-mode',ST.mode); qc.scrollTop=0;
 }
 function closePractice(){
+  _cont=null;
   document.body.classList.remove('focus','pfocus');
   renderModes();
   window.scrollTo(0,_prScroll);
@@ -3622,7 +3651,7 @@ function practiceMissed(){
 
 // ── NEW QUESTION DISPATCHER ───────────────────────────────────
 function newQ(){
-  _pid=0; ST.answered=false;
+  _pid=0; ST.answered=false; _cont=null;
   if(ST.mode==='test'){openTest();return;}
   if(ST.mode==='sicha'){renderSicha();return;}
   if(ST.mode==='pattern'){renderPattern();return;}
@@ -3713,7 +3742,8 @@ function checkMC(i,correct){
   else{ST.streak=0;}
   var fb=document.getElementById('mcfb');
   if(fb) fb.innerHTML=afterReveal(ST.cur);
-  updateStats();setTimeout(function(){advance(correct);},correct?1100:2400);
+  updateStats(); hold(function(){advance(correct);});
+  showCont(fb&&fb.nextElementSibling&&fb.nextElementSibling.classList.contains('fs-row')?fb.nextElementSibling:fb);
 }
 
 // ── KEYBOARD ─────────────────────────────────────────────────
@@ -3795,6 +3825,24 @@ document.addEventListener('pointercancel',_kbUp);
 document.addEventListener('click',function(e){
   if(_kbKey(e.target) && Date.now()-_kbPtrAt<800){ e.stopPropagation(); e.preventDefault(); }
 },true);
+// ── HOLD, THEN CONTINUE ──────────────────────────────────────
+// Feedback holds until the learner taps: no answer ever auto-advances (the
+// app has no timers, and a held frame is where the correction is read).
+// One pending continuation; Continue buttons, the keyboard's Check key
+// (relabelled) and Enter all call cont().
+var _cont=null;
+function hold(fn){ _cont=fn; }
+function cont(){ var f=_cont; _cont=null; if(f) f(); }
+function showCont(el,label){
+  if(!el) return;
+  var b='<button class="btn cont-btn" onclick="cont()">'+(label||'Continue')+'</button>';
+  if(el.classList&&el.classList.contains('fs-row')) el.innerHTML=b;
+  else el.insertAdjacentHTML('afterend','<div class="fs-row cont-row">'+b+'</div>');
+}
+function kbToContinue(){
+  var g=document.getElementById('kbGo'); if(!g) return;
+  g.disabled=false; g.textContent='Continue'; g.onclick=function(){ cont(); };
+}
 function kbClear(){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value='';kbSyncGo();}
 
 // ── SHORESH (ROOT) MODE ────────────────────────────────────────
@@ -3953,15 +4001,36 @@ function checkShoresh(i,correct){
   if(correct){ST.correct++;ST.score+=15;ST.streak++;toast('Correct','good');}
   else{ST.streak=0;toast(''+document.getElementById('quizContent')._shCorrect.meaning,'bad');}
   updateStats();
-  setTimeout(function(){renderShorashQuiz();},1500);
+  hold(renderShorashQuiz); showCont(btns[0]&&btns[0].parentNode);
 }
 
 // ── GRAMMAR MODE ──────────────────────────────────────────────
+// A hint ladder instead of a pronunciation reveal: showing how the ANSWER
+// sounds gives it away. Hint 1 = first letter + a slot per letter (a correct
+// answer then grades "hard"); hint 2 = the answer (grades as a miss, so the
+// word comes back later in the round). Constrained generation still beats
+// reading the answer.
+var _hint=0;
+function typeHint(){
+  if(ST.answered||!ST.cur) return;
+  _hint++;
+  var he=stripV(ST.cur.he), out=document.getElementById('hintOut'), b=document.getElementById('hintBtn');
+  if(!out||!b) return;
+  if(_hint===1){
+    var h='', first=true;
+    for(var i=0;i<he.length;i++){ var c=he[i]; if(c===' '){ h+='   '; continue; } h+=(first?c:'_')+' '; first=false; }
+    out.textContent=h.trim(); b.textContent='Show answer';
+  } else {
+    out.innerHTML=esc(dHe(ST.cur))+' <span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>';
+    b.disabled=true;
+  }
+}
 function typeHTML(w){
-  _kbSubmit=checkType;
+  _kbSubmit=checkType; _hint=0;
   return '<div class="fs-prompt">'+
       '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
-      pronBtn(w)+
+      '<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>'+
+      '<div class="hint-out" id="hintOut" lang="he" dir="rtl"></div>'+
     '</div>'+
     '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" '+
       'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" '+
@@ -3993,15 +4062,17 @@ function diffMark(typed,want){
   return out;
 }
 function checkType(){
-  if(ST.answered)return;
+  if(ST.answered){ cont(); return; }
   var inp=document.getElementById('ti');
   var typed=stripV(inp.value.trim()), correct=stripV(ST.cur.he);
   var m=matchAnswer(inp.value,ST.cur.he);
+  var revealed=_hint>=2, hinted=_hint===1;
   ST.answered=true; ST.total++;
-  reviewItem(itemWord(ST.cur.he),'P', m==='wrong'?false:(m==='close'?'hard':true));
-  trackW(ST.cur.he,m!=='wrong');
+  if(ROUND.active) ROUND.lastTyped=inp.value.trim();
+  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed)?false:((m==='close'||hinted)?'hard':true));
+  trackW(ST.cur.he,m!=='wrong'&&!revealed);
   if(m==='close') typed=correct;
-  var ok=(typed===correct), fb=document.getElementById('tfb');
+  var ok=(typed===correct)&&!revealed, fb=document.getElementById('tfb');
   var go=document.getElementById('kbGo'); if(go) go.disabled=true;
   if(ok){
     inp.classList.add('good');
@@ -4013,9 +4084,11 @@ function checkType(){
   } else {
     inp.classList.add('bad'); ST.streak=0;
     fb.innerHTML='<span class="was" lang="he" dir="rtl">'+diffMark(typed,correct)+'</span>'+
-      '<span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>';
+      '<span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>'+
+      (revealed&&typed===correct?'<span class="fs-note">shown, so it comes back</span>':'');
   }
-  updateStats(); setTimeout(function(){advance(ok);}, ok?1200:2600);
+  var _rv=afterReveal(ST.cur); if(_rv) fb.insertAdjacentHTML('beforeend',_rv);   // inside the reserved slot: nothing below moves
+  updateStats(); hold(function(){advance(ok);}); kbToContinue();
 }
 
 // ── MATCH ─────────────────────────────────────────────────────
@@ -4047,7 +4120,7 @@ function selMatch(el,word,type){
     ST.matchDone.push(word);ST.matchSel=null;
     ST.score+=15;ST.streak++;ST.learned.add(word);ST.total++;ST.correct++;
     trackW(word,true);updateStats();toast('Match','good');
-    if(ST.matchDone.length===ST.matchPairs.length)setTimeout(function(){toast('All matched','good');setTimeout(renderMatch,800);},400);
+    if(ST.matchDone.length===ST.matchPairs.length){ toast('All matched','good'); hold(renderMatch); showCont(document.querySelector('#quizContent .match-grid'),'Next set'); }
   } else {
     prev.el.classList.remove('selected');
     el.classList.add('wrong-flash');prev.el.classList.add('wrong-flash');
@@ -4095,7 +4168,7 @@ function pickBank(word,idx){
     if(fb) fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:22px;color:var(--blue)">'+dHe(ST.cur)+'</span> <em style="color:var(--blue);font-size:13px">('+ST.cur.pron+')</em>';
     toast(''+ST.cur.en,'bad');
   }
-  updateStats();setTimeout(function(){advance(ok);},1800);
+  updateStats(); hold(function(){advance(ok);}); showCont(document.getElementById('sfb'));
 }
 
 // ── CONVERSATION ──────────────────────────────────────────────
@@ -4325,7 +4398,7 @@ function checkGram(i,correct){
   if(correct){ST.correct++;ST.score+=15;ST.streak++;toast('Correct','good');}
   else{ST.streak=0;toast(''+_gramQ.he+' ('+_gramQ.pron+')','bad');}
   updateStats();
-  setTimeout(function(){startGramQuiz();},1500);
+  hold(startGramQuiz); showCont(btns[0]&&btns[0].parentNode);
 }
 
 // ── ANALYTICS ─────────────────────────────────────────────────
@@ -4519,11 +4592,11 @@ function checkTestMC(btn,ok){
   var fb=document.getElementById('tfb');
   if(fb) fb.innerHTML=ok?'<span style="color:var(--green)"><svg class="i"><use href="#i-check"/></svg></span>':'<span style="color:var(--rose)">'+(item.style==='mc_en2he'?esc(w.en)+' = ':'')+'</span>'+(item.style==='mc_en2he'?'<span class="he-text" style="color:var(--blue);font-size:20px">'+dHe(w)+'</span>':'<span class="he-text" style="color:var(--blue);font-size:20px">'+dHe(w)+'</span>');
   _testRecord(ok,'');
-  setTimeout(_testNext, ok?900:1600);
+  hold(_testNext); showCont(fb);
 }
 
 function checkTestType(){
-  if(TST.answered)return; TST.answered=true; ST.answered=true;
+  if(TST.answered){ cont(); return; } TST.answered=true; ST.answered=true;
   var w=TST.queue[TST.idx].w;
   var inp=document.getElementById('ti');
   var typed=stripV((inp?inp.value:'').trim());
@@ -4535,7 +4608,7 @@ function checkTestType(){
     else fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:24px;color:var(--blue)">'+dHe(w)+'</span> <em style="color:var(--blue);font-size:13px">('+w.pron+')</em>';
   }
   _testRecord(ok, typed||'(blank)');
-  setTimeout(_testNext, ok?1100:2000);
+  hold(_testNext); kbToContinue(); showCont(fb);
 }
 
 function _testRecord(ok,your){
@@ -4789,7 +4862,7 @@ function renderCheckpoint(){
   var i=document.getElementById('ti'); if(i) i.focus();
 }
 function checkCheckpoint(){
-  if(CHK.answered) return;
+  if(CHK.answered){ cont(); return; }
   var inp=document.getElementById('ti'); if(!inp) return;
   var w=CHK.queue[CHK.i], m=matchAnswer(inp.value,w.he);
   if(m==='wrong'&&!inp.value.trim()) return;
@@ -4802,7 +4875,7 @@ function checkCheckpoint(){
     : m==='close' ? '<span style="color:var(--teal)">almost — '+esc(w.he)+'</span>'
     : '<span style="color:var(--rose)">'+esc(w.he)+'</span>';
   CHK.i++;
-  setTimeout(renderCheckpoint, m==='exact'?650:1600);
+  hold(renderCheckpoint); kbToContinue();
 }
 function abortCheckpoint(){ CHK.active=false; renderLevelsView(); }
 function finishCheckpoint(){
@@ -4960,15 +5033,16 @@ function segBar(){
   return h+'</div>';
 }
 function exitRound(){
-  ROUND.active=false;
+  ROUND.active=false; _cont=null;
   document.body.classList.remove('focus');
   saveProgress(); renderToday(); showView('Today');
 }
 function roundStep(){
+  _cont=null;
   if(ROUND.i>=ROUND.steps.length){ return roundDone(); }
   var st=ROUND.steps[ROUND.i];
   ST.answered=false;
-  if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=patternPickWord(st.p); PAT.answered=false; }
+  if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=st.w||patternPickWord(st.p); st.w=PAT.w; PAT.answered=false; }
   else if(st.kind==='root'){ /* rootHTML sets ROOTQ */ }
   else ST.cur=st.w;
   document.body.classList.add('focus');
@@ -4980,7 +5054,7 @@ function roundStep(){
           '<svg class="i"><use href="#i-close"/></svg></button>'+
         segBar()+
       '</div>'+
-      '<div class="focus-kind">'+STEP_LABEL[st.kind]+'</div>'+
+      '<div class="focus-kind">'+STEP_LABEL[st.kind]+(st.retest?' · again':'')+'</div>'+
       '<div id="stepBody"></div>'+
     '</div>';
   var host=document.getElementById('stepBody');
@@ -4993,9 +5067,32 @@ function roundStep(){
   kbSyncGo();
 }
 function roundNext(ok){
-  if(ROUND.steps[ROUND.i]) ROUND.steps[ROUND.i].ok=(ok!==false);
+  var st=ROUND.steps[ROUND.i];
+  if(st) st.ok=(ok!==false);
   if(ok===false) ROUND.wrong++; else ROUND.right++;
+  if(ok===false && st && st.w){
+    // Corrected at once, then RETRIEVED again 3–5 steps later (immediate
+    // correction + delayed re-test). Once per item, at most 4 per round.
+    if(!st.retest && (st.kind==='mc'||st.kind==='type'||st.kind==='pattern') && (ROUND.retests||0)<4){
+      var at=Math.min(ROUND.steps.length, ROUND.i+1+3+Math.floor(Math.random()*3));
+      ROUND.steps.splice(at,0,{kind:st.kind,w:st.w,p:st.p,retest:true});
+      ROUND.retests=(ROUND.retests||0)+1;
+    }
+    ROUND.misses=ROUND.misses||[];
+    if(!ROUND.misses.some(function(m){ return m.w===st.w; })) ROUND.misses.push({w:st.w, typed:ROUND.lastTyped||''});
+  }
+  ROUND.lastTyped='';
   ROUND.i++; roundStep();
+}
+// "Review these again": a short round of exactly the words missed.
+var _lastMisses=[];
+function reviewMisses(){
+  var steps=_lastMisses.map(function(w){
+    return {kind:getCard(itemWord(w.he),'P').reps>0?'type':'mc', w:w};
+  });
+  if(!steps.length) return;
+  ROUND={active:true,steps:steps,i:0,right:0,wrong:0,started:Date.now()};
+  showView('Today'); roundStep();
 }
 function roundDone(){
   ROUND.active=false;
@@ -5005,6 +5102,15 @@ function roundDone(){
   var acc=tot?Math.round(100*ROUND.right/tot):0;
   bumpDay(); saveProgress();
   var lv=activeLevel(), sh=levelShape(lv);
+  var miss=ROUND.misses||[]; _lastMisses=miss.map(function(m){ return m.w; });
+  // What you got wrong, your attempt (muted) above the right form.
+  var missHTML=miss.length?'<div class="done-miss"><div class="done-miss-h">To review</div>'+
+    miss.map(function(m){
+      return '<div class="dm-row"><div class="dm-l">'+
+          (m.typed?'<span class="dm-typed" lang="he" dir="rtl">'+esc(m.typed)+'</span>':'')+
+          '<span class="dm-he" lang="he" dir="rtl">'+esc(dHe(m.w))+'</span></div>'+
+        '<span class="dm-en">'+esc(m.w.en)+'</span></div>';
+    }).join('')+'</div>':'';
   document.getElementById('todayBody').innerHTML=
     '<div class="done-wrap">'+
       '<div class="done-mid">'+
@@ -5014,9 +5120,13 @@ function roundDone(){
         '<span class="num">'+ROUND.wrong+'</span> to revisit · <span class="num">'+mins+'</span> min</div>'+
       '<div class="done-dims">'+dimGlyph(sh)+'<span class="dg-lbl">R P U C · Level '+lv+'</span></div>'+
       '</div>'+
+      missHTML+
       '<div class="done-actions">'+
-        '<button class="btn" onclick="startRound()">Another round</button>'+
-        '<button class="btn-quiet" onclick="goTab(\'Levels\')">See the map</button>'+
+        (miss.length
+          ? '<button class="btn" onclick="reviewMisses()">Review these again</button>'+
+            '<button class="btn-quiet" onclick="startRound()">Another round</button>'
+          : '<button class="btn" onclick="startRound()">Another round</button>'+
+            '<button class="btn-quiet" onclick="goTab(\'Levels\')">See the map</button>')+
       '</div>'+
     '</div>';
 }
@@ -5238,6 +5348,20 @@ function renderLevelsView(){
 }
 
 // ── Me view ───────────────────────────────────────────────────
+// One square per day you studied this month. No numbers, no streak, nothing
+// that can "break": just a record of showing up.
+function studyCalendar(){
+  var now=new Date(), y=now.getFullYear(), mo=now.getMonth(), today=now.getDate();
+  var lead=new Date(y,mo,1).getDay(), days=new Date(y,mo+1,0).getDate();
+  var h='<div class="cal-h">'+esc(now.toLocaleDateString('en-GB',{month:'long',year:'numeric'}))+'</div><div class="cal-g">';
+  ['S','M','T','W','T','F','S'].forEach(function(d){ h+='<span class="cal-dow">'+d+'</span>'; });
+  for(var i=0;i<lead;i++) h+='<span></span>';
+  for(var d=1;d<=days;d++){
+    var on=ST.studied&&ST.studied[dayKey(new Date(y,mo,d))];
+    h+='<span class="cal-d'+(on?' on':'')+(d===today?' today':'')+(d>today?' future':'')+'" title="'+d+'"></span>';
+  }
+  return h+'</div>';
+}
 function appearanceRow(){
   var t=themePref();
   return '<div class="row segc-row"><span>Appearance</span><span class="segc" role="group" aria-label="Appearance">'+
@@ -5276,9 +5400,9 @@ function renderMe(){
       row('Secure words', secure+' / '+vocab.length)+
       row('Words met', met)+
       row('Accuracy', acc)+
-      row('Day streak', (ST.dayStreak||0))+
-      row('Streak freezes', (ST.freezes||0)+' / 3')+
-    '</div></section>')+
+      row('Days studied', Object.keys(ST.studied||{}).length)+
+    '</div></section>'+
+    '<section class="group"><h3 class="group-h">This month</h3><div class="group-b cal-b">'+studyCalendar()+'</div></section>')+
     '<section class="group"><h3 class="group-h">Display</h3><div class="group-b">'+
       appearanceRow()+
       sw('Vowel points', ST.showVowels, 'toggleVowels()')+
@@ -5370,7 +5494,8 @@ function checkRoot(btn,ok){
   if(ok){ ST.correct++; ST.score+=15; ST.streak++; toast('' +ROOTQ.root,'good'); }
   else  { ST.streak=0; toast(''+ROOTQ.answer.he,'bad'); }
   updateStats();
-  setTimeout(function(){ advance(ok); }, ok?1100:2300);
+  hold(function(){ advance(ok); });
+  var host=btn.closest('#stepBody,#quizContent'); showCont(host&&host.querySelector('.fs-row'));
 }
 function renderRoots(){
   var r=rootDue();
@@ -5471,11 +5596,12 @@ function renderPattern(){
 
 
 function checkPattern(){
-  if(PAT.answered) return;
+  if(PAT.answered){ cont(); return; }
   var inp=document.getElementById('ti'); if(!inp) return;
   var typed=stripV(inp.value.trim()), want=stripV(PAT.w.he);
   if(!typed) return;
   PAT.answered=true; ST.answered=true; ST.total++;
+  if(ROUND.active) ROUND.lastTyped=inp.value.trim();
   var m=matchAnswer(inp.value,PAT.w.he), ok=(m!=='wrong');
   var g=(m==='wrong')?false:(m==='close'?'hard':true);
   // One answer, two dimensions.
@@ -5497,7 +5623,7 @@ function checkPattern(){
     toast(''+PAT.w.he,'bad');
   }
   updateStats();
-  setTimeout(function(){advance(ok);}, ok?1200:2600);
+  hold(function(){advance(ok);}); kbToContinue();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -6395,7 +6521,8 @@ function saveProgress(){
       dayStreak:ST.dayStreak||0,lastDay:ST.lastDay||'',freezes:ST.freezes||0,
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
       userVocab:ST.userVocab||[],grammarErrors:ST.grammarErrors||{},
-      sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{}
+      sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{},
+      studied:ST.studied||{}
     }));
   }catch(e){}
 }
@@ -6425,6 +6552,8 @@ function loadProgress(){
     ST.userVocab=d.userVocab||[];ST.grammarErrors=d.grammarErrors||{};
     ST.sichaMinutes=d.sichaMinutes||0;
     ST.quests=d.quests||{};ST.checkpoints=d.checkpoints||{};
+    // Days studied (a calendar, not a streak). Older saves only know the last day.
+    ST.studied=d.studied||{}; if(!d.studied&&d.lastDay) ST.studied[d.lastDay]=1;
     if(d.showVowels){ST.showVowels=true;
       var b=document.getElementById('vowelBtn');if(b)b.classList.add('on');
       var l=document.getElementById('vowelLbl');if(l)l.textContent='ON';}
@@ -6449,6 +6578,7 @@ function daysBetween(a,b){
 // being a reason to quit. Freezes are earned by showing up, spent silently.
 function bumpDay(){
   var today=dayKey();
+  ST.studied=ST.studied||{}; ST.studied[today]=1;
   if(ST.lastDay===today) return;
   if(!ST.lastDay){ ST.dayStreak=1; ST.lastDay=today; ST.freezes=ST.freezes||0; return; }
   var gap=daysBetween(ST.lastDay,today);
@@ -6463,8 +6593,6 @@ function bumpDay(){
   ST.lastDay=today;
   // One freeze per 5 consecutive days, capped at 3.
   if(ST.dayStreak%5===0 && ST.freezes<3) ST.freezes++;
-  if(ST.frozeFor>0) setTimeout(function(){
-    toast(' Streak freeze used — '+ST.dayStreak+' days still going','good'); }, 700);
 }
 function resetProgress(){
   if(confirm('Reset ALL saved progress (score, streaks, SRS, word stats)? This cannot be undone.')){
@@ -6475,6 +6603,7 @@ function resetProgress(){
 
 // ── KEYBOARD SHORTCUTS ────────────────────────────────────────
 document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&_cont){ e.preventDefault(); cont(); return; }
   var t=e.target;
   if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
   var inTest=document.getElementById('testOverlay').classList.contains('open');

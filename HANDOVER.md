@@ -179,6 +179,29 @@ learner's first round is now intro ×3 then each word retrieved (6 steps).
 
 `ROUND_LEN = 12`.
 
+### The answer loop (2026-10-17, from the user's own research)
+- **Feedback holds until the learner taps.** No answer auto-advances
+  anywhere (`hold(fn)` / `cont()`): a Continue button appears in the step's
+  action row; in typing steps the keyboard's Check key becomes Continue;
+  Enter continues. Only the flashcard's self-grade tap advances by itself.
+- **Misses come back.** `roundNext` re-inserts a missed mc/type/pattern step
+  3–5 steps later (`retest`, once per item, max 4 per round; labelled
+  "· again"): immediate correction + delayed re-test.
+- **Hint ladder, not a pronunciation reveal**, on typed production
+  (`typeHint`): 1) first letter + a slot per letter → a correct answer grades
+  `hard`; 2) the answer → grades as a miss. The old eye button there showed
+  how the ANSWER sounds, i.e. gave it away.
+- **Round summary lists the misses** (what you typed, muted, above the right
+  form) with **Review these again** (`reviewMisses`).
+- **No streak on screen.** Header = due count only; Me shows "Days studied"
+  and a month calendar (`ST.studied`, saved in `jw_progress`). The streak
+  fields are still stored, just not shown.
+- Considered from the research and deliberately NOT done (yet): Sure/Unsure
+  commit buttons, a difficulty controller targeting 85–90%, a 5-stage
+  production ramp, FSRS, moving modes into a Words library, and the
+  research's Today ("Begin · N due" + calendar) — the user specified Today
+  themselves just before.
+
 ### Load governor
 `LOAD = {pauseNewAt:60, catchUpCap:40}` — new words pause when the backlog
 exceeds 60. `newPaused()` reports it and Today says so in words.
