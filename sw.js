@@ -1,6 +1,6 @@
 // Jewolingo service worker — offline app shell.
 // Bump CACHE_VERSION on every deploy so clients pick the new build up.
-const CACHE_VERSION = 'jw-v48';
+const CACHE_VERSION = 'jw-v49';
 const SHELL = 'shell-' + CACHE_VERSION;
 // Deliberately NOT versioned: fonts do not change between builds, and
 // tying them to CACHE_VERSION re-downloads ~200KB on every deploy and

@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v48`
+- **Deployed version:** service-worker `jw-v49`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -296,6 +296,22 @@ the 8- and 9-key rows sit centred. 46px tall, 6px gaps, 10px row gap, keys
 (`data-ch` + `:active::before`); iOS only applies `:active` because of the
 passive `touchstart` listener at the bottom of the script — keep it.
 
+### Motion (2026-10-17)
+Entrance-only, transform + opacity, house curve `--ease`, all under 300ms:
+a new step settles in (`step-in`, 200ms; the keyboard never animates),
+feedback fades up beside the answer (`fb-in`), the Practice layer lifts in
+(`layer-in`, 240ms; closing is instant), buttons press to `scale(.98)`
+instantly and release in 80ms. Tab changes use View Transitions through
+`goTab()`, with the tab bar and header named so they stay still.
+
+**Nothing may wait for an animation.** No `animationend`/`transitionend`
+anywhere — that is what makes Reduce Motion (`animation:none`) safe: content
+simply appears. Verified by playing full rounds, typing included, with all
+animation forced off. `goTab()` also has a 150ms fallback, because a view
+transition only runs its update on a rendered frame (see trap 14).
+Chat-style Practice modes (Sicha, Dialogue) are excluded from the entrance
+via `#quizContent[data-mode]`, since they redraw the whole thread per turn.
+
 ### Information architecture
 Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 `viewLevels` internally; the tab is labelled Map).
@@ -403,6 +419,13 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     `getBoundingClientRect()` still reported 0–375. Overflow clips at the
     padding edge, so the 16px side padding lives on the scroll container, not
     on the card around it. Check with a screenshot, not rects.
+
+14. **View Transitions wait for a frame.** In a page that renders no frames
+    (hidden preview pane, backgrounded tab) `startViewTransition`'s update
+    never runs, so a tab tap did nothing. `goTab()` switches directly after
+    150ms if the transition has not started. Never make a state change
+    depend on an animation or a frame. The hidden Claude preview pane also
+    leaves CSS animations at frame 0 until a screenshot forces a paint.
 
 ---
 

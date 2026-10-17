@@ -903,6 +903,45 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 /* a quest with nothing to do today: neither pending nor done */
 .q-row.idle .q-txt,.q-row.idle .q-n{color:var(--text3);}
 .q-row.idle .q-box{border-style:dashed;}
+
+
+/* ── MOTION ──────────────────────────────────────────────────
+   Entrance-only: new content settles in, and NOTHING waits for an
+   animation to finish, so no setting (Reduce Motion, Low Power, a
+   backgrounded tab) can stall a round. Transform and opacity only, all
+   under 300ms, one house curve. No bounce, no shake, no count-ups. The
+   keyboard never animates — it is touched hundreds of times a day. */
+:root{--d-press:80ms;--d-step:200ms;--d-screen:280ms;}
+@keyframes step-in{from{opacity:0;transform:translateY(6px);}}
+@keyframes fb-in{from{opacity:0;transform:translateY(4px);}}
+@keyframes layer-in{from{opacity:0;transform:translateY(12px);}}
+@keyframes fade-out{to{opacity:0;}}
+/* a new step / question */
+#stepBody>:not(.kbd),
+body.pfocus #quizContent.fsq>:not(.kbd),
+body.pfocus #quizContent:not(.fsq):not([data-mode="sicha"]):not([data-mode="conversation"])>*{
+  animation:step-in var(--d-step) var(--ease) both;}
+/* feedback arrives beside the answer, never as a flash */
+.fs-fb>*{animation:fb-in var(--d-step) var(--ease) both;}
+/* opening a Practice mode lifts the layer in; closing is instant */
+body.pfocus #viewPractice .quiz-card{animation:layer-in 240ms var(--ease) both;}
+/* press states: instant on press, 80ms release, no lift and no glow */
+.btn,.btn-quiet,.fs-opt,.big-btn{transition:transform var(--d-press) var(--ease),
+  background-color var(--d-press) var(--ease),border-color .12s var(--ease),color .12s var(--ease);}
+.btn:active,.btn-quiet:active,.big-btn:active,.fs-opt:active:not(:disabled){transform:scale(.98);transition:none;}
+.tabbar button{transition:opacity var(--d-press) var(--ease);}
+.tabbar button:active{opacity:.55;transition:none;}
+/* tab changes: View Transitions (Safari 18+), progressive. The tab bar and
+   header are named so they stay put while the screen between them changes. */
+::view-transition-old(root){animation:140ms var(--ease) both fade-out;}
+::view-transition-new(root){animation:var(--d-screen) var(--ease) both step-in;}
+.tabbar{view-transition-name:tabbar;}
+.app>.compact-head{view-transition-name:apphead;}
+/* `*` does not reach the view-transition pseudo-elements, so they get their
+   own reduced-motion rule (JS also skips the transition entirely). */
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important;}
+}
 </style>
 </head>
 <body class="">
@@ -1010,10 +1049,10 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 </div>
 
 <nav class="tabbar">
-  <button id="tabToday"    class="on" onclick="showView('Today')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-today"/></svg></span>Today</button>
-  <button id="tabLevels"            onclick="showView('Levels')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-map"/></svg></span>Map</button>
-  <button id="tabPractice"          onclick="showView('Practice')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-practice"/></svg></span>Practice</button>
-  <button id="tabMe"                onclick="showView('Me')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-me"/></svg></span>Me</button>
+  <button id="tabToday"    class="on" onclick="goTab('Today')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-today"/></svg></span>Today</button>
+  <button id="tabLevels"            onclick="goTab('Levels')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-map"/></svg></span>Map</button>
+  <button id="tabPractice"          onclick="goTab('Practice')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-practice"/></svg></span>Practice</button>
+  <button id="tabMe"                onclick="goTab('Me')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-me"/></svg></span>Me</button>
 </nav>
 
 <div class="test-overlay" id="testOverlay"></div>
@@ -3405,7 +3444,7 @@ function prFrame(){
   var mode=MODES.filter(function(x){return x.id===ST.mode;})[0];
   var t=document.getElementById('prTitle'); if(t) t.textContent=mode?mode.en:'';
   var qc=document.getElementById('quizContent');
-  qc.classList.toggle('fsq',!!FSQ_MODES[ST.mode]); qc.scrollTop=0;
+  qc.classList.toggle('fsq',!!FSQ_MODES[ST.mode]); qc.setAttribute('data-mode',ST.mode); qc.scrollTop=0;
 }
 function closePractice(){
   document.body.classList.remove('focus','pfocus');
@@ -4593,6 +4632,24 @@ function finishCheckpoint(){
 // SHELL — Today / Levels / Practice / Me
 // ══════════════════════════════════════════════════════════════
 var VIEW='Today';
+// Tab changes animate where the browser supports View Transitions and the
+// user has not asked for reduced motion; everywhere else they are instant.
+// The DOM update runs either way — the transition is decoration, never a gate.
+var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+function goTab(v){
+  if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
+  // A view transition runs its update on the next rendered frame. If no frame
+  // comes (throttled or backgrounded page), the tab must still change: after
+  // 150ms we switch directly and drop the animation. Whichever runs first wins.
+  var done=false;
+  function go(){ if(done) return; done=true; showView(v); }
+  var t=document.startViewTransition(go);
+  setTimeout(function(){ if(!done){ go(); try{ t.skipTransition(); }catch(e){} } },150);
+  // a skipped transition rejects these; the view has still changed
+  if(t&&t.ready) t.ready.catch(function(){});
+  if(t&&t.finished) t.finished.catch(function(){});
+  if(t&&t.updateCallbackDone) t.updateCallbackDone.catch(function(){});
+}
 function showView(v){
   VIEW=v;
   ['Today','Levels','Practice','Me'].forEach(function(n){
@@ -4765,7 +4822,7 @@ function roundDone(){
       '</div>'+
       '<div class="done-actions">'+
         '<button class="btn" onclick="startRound()">Another round</button>'+
-        '<button class="btn-quiet" onclick="showView(\'Levels\')">See the map</button>'+
+        '<button class="btn-quiet" onclick="goTab(\'Levels\')">See the map</button>'+
       '</div>'+
     '</div>';
 }
