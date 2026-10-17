@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v46`
+- **Deployed version:** service-worker `jw-v47`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -314,7 +314,20 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
 - **Practice** — grouped by dimension (`MODE_DIM`), weakest first, with two
   quiet filter buttons. Each mode has a line icon (`#i-m-<id>` in the
   sprite, drawn in-house — no third-party set) instead of a Hebrew letter. The stat pills and three dropdowns were removed.
-- **Me** — plain labelled list, vowel/script toggles, analytics, settings.
+- **Me** — iOS inset grouped lists (`.group` / `.group-b` / `.row`): an
+  identity block (secure count + `dimGlyph`), Progress, Display (real
+  `.switch` controls — the one exception to the two-radii rule, because a
+  square toggle reads as a checkbox), What the slots mean, More, and Reset
+  progress alone in rose. First run leads with the R/P/U/C explanation.
+  "Words met" now counts map states (`dotState`), not the legacy
+  `ST.learned` set, so Me and the Map agree.
+- **Map canvas** (`drawMap`) — 8px filled cells with 2px gaps, labelled level
+  bands, drawn at up to 3× density. **All five states are kept** (unseen,
+  met, recognised, secure, due) and encoded by lightness: the research
+  proposal to colour learned cells by level was rejected because it
+  collapses those states and swaps lightness for hue.
+- **First run** — Today says "Your first words" with a **Begin** button; the
+  Map carries a one-line caption; the header is silent.
 
 ---
 

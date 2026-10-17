@@ -849,6 +849,56 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 .pr-nm{font-size:17px;}
 .pr-ds{font-size:13px;}
 .pr-gl .pct.weak{color:var(--text2);font-style:italic;}
+
+
+/* ── ME: iOS inset grouped lists ─────────────────────────────
+   Grouped rows on one surface with inset hairlines; headers are running
+   heads, not chips. Real switches for binary settings. */
+.me-id{padding:6px 0 4px;}
+.me-big{font-size:24px;color:var(--text);line-height:1.25;}
+.me-of{font-size:17px;color:var(--text2);}
+.me-sub{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text3);padding-top:6px;line-height:1.5;}
+.me-legend{display:flex;flex-direction:column;gap:10px;padding-top:14px;}
+.me-legend-b .me-legend{padding:14px 16px;}
+.ml-row{display:flex;gap:12px;font-size:14px;color:var(--text3);line-height:1.45;}
+.ml-row b{font-weight:400;color:var(--text);}
+.ml-k{flex:none;width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);border-radius:var(--r-sm);font-size:12px;color:var(--text2);
+  font-variant-numeric:tabular-nums;}
+.group{margin-top:24px;}
+.group-h{margin:0 0 8px 16px;font-size:13px;font-weight:400;font-variant-caps:all-small-caps;
+  letter-spacing:.06em;color:var(--text3);}
+.group-b{background:var(--surface);border-radius:var(--r-md);overflow:hidden;}
+.group-f{margin:8px 16px 0;font-size:13px;line-height:1.45;color:var(--text3);}
+.group-b .row{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;
+  padding:12px 16px;font:400 16px/1.3 var(--ui-font);color:var(--text);background:none;border:0;
+  text-align:start;cursor:pointer;}
+.group-b .row>span:first-child{flex:1;}
+.group-b .row+.row::before{content:'';position:absolute;top:0;inset-inline:16px 0;border-top:1px solid var(--border);}
+.group-b .row:active{background:var(--surface2);}
+.row-meta{color:var(--text3);}
+.row-chev{width:18px;height:18px;color:var(--text3);transform:rotate(-90deg);flex:none;}
+.row.danger{color:var(--rose);}
+
+/* Native-proportioned switch: 51×31 track, 27px thumb, hit area ≥44px.
+   The ONE exception to the two-radii rule: a switch is recognised by its
+   rounded shape, and a square toggle reads as a checkbox. Dark thumb on
+   the accent fill when on — the Ledger signature carried into the control. */
+.switch{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:51px;height:31px;margin:0;
+  border-radius:16px;background:var(--surface3);cursor:pointer;
+  transition:background-color .2s var(--ease);}
+.switch::before{content:'';position:absolute;inset:-7px -4px;}
+.switch::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;
+  background:var(--text2);box-shadow:0 1px 2px rgba(0,0,0,.4);
+  transition:transform .2s var(--ease),background-color .2s var(--ease);}
+.switch:checked{background:var(--accent);}
+.switch:checked::after{transform:translateX(20px);background:var(--bg);}
+.switch:focus-visible{outline:2px solid var(--accent-hi);outline-offset:2px;}
+
+.map-cap{font-size:14px;color:var(--text2);line-height:1.5;padding-top:8px;}
+
+.t-first{display:block;font-size:24px;color:var(--text);line-height:1.25;padding-top:4px;}
+.t-first-sub{display:block;font-size:15px;color:var(--text2);line-height:1.5;padding-top:6px;}
 </style>
 </head>
 <body class="">
@@ -4728,7 +4778,7 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
   var words=vocab.slice().sort(function(a,b){return a.rank-b.rank;});
   if(onlyLevel) words=words.filter(function(w){return w.level===onlyLevel;});
   var cssW=cv.parentNode.clientWidth||343;
-  var pitch=pitchArg||7;
+  var pitch=pitchArg||10;
   if(pitchArg==='fit'){
     // Choose the pitch that fills the available box without overflowing it.
     var availH=cv.parentNode.clientHeight||120, n=words.length;
@@ -4738,7 +4788,8 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
       if(rw*t<=availH){ pitch=t; break; }
     }
   }
-  var dot=pitch*0.63, gap=10;
+  // 8px cells with 2px gaps: big enough to read as data, not texture.
+  var dot=pitch-2, gap=10, labelH=onlyLevel?0:22;
   var cols=Math.max(12,Math.floor(cssW/pitch));
   var bands=[], cur=null;
   words.forEach(function(w){
@@ -4746,14 +4797,20 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
     cur.items.push(w);
   });
   var y=0, rowsTotal=0;
-  bands.forEach(function(b){ b.y=y; b.rows=Math.ceil(b.items.length/cols);
+  bands.forEach(function(b){ y+=labelH; b.y=y; b.rows=Math.ceil(b.items.length/cols);
     rowsTotal+=b.rows; y+=b.rows*pitch+gap; });
   var cssH=Math.max(24,y-gap);
-  var dpr=Math.min(2,window.devicePixelRatio||1);
+  var dpr=Math.min(3,window.devicePixelRatio||1);   // iPhones are 3x
   cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr);
   cv.style.height=cssH+'px';
   var x=cv.getContext('2d'); x.setTransform(dpr,0,0,dpr,0,0);
   x.clearRect(0,0,cssW,cssH);
+  if(labelH){
+    // Each band names itself, read from the right like the cells.
+    x.font='12px "Source Serif 4", Georgia, serif'; x.fillStyle='#8A8D9A';
+    x.textAlign='right'; x.textBaseline='alphabetic';
+    bands.forEach(function(b){ x.fillText('Level '+b.lv+' · '+b.items.length+' words', cssW, b.y-8); });
+  }
   bands.forEach(function(b){
     b.items.forEach(function(w,i){
       var r=Math.floor(i/cols), c=i%cols;
@@ -4762,8 +4819,9 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
       var st=dotState(w);
       var ahead=dimBeyond && w.level>dimBeyond;
       x.globalAlpha = ahead ? 0.32 : 1;
-      if(st==='unseen'){ x.strokeStyle='#2E3140'; x.lineWidth=1;
-        x.strokeRect(px+.5,py+.5,dot-1,dot-1); }
+      // Unseen is a quiet FILLED cell, not a 1px outline: a field of hairline
+      // squares reads as texture and shimmers when scaled.
+      if(st==='unseen'){ x.fillStyle='#1E2029'; x.fillRect(px,py,dot,dot); }
       else {
         x.fillStyle = st==='secure' ? '#9AA3E8'
                     : st==='seen'   ? LV_RAMP[2]
@@ -4772,7 +4830,7 @@ function drawMap(id,onlyLevel,pitchArg,dimBeyond){
       }
       if(!ahead && (dueNow(itemWord(w.he),'R')||dueNow(itemWord(w.he),'P'))){
         x.strokeStyle='#D9B46A'; x.lineWidth=1;
-        x.strokeRect(px-1.5,py-1.5,dot+3,dot+3);
+        x.strokeRect(px-.5,py-.5,dot+1,dot+1);
       }
       x.globalAlpha=1;
     });
@@ -4817,6 +4875,10 @@ function renderToday(){
   var lw=vocab.filter(function(w){ return w.level===lv; }), met=0, sec=0;
   lw.forEach(function(w){ var st=dotState(w); if(st==='secure') sec++; else if(st!=='unseen') met++; });
   var tot=lw.length||1;
+  // First run: say what is about to happen instead of a row of zeros.
+  var first=!vocab.some(function(w){ return dotState(w)!=='unseen'; });
+  if(first) line='<span class="t-first">Your first words</span>'+
+    '<span class="t-first-sub">Three of the most frequent words in spoken Hebrew, each one tested again before the round ends.</span>';
   document.getElementById('todayBody').innerHTML=
     '<div class="today-grid">'+
       '<div class="t-date"><span>'+esc(d)+'</span></div>'+
@@ -4832,7 +4894,7 @@ function renderToday(){
       '<div class="qlist">'+quests+'</div>'+
       upNextHTML(c)+
       '<div class="t-cta">'+
-        (n?'<button class="btn" onclick="startRound()">Start round</button>'
+        (n?'<button class="btn" onclick="startRound()">'+(first?'Begin':'Start round')+'</button>'
           :'<div class="empty-line">Nothing due'+nextDueLine()+'.</div>'+
             (c.fresh?'<button class="btn-quiet" onclick="learnNew()">Learn 3 new words</button>':''))+
       '</div>'+
@@ -4860,10 +4922,14 @@ function renderLevelsView(){
   if(CHK.active) return renderCheckpoint();
   refreshQuests();
   var cur=activeLevel();
-  var html='<div class="map-head"><div class="map-title">The journey — 1,441 words by frequency</div></div>'+
+  var anyMet=vocab.some(function(w){ return dotState(w)!=='unseen'; });
+  var html='<div class="map-head"><div class="map-title">The journey — 1,441 words by frequency</div>'+
+      (anyMet?'':'<div class="map-cap">Each square is a word, most frequent first, read right to left. '+
+        'They fill in as you learn them.</div>')+
+    '</div>'+
     '<div class="map-full"><canvas id="fullMap"></canvas>'+
       '<div class="map-key">'+
-        '<span><i class="mk" style="border:1px solid var(--border)"></i>unseen</span>'+
+        '<span><i class="mk" style="background:#1E2029"></i>unseen</span>'+
         '<span><i class="mk" style="background:#8A8D9A"></i>met</span>'+
         '<span><i class="mk" style="background:#505693"></i>recognised</span>'+
         '<span><i class="mk" style="background:var(--accent)"></i>secure</span>'+
@@ -4916,29 +4982,49 @@ function renderLevelsView(){
 function renderMe(){
   var acc=ST.total?Math.round(ST.correct/ST.total*100)+'%':'—';
   var secure=vocab.filter(function(w){var st=wordState(w.he);return st==='secure'||st==='mastered';}).length;
-  function row(k,v){ return '<div class="me-row"><span>'+k+'</span><span class="num">'+v+'</span></div>'; }
+  var met=vocab.filter(function(w){return dotState(w)!=='unseen';}).length;
+  var lv=activeLevel(), sh=levelShape(lv), fresh=!met;
+  var chev='<svg class="i sm row-chev" aria-hidden="true"><use href="#i-chevron"/></svg>';
+  function row(k,v){ return '<div class="row"><span>'+k+'</span><span class="row-meta num">'+v+'</span></div>'; }
+  function sw(label,on,fn){
+    return '<label class="row"><span>'+label+'</span>'+
+      '<input type="checkbox" class="switch" role="switch"'+(on?' checked':'')+' onchange="'+fn+'"></label>';
+  }
+  // The four-slot glyph is explained before it has to carry any data.
+  var legend='<div class="me-legend">'+
+    [['R','Recognise','see the Hebrew, know the meaning'],['P','Produce','type it from the English — this is what makes a word secure'],
+     ['U','Use','put it into a sentence pattern'],['C','Connect','link it to its root family']].map(function(d){
+      return '<div class="ml-row"><span class="ml-k">'+d[0]+'</span><span><b>'+d[1]+'</b> — '+d[2]+'</span></div>';
+    }).join('')+'</div>';
   document.getElementById('meBody').innerHTML=
-    '<div class="compact-head"><span class="ch-title">Me</span></div>'+
-    '<div class="sch-sec-lbl">Progress</div>'+
-    row('Secure words', secure+' / '+vocab.length)+
-    row('Words met', ST.learned.size)+
-    row('Accuracy', acc)+
-    row('Day streak', (ST.dayStreak||0))+
-    row('Streak freezes', (ST.freezes||0)+' / 3')+
-    '<div class="sch-sec-lbl">Display</div>'+
-    '<div class="me-row"><span>Vowel points</span>'+
-      '<button class="me-tog'+(ST.showVowels?' on':'')+'" onclick="toggleVowels();renderMe()">'+
-      (ST.showVowels?'On':'Off')+'</button></div>'+
-    '<div class="me-row"><span>Script</span>'+
-      '<button class="me-tog'+(ST.cursiveOn?' on':'')+'" onclick="toggleCursive();renderMe()">'+
-      (ST.cursiveOn?'Cursive':'Print')+'</button></div>'+
-    '<div class="sch-sec-lbl">More</div>'+
-    '<div class="me-row link" onclick="openAnalytics()"><span>Analytics</span>'+
-      '<svg class="i" style="color:var(--text3);transform:rotate(-90deg)"><use href="#i-chevron"/></svg></div>'+
-    '<div class="me-row link" onclick="openSettings()"><span>Settings &amp; backup</span>'+
-      '<svg class="i" style="color:var(--text3);transform:rotate(-90deg)"><use href="#i-chevron"/></svg></div>'+
-    '<div class="lv-lock" style="padding:22px 0">Everything is stored on this device. '+
-      'Export a backup from Settings before clearing Safari data.</div>';
+    '<div class="me-id">'+
+      (fresh
+        ? '<div class="me-big">Nothing learned yet</div>'+
+          '<div class="me-sub">Every word is tracked four ways. Progress fills these four slots, always in this order:</div>'
+        : '<div class="me-big"><span class="num">'+secure+'</span> <span class="me-of">of '+vocab.length.toLocaleString('en-US')+' words secure</span></div>'+
+          '<div class="me-sub">Level '+lv+' · '+dimGlyph(sh)+'</div>')+
+      (fresh?legend:'')+
+    '</div>'+
+    (fresh?'':
+    '<section class="group"><h3 class="group-h">Progress</h3><div class="group-b">'+
+      row('Secure words', secure+' / '+vocab.length)+
+      row('Words met', met)+
+      row('Accuracy', acc)+
+      row('Day streak', (ST.dayStreak||0))+
+      row('Streak freezes', (ST.freezes||0)+' / 3')+
+    '</div></section>')+
+    '<section class="group"><h3 class="group-h">Display</h3><div class="group-b">'+
+      sw('Vowel points', ST.showVowels, 'toggleVowels()')+
+      sw('Cursive script', ST.cursiveOn, 'toggleCursive()')+
+    '</div><p class="group-f">Both apply everywhere Hebrew appears.</p></section>'+
+    (fresh?'':'<section class="group"><h3 class="group-h">What the slots mean</h3><div class="group-b me-legend-b">'+legend+'</div></section>')+
+    '<section class="group"><h3 class="group-h">More</h3><div class="group-b">'+
+      '<button class="row" onclick="openAnalytics()"><span>Analytics</span>'+chev+'</button>'+
+      '<button class="row" onclick="openSettings()"><span>Settings &amp; backup</span>'+chev+'</button>'+
+    '</div><p class="group-f">Everything is stored on this device. Export a backup from Settings before clearing Safari data.</p></section>'+
+    '<section class="group"><div class="group-b">'+
+      '<button class="row danger" onclick="resetProgress()"><span>Reset progress</span></button>'+
+    '</div></section>';
 }
 
 // ── ROOT FAMILIES ─────────────────────────────────────────────
