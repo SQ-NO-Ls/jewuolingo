@@ -498,7 +498,7 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
   feminine forms authored first.
 - **293 unmatched annotation words** and the low-confidence entries need human
   review.
-- **Niqqud/pron audit — L1–L2 done (2026-10-16), L3–L6 open.**
+- **Niqqud/pron audit — L1–L2 done (2026-10-16), L3–L6 done (2026-10-17).**
   `scripts/audit_niqqud.py <index.html> <kaikki-hebrew.jsonl> <out.json>`
   compares every `heV` with Wiktionary's vowelled forms. It also checks `pron`
   stress against Wiktionary's `tr`, and flags `heV` whose *letters* differ
@@ -511,10 +511,25 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     the spelling the learner is then asked to type. Four doubled-letter
     words are left as they are (`עדיין חייב עניין להתכוון`): the vowelled
     ktiv-male form there is not settled.
-  - Still open: **~212 letter mismatches in L3–L6** (mostly holam-haser
-    infinitives). **39 stress mismatches** (some are false alarms where vowels
-    are adjacent, e.g. `batúakh`). **~330 `NOSRC`**: mostly phrases, which
-    need review by eye.
+  - L3–L6: 208 words fixed (176 `heV`, 52 `pron`). Most are the ktiv-male
+    letter fixes (holam/qubuts/hiriq haser → וֹ/וּ/י, kamatz katan → וֹ as
+    in `תּוֹכְנִית`). The rest are wrong vowels or stress (`חֶבֶל` → `חֲבָל` in
+    "חבל על הזמן", `כַּפָּפָה` → `כְּפָפָה`, `מַהְמֵם` → `מְהַמֵּם`,
+    `כדורגל` ka-du-RE-gel, `נצרת` nats-RAT, `פיסטוק` FIS-tuk). Every non-OK,
+    stress-flagged and letter-mismatched entry was read by hand, NOSRC
+    phrases included.
+  - Left alone on purpose: 52 doubled-ו/י words (`שניים`, `שווה`,
+    `עגבנייה`, `סופגנייה`…), plus `חוויאג'`. Their `heV` letters still
+    differ from `he`, by the same convention as the four above.
+  - The 15 stress flags still left are all false alarms from a furtive
+    patah (`שָׁבוּעַ` sha-VU-ah, `תַּפּוּחַ`).
+  - Still unsure, for a human: `רעיון` (heV רַעְיוֹן, Wiktionary
+    רַעֲיוֹן), `נענע` (na-a-NA vs Wiktionary נַעְנַע, colloquially NA-na),
+    `אופנה` stress (of-NAH or OF-na), `סביח` (pron now sa-BIKH, but the
+    vowel under ס is a guess), `מהי`/`מיהי` (stress moved to MA-hi/MEE-hi
+    by analogy with Wiktionary's máhu/míhu), `ממה` (מִמַּה vs מִמָּה,
+    sounds the same), `תירס` (ti-RAS kept; colloquially TI-ras),
+    `בורקס` (BU-re-kas kept; Wiktionary burékas).
   - Expect false `HOMOGRAPH`/`DIFF` hits when the only entry that agrees on
     meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
