@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v43`
+- **Deployed version:** service-worker `jw-v44`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -38,12 +38,14 @@ If the clean URL is ever wanted, it needs: export progress → rename → re-ins
 index.html              6,202 lines — THE APP. Everything: markup, CSS, JS, vocab.
 sw.js                   Service worker. Offline shell + font cache.
 manifest.webmanifest    PWA manifest (name: "Jewolingo — Hebrew Mastery").
-icons/                  180 / 192 / 512 / 512-maskable PNGs.
+icons/                  180 / 192 / 512 / 512-maskable PNGs. Full-bleed (no baked-in
+                        corners: iOS masks it), dark א on accent #9AA3E8.
 data/annotations.json   132KB — POS, gender, plural, root, binyan per word.
 data/DATA_LICENSE       CC BY-SA. Scoped to the DATA FILE ONLY, not the app code.
 scripts/build_frequency.py    Assigns rank + level from FDOSH.
 scripts/build_annotations.py  Builds annotations.json from kaikki Wiktionary dump.
 scripts/verb_lemmas.py        93 hand-written verb→lemma mappings. KEEP HAND-WRITTEN.
+scripts/audit_niqqud.py       Read-only audit of heV/pron against Wiktionary.
 DESIGN_BRIEF.md         The brief that produced the current design.
 README.md               Short public readme + install instructions.
 .claude/launch.json     Dev server on port 8771.
@@ -415,8 +417,25 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
   feminine forms authored first.
 - **293 unmatched annotation words** and the low-confidence entries need human
   review.
-- **~190 self-generated niqqud entries unverified.** (Nakdan's 95.12% figure is
-  *letter*-level; word-level is 88.23%.)
+- **Niqqud/pron audit — L1–L2 done (2026-10-16), L3–L6 open.**
+  `scripts/audit_niqqud.py <index.html> <kaikki-hebrew.jsonl> <out.json>`
+  compares every `heV` with Wiktionary's vowelled forms. It also checks `pron`
+  stress against Wiktionary's `tr`, and flags `heV` whose *letters* differ
+  from `he`. It is read-only, and its statuses are leads, not verdicts.
+  `EXACT-NOGLOSS` hid the worst error (`את` "you (f.)" carried the vowels of
+  the object marker אֶת), so read those by eye too.
+  - L1–L2: 21 fixes (heV + pron only, never `he`).
+  - **Convention: `heV` uses the same letters as `he`**, i.e. ktiv male with
+    niqqud (`לַחְשׁוֹב`, not `לַחְשֹׁב`). Otherwise turning vowels on changes
+    the spelling the learner is then asked to type. Four doubled-letter
+    words are left as they are (`עדיין חייב עניין להתכוון`): the vowelled
+    ktiv-male form there is not settled.
+  - Still open: **~212 letter mismatches in L3–L6** (mostly holam-haser
+    infinitives). **39 stress mismatches** (some are false alarms where vowels
+    are adjacent, e.g. `batúakh`). **~330 `NOSRC`**: mostly phrases, which
+    need review by eye.
+  - Expect false `HOMOGRAPH`/`DIFF` hits when the only entry that agrees on
+    meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
 - FSRS behind `schedule()` (currently a hand-tuned interval ladder).
 - Grammar tables → drills.
