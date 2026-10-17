@@ -17,7 +17,9 @@ TEXT, PX, TRACK = 'Jewolingo', 28, -0.67   # CSS px; header is 21px / -.5px
 
 # (width, height, device-pixel-ratio) in physical pixels, portrait.
 SIZES = [(1125, 2436, 3), (1170, 2532, 3), (1179, 2556, 3), (1284, 2778, 3),
-         (1290, 2796, 3), (1242, 2688, 3), (828, 1792, 2)]
+         (1290, 2796, 3), (1242, 2688, 3), (828, 1792, 2),
+         (1206, 2622, 3), (1320, 2868, 3), (1260, 2736, 3),   # 16 Pro/17, Pro Max, Air
+         (750, 1334, 2), (1080, 2340, 3)]                       # SE, mini
 
 def make(ttf, w, h, dpr):
     im = Image.new('RGB', (w, h), BG)

@@ -2,7 +2,7 @@
 
 **Read this file first. It is the source of truth for the project.**
 
-Last updated: 2026-10-16, after the Ledger redesign and polish pass.
+Last updated: 2026-10-17, after the parallel polish (Paper theme, self-hosted fonts, L3–L6 vowel audit, update flow).
 
 ---
 
@@ -35,13 +35,13 @@ If the clean URL is ever wanted, it needs: export progress → rename → re-ins
 ## 2. Files
 
 ```
-index.html              6,202 lines — THE APP. Everything: markup, CSS, JS, vocab.
+index.html              ~6,470 lines — THE APP. Everything: markup, CSS, JS, vocab.
 sw.js                   Service worker. Offline shell + font cache.
 fonts/                  Self-hosted woff2 (Google Fonts subsets, unmodified) + OFL.txt.
                         frl-* Frank Ruhl Libre, ss4-* Source Serif 4 (roman+italic,
                         latin+latin-ext), gveret-* Gveret Levin. ~546KB total.
-splash/                 iOS launch screens (apple-touch-startup-image), 7 iPhone
-                        sizes, ~63KB total. make_splash.py regenerates them.
+splash/                 iOS launch screens (apple-touch-startup-image), 12 iPhone
+                        sizes, ~106KB total. make_splash.py regenerates them.
 manifest.webmanifest    PWA manifest (name: "Jewolingo — Hebrew Mastery").
 icons/                  180 / 192 / 512 / 512-maskable PNGs. Full-bleed (no baked-in
                         corners: iOS masks it), dark א on accent #9AA3E8.
@@ -320,7 +320,9 @@ flashes dark. Rules carried over: warm paper not white, near-black ink not
 black, **dark ink on the accent fill** (`--on-accent`), the accent as TEXT
 uses `--accent-ink` (#3D479E on paper), levels still by lightness (the ramp
 darkens with level on paper). All paper text pairs pass WCAG AA (lowest:
-warning 4.8:1). The map canvas reads colours from tokens via `cssv()`, so
+warning on surface3 4.59:1; text3 on surface3 is 4.18:1 but appears only on
+disabled buttons). The launch screen is dark in every theme — iOS picks it
+before the page runs — so Paper opens dark-then-paper; accepted. The map canvas reads colours from tokens via `cssv()`, so
 **never hard-code a colour in canvas or inline styles again**. iOS fixes
 the status-bar style at install (white icons), so Paper paints a dark band
 behind the status bar (`--status-band`). Dark was verified unchanged by a
@@ -505,7 +507,9 @@ offline shell); on activate the page reloads itself into the new build —
 unless a round, checkpoint or Practice question is open, in which case the
 new build opens on the next launch. Updates are also checked whenever the
 app returns to the foreground. If a shell ever loses its page, the
-navigation handler re-stores it the next time the network serves it. **Verify the deployed build actually runs**,
+navigation handler re-stores it the next time the network serves it.
+
+**Verify the deployed build actually runs**,
 not just that the bytes are present — load it and check `vocab.length`,
 `Object.keys(ANN).length` and that a round builds.
 
@@ -569,7 +573,9 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     the spelling the learner is then asked to type. Four doubled-letter
     words are left as they are (`עדיין חייב עניין להתכוון`): the vowelled
     ktiv-male form there is not settled.
-  - L3–L6: 202 objects changed (176 `heV`, 43 `pron`). Most are the ktiv-male
+  - 202 objects changed (176 `heV`, 43 `pron`): 201 in L3–L6 plus the L1
+    `יותר` stress. Four more `heV` letter fixes followed the final review
+    (`סמוך עליי`, `חנוכייה`, `סופגנייה`, `שיניים`). Most are the ktiv-male
     letter fixes (holam/qubuts/hiriq haser → וֹ/וּ/י, kamatz katan → וֹ as
     in `תּוֹכְנִית`). The rest are wrong vowels or stress (`חֶבֶל` → `חֲבָל` in
     "חבל על הזמן", `כַּפָּפָה` → `כְּפָפָה`, `מַהְמֵם` → `מְהַמֵּם`,
@@ -584,8 +590,8 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     `כוסברה` kus-BA-ra, `חלאס` kha-LAS, `לבנה` la-BA-ne stay as they are even
     though the audit flags them. `ביותר` stays formal (be-yo-TER). Do not
     "fix" these back to Wiktionary on the next pass.
-  - Left alone on purpose: 52 doubled-ו/י words (`שניים`, `שווה`,
-    `עגבנייה`, `סופגנייה`…), plus `חוויאג'`. Their `heV` letters still
+  - Left alone on purpose: 52 doubled-ו/י words in L3–L6, `חוויאג'`
+    included (`שניים`, `שווה`, `עגבנייה`, `סופגנייה`…). Their `heV` letters still
     differ from `he`, by the same convention as the four above.
   - Apart from those, the 15 stress flags still left are all false alarms
     from a furtive patah (`שָׁבוּעַ` sha-VU-ah, `תַּפּוּחַ`).

@@ -19,11 +19,17 @@
 <link rel="apple-touch-startup-image" href="splash/1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="splash/828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/1260x2736.png" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="splash/1080x2340.png" media="(device-width: 360px) and (device-height: 780px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
 <!-- Fonts are self-hosted (fonts/, OFL) and precached by sw.js, so the very
      first offline launch has the real faces. Only the two faces on screen at
      launch are preloaded; the rest load on first use via unicode-range. -->
 <link rel="preload" href="fonts/ss4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/frl-hebrew.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/frl-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Subsets and unicode-ranges as Google Fonts serves them. Source Serif 4
    files carry the opsz axis (8–60); font-optical-sizing:auto drives it. */
@@ -90,7 +96,7 @@
   --key-shadow:rgba(0,0,0,.35); --thumb-shadow:rgba(0,0,0,.4);
   --status-band:transparent; --map-unseen:#1E2029;
   /* map states by lightness: unseen < met < recognised < secure, in each theme */
-  --map-met:#8A8D9A; --map-seen:#505693; --map-secure:#9AA3E8;
+  --map-met:#3E4150; --map-seen:#5E64AD; --map-secure:#9AA3E8;
   --accent-line:#9AA3E8;   /* thin progress fills and markers */
   color-scheme:dark;
 }
@@ -1396,7 +1402,7 @@ const vocab=[
   {he:"ברך",level:4,heV:"בֶּרֶךְ",pron:"BEH-rekh",en:"knee",cat:"Body",sentence:"פגעתי ב___",sentenceEn:"I hurt my ___",rank:709},
   {he:"מרפק",level:5,heV:"מַרְפֵּק",pron:"mar-PEK",en:"elbow",cat:"Body",sentence:"כאב לי ה___",sentenceEn:"My ___ hurts",rank:844},
   {he:"אצבע",level:4,heV:"אֶצְבַּע",pron:"ETS-bah",en:"finger / toe",cat:"Body",sentence:"פצעתי את ה___",sentenceEn:"I cut my ___",rank:737},
-  {he:"שיניים",level:5,heV:"שִׁנַּיִם",pron:"shi-NA-yim",en:"teeth (pair)",cat:"Body",sentence:"ה___ שלי לבנות",sentenceEn:"My ___ are white",rank:801},
+  {he:"שיניים",level:5,heV:"שִׁינַּיִם",pron:"shi-NA-yim",en:"teeth (pair)",cat:"Body",sentence:"ה___ שלי לבנות",sentenceEn:"My ___ are white",rank:801},
   {he:"שיער",level:4,heV:"שֵׂיעָר",pron:"seh-AR",en:"hair",cat:"Body",sentence:"ה___ שלה ארוך",sentenceEn:"Her ___ is long",rank:775},
   // ── LEVEL 3 ADDITIONS ────────────────────────────────────────────────────
   {he:"לבשל",level:5,heV:"לְבַשֵּׁל",pron:"le-va-SHEL",en:"to cook",cat:"Verbs",sentence:"אני אוהב ___",sentenceEn:"I love ___",rank:1163},
@@ -2077,7 +2083,7 @@ const vocab=[
   {he:"חופר",level:6,heV:"חוֹפֵר",pron:"kho-FER",en:"talks too much — lit. digging",cat:"Israeli Speak",sentence:"הוא ___ בלי סוף",sentenceEn:"he ___ endlessly",rank:1296},
   {he:"לא משנה",level:5,heV:"לֹא מְשַׁנֶּה",pron:"lo me-sha-NE",en:"never mind / doesn't matter",cat:"Israeli Speak",sentence:"___, נסתדר",sentenceEn:"___, we'll manage",rank:1045},
   {he:"מה שבא לך",level:6,heV:"מָה שֶׁבָּא לְךָ",pron:"ma she-BA le-KHA",en:"whatever you want",cat:"Israeli Speak",sentence:"תזמין ___",sentenceEn:"order ___",rank:1351},
-  {he:"סמוך עליי",level:6,heV:"סְמֹךְ עָלַי",pron:"smokh a-LAI",en:"trust me",cat:"Israeli Speak",sentence:"___, יהיה טוב",sentenceEn:"___, it'll be good",rank:1397},
+  {he:"סמוך עליי",level:6,heV:"סְמוֹךְ עָלַי",pron:"smokh a-LAI",en:"trust me",cat:"Israeli Speak",sentence:"___, יהיה טוב",sentenceEn:"___, it'll be good",rank:1397},
   {he:"עזוב אותך",level:6,heV:"עֲזוֹב אוֹתְךָ",pron:"a-ZOV ot-KHA",en:"forget it / drop it",cat:"Israeli Speak",sentence:"___ מזה, בוא נלך",sentenceEn:"___ it, let's go",rank:1248},
   {he:"קטן עליך",level:6,heV:"קָטָן עָלֶיךָ",pron:"ka-TAN a-LE-kha",en:"you got this — lit. small on you",cat:"Israeli Speak",sentence:"המבחן ___",sentenceEn:"the test is ___ (easy for you)",rank:1340},
   {he:"הכול דבש",level:6,heV:"הַכּוֹל דְּבַשׁ",pron:"ha-KOL dvash",en:"everything's great — lit. all honey",cat:"Israeli Speak",sentence:"אצלי ___",sentenceEn:"with me it's ___",rank:1322},
@@ -2142,7 +2148,7 @@ const vocab=[
   {he:"פסח",level:5,heV:"פֶּסַח",pron:"PE-sakh",en:"Passover",cat:"Jewish Life",sentence:"מצה ב___",sentenceEn:"matzah on ___",rank:1021},
   {he:"ראש השנה",level:5,heV:"רֹאשׁ הַשָּׁנָה",pron:"rosh ha-sha-NA",en:"Rosh Hashanah",cat:"Jewish Life",sentence:"תפוח בדבש ב___",sentenceEn:"apple in honey on ___",rank:977},
   {he:"יום כיפור",level:5,heV:"יוֹם כִּיפּוּר",pron:"yom ki-PUR",en:"Yom Kippur",cat:"Jewish Life",sentence:"צמים ב___",sentenceEn:"we fast on ___",rank:1101},
-  {he:"חנוכייה",level:6,heV:"חֲנֻכִּיָּה",pron:"kha-nu-ki-YA",en:"Hanukkah menorah",cat:"Jewish Life",sentence:"הדלקנו את ה___",sentenceEn:"we lit the ___",rank:1220},
+  {he:"חנוכייה",level:6,heV:"חֲנוּכִּיָּה",pron:"kha-nu-ki-YA",en:"Hanukkah menorah",cat:"Jewish Life",sentence:"הדלקנו את ה___",sentenceEn:"we lit the ___",rank:1220},
   {he:"סוכה",level:5,heV:"סוּכָּה",pron:"su-KA",en:"sukkah",cat:"Jewish Life",sentence:"אוכלים ב___",sentenceEn:"we eat in the ___",rank:1186},
   {he:"מצה",level:5,heV:"מַצָּה",pron:"ma-TSA",en:"matzah",cat:"Jewish Life",sentence:"___ בפסח",sentenceEn:"___ on Passover",rank:1020},
   {he:"שופר",level:5,heV:"שׁוֹפָר",pron:"sho-FAR",en:"shofar",cat:"Jewish Life",sentence:"תוקעים ב___",sentenceEn:"we blow the ___",rank:1190},
@@ -2357,7 +2363,7 @@ const vocab=[
   {he:"חמין",level:5,heV:"חָמִין",pron:"kha-MIN",en:"cholent (Shabbat stew)",cat:"Food",sentence:"___ חם בשבת",sentenceEn:"hot ___ on Shabbat",rank:1060},
   {he:"קניידלך",level:5,heV:"קְנֵיידְלַךְ",pron:"k-NEY-dlakh",en:"matzah balls",cat:"Food",sentence:"מרק עוף עם ___",sentenceEn:"chicken soup with ___",rank:1089},
   {he:"לביבה",level:5,heV:"לְבִיבָה",pron:"le-vi-VA",en:"latke (potato pancake)",cat:"Food",sentence:"___ בחנוכה",sentenceEn:"___ on Hanukkah",rank:868},
-  {he:"סופגנייה",level:5,heV:"סֻפְגָּנִיָּה",pron:"suf-ga-ni-YA",en:"sufganiyah (jelly donut)",cat:"Food",sentence:"___ עם ריבה",sentenceEn:"a ___ with jam",rank:913},
+  {he:"סופגנייה",level:5,heV:"סוּפְגָּנִיָּה",pron:"suf-ga-ni-YA",en:"sufganiyah (jelly donut)",cat:"Food",sentence:"___ עם ריבה",sentenceEn:"a ___ with jam",rank:913},
   {he:"חלבה",level:5,heV:"חַלְבָּה",pron:"KHAL-va",en:"halva",cat:"Food",sentence:"___ מסומשום",sentenceEn:"___ made from sesame",rank:833},
   {he:"מלבי",level:6,heV:"מַלַבִּי",pron:"ma-la-BI",en:"malabi (milk pudding)",cat:"Food",sentence:"___ עם סירופ ורוד",sentenceEn:"___ with pink syrup",rank:1328},
   {he:"בקלאווה",level:5,heV:"בַּקְלָאוָה",pron:"bak-la-VA",en:"baklava",cat:"Food",sentence:"___ מתוקה ודביקה",sentenceEn:"sweet, sticky ___",rank:1087},
@@ -3284,9 +3290,9 @@ function setTheme(t){
   try{ localStorage.setItem('jw_theme',t); }catch(e){}
   applyTheme();
   if(VIEW==='Me') renderMe();
-  if(VIEW==='Levels') renderLevelsView();     // the map canvas reads colours once per paint
+  if(VIEW==='Levels'&&document.getElementById('fullMap')) drawMap('fullMap');   // canvas reads colours per paint; never re-render (a checkpoint may be open)
 }
-function _onSchemeChange(){ if(themePref()==='auto'){ applyTheme(); if(VIEW==='Levels') renderLevelsView(); } }
+function _onSchemeChange(){ if(themePref()==='auto'){ applyTheme(); if(VIEW==='Levels'&&document.getElementById('fullMap')) drawMap('fullMap'); } }
 if(_lightMQ&&_lightMQ.addEventListener) _lightMQ.addEventListener('change',_onSchemeChange);
 else if(_lightMQ&&_lightMQ.addListener) _lightMQ.addListener(_onSchemeChange);   // iOS < 14
 // Canvas cannot use CSS variables, so it reads the resolved token values.
@@ -6449,7 +6455,8 @@ if('serviceWorker' in navigator){
   var _hadSW=!!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener('controllerchange',function(){
     if(!_hadSW) return;
-    if(ROUND.active||CHK.active||document.body.classList.contains('pfocus')) return;
+    var tst=document.getElementById('testOverlay');
+    if(ROUND.active||CHK.active||document.body.classList.contains('pfocus')||(tst&&tst.classList.contains('open'))) return;
     location.reload();
   });
   // Standalone apps resume without navigating, so check for updates on return.
