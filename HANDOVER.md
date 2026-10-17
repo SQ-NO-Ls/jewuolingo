@@ -317,8 +317,14 @@ keys are equal-width, sized off the widest row (10 keys → ~31px at 375), so
 the 8- and 9-key rows sit centred. 46px tall, 6px gaps, 10px row gap, keys
 `--surface3` with a 1px base shadow. Hit areas tile the gaps via
 `.kbd-key::after`. Pressing a letter shows a callout above the thumb
-(`data-ch` + `:active::before`); iOS only applies `:active` because of the
-passive `touchstart` listener at the bottom of the script — keep it.
+(`data-ch` + `.down::before`). **Keys act on `pointerdown`, per finger**
+(`_kbDown` map), not on `click`: iOS drops the click entirely when a key is
+pressed while another thumb is down or with a slight slide, and delivers it
+late otherwise — that was the "keyboard doesn't respond" bug (2026-10-17).
+The click that may follow is swallowed (capture listener, 800ms), the tray
+is `touch-action:none`, backspace repeats when held, and a mouse still uses
+plain click. Keep key actions in the button's inline onclick — the pointer
+handler calls `k.onclick`.
 
 ### Paper — the light theme (2026-10-17)
 `:root[data-theme="paper"]` overrides the tokens; Me → Display →
@@ -474,6 +480,11 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     depend on an animation or a frame. The hidden Claude preview pane also
     leaves CSS animations at frame 0 until a screenshot forces a paint.
 
+15. **iOS `click` is unreliable for anything typed fast.** It is not sent for
+    a tap that overlaps another finger or slides slightly, and arrives after
+    lift-off. Anything tapped in rapid succession (keyboard keys) must act on
+    `pointerdown`. Testing with the preview's mouse clicks will never show it.
+
 ---
 
 ## 8. Workflow
@@ -497,8 +508,10 @@ Always test at **375×812** (iPhone). The useful checks, run in the console:
 
 ### Deploy
 ```bash
-# 1. bump the cache version FIRST
-#    sw.js: const CACHE_VERSION = 'jw-vNN'
+# 1. bump the cache version FIRST — in BOTH places, same value:
+#    sw.js:      const CACHE_VERSION = 'jw-vNN'
+#    index.html: var APP_BUILD='jw-vNN'   (shown at the bottom of Me, so the
+#                user can see which build the installed app is running)
 # 2.
 git add -A && git commit -m "..." && git push origin main
 # 3. wait for GitHub Pages, then verify

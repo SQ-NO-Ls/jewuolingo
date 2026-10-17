@@ -562,7 +562,7 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
    Visual keys are ~31px wide, under the 44px guide, so hit areas tile the
    6px gaps the way system keyboards do, and pressing a letter lifts it into
    a callout above the thumb. */
-.kbd{margin:8px -16px 0;padding:8px 4px calc(6px + env(safe-area-inset-bottom));
+.kbd{touch-action:none;margin:8px -16px 0;padding:8px 4px calc(6px + env(safe-area-inset-bottom));
   background:var(--surface);border-top:1px solid var(--border);user-select:none;-webkit-user-select:none;}
 .kbd-rows{display:flex;flex-direction:column;gap:10px;}
 .kbd-row{display:flex;gap:6px;justify-content:center;}
@@ -572,21 +572,21 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
   font-family:var(--he-font);font-size:22px;font-weight:400;line-height:1;color:var(--text);
   cursor:pointer;touch-action:manipulation;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none;}
 .kbd-key::after{content:'';position:absolute;inset:-5px -3px;}
-.kbd-key:active{background:var(--surface2);}
-.kbd-key[data-ch]:active::before{content:attr(data-ch);position:absolute;left:50%;bottom:calc(100% + 6px);
+.kbd-key:active,.kbd-key.down{background:var(--surface2);}
+.kbd-key[data-ch]:active::before,.kbd-key[data-ch].down::before{content:attr(data-ch);position:absolute;left:50%;bottom:calc(100% + 6px);
   transform:translateX(-50%);width:52px;height:56px;display:flex;align-items:center;justify-content:center;
   background:var(--surface3);border:1px solid var(--border);border-radius:var(--r-md);
   font-size:32px;color:var(--text);pointer-events:none;z-index:2;}
 /* edge keys: keep the callout on screen */
-.kbd-row .kbd-key[data-ch]:first-child:active::before{left:0;transform:none;}
-.kbd-row .kbd-key[data-ch]:last-child:active::before{left:auto;right:0;transform:none;}
+.kbd-row .kbd-key[data-ch]:first-child:active::before,.kbd-row .kbd-key[data-ch]:first-child.down::before{left:0;transform:none;}
+.kbd-row .kbd-key[data-ch]:last-child:active::before,.kbd-row .kbd-key[data-ch]:last-child.down::before{left:auto;right:0;transform:none;}
 .kbd-key .klat{display:none;}
 .kbd-key.wide{flex:1.4 1 0;background:var(--surface2);color:var(--text2);
   font-family:var(--ui-font);font-size:15px;}
 .kbd-key.go{flex:2.2 1 0;background:var(--accent);color:var(--on-accent);font-family:var(--ui-font);
   font-size:15px;font-weight:600;}
 .kbd-key.go:disabled{background:var(--surface2);color:var(--text3);}
-.kbd-key.go:active{background:var(--accent-hi);}
+.kbd-key.go:active,.kbd-key.go.down{background:var(--accent-hi);}
 
 
 /* ── FOCUS STEP BODIES ───────────────────────────────────────*/
@@ -3733,6 +3733,36 @@ function toggleKbdLang(){
 }
 function kbType(c){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value+=c;kbSyncGo();}
 function kbBack(){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value=i.value.slice(0,-1);kbSyncGo();}
+// ── KEY INPUT ────────────────────────────────────────────────
+// iOS only synthesises `click` for a clean single tap. A key pressed while
+// another thumb was still down, or with the slightest slide, produced NO
+// click — dropped letters when typing at speed — and every click arrived only
+// after the finger lifted. Keys now act on pointerdown, per finger, like a
+// system keyboard; the click that may follow is swallowed so nothing types
+// twice. A mouse keeps plain click (desktop is secondary).
+var _kbDown={}, _kbPtrAt=0, _bsRepeat=null;
+function _kbKey(t){ return t&&t.closest?t.closest('.kbd-key'):null; }
+document.addEventListener('pointerdown',function(e){
+  if(e.pointerType==='mouse') return;
+  var k=_kbKey(e.target); if(!k||k.disabled) return;
+  e.preventDefault();                       // no focus shift, selection or zoom
+  _kbPtrAt=Date.now();
+  _kbDown[e.pointerId]=k; k.classList.add('down');
+  if(typeof k.onclick==='function') k.onclick.call(k,e);
+  if(k.getAttribute('aria-label')==='Backspace'){          // hold to repeat
+    clearTimeout(_bsRepeat);
+    _bsRepeat=setTimeout(function rep(){ kbBack(); _bsRepeat=setTimeout(rep,70); },450);
+  }
+},{passive:false});
+function _kbUp(e){
+  var k=_kbDown[e.pointerId]; if(k){ k.classList.remove('down'); delete _kbDown[e.pointerId]; }
+  if(!Object.keys(_kbDown).length){ clearTimeout(_bsRepeat); _bsRepeat=null; }
+}
+document.addEventListener('pointerup',_kbUp);
+document.addEventListener('pointercancel',_kbUp);
+document.addEventListener('click',function(e){
+  if(_kbKey(e.target) && Date.now()-_kbPtrAt<800){ e.stopPropagation(); e.preventDefault(); }
+},true);
 function kbClear(){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value='';kbSyncGo();}
 
 // ── SHORESH (ROOT) MODE ────────────────────────────────────────
@@ -4765,6 +4795,8 @@ var VIEW='Today';
 // Tab changes animate where the browser supports View Transitions and the
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
+// Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
+var APP_BUILD='jw-v52';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
@@ -5242,7 +5274,7 @@ function renderMe(){
     '</div><p class="group-f">Everything is stored on this device. Export a backup from Settings before clearing Safari data.</p></section>'+
     '<section class="group"><div class="group-b">'+
       '<button class="row danger" onclick="resetProgress()"><span>Reset progress</span></button>'+
-    '</div></section>';
+    '</div><p class="group-f num">Jewolingo '+APP_BUILD+'</p></section>';
 }
 
 // ── ROOT FAMILIES ─────────────────────────────────────────────
