@@ -511,25 +511,34 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     the spelling the learner is then asked to type. Four doubled-letter
     words are left as they are (`עדיין חייב עניין להתכוון`): the vowelled
     ktiv-male form there is not settled.
-  - L3–L6: 208 words fixed (176 `heV`, 52 `pron`). Most are the ktiv-male
+  - L3–L6: 202 objects changed (176 `heV`, 43 `pron`). Most are the ktiv-male
     letter fixes (holam/qubuts/hiriq haser → וֹ/וּ/י, kamatz katan → וֹ as
     in `תּוֹכְנִית`). The rest are wrong vowels or stress (`חֶבֶל` → `חֲבָל` in
     "חבל על הזמן", `כַּפָּפָה` → `כְּפָפָה`, `מַהְמֵם` → `מְהַמֵּם`,
     `כדורגל` ka-du-RE-gel, `נצרת` nats-RAT, `פיסטוק` FIS-tuk). Every non-OK,
     stress-flagged and letter-mismatched entry was read by hand, NOSRC
-    phrases included.
+    phrases included. A second reviewer then checked every `pron` change
+    and reverted 11 to their earlier colloquial stress, corrected `מלפפון`
+    to me-la-fe-FON, and moved `יותר` and `יותר מדי` (L1/L3) to YO-ter.
+  - **Stress rule: colloquial Israeli stress wins over Wiktionary's
+    normative `tr`.** The app teaches spoken Hebrew. So `ארבע` AR-bah,
+    `יותר` YO-ter, `פלפל` PIL-pel, `יוגורט` YO-gurt, `מנגל` man-GAL,
+    `כוסברה` kus-BA-ra, `חלאס` kha-LAS, `לבנה` la-BA-ne stay as they are even
+    though the audit flags them. `ביותר` stays formal (be-yo-TER). Do not
+    "fix" these back to Wiktionary on the next pass.
   - Left alone on purpose: 52 doubled-ו/י words (`שניים`, `שווה`,
     `עגבנייה`, `סופגנייה`…), plus `חוויאג'`. Their `heV` letters still
     differ from `he`, by the same convention as the four above.
-  - The 15 stress flags still left are all false alarms from a furtive
-    patah (`שָׁבוּעַ` sha-VU-ah, `תַּפּוּחַ`).
+  - Apart from those, the 15 stress flags still left are all false alarms
+    from a furtive patah (`שָׁבוּעַ` sha-VU-ah, `תַּפּוּחַ`).
   - Still unsure, for a human: `רעיון` (heV רַעְיוֹן, Wiktionary
     רַעֲיוֹן), `נענע` (na-a-NA vs Wiktionary נַעְנַע, colloquially NA-na),
-    `אופנה` stress (of-NAH or OF-na), `סביח` (pron now sa-BIKH, but the
-    vowel under ס is a guess), `מהי`/`מיהי` (stress moved to MA-hi/MEE-hi
-    by analogy with Wiktionary's máhu/míhu), `ממה` (מִמַּה vs מִמָּה,
-    sounds the same), `תירס` (ti-RAS kept; colloquially TI-ras),
-    `בורקס` (BU-re-kas kept; Wiktionary burékas).
+    `אופנה` stress (of-NAH or OF-na), `סביח` (pron sa-BIKH, heV סָבִּיח with
+    the patach gnuva dropped to match; the vowel under ס is a guess),
+    `תוכי` tu-KI and `חסה` kha-SA (kept; colloquial stress unclear),
+    `מהי`/`מיהי` (stress moved to MA-hi/MEE-hi by analogy with Wiktionary's
+    máhu/míhu), `ממה` (מִמַּה vs מִמָּה, sounds the same), `תירס`
+    (ti-RAS kept; colloquially TI-ras), `בורקס` (BU-re-kas kept; Wiktionary burékas).
   - Expect false `HOMOGRAPH`/`DIFF` hits when the only entry that agrees on
     meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
