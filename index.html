@@ -4907,7 +4907,7 @@ var VIEW='Today';
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
 // Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
-var APP_BUILD='jw-v56';
+var APP_BUILD='jw-v57';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
