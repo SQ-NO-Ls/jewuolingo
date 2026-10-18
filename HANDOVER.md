@@ -531,6 +531,13 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     a focused input as a place to type, `inputmode="none"` or not: its
     keyboard/Done bar and scroll-into-view broke the custom keyboard. See §6.
 
+18. **Pinning a scrolled body offsets every tap on iOS.** `body.focus` is
+    `position:fixed`; iOS hit-tests the pinned page with the scroll offset it
+    had when pinned, so opening Type It from half-way down the Practice list
+    made taps land on a different key. Always `scrollTo(0,0)` BEFORE adding
+    `focus` (roundStep, openPractice); `_unshift()` keeps it at 0 while a
+    question is open. Desktop browsers do not reproduce this.
+
 ---
 
 ## 8. Workflow

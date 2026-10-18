@@ -3630,6 +3630,7 @@ var FSQ_MODES={multiple:1,type:1,pattern:1,roots:1};   // built from the shared 
 function openPractice(m){
   if(m==='test'){ setMode(m); return; }                // the exam has its own overlay
   _prScroll=window.scrollY;
+  window.scrollTo(0,0);                 // BEFORE pinning — see _unshift below
   document.body.classList.add('focus','pfocus');
   setMode(m);
 }
@@ -5050,6 +5051,7 @@ function roundStep(){
   if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=st.w||patternPickWord(st.p); st.w=PAT.w; PAT.answered=false; }
   else if(st.kind==='root'){ /* rootHTML sets ROOTQ */ }
   else ST.cur=st.w;
+  if(!document.body.classList.contains('focus')) window.scrollTo(0,0);   // BEFORE pinning
   document.body.classList.add('focus');
   var body=document.getElementById('todayBody');
   body.innerHTML=
@@ -6665,6 +6667,22 @@ if('serviceWorker' in navigator){
 // Ask the browser not to evict our storage. Home-screen web apps are already
 // exempt from WebKit's 7-day cap, but this is free insurance elsewhere.
 if(navigator.storage&&navigator.storage.persist){ navigator.storage.persist().catch(function(){}); }
+// ── TAP OFFSET GUARD ─────────────────────────────────────────
+// Focus mode pins the body (position:fixed). iOS hit-tests a pinned body with
+// the scroll offset it had when pinned: pin it while scrolled — Type It sits
+// half-way down the Practice list — and every tap lands that many pixels
+// off, on a different key ("taps hit a different letter", 2026-10-17). So
+// the scroll is zeroed before pinning (roundStep, openPractice), and kept at
+// zero while a question is open, whatever iOS does to its viewport.
+function _unshift(){
+  if(!document.body.classList.contains('focus')) return;
+  var vv=window.visualViewport;
+  if(window.scrollY||document.documentElement.scrollTop||(vv&&(vv.offsetTop||vv.pageTop))) window.scrollTo(0,0);
+}
+window.addEventListener('scroll',_unshift,{passive:true});
+window.addEventListener('pageshow',_unshift);
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible') _unshift(); });
+if(window.visualViewport){ visualViewport.addEventListener('resize',_unshift); visualViewport.addEventListener('scroll',_unshift); }
 // iOS Safari only applies :active (key press states, the key callout) once a
 // touch listener exists on the page.
 document.addEventListener('touchstart',function(){},{passive:true});
