@@ -563,14 +563,14 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
    Visual keys are ~31px wide, under the 44px guide, so hit areas tile the
    6px gaps the way system keyboards do, and pressing a letter lifts it into
    a callout above the thumb. */
-.kbd{touch-action:none;margin:var(--s2) calc(-1 * var(--gutter)) 0;padding:8px 4px calc(6px + env(safe-area-inset-bottom));
+.kbd{touch-action:none;margin:var(--s2) calc(-1 * var(--gutter)) 0;padding:10px 4px calc(20px + env(safe-area-inset-bottom));
   background:var(--surface);border-top:1px solid var(--border);user-select:none;-webkit-user-select:none;}
 .kbd-rows{display:flex;flex-direction:column;gap:10px;}
 .kbd-row{display:flex;gap:6px;justify-content:center;}
-.kbd-key{position:relative;flex:0 0 calc((100% - 54px) / 10);min-width:0;height:46px;
+.kbd-key{position:relative;flex:0 0 calc((100% - 54px) / 10);min-width:0;height:52px;
   display:flex;align-items:center;justify-content:center;
   background:var(--surface3);border:none;border-radius:var(--r-sm);box-shadow:0 1px 0 var(--key-shadow);
-  font-family:var(--he-font);font-size:22px;font-weight:400;line-height:1;color:var(--text);
+  font-family:var(--he-font);font-size:24px;font-weight:400;line-height:1;color:var(--text);
   cursor:pointer;touch-action:manipulation;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none;}
 .kbd-key::after{content:'';position:absolute;inset:-5px -3px;}
 .kbd-key:active,.kbd-key.down{background:var(--surface2);}
@@ -1098,6 +1098,12 @@ body{text-rendering:optimizeLegibility;font-kerning:normal;font-optical-sizing:a
 
 /* the root line under a typed answer gets its own line in the feedback slot */
 .fs-fb .fs-reveal{flex-basis:100%;padding:var(--s1) 0 0;}
+
+/* The answer field shows what the on-screen keyboard typed. It is never
+   focused or tapped: a focused field invites iOS to raise its own keyboard
+   or its Done bar and to scroll the screen, which moved the keys out from
+   under the finger. */
+#ti{pointer-events:none;caret-color:transparent;-webkit-user-select:none;user-select:none;}
 </style>
 </head>
 <body class="">
@@ -4032,7 +4038,7 @@ function typeHTML(w){
       '<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>'+
       '<div class="hint-out" id="hintOut" lang="he" dir="rtl"></div>'+
     '</div>'+
-    '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" '+
+    '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" readonly tabindex="-1" '+
       'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" '+
       'oninput="kbSyncGo()" onkeydown="if(event.key===\'Enter\')checkType()">'+
     '<div class="fs-fb" id="tfb"></div>'+
@@ -4568,7 +4574,7 @@ function renderTestQ(){
   } else {
     body='<div class="test-style-tag">Fill the blank — type the Hebrew</div>'+
       '<div class="test-prompt-en">'+w.en+'</div>'+pronBtn(w,'margin:6px 0 16px')+
-      '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" inputmode="none" onkeydown="if(event.key===\'Enter\')checkTestType()"></div>'+
+      '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" inputmode="none" readonly tabindex="-1" onkeydown="if(event.key===\'Enter\')checkTestType()"></div>'+
       '<div class="test-feedback" id="tfb"></div>'+
       '<div class="quiz-actions" style="margin-top:12px;justify-content:flex-end"><button class="btn" onclick="checkTestType()">Check </button></div>'+
       buildKbd();
@@ -4853,13 +4859,12 @@ function renderCheckpoint(){
     '<div class="type-english">'+esc(w.en)+'</div>'+
     '<div class="type-input-wrap"><input class="type-input he-text" id="ti" autocomplete="off" '+
       'autocorrect="off" autocapitalize="off" spellcheck="false" lang="he" '+
-      'inputmode="none" onkeydown="if(event.key===\'Enter\')checkCheckpoint()"></div>'+
+      'inputmode="none" readonly tabindex="-1" onkeydown="if(event.key===\'Enter\')checkCheckpoint()"></div>'+
     '<div class="type-feedback" id="cfb"></div>'+
     '<div class="quiz-actions" style="margin-top:10px">'+
       '<button class="btn-ghost" onclick="abortCheckpoint()">Quit</button>'+
       '<button class="btn" onclick="checkCheckpoint()">Check </button></div>'+
     buildKbd();
-  var i=document.getElementById('ti'); if(i) i.focus();
 }
 function checkCheckpoint(){
   if(CHK.answered){ cont(); return; }
@@ -5063,7 +5068,6 @@ function roundStep(){
   if(st.kind==='type')    host.innerHTML=typeHTML(st.w);
   if(st.kind==='pattern') host.innerHTML=patternHTML(PAT.p,PAT.w);
   if(st.kind==='root')    host.innerHTML=rootHTML(st.root);
-  var inp=document.getElementById('ti'); if(inp) inp.focus();
   kbSyncGo();
 }
 function roundNext(ok){
@@ -5547,7 +5551,7 @@ function patternHTML(p,w){
         '<b>'+esc(fillerEn(p,w))+'</b>'+esc(p.enPost||'')+
         (p.t.slice(-1)==='?'?'?':'')+'</div>'+
     '</div>'+
-    '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" '+
+    '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" readonly tabindex="-1" '+
       'placeholder="מילה אחת…" autocomplete="off" autocorrect="off" autocapitalize="off" '+
       'spellcheck="false" oninput="kbSyncGo()" '+
       'onkeydown="if(event.key===\'Enter\'){event.preventDefault();checkPattern();}">'+
@@ -5591,7 +5595,6 @@ function renderPattern(){
   }
   PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
   document.getElementById('quizContent').innerHTML=patternHTML(PAT.p,PAT.w);
-  var i=document.getElementById('ti'); if(i) i.focus();
 }
 
 
@@ -6187,7 +6190,6 @@ function sichaRender(){
   }
   qc.innerHTML=html;
   var th=document.getElementById('schThread'); if(th) th.scrollTop=99999;
-  var inp=document.getElementById('ti'); if(inp&&SCH.support!=='A') inp.focus();
 }
 
 function sichaInputUI(){
@@ -6218,7 +6220,7 @@ function sichaInputUI(){
 }
 function sichaTypeUI(){
   return '<div class="sch-input-row">'+
-      '<input class="sch-input he-text" id="ti" placeholder="כתוב/כתבי בעברית…" inputmode="none" onkeydown="if(event.key===\'Enter\'){event.preventDefault();sichaSendInput();}">'+
+      '<input class="sch-input he-text" id="ti" placeholder="כתוב/כתבי בעברית…" inputmode="none" readonly tabindex="-1" onkeydown="if(event.key===\'Enter\'){event.preventDefault();sichaSendInput();}">'+
       '<button class="btn" style="padding:12px 18px" onclick="sichaSendInput()">שלח</button>'+
     '</div>'+ buildKbd();
 }
@@ -6604,6 +6606,15 @@ function resetProgress(){
 // ── KEYBOARD SHORTCUTS ────────────────────────────────────────
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter'&&_cont){ e.preventDefault(); cont(); return; }
+  // The answer field is read-only (so iOS never raises its own keyboard over
+  // ours); a hardware keyboard is routed through the on-screen one instead.
+  var ti=document.getElementById('ti'), tg=e.target;
+  var editing=tg&&tg!==ti&&(tg.tagName==='INPUT'||tg.tagName==='TEXTAREA')&&!tg.readOnly;
+  if(ti&&ti.readOnly&&!editing&&document.querySelector('.kbd')&&!e.metaKey&&!e.ctrlKey&&!e.altKey){
+    if(e.key==='Backspace'){ e.preventDefault(); kbBack(); return; }
+    if(e.key==='Enter'){ e.preventDefault(); var g=document.getElementById('kbGo'); if(g&&!g.disabled&&g.onclick) g.onclick(); return; }
+    if(e.key.length===1){ e.preventDefault(); kbType(e.key); return; }
+  }
   var t=e.target;
   if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
   var inTest=document.getElementById('testOverlay').classList.contains('open');

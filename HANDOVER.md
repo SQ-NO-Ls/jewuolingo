@@ -329,10 +329,14 @@ transferable skill. **Finals are their own keys** (ן ם ך ף ץ): long-press i
 undiscoverable and finals are distinct letters a learner must choose
 deliberately.
 
-All five Hebrew inputs carry **`inputmode="none"`**, which stops iOS raising
-its own (English) keyboard on top of the app's Hebrew one. **If you add a new
-Hebrew input, it needs `inputmode="none"` and `buildKbd()`, and the submit
-control must come BEFORE the keyboard in source order.**
+All five Hebrew answer fields are **`readonly tabindex="-1"`** plus
+`inputmode="none"`, `pointer-events:none`, and are **never focused** (no
+`.focus()` anywhere). A focusable/focused field let iOS raise its own
+keyboard or its ⌃⌄ Done bar and scroll the screen, moving the keys out from
+under the finger — the "keyboard impossible to use" report (2026-10-17).
+Values are set only by the on-screen keyboard (`kbType`/`kbBack`); a
+hardware keyboard is routed through the global keydown handler. **If you add
+a Hebrew answer field, copy those attributes and never focus it.**
 
 Proportioned like the system keyboard (2026-10-16): a **full-bleed tray**
 (`margin-inline:-16px`, 4px outer inset, `--surface`, top hairline). Letter
@@ -522,6 +526,10 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     script appending CSS "at the end of the stylesheet" lands before the main
     sheet and loses every equal-specificity contest. Append before the
     `</style>` that follows `<style>\n\n:root`.
+
+17. **Never focus a Hebrew answer field, and keep it read-only.** iOS treats
+    a focused input as a place to type, `inputmode="none"` or not: its
+    keyboard/Done bar and scroll-into-view broke the custom keyboard. See §6.
 
 ---
 
