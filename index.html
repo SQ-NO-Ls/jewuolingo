@@ -3378,10 +3378,12 @@ function toggleCursive(){
 // ══════════════════════════════════════════════════════════════
 // These are design judgments, NOT sourced cut-offs. They are collected in one
 // place so the pending research run can retune them without touching logic.
+// The state thresholds are FSRS stability in days (ui-context/LEARNING_RESEARCH.md §8b).
 const CFG={
-  newPerDay: 7,            // 2 scheduled cards per word; 7/day ≈ 20 min/day
-  secureDays: 7,           // Produce stability before a word counts as Secure
-  masteredDays: 21,
+  newPerDay: 7,            // a ceiling, enforced in freshList(); the backlog pause usually binds first
+  familiarDays: 2.3,       // R stability: FSRS-6's initial stability after "Good"
+  secureDays: 21,          // P stability that survives year-scale spacing (Cepeda 2008)
+  masteredDays: 120,       // P stability, with at most one lapse
   gate:{ breadth:0.85, patterns:0.80, checkpoint:0.85, softUnlock:0.70 },
   // The doc's "no dimension below 70%" hard gate is deliberately NOT enforced
   // yet — four ways to be blocked risks deadlock. Surfaced as a shape chart
@@ -3407,40 +3409,168 @@ function itemRoot(r){ return 'r:'+r; }
 
 function getCard(id,dim){
   var k=id+'|'+dim;
-  return ST.cards[k]||{n:0,due:0,reps:0,lapses:0};
+  return ST.cards[k]||{st:'new',step:0,s:0,d:0,due:0,reps:0,lapses:0,n:0};
 }
-// Interval ladder, kept deliberately swappable: FSRS drops in here once its
-// parameters can be verified rather than recalled.
+// The old interval ladder. Still drives the legacy flashcard store (ST.srs),
+// and maps old cards onto FSRS in migrateCards().
 function srsInt(l){ return [0,60000,300000,1800000,864e5,6048e5][Math.min(l,5)]; }
-// grade: true|'good' advances, 'hard' holds the rung, false|'again' drops it.
-function schedule(c,grade){
-  var n;
-  if(grade===false||grade==='again') n=Math.max(c.n-1,0);
-  else if(grade==='hard')            n=Math.max(c.n,1);
-  else                               n=Math.min(c.n+1,5);
-  var bad=(grade===false||grade==='again');
-  return {n:n,due:Date.now()+srsInt(n),reps:(c.reps||0)+1,
-          lapses:(c.lapses||0)+(bad?1:0)};
+
+// ── FSRS-6 ────────────────────────────────────────────────────
+// Ported line by line from ts-fsrs 5.4.2 (open-spaced-repetition), default
+// parameters, short-term scheduling on, fuzz off. Cards carry st (new |
+// learning | review | relearning), step, s (stability, days: the interval at
+// which recall is 90%), d (difficulty 1–10), due, last, reps, lapses, and f
+// (first review). Sources and the reasoning: ui-context/LEARNING_RESEARCH.md.
+// FSRS_BEGIN
+const FSRS={
+  w:[0.212,1.2931,2.3065,8.2956,6.4133,0.8334,3.0194,0.001,1.8722,0.1666,0.796,
+     1.4835,0.0614,0.2629,1.6483,0.6014,1.8729,0.5425,0.0912,0.0658,0.1542],
+  retention:0.9,
+  learn:[1,10],      // minutes; the 1-minute step is the echo inside the same round
+  relearn:[10],
+  maxIvl:36500
+};
+function fsrsClamp(v,a,b){ return Math.min(Math.max(v,a),b); }
+function fsrsDecay(){ return -FSRS.w[20]; }
+function fsrsFactor(){ return Math.pow(0.9,1/fsrsDecay())-1; }
+// Probability of recall t days after the last review.
+function fsrsR(t,s){ return Math.pow(1+fsrsFactor()*t/s,fsrsDecay()); }
+function fsrsInitS(g){ return Math.max(FSRS.w[g-1],0.1); }
+function fsrsInitD(g){ return FSRS.w[4]-Math.exp((g-1)*FSRS.w[5])+1; }
+function fsrsNextD(d,g){
+  var w=FSRS.w, next=d+(-w[6]*(g-3))*(10-d)/9;
+  return fsrsClamp(w[7]*fsrsInitD(4)+(1-w[7])*next,1,10);
 }
+function fsrsRecallS(d,s,r,g){
+  var w=FSRS.w, hard=g===2?w[15]:1, easy=g===4?w[16]:1;
+  return fsrsClamp(s*(1+Math.exp(w[8])*(11-d)*Math.pow(s,-w[9])*(Math.exp((1-r)*w[10])-1)*hard*easy),0.001,36500);
+}
+function fsrsForgetS(d,s,r){
+  var w=FSRS.w;
+  return fsrsClamp(w[11]*Math.pow(d,-w[12])*(Math.pow(s+1,w[13])-1)*Math.exp((1-r)*w[14]),0.001,36500);
+}
+function fsrsShortS(s,g){
+  var w=FSRS.w, sinc=Math.pow(s,-w[19])*Math.exp(w[17]*(g-3+w[18]));
+  return fsrsClamp(s*(g>=2?Math.max(sinc,1):sinc),0.001,36500);
+}
+// t = whole days since the last review; t=0 is a same-day review.
+function fsrsNextState(d,s,t,g,r){
+  if(r===undefined) r=fsrsR(t,s);
+  var ns;
+  if(t===0) ns=fsrsShortS(s,g);
+  else if(g===1) ns=fsrsClamp(s/Math.exp(FSRS.w[17]*FSRS.w[18]),0.001,fsrsForgetS(d,s,r));
+  else ns=fsrsRecallS(d,s,r,g);
+  return {d:fsrsNextD(d,g),s:ns};
+}
+function fsrsIvl(s){
+  var im=(Math.pow(FSRS.retention,1/fsrsDecay())-1)/fsrsFactor();
+  return Math.min(Math.max(1,Math.round(s*im)),FSRS.maxIvl);
+}
+function fsrsDayStart(ms){ var d=new Date(ms); return new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime(); }
+function fsrsAddDays(ms,n){ var d=new Date(ms); return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n).getTime(); }
+function fsrsDays(a,b){ return Math.round((fsrsDayStart(b)-fsrsDayStart(a))/864e5); }
+// Learning and relearning steps (ts-fsrs BasicLearningStepsStrategy).
+function fsrsSteps(o,g,steps,toState,now){
+  var cur=o.step||0, n=steps.length, min=0, next=0;
+  if(n&&cur<n){
+    if(g===1){ min=steps[0]; next=0; }
+    else if(g===2){ min=n===1?Math.round(steps[0]*1.5):Math.round((steps[0]+steps[1])/2); next=cur; }
+    else if(cur+1<n){ min=steps[cur+1]; next=cur+1; }
+  }
+  if(min>0&&min<1440){ o.st=toState; o.step=next; o.due=now+min*6e4; }
+  else { o.st='review'; o.step=0; o.ivl=fsrsIvl(o.s); o.due=fsrsAddDays(now,o.ivl); }
+  return o;
+}
+// grade: true|'good' → Good, 'hard' → Hard (recalled with effort), false|'again' → Again.
+function fsrsGrade(grade){ return (grade===false||grade==='again')?1:(grade==='hard'?2:3); }
+function schedule(c,grade,now){
+  now=now||Date.now();
+  var g=fsrsGrade(grade), st=c.st||'new', t=c.last?fsrsDays(c.last,now):0;
+  var o={st:st,step:c.step||0,s:c.s||0,d:c.d||0,reps:(c.reps||0)+1,
+         lapses:c.lapses||0,last:now,f:c.f||now};
+  if(st==='new'){
+    o.d=fsrsClamp(fsrsInitD(g),1,10); o.s=fsrsInitS(g);
+    fsrsSteps(o,g,FSRS.learn,'learning',now);
+  } else if(st==='learning'||st==='relearning'){
+    var ls=fsrsNextState(c.d,c.s,t,g); o.d=ls.d; o.s=ls.s;
+    fsrsSteps(o,g,st==='learning'?FSRS.learn:FSRS.relearn,st,now);
+  } else {
+    var r=fsrsR(t,c.s);
+    if(g===1){
+      var a=fsrsNextState(c.d,c.s,t,1,r); o.d=a.d; o.s=a.s; o.lapses++;
+      o.st='relearning'; o.step=0; o.due=now+FSRS.relearn[0]*6e4;
+    } else {
+      // Hard never schedules past Good, and Good always beats Hard by a day.
+      var h=fsrsNextState(c.d,c.s,t,2,r), gd=fsrsNextState(c.d,c.s,t,3,r);
+      var hi=Math.min(fsrsIvl(h.s),fsrsIvl(gd.s)), gi=Math.max(fsrsIvl(gd.s),hi+1);
+      var pick=g===2?h:gd;
+      o.d=pick.d; o.s=pick.s; o.st='review'; o.step=0;
+      o.ivl=g===2?hi:gi; o.due=fsrsAddDays(now,o.ivl);
+    }
+  }
+  // n: the old rung, kept so an older cached build can still read the card.
+  o.n=o.st==='review'?(o.s>=7?5:4):Math.min(o.step+1,3);
+  return o;
+}
+// FSRS_END
+
+// One-time move from the rung ladder onto FSRS (research §8a.7): stability
+// from the card's current ladder interval, difficulty from D0(Good), due
+// dates left alone rather than rescheduled. Idempotent: a card that already
+// has st is never touched. jw_progress_pre_fsrs keeps the untouched save.
+function migrateCards(raw){
+  var keys=Object.keys(ST.cards), todo=keys.filter(function(k){ return ST.cards[k]&&!ST.cards[k].st; });
+  if(!todo.length) return false;
+  try{ if(raw&&!localStorage.getItem('jw_progress_pre_fsrs')) localStorage.setItem('jw_progress_pre_fsrs',raw); }catch(e){}
+  var now=Date.now();
+  todo.forEach(function(k){
+    var c=ST.cards[k];
+    // Practice Fill-the-Blank used to write a Use card onto words; nothing reads it.
+    if(/^w:.*\|U$/.test(k)){ delete ST.cards[k]; return; }
+    if(!c.reps){ delete ST.cards[k]; return; }
+    var n=Math.min(c.n||0,5), due=c.due||now;
+    var o={reps:c.reps,lapses:c.lapses||0,due:due,last:Math.min(due-srsInt(n),now),
+           d:fsrsClamp(fsrsInitD(3),1,10),m:1,n:n};
+    o.f=Math.min(o.last,fsrsDayStart(now)-1);   // before today: never counted as new today
+    // Patterns and roots counted as learned at rung 3 under the old rule.
+    var floor=/^[pr]:/.test(k)?3:4;
+    if(n>=floor){ o.st='review'; o.step=0; o.s=n===5?7:1; }
+    else { o.st='learning'; o.step=n>=2?1:0; o.s=n>=2?FSRS.w[2]:(n===1?FSRS.w[1]:FSRS.w[0]); }
+    // Secure under the old rule stays Secure until its next review re-decides it.
+    if(/\|P$/.test(k)&&n===5&&c.reps>=2) o.g=1;
+    ST.cards[k]=o;
+  });
+  return true;
+}
+
+// Only a DUE card moves forward (research §8f). A success on a review card
+// that is not due yet — a round's top-up, a checkpoint, Practice — changes
+// nothing; a failure is always real information. Practice also never creates
+// a card for a word that was never taught, and never moves learning steps.
+// Inside a round, learning steps do move early: that is the in-round retest.
 function reviewItem(id,dim,grade){
-  var was=getCard(id,dim);
-  if((dim==='R'||dim==='P') && was.reps>0 && was.due<=Date.now()) questReviewed();
-  var nc=schedule(was,grade);
+  var was=getCard(id,dim), now=Date.now(), bad=(grade===false||grade==='again');
+  var practice=!ROUND.active&&!CHK.active;
+  if(!was.reps){ if(practice) return was; }
+  else if(was.due>now&&!bad&&(was.st==='review'||practice)) return was;
+  if((dim==='R'||dim==='P') && was.reps>0 && was.due<=now) questReviewed();
+  var nc=schedule(was,grade,now);
   ST.cards[id+'|'+dim]=nc;
   return nc;
 }
 function cardDue(id,dim){ return getCard(id,dim).due<=Date.now(); }
-// Days of stability the card's current rung represents.
-function stabilityDays(id,dim){ return srsInt(getCard(id,dim).n)/864e5; }
+function stabilityDays(id,dim){ var c=getCard(id,dim); return c.st==='review'?c.s:0; }
+// Graduated out of the learning steps at least once.
+function graduated(id,dim){ var c=getCard(id,dim); return c.st==='review'||c.st==='relearning'; }
 
 // A word is Secure on PRODUCTION evidence that survived spaced intervals —
 // not on recognition streaks, which multiple choice inflates by guessing.
 function wordState(he){
   var id=itemWord(he), p=getCard(id,'P'), r=getCard(id,'R');
-  var pd=srsInt(p.n)/864e5;
-  if(pd>=CFG.masteredDays&&p.lapses<=1) return 'mastered';
-  if(pd>=CFG.secureDays&&p.reps>=2) return 'secure';
-  if(srsInt(r.n)/864e5>=2) return 'familiar';
+  var ps=p.st==='review'?p.s:0;
+  if(ps>=CFG.masteredDays&&p.lapses<=1) return 'mastered';
+  if(ps>=CFG.secureDays||(p.g&&p.st==='review')) return 'secure';
+  if(r.st==='review'&&r.s>=CFG.familiarDays) return 'familiar';
   if(r.reps||p.reps) return 'learning';
   return 'new';
 }
@@ -4076,7 +4206,9 @@ function checkType(){
   var revealed=_hint>=2, hinted=_hint===1;
   ST.answered=true; ST.total++;
   if(ROUND.active) ROUND.lastTyped=inp.value.trim();
-  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed)?false:((m==='close'||hinted)?'hard':true));
+  // A hint means it was not produced from memory: Again, and it comes back.
+  // Hard is for a correct answer with a slip (research §8a.4).
+  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed||hinted)?false:(m==='close'?'hard':true));
   trackW(ST.cur.he,m!=='wrong'&&!revealed);
   if(m==='close') typed=correct;
   var ok=(typed===correct)&&!revealed, fb=document.getElementById('tfb');
@@ -4087,7 +4219,8 @@ function checkType(){
     fb.innerHTML='<span style="color:var(--green)">'+
       '<svg class="i"><use href="#i-check"/></svg></span>'+
       (m==='close'?'<span style="color:var(--text3)">close enough — '+
-        '<span class="was" lang="he" dir="rtl">'+dHe(ST.cur)+'</span></span>':'');
+        '<span class="was" lang="he" dir="rtl">'+dHe(ST.cur)+'</span></span>':'')+
+      (hinted?'<span class="fs-note">with a hint, so it comes back</span>':'');
   } else {
     inp.classList.add('bad'); ST.streak=0;
     fb.innerHTML='<span class="was" lang="he" dir="rtl">'+diffMark(typed,correct)+'</span>'+
@@ -4095,7 +4228,7 @@ function checkType(){
       (revealed&&typed===correct?'<span class="fs-note">shown, so it comes back</span>':'');
   }
   var _rv=afterReveal(ST.cur); if(_rv) fb.insertAdjacentHTML('beforeend',_rv);   // inside the reserved slot: nothing below moves
-  updateStats(); hold(function(){advance(ok);}); kbToContinue();
+  updateStats(); hold(function(){advance(ok&&!hinted);}); kbToContinue();
 }
 
 // ── MATCH ─────────────────────────────────────────────────────
@@ -4157,8 +4290,8 @@ function pickBank(word,idx){
   if(bs) bs.value=word;
   ST.answered=true;ST.total++;
   var ok=stripV(ST.cur.he)===stripV(word);
-  // Cloze with a word bank is weak production but real USE.
-  reviewItem(itemWord(ST.cur.he),'U',ok);
+  // Picking from a word bank is recognition in context, so it reports to R.
+  reviewItem(itemWord(ST.cur.he),'R',ok);
   trackW(ST.cur.he,ok);
   var bw=document.getElementById('bw'+idx);
   if(bw) bw.classList.add('used');
@@ -4728,8 +4861,22 @@ function matchAnswer(typed,want){
   if(t===w) return 'exact';
   // 4, not 5: Hebrew drops its vowels, so a 4-letter word is already
   // substantial. Below that a single character is too much of the word.
-  if(w.length>=4 && lev(t,w)===1 && !vocabSet()[t]) return 'close';
+  if(w.length>=4 && lev(t,w)===1 && !vocabSet()[t] && !confusableSwap(t,w)) return 'close';
   return 'wrong';
+}
+// Letters that sound or look alike to an English speaker. Swapping one is a
+// spelling error, not a slip of the finger, so it is never "close enough"
+// (research §8d — an inference, no Hebrew-specific study exists).
+var CONFUSABLE=['בכ','חכ','סש','טת','אע','קכ','וב'];
+var FINAL_BASE={'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'};
+function confusableSwap(t,w){
+  if(t.length!==w.length) return false;
+  for(var i=0;i<w.length;i++){
+    if(t[i]===w[i]) continue;
+    var a=FINAL_BASE[t[i]]||t[i], b=FINAL_BASE[w[i]]||w[i];
+    return CONFUSABLE.some(function(p){ return (p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a); });
+  }
+  return false;
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -4756,7 +4903,7 @@ function candoDone(c){
     if(!w) return true;                       // not in the app yet: do not block
     var s=wordState(h); return s==='secure'||s==='mastered';
   });
-  var pOk=c.patterns.every(function(id){ return getCard(itemPattern(id),'U').n>=3; });
+  var pOk=c.patterns.every(function(id){ return graduated(itemPattern(id),'U'); });
   return wOk&&pOk;
 }
 
@@ -4766,7 +4913,7 @@ function candoDone(c){
 // A backlog compounds: miss a week, open the app, see 600 cards, never
 // open it again. New words stop arriving while you are behind, and a
 // catch-up day is capped rather than dumped on you.
-const LOAD={pauseNewAt:60, catchUpCap:40};
+const LOAD={pauseNewAt:24, catchUpCap:40};   // 24 = two rounds of reviews
 function dueTotal(){ return dueList('R').length+dueList('P').length; }
 function newPaused(){ return dueTotal()>=LOAD.pauseNewAt; }
 
@@ -4786,7 +4933,7 @@ function secureCount(){
   return vocab.filter(function(w){var s=wordState(w.he);return s==='secure'||s==='mastered';}).length;
 }
 function patternSecureCount(){
-  return PATTERNS.filter(function(p){return getCard(itemPattern(p.id),'U').n>=3;}).length;
+  return PATTERNS.filter(function(p){return graduated(itemPattern(p.id),'U');}).length;
 }
 const QUEST_DEFS={
   secure3  :{scope:'daily', target:3,  label:'Secure 3 words',          read:secureCount},
@@ -4907,7 +5054,7 @@ var VIEW='Today';
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
 // Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
-var APP_BUILD='jw-v57';
+var APP_BUILD='jw-v58';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
@@ -4961,21 +5108,31 @@ var ROUND={active:false,steps:[],i:0,right:0,wrong:0,started:0};
 var ROUND_LEN=12;
 
 function dueList(dim){
+  var now=Date.now();
+  // Learning steps first (they are minutes long), then lowest chance of recall.
+  function key(w){
+    var c=getCard(itemWord(w.he),dim);
+    return c.st==='review'?fsrsR(Math.max(0,(now-c.last)/864e5),c.s):-1;
+  }
   return vocab.filter(function(w){
     var c=getCard(itemWord(w.he),dim);
-    return c.reps>0 && c.due<=Date.now();
-  }).sort(function(a,b){
-    return getCard(itemWord(a.he),dim).due-getCard(itemWord(b.he),dim).due;
-  });
+    return c.reps>0 && c.due<=now;
+  }).sort(function(a,b){ return key(a)-key(b); });
+}
+// Words whose first review was today: what the daily new-word cap counts.
+function newToday(){
+  var t0=fsrsDayStart(Date.now());
+  return vocab.filter(function(w){ var c=getCard(itemWord(w.he),'R'); return c.f&&c.f>=t0; }).length;
 }
 function freshList(){
   // Nothing new while a backlog is building — this is the single rule that
   // stops the review queue running away from you.
   if(newPaused()) return [];
-  var lv=activeLevel();
+  var lv=activeLevel(), left=Math.max(0,CFG.newPerDay-newToday());
   return vocab.filter(function(w){
     return w.level<=lv && getCard(itemWord(w.he),'R').reps===0;
-  }).sort(function(a,b){ return a.rank-b.rank; });   // most frequent first
+  }).sort(function(a,b){ return a.rank-b.rank; })   // most frequent first
+    .slice(0,left);
 }
 function roundCounts(){
   return {dueR:dueList('R').length, dueP:dueList('P').length, fresh:freshList().length};
@@ -4991,11 +5148,11 @@ function buildRound(){
   // Reviews carry the round; new material is strictly rationed.
   dueList('P').slice(0,5).forEach(function(w){ push('type',w); });
   dueList('R').slice(0,5).forEach(function(w){ push('mc',w); });
-  // Production unlocks once recognition is established. Without this the gate
-  // dimension can never start: a word only gets a P card by being typed, and
-  // it is only typed if it already has a due P card.
+  // Production unlocks once recognition has graduated out of its learning
+  // steps. Without this the gate dimension can never start: a word only gets
+  // a P card by being typed, and it is only typed if it already has one.
   vocab.filter(function(w){
-    return getCard(itemWord(w.he),'R').n>=2 && getCard(itemWord(w.he),'P').reps===0;
+    return graduated(itemWord(w.he),'R') && getCard(itemWord(w.he),'P').reps===0;
   }).sort(function(a,b){ return a.rank-b.rank; })
     .slice(0,3).forEach(function(w){ push('type',w); });
   PATTERNS.filter(function(p){ return p.level<=activeLevel()+1 && patternKnownFillers(p).length; })
@@ -5007,11 +5164,15 @@ function buildRound(){
   if(rk) steps.push({kind:'root',root:rk});
   // Top up from words already met, never by adding more new ones.
   if(steps.length<ROUND_LEN){
-    vocab.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; })
-      .sort(function(a,b){ return getCard(itemWord(a.he),'R').due-getCard(itemWord(b.he),'R').due; })
+    // Review cards only, weakest first. A word in its learning steps waits for
+    // its step: asking it early would let it skip the wait.
+    var now=Date.now();
+    var weak=function(w){ var c=getCard(itemWord(w.he),'R'); return fsrsR(Math.max(0,(now-c.last)/864e5),c.s); };
+    vocab.filter(function(w){ var c=getCard(itemWord(w.he),'R'); return c.reps>0&&(c.st==='review'||c.due<=now); })
+      .sort(function(a,b){ return weak(a)-weak(b); })
       .forEach(function(w){ if(steps.length<ROUND_LEN) push('mc',w); });
   }
-  var rest=steps.sort(function(){ return Math.random()-.5; });
+  var rest=steps;   // still in priority order: the trim below keeps the most due
 
   // At most 3 genuinely new words per round. Each is introduced and then
   // tested later in the SAME round — the study card is shown once, after
@@ -5019,9 +5180,12 @@ function buildRound(){
   var intros=freshList().slice(0,3);
   var echoes=intros.map(function(w){ return {kind:'mc',w:w,echo:true}; });
   var out=intros.map(function(w){ return {kind:'intro',w:w}; });
-  // Intros first guarantees every echo lands after its own introduction.
-  out=out.concat(rest.concat(echoes).sort(function(){ return Math.random()-.5; }));
-  return out.slice(0,ROUND_LEN);
+  // Intros first guarantees every echo lands after its own introduction, and
+  // the trim comes off the reviews, never an echo: an intro is not a review,
+  // so a word whose echo was cut would simply be introduced again.
+  rest=rest.slice(0,Math.max(0,ROUND_LEN-out.length-echoes.length));
+  // Then shuffled: interleaving item types retains better than blocks.
+  return out.concat(rest.concat(echoes).sort(function(){ return Math.random()-.5; }));
 }
 
 function startRound(){
@@ -5158,7 +5322,7 @@ function dotState(w){
   var r=getCard(itemWord(w.he),'R'), pr=getCard(itemWord(w.he),'P');
   if(pr.reps>0 && wordState(w.he)==='secure') return 'secure';
   if(r.reps>0) return 'seen';
-  if(r.n>0||ST.learned.has(w.he)) return 'met';
+  if(ST.learned.has(w.he)) return 'met';
   return 'unseen';
 }
 function drawMap(id,onlyLevel,pitchArg,dimBeyond){
@@ -5582,8 +5746,8 @@ function introHTML(w){
 }
 function introDone(){
   var w=ST.cur; if(!w) return;
-  // First exposure is a learning step, not a pass: it comes back inside the round.
-  reviewItem(itemWord(w.he),'R',true);
+  // Seeing a word is not retrieving it (research §1.3): no grade here. Its
+  // first review is the echo later in this round.
   saveProgress(); advance(true);
 }
 function renderPattern(){
@@ -6551,6 +6715,7 @@ function loadProgress(){
         ST.cards[itemWord(he)+'|R']={n:o.level||0,due:o.nextAt||0,reps:Math.max(1,o.level||0),lapses:0};
       });
     }
+    migrateCards(localStorage.getItem('jw_progress'));
     ST.dayStreak=d.dayStreak||0;ST.lastDay=d.lastDay||'';ST.freezes=d.freezes||0;
     ST.gender=d.gender||null;ST.sichaSupport=d.sichaSupport||{};
     ST.userVocab=d.userVocab||[];ST.grammarErrors=d.grammarErrors||{};

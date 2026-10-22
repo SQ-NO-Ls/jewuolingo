@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v57`
+- **Deployed version:** service-worker `jw-v58`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -116,8 +116,14 @@ Feeding derived levels back into the imputation would be circular.
 itemWord(he)      → "w:<he>"
 itemPattern(id)   → "p:<id>"
 itemRoot(root)    → "r:<root>"
-ST.cards["<itemId>|<dim>"] = {n, reps, lapses, due, ...}
+ST.cards["<itemId>|<dim>"] = {st, step, s, d, due, last, reps, lapses, f, n, ivl?, g?, m?}
 ```
+FSRS-6 fields (since jw-v58): `st` new|learning|review|relearning, `step`
+learning-step index, `s` stability in days (the gap at which recall is 90%),
+`d` difficulty 1–10, `last` last review, `f` first review (the daily new-word
+cap counts these), `ivl` last interval in days. `n` is the OLD rung, still
+written so an older cached build can read the card. `g` = grandfathered
+Secure, `m` = migrated from the ladder (see §5 "Scheduler").
 
 Only **R** and **P** schedule cards on words. **U** belongs to the pattern,
 **C** to the root — as items in their own right. This is deliberate: duplicating
@@ -143,12 +149,61 @@ A word is **secure** on *production stability only*. Recognition does not count.
 
 ### `CFG` — all tunable thresholds in one place
 ```js
-newPerDay: 7, secureDays: 7, masteredDays: 21,
+newPerDay: 7,          // ceiling, enforced in freshList() via newToday()
+familiarDays: 2.3, secureDays: 21, masteredDays: 120,   // FSRS stability, days
 gate: {breadth:0.85, patterns:0.80, checkpoint:0.85, softUnlock:0.70},
 minDimension: null   // the "no dimension below 70%" hard gate is NOT enforced:
                      // four ways to be blocked risks deadlock. Shown as a
                      // shape chart first. Revisit with real data.
 ```
+
+### Scheduler — FSRS-6 (jw-v58, 2026-10-22)
+Research: `ui-context/LEARNING_RESEARCH.md` (the user's research run, with a
+"checked against the code" note at the end). The rung ladder (0/1m/5m/30m/1d/7d,
+capped at 7 days) is gone from scheduling; `srsInt` survives only for the
+legacy flashcard store `ST.srs` and for the migration.
+- **`schedule(c, grade, now)`** is FSRS-6 **ported line by line from ts-fsrs
+  5.4.2**: default 21 weights, desired retention 0.90, short-term scheduling
+  on, fuzz off, learning steps `[1m, 10m]`, relearning `[10m]`, max interval
+  100 years. The block sits between `// FSRS_BEGIN` and `// FSRS_END` so a
+  test can lift it out. **Verified**: 42,000 random reviews compared against
+  the ts-fsrs package, 0 mismatches (stability/difficulty within 1e-6, same
+  state, step and interval). Script: rebuild with `npm pack ts-fsrs` and the
+  check in the session scratchpad if needed; run under `TZ=UTC` (ts-fsrs
+  counts UTC days, the app counts local days).
+- Review intervals land on a **local day start** (`fsrsAddDays`), so a card
+  due "in 1 day" is in tomorrow morning's round, not at tonight's clock time.
+- Grades: `true`/'good' → Good, 'hard' → Hard, `false`/'again' → Again.
+  **Hard means recalled with effort** (Anki/FSRS rule) — never use it for a
+  failed or scaffolded recall: it inflates intervals.
+- **States** (`wordState`): familiar = R in review with s ≥ 2.3; secure = P
+  in review with s ≥ 21 (or grandfathered); mastered = P s ≥ 120 with ≤1 lapse.
+  All three are now reachable (the old 21-day "mastered" and 2-day
+  "familiar" never were). `graduated(id,dim)` = left the learning steps; it
+  replaces every old `n>=2` / `n>=3` check (P unlock, pattern "secure").
+- **Migration** `migrateCards(raw)` runs in `loadProgress`, once per card
+  (a card with `st` is never touched again): stability from the old rung
+  interval (rung 5 → 7 d, rung 4 → 1 d; patterns/roots count as graduated
+  from rung 3), difficulty D0(Good), **due dates kept** (Anki: do not
+  reschedule on switch). P cards that were Secure under the old rule get
+  `g:1` and stay Secure until their next review re-decides them, so no
+  level bar drops on update. Stray `w:<he>|U` cards (old Practice
+  Fill-the-Blank) are deleted. The untouched save is copied once to
+  **`localStorage.jw_progress_pre_fsrs`** — the way back if anything is wrong.
+- **Only a DUE card moves forward** (`reviewItem`): a success on a review card
+  that is not due (round top-up, checkpoint, Practice) changes nothing; a
+  failure is always recorded. Practice never creates a card for an untaught
+  word and never moves learning steps. Inside a round, learning steps do move
+  early — that is the in-round retest.
+- **Honest grading**: the intro card is NOT a review any more (seeing is not
+  retrieving; the echo is the first review). A typing hint grades **Again**
+  (was Hard) and the step comes back in the round ("with a hint, so it comes
+  back"). A one-letter typo is still Hard — unless it swaps a look-alike /
+  sound-alike pair (`CONFUSABLE`: ב/כ ח/כ ס/ש ט/ת א/ע ק/כ ו/ב, finals folded),
+  which `matchAnswer` now marks wrong. Fill-the-Blank reports to R, not U.
+- Due order: learning steps first, then lowest retrievability (`fsrsR`).
+  Round top-up takes review cards weakest-first and never a word waiting on
+  a learning step.
 
 ### The round — one funnel
 `buildRound()` returns an array of steps; **it does not set `ROUND.steps`**
@@ -158,7 +213,7 @@ through `advance(ok)` → `roundNext()` → `roundStep()`, not through `newQ()`.
 Round composition, in order of priority:
 1. Due **P** cards (max 5) → `type` steps
 2. Due **R** cards (max 5) → `mc` steps
-3. **Production unlock**: words with `R.n>=2 && P.reps===0` (max 3). Without
+3. **Production unlock**: words whose R card has graduated and `P.reps===0` (max 3). Without
    this the P dimension can never start — chicken-and-egg: a word only gets a
    P card by being typed, and was only typed if it had a due P card.
 4. Patterns at `level <= activeLevel()+1` (max 3) → `U`, **only patterns
@@ -172,10 +227,13 @@ Round composition, in order of priority:
 **Rule: nothing is tested before it is taught.** Until 2026-10-17 a first
 round taught three words and then asked for לעבור, סבא and שקל. A brand-new
 learner's first round is now intro ×3 then each word retrieved (6 steps).
-6. Top up from words already met, never by adding new ones
+6. Top up from words already met, never by adding new ones (review cards,
+   weakest first)
 7. **Max 3 genuine new words** (`intro`), each echoed later in the same round
    so it is retrieved, not just re-read. Intros are placed first so every echo
-   lands after its own introduction.
+   lands after its own introduction. The 12-step trim comes off the lowest
+   priority reviews, **never an echo** (an unechoed intro would be
+   introduced again). New words also obey the daily cap (`CFG.newPerDay`).
 
 `ROUND_LEN = 12`.
 
@@ -188,8 +246,8 @@ learner's first round is now intro ×3 then each word retrieved (6 steps).
   3–5 steps later (`retest`, once per item, max 4 per round; labelled
   "· again"): immediate correction + delayed re-test.
 - **Hint ladder, not a pronunciation reveal**, on typed production
-  (`typeHint`): 1) first letter + a slot per letter → a correct answer grades
-  `hard`; 2) the answer → grades as a miss. The old eye button there showed
+  (`typeHint`): 1) first letter + a slot per letter; 2) the answer. **Either
+  grades Again** since jw-v58 (it was Hard), and the step is re-asked. The old eye button there showed
   how the ANSWER sounds, i.e. gave it away.
 - **Round summary lists the misses** (what you typed, muted, above the right
   form) with **Review these again** (`reviewMisses`).
@@ -198,13 +256,15 @@ learner's first round is now intro ×3 then each word retrieved (6 steps).
   fields are still stored, just not shown.
 - Considered from the research and deliberately NOT done (yet): Sure/Unsure
   commit buttons, a difficulty controller targeting 85–90%, a 5-stage
-  production ramp, FSRS, moving modes into a Words library, and the
+  production ramp, moving modes into a Words library, and the
   research's Today ("Begin · N due" + calendar) — the user specified Today
   themselves just before.
 
 ### Load governor
-`LOAD = {pauseNewAt:60, catchUpCap:40}` — new words pause when the backlog
-exceeds 60. `newPaused()` reports it and Today says so in words.
+`LOAD = {pauseNewAt:24, catchUpCap:40}` — new words pause when the backlog
+reaches 24 (two rounds; was 60 until jw-v58). Anki's rule of thumb is ~10
+reviews a day per new card a day, so the pause, not `newPerDay`, is what
+usually sets the pace. `newPaused()` reports it and Today says so in words.
 
 ### Levels, checkpoints, can-dos, quests
 - `levelLocked(n)` genuinely restricts *new-word arrival* (it was once
@@ -538,6 +598,16 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     `focus` (roundStep, openPractice); `_unshift()` keeps it at 0 while a
     question is open. Desktop browsers do not reproduce this.
 
+19. **Every function is global, and a later one with the same name silently
+    wins.** The first FSRS build defined `daysBetween(ms,ms)`; one already
+    existed further down taking date strings, so scheduling crashed with
+    "a.split is not a function". The FSRS helpers are all `fsrs`-prefixed
+    for this reason. `grep -n "function <name>"` before adding one.
+
+20. **Local testing: the service worker re-caches the page on every load.**
+    After an edit, unregister it and clear caches again, or the browser keeps
+    running the build from before the edit (it did, mid-test, on jw-v58).
+
 ---
 
 ## 8. Workflow
@@ -681,7 +751,11 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
   - Expect false `HOMOGRAPH`/`DIFF` hits when the only entry that agrees on
     meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
-- FSRS behind `schedule()` (currently a hand-tuned interval ladder).
+- **Learning engine, next phases** (from `ui-context/LEARNING_RESEARCH.md` §8,
+  FSRS done in jw-v58): competitive distractors + confusable pairs (introduce
+  apart, test together); per-word format ramp chosen by card state; leech
+  handling at 8 lapses; Sure/Unsure on P items; a "words you can produce"
+  line. The FSRS optimizer needs a few hundred reviews first.
 - Grammar tables → drills.
 - Haptics: iOS Safari has never implemented the Vibration API. Since iOS 18 a
   native `<input type="checkbox" switch>` produces a Taptic tick, but it is an
