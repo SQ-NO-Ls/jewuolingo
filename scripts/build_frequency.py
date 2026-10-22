@@ -31,8 +31,10 @@ from verb_lemmas import VERB_LEMMA
 FDOSH = os.path.join(HERE, 'fdosh.tsv')
 INDEX = os.path.join(ROOT, 'index.html')
 
-# Level bands by position in the frequency ordering.
-BANDS = [(1,100),(2,250),(3,500),(4,800),(5,1200),(6,10**9)]
+# Level bands by position in the frequency ordering. L1 is 112, not 100, since
+# the FORM_EST words (and the new לי/לך) joined it on 2026-10-22: sized so that
+# nothing already in Level 1 left it.
+BANDS = [(1,112),(2,250),(3,500),(4,800),(5,1200),(6,10**9)]
 
 # Fixed expressions whose chunk frequency beats their component words: you learn
 # "boker tov" as one unit long before you analyse boker and tov separately.
@@ -51,6 +53,26 @@ CHUNK_RANK = {
  "בדרך כלל":270, "כל הזמן":230, "הרבה פעמים":340, "לפעמים כן":560,
  "מה דעתך":290, "איך אומרים":280, "אני מתגעגע אליך":600,
  "נעים מאוד":165, "להתראות בקרוב":480, "נתראה בקרוב":250,
+}
+
+# Words FDOSH lemmatises away. It folds every personal pronoun into the lemma
+# הוא (which is why הוא is #1 and אני had sunk to #439), possessives into של,
+# and כל/הכל into one entry it does not list; inflected forms vanish into their
+# lemma (אנשים into איש, מצטער, the infinitive לקבל, the imperatives בואי and
+# תגיד), and לי/לך into the excluded prefix ל. These are placed instead
+# from OpenSubtitles2018 WORD-FORM counts (hermitdave/FrequencyWords,
+# content/2018/he/he_50k.txt, MIT), converted to FDOSH's scale by dividing by
+# 176.6: the median form/lemma ratio of 15 single-form function words
+# (לא את זה מה על כן אבל יש עם אם אז רק כאן למה טוב). Value = that estimated
+# FDOSH frequency. Each word goes just before the first non-verb word that is
+# directly in FDOSH with a lower frequency, so re-runs are stable. (2026-10-22)
+FORM_EST = {
+ "אני":25725, "אתה":12512, "שלי":4904, "כל":4837, "היא":4639, "שלך":4499,
+ "אנחנו":3986, "הם":3297, "שלו":1415, "שלנו":1319, "הכל":925, "שלה":775,
+ "שלהם":447, "שלכם":339, "הן":317, "ממנו":213, "ממנה":113,
+ # forms (2026-10-22, second pass). לך's count also holds לֵךְ "go!".
+ "לי":7919, "לך":6206, "אנשים":883, "מצטער":839, "לקבל":442, "בואי":416,
+ "תגיד":390,
 }
 
 # Subtitle corpora under-rank everyday survival vocabulary (food, numbers,
@@ -77,6 +99,17 @@ def load_fdosh():
                 try: fd[row[0]] = int(row[1])
                 except ValueError: pass
     return fd
+
+
+def load_fdosh_freq():
+    # FREQUENCY column, for FORM_EST placement (load_fdosh keeps only ranks).
+    ff = {}
+    with io.open(FDOSH, encoding='utf-8') as fh:
+        for row in list(csv.reader(fh, delimiter='\t'))[1:]:
+            if len(row) > 3 and row[0] and row[0] not in ff:
+                try: ff[row[0]] = float(row[3].replace(',', ''))
+                except ValueError: pass
+    return ff
 
 
 def verb_candidates(v):
@@ -163,6 +196,16 @@ def main():
         else:
             w['rank'], w['src'] = resolve(w, fd)
         srcs[w['src']] += 1
+
+    # FORM_EST words go before their anchor (see FORM_EST above).
+    order, ff = sorted(words, key=lambda w: w['rank']), load_fdosh_freq()
+    for w in words:
+        est = FORM_EST.get(w['he'])
+        if est is None: continue
+        anchor = next(a for a in order if a['he'] not in FORM_EST and a['cat'] != 'Verbs'
+                      and a['he'] in ff and ff[a['he']] < est)
+        w['rank'], w['src'] = anchor['rank'] - 0.5 - est * 1e-9, 'form'
+    srcs = collections.Counter(w['src'] for w in words)
 
     # Stable ordering: rank, then present-tense verbs before infinitives
     # (you speak in "ani rotse", not "lirtsot"), then shorter first.

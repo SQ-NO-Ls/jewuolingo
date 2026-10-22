@@ -13,8 +13,8 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v59`
-- **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
+- **Deployed version:** service-worker `jw-v60`
+- **Vocabulary:** 1,443 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
 ### ⚠️ The URL is load-bearing — do not rename the repo
@@ -136,7 +136,19 @@ U and C onto every word is what would make the review load unsurvivable.
 ### Frequency levels
 Words ordered by spoken-Hebrew frequency (FDOSH, MIT, 5,000 lemmas from
 OpenSubtitles2018, dispersion-weighted), cut into 6 bands by **position**:
-L1 = top 100, L2 = 101–250, L3 = 251–500, L4 = 501–800, L5 = 801–1200, L6 = 1201+.
+L1 = top 112, L2 = 113–250, L3 = 251–500, L4 = 501–800, L5 = 801–1200, L6 = 1201+.
+L1 was 100 until jw-v60 (2026-10-22). FDOSH lemmatises away the words learners
+hear most: every personal pronoun is folded into הוא, possessives into של,
+inflected forms into their lemma. `FORM_EST` in `scripts/build_frequency.py`
+re-places them from OpenSubtitles2018 **word-form** counts (hermitdave/
+FrequencyWords, MIT), scaled to FDOSH by the median form/lemma ratio (176.6):
+אני #439→#5, אתה #551→#6, שלי, כל, היא #552→#24, שלך, אנחנו #572→#35, הם;
+אנשים #860→#141, מצטער #600→#164, לקבל #992→#258, בואי #1281→#276, תגיד
+#929→#286. **לי** (#14) and **לך** (#17) were added as new words (top-15 in
+speech, missing entirely). L1 grew to 112 so that no word already in Level 1
+left it (תודה, לילה טוב, כי… would have). Re-running the script is stable.
+To find more: list vocab words in the word-form top 300 whose app rank is
+far below (the scan that found these).
 
 ### Four dimensions (`DIMS`)
 - **R** Recognize — see Hebrew, retrieve meaning
@@ -499,7 +511,7 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
   gloss, then the example with the word filled in on the Hebrew side. The
   English keeps a drawn gap: filling it from the gloss produced broken
   English in 35+ entries ("I to love you").
-- **Map** — the 1,441-word journey canvas (all words as dots by frequency,
+- **Map** — the 1,443-word journey canvas (all words as dots by frequency,
   read right-to-left, state by **lightness only** so it survives any
   colour-vision deficiency), weekly quests, then per-level rows with four
   labelled R/P/U/C bars, can-dos and the checkpoint.
@@ -713,7 +725,7 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
 ## 9. State of play
 
 ### Done
-- 1,441 words, frequency-ranked into 6 levels, no duplicates, no array holes
+- 1,443 words, frequency-ranked into 6 levels, no duplicates, no array holes
 - 13 modes incl. Sicha (live AI conversation) and Word Families
 - Four-dimension model with production-gated mastery
 - Progression: level gating, checkpoints, 11 can-dos, daily/weekly quests,
@@ -785,10 +797,9 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
   handling at 8 lapses; Sure/Unsure on P items; a "words you can produce"
   line. The FSRS optimizer needs a few hundred reviews first.
 - Grammar tables → drills.
-- **Basic pronouns are ranked far too low** (found 2026-10-22): אני "I" #439
-  L3, אתה #551 L4, היא "she" #552 L4, אנחנו #572 L4, שלי #560 L4, while הוא
-  is #1. FDOSH lemmatises them together, so the frequency join lost them.
-  Needs a curated rank fix (like `CHUNK_RANK`), not a re-run.
+- `את` "you (f.)" sits at #2 on the object marker's frequency (the same
+  letters); left as is — it is needed early anyway. `לך` likewise carries
+  the count of לֵךְ "go!".
 - Haptics: iOS Safari has never implemented the Vibration API. Since iOS 18 a
   native `<input type="checkbox" switch>` produces a Taptic tick, but it is an
   undocumented side-effect. Optional enhancement only, if ever.
