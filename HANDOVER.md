@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v60`
+- **Deployed version:** service-worker `jw-v61`
 - **Vocabulary:** 1,443 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -244,6 +244,61 @@ options are plausible; random off-topic options give the answer away.
   (`.fs-note b[lang="he"]`).
 - Practice multiple choice uses the same picker within its own filter
   (whole vocab if the filter leaves fewer than 8 words).
+
+### The production ramp (jw-v61, 2026-10-22)
+Research §8c: a word's typing (P) card is met in three formats chosen by its
+FSRS state — formats, not extra rungs. `typeFormat(w)`:
+- **P never reviewed → `pick`**: English shown, choose the Hebrew from four
+  (`pickHTML`/`checkPick`, lures from `pickLures(w,vocab,true)`: Hebrew
+  options, so words never met score −5 and only fill in when needed, and no
+  option may share the target's spelling). Graded on P like any first review.
+- **P in learning / relearning → `tiles`**: the normal typing step, but
+  `buildKbd(submit, lit)` lights only the word's letters plus up to three
+  look-alike decoys (`tileLetters`: `CONFUSABLE` partners first, random
+  letters if fewer than two); every other key is dimmed AND disabled, the
+  hardware keyboard included (`kbType` refuses a disabled key). Space only if
+  the word has one; EN switch off.
+- **P graduated → `type`**: cold typing, as before (hint = Again).
+Routing happens in `roundStep` (`st.fmt`), so a retest after a miss moves down
+the ramp: a missed `pick` comes back in the same round as `tiles`. The usual
+path is pick → (10 min later) tiles → graduates (~2 days) → type cold.
+**Rounds only**: Practice's Type It, the checkpoint and patterns stay cold.
+Labels: "produce — choose the Hebrew", "produce — type it, letters lit".
+Verified at 375×812 and 375×667 (feedback and Continue fit; no scroll), and a
+14-day scripted run (2 rounds/day, 15% misses): every format in order, no
+errors, backlog steady at 16–20.
+
+### Mix-ups, Trouble words, Not sure, recall rate (jw-v61, 2026-10-22)
+- **Mix-ups** (`recordMix`, `ST.mix` = {he:{other,n,at}}, saved in
+  `jw_progress`): recorded when a wrong multiple-choice pick is a met word,
+  a wrong "choose the Hebrew" pick, or a typed answer that is another real
+  word. From then on `pickLures` gives that partner the top score (8), even
+  if it was never taught — the pair is always tested against each other.
+- **Trouble words** (`troubleWords`, `startTrouble`): leeches (R or P lapses
+  ≥ `CFG.leechLapses` = 8, Anki's default — not suspended, drilled), words
+  mixed up 2+ times, and words missed at least as often as got (3+ misses).
+  Shown at the top of Practice only when there are any; the drill is a round
+  (recognise each, then type each), so grading follows the round rules.
+- **Not sure** (research §8h): in round typing steps the EN key becomes
+  **Not sure** (`kbUnsure`). Check = sure. Unsure + correct → Hard; SURE +
+  wrong (no hint) → Again and "you were sure — this one comes back"
+  (hypercorrection). No extra tap unless you choose it. Not in Practice.
+- **Recall rate** (`logReview`, `ST.revlog` = {day:{P:[pass,tot],R:[…]}}):
+  every DUE review of a graduated card. Me shows "Typing recall, 30 days —
+  N% · aim 90%" once there are 20 reviews. Well below 90% = lenient grading
+  or the FSRS defaults fit poorly → the trigger to consider the optimizer.
+  Me's row is now "Secure — typed from memory".
+- **Difficulty controller** (`pace()`, research §8e): first-attempt success
+  over the last 30 round answers (`ST.firsts`, last 40 kept, saved; retests
+  and intros don't count; needs 15 before acting). Under 80% → `'ease'`: new
+  words pause (`newPaused`) and learning steps use "choose the Hebrew"; Today
+  says "New words pause for a round or two while recent answers settle"
+  (`pausedWhy`). Over 92% → `'push'`: learning steps skip letters-lit and go
+  straight to cold typing. Due dates are never moved. 21-day runs: an 8%-miss
+  learner sat at push and met 87 words; a 30%-miss learner sat at ease, met
+  33 and got far more "choose" steps — self-pacing as intended.
+Verified: scripted feature checks, 375×667 fit, and a 21-day run (2 rounds/
+day, 15% misses, 15% Not sure, Trouble drill every 5 days): no errors.
 
 ### The round — one funnel
 `buildRound()` returns an array of steps; **it does not set `ROUND.steps`**
@@ -792,10 +847,10 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
 - **Learning engine, next phases** (from `ui-context/LEARNING_RESEARCH.md` §8,
-  FSRS done in jw-v58, lures + look-alikes in jw-v59): per-word format ramp
-  chosen by card state (incl. English → choose the Hebrew); leech
-  handling at 8 lapses; Sure/Unsure on P items; a "words you can produce"
-  line. The FSRS optimizer needs a few hundred reviews first.
+  FSRS done in jw-v58, lures + look-alikes in jw-v59, format ramp, leeches,
+  Sure/Unsure, the recall line and the difficulty controller in jw-v61).
+  What is left from §8: only the FSRS optimizer, once there are a few
+  hundred reviews (watch Me's "Typing recall" against 90%).
 - Grammar tables → drills.
 - `את` "you (f.)" sits at #2 on the object marker's frequency (the same
   letters); left as is — it is needed early anyway. `לך` likewise carries

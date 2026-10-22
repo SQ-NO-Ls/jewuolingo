@@ -1107,6 +1107,11 @@ body{text-rendering:optimizeLegibility;font-kerning:normal;font-optical-sizing:a
 /* Contrast line under a wrong answer: the Hebrew must be readable, not note-sized. */
 .fs-note b[lang="he"]{font-family:var(--he-font);font-size:18px;font-weight:500;color:var(--text2);line-height:1.9;}
 body.cursive-on .fs-note b[lang="he"]{font-family:var(--he-cursive);}
+/* Production ramp: Hebrew answer options, and dimmed keys on the letters-lit step. */
+.fs-opt.he-opt{font-family:var(--he-font);font-size:26px;font-weight:500;line-height:1.5;text-align:center;justify-content:center;}
+body.cursive-on .fs-opt.he-opt{font-family:var(--he-cursive);}
+.kbd-key.kbd-off{opacity:.22;}
+.kbd-key.kbd-unsure{font-family:var(--ui-font);font-size:13px;color:var(--text2);}
 </style>
 </head>
 <body class="">
@@ -3313,6 +3318,9 @@ const ST={
   sichaMinutes:0,       // cumulative conversation practice time
   focusList:null,       // temporary drill pool (debrief → Type It)
   quests:{}, checkpoints:{},
+  mix:{},               // {he: {other, n, at}} — the word it was last mixed up with
+  revlog:{},            // {day: {P:[pass,total], R:[pass,total]}} — due reviews only
+  firsts:[],            // last 40 first attempts in rounds (true/false) — the difficulty controller
 };
 
 // ── DISPLAY HELPERS ─────────────────────────────────────────
@@ -3389,6 +3397,7 @@ const CFG={
   familiarDays: 2.3,       // R stability: FSRS-6's initial stability after "Good"
   secureDays: 21,          // P stability that survives year-scale spacing (Cepeda 2008)
   masteredDays: 120,       // P stability, with at most one lapse
+  leechLapses: 8,          // Anki's default leech threshold
   gate:{ breadth:0.85, patterns:0.80, checkpoint:0.85, softUnlock:0.70 },
   // The doc's "no dimension below 70%" hard gate is deliberately NOT enforced
   // yet — four ways to be blocked risks deadlock. Surfaced as a shape chart
@@ -3559,11 +3568,27 @@ function reviewItem(id,dim,grade){
   if(!was.reps){ if(practice) return was; }
   else if(was.due>now&&!bad&&(was.st==='review'||practice)) return was;
   if((dim==='R'||dim==='P') && was.reps>0 && was.due<=now) questReviewed();
+  if((dim==='R'||dim==='P') && was.st==='review' && was.due<=now) logReview(dim,!bad);
   var nc=schedule(was,grade,now);
   ST.cards[id+'|'+dim]=nc;
   return nc;
 }
 function cardDue(id,dim){ return getCard(id,dim).due<=Date.now(); }
+// The calibration check (research §8g): how often a DUE review of a graduated
+// card is actually recalled, against the 90% FSRS schedules for.
+function logReview(dim,pass){
+  ST.revlog=ST.revlog||{};
+  var k=dayKey(), d=ST.revlog[k]=ST.revlog[k]||{P:[0,0],R:[0,0]};
+  d[dim][1]++; if(pass) d[dim][0]++;
+}
+function recallRate(dim,days){
+  var t0=new Date(); t0.setDate(t0.getDate()-(days||30));
+  var since=dayKey(t0), pass=0, tot=0;
+  Object.keys(ST.revlog||{}).forEach(function(k){
+    if(k<since) return; var d=ST.revlog[k][dim]; pass+=d[0]; tot+=d[1];
+  });
+  return {pass:pass,tot:tot};
+}
 function stabilityDays(id,dim){ var c=getCard(id,dim); return c.st==='review'?c.s:0; }
 // Graduated out of the learning steps at least once.
 function graduated(id,dim){ var c=getCard(id,dim); return c.st==='review'||c.st==='relearning'; }
@@ -3655,6 +3680,13 @@ function renderModes(){
   var host=document.getElementById('modeGrid'); if(!host) return;
   var sh=levelShape(activeLevel());
   var order=['R','P','U','C'], h='';
+  var tw=troubleWords();
+  if(tw.length) h+='<div class="pr-group"><div class="pr-gl"><span>Trouble words</span><span class="pct">'+tw.length+'</span></div>'+
+    '<div class="pr-item" onclick="startTrouble()">'+
+      '<span class="pr-mark"><svg class="i" aria-hidden="true"><use href="#i-m-test"/></svg></span>'+
+      '<span class="pr-txt"><span class="pr-nm">Drill the words you miss</span>'+
+        '<span class="pr-ds">the ones you keep missing or mixing up, each against its look-alike</span></span>'+
+    '</div></div>';
   // Lead with the weakest dimension, so the obvious next tap is the useful one.
   var weakest=order.filter(function(d){return sh[d]!==null;})
     .sort(function(a,b){return sh[a]-sh[b];})[0];
@@ -3908,15 +3940,22 @@ function sameMeaning(a,b){
   function inside(x,y){ return (' '+y+' ').indexOf(' '+x+' ')!==-1; }
   return pa.some(function(p){ return pb.some(function(q){ return p===q||inside(p,q)||inside(q,p); }); });
 }
-function pickLures(w,pool){
+// heDir: the options are HEBREW (English → choose the Hebrew). Then a word
+// never met is a last resort (research §8d: showing untaught forms as options
+// plants false memories), and no option may share the target's spelling.
+function pickLures(w,pool,heDir){
   var met=function(x){ return getCard(itemWord(x.he),'R').reps>0; };
   var nb=neighbours(w), fam=familyOf(w.he), wFam=graduated(itemWord(w.he),'R');
   var verb=/^to\s/i.test(w.en);
   var scored=[];
   pool.forEach(function(x){
     if(x===w||x.en===w.en||sameMeaning(x,w)) return;
+    if(heDir&&lureSkel(x)===lureSkel(w)) return;
     var sc;
-    if(nb.indexOf(x)!==-1){
+    // Already mixed up: the strongest lure there is, whatever the stage, even
+    // if the other word was never taught (you typed or picked it yourself).
+    if(mixedWith(w,x)) sc=8;
+    else if(nb.indexOf(x)!==-1){
       // Test together only once both are recognised; until then keep apart.
       if(!(wFam&&graduated(itemWord(x.he),'R'))) return;
       sc=6+(confusableSwap(lureSkel(x),lureSkel(w))?1:0);
@@ -3926,12 +3965,24 @@ function pickLures(w,pool){
     else sc=met(x)?1:0;
     // A lone verb among nouns is guessable by its "to …".
     if((/^to\s/i.test(x.en))!==verb) sc-=2;
+    if(heDir&&!met(x)) sc-=5;
     scored.push({x:x,sc:sc+Math.random()*0.5});
   });
   scored.sort(function(a,b){ return b.sc-a.sc; });
   return scored.slice(0,3).map(function(o){ return o.x; });
 }
 var _mcOpts=[];
+// What a word was mixed up with. Feeds the lures (the pair is tested against
+// each other from then on) and the Trouble words drill.
+function recordMix(w,other){
+  if(!w||!other||w===other) return;
+  ST.mix=ST.mix||{};
+  var m=ST.mix[w.he]||{n:0}; m.n++; m.other=other.he; m.at=Date.now(); ST.mix[w.he]=m;
+}
+function mixedWith(a,b){
+  var m=(ST.mix||{})[a.he], n=(ST.mix||{})[b.he];
+  return (m&&m.other===b.he)||(n&&n.other===a.he);
+}
 
 function mcHTML(w){
   // Practice keeps to its own filter when it is big enough to choose from.
@@ -3950,6 +4001,67 @@ function mcHTML(w){
 }
 function renderMultiple(w){ document.getElementById('quizContent').innerHTML=mcHTML(w); }
 
+// ── THE PRODUCTION RAMP ───────────────────────────────────────
+// A word's typing card is met in three formats chosen by its FSRS state, not
+// by extra rungs (research §8c): new → choose the Hebrew from four look-alike
+// options; in learning steps → type it with only its letters lit (plus
+// look-alike decoys); graduated → type it cold. Only rounds use the ramp;
+// Practice's Type It and the checkpoint stay cold.
+function typeFormat(w){
+  var c=getCard(itemWord(w.he),'P'), p=pace();
+  if(!c.reps) return 'pick';
+  if(c.st==='learning'||c.st==='relearning') return p==='ease'?'pick':(p==='push'?'type':'tiles');
+  return 'type';
+}
+function pickHTML(w){
+  var opts=pickLures(w,vocab,true).concat([w]).sort(function(){return Math.random()-.5;});
+  _mcOpts=opts;
+  var html='<div class="fs-prompt">'+
+      '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
+    '</div><div class="fs-opts">';
+  opts.forEach(function(o,i){
+    html+='<button class="fs-opt he-opt" id="mco'+i+'" lang="he" dir="rtl" onclick="checkPick('+i+')">'+esc(dHe(o))+'</button>';
+  });
+  return html+'</div><div class="fs-fb" id="mcfb"></div><div class="fs-row"></div>';
+}
+function checkPick(i){
+  if(ST.answered) return; ST.answered=true; ST.total++;
+  var picked=_mcOpts[i], correct=picked===ST.cur;
+  reviewItem(itemWord(ST.cur.he),'P',correct);
+  trackW(ST.cur.he,correct);
+  var btns=document.querySelectorAll('.fs-opt');
+  btns.forEach(function(b){ b.disabled=true; });
+  if(btns[i]) btns[i].classList.add(correct?'correct':'wrong');
+  if(!correct) _mcOpts.forEach(function(o,j){ if(o===ST.cur&&btns[j]) btns[j].classList.add('correct'); });
+  if(correct){ ST.correct++; ST.score+=10+ST.streak; ST.streak++; }
+  else ST.streak=0;
+  var fb=document.getElementById('mcfb');
+  if(!correct&&picked) recordMix(ST.cur,picked);
+  var contrast=(!correct&&picked)?'<div class="fs-note"><b lang="he" dir="rtl">'+esc(dHe(picked))+'</b> is “'+esc(picked.en)+'”</div>':'';
+  if(fb) fb.innerHTML=contrast+'<div class="fs-note"><span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span></div>'+afterReveal(ST.cur);
+  updateStats(); hold(function(){ advance(correct); });
+  showCont(fb&&fb.nextElementSibling&&fb.nextElementSibling.classList.contains('fs-row')?fb.nextElementSibling:fb);
+}
+// Letters lit for the scaffolded step: the word's own letters, plus up to
+// three look-alike decoys so it is still a choice, never a jigsaw of the answer.
+function tileLetters(w){
+  var word=stripV(w.he), set={}, extra=[];
+  for(var i=0;i<word.length;i++) set[word[i]]=1;
+  Object.keys(set).forEach(function(ch){
+    var base=FINAL_BASE[ch]||ch;
+    CONFUSABLE.forEach(function(p){
+      var other=p[0]===base?p[1]:(p[1]===base?p[0]:null);
+      if(other&&!set[other]&&extra.indexOf(other)===-1) extra.push(other);
+    });
+  });
+  if(extra.length<2){
+    var pool='אבגדהוזחטיכלמנסעפצקרשת'.split('').filter(function(c){ return !set[c]&&extra.indexOf(c)===-1; });
+    while(extra.length<2&&pool.length) extra.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+  }
+  extra.sort(function(){return Math.random()-.5;}).slice(0,3).forEach(function(c){ set[c]=1; });
+  return set;
+}
+
 function checkMC(i,correct){
   if(ST.answered)return; ST.answered=true; ST.total++;
   reviewItem(itemWord(ST.cur.he),'R',correct);
@@ -3964,8 +4076,10 @@ function checkMC(i,correct){
   // Show what the picked meaning really belongs to, when it is a word already
   // met: the confusion itself is the thing to correct.
   var picked=_mcOpts[i], contrast='';
-  if(!correct&&picked&&picked!==ST.cur&&getCard(itemWord(picked.he),'R').reps>0)
+  if(!correct&&picked&&picked!==ST.cur&&getCard(itemWord(picked.he),'R').reps>0){
+    recordMix(ST.cur,picked);
     contrast='<div class="fs-note">“'+esc(picked.en)+'” is <b lang="he" dir="rtl">'+esc(dHe(picked))+'</b></div>';
+  }
   if(fb) fb.innerHTML=contrast+afterReveal(ST.cur);
   updateStats(); hold(function(){advance(correct);});
   showCont(fb&&fb.nextElementSibling&&fb.nextElementSibling.classList.contains('fs-row')?fb.nextElementSibling:fb);
@@ -3983,21 +4097,27 @@ var EN_KEYS=[
   [['l','l'],['z','z'],['x','x'],['c','c'],['v','v'],['b','b'],['n','n'],['m','m'],['.','.']]
 ];
 var _kbdLang='he';
-function buildKbd(submitFn){
+// lit: optional {letter:1} set — every other key is dimmed and dead (the
+// scaffolded step of the production ramp). Hebrew only.
+function buildKbd(submitFn,lit,unsure){
+  if(lit) _kbdLang='he';
   var isHe=_kbdLang==='he';
   var keys=isHe?HEB_KEYS:EN_KEYS;
   var h='<div class="kbd"><div class="kbd-rows">';
   keys.forEach(function(row){
     h+='<div class="kbd-row">';
     row.forEach(function(k){
-      h+='<button class="kbd-key'+(isHe?' he-text':'')+'" data-ch="'+k[0]+'" onclick="kbType(\''+k[0]+'\')">'+
+      var off=lit&&!lit[k[0]];
+      h+='<button class="kbd-key'+(isHe?' he-text':'')+(off?' kbd-off':'')+'" data-ch="'+k[0]+'"'+(off?' disabled':'')+' onclick="kbType(\''+k[0]+'\')">'+
          k[0]+'<span class="klat">'+k[1]+'</span></button>';
     });
     h+='</div>';
   });
   h+='<div class="kbd-row">'+
-       '<button class="kbd-key wide" onclick="toggleKbdLang()" aria-label="Switch script">'+(isHe?'EN':'עב')+'</button>'+
-       '<button class="kbd-key wide" onclick="kbType(\' \')" aria-label="Space">'+
+       (unsure
+         ? '<button class="kbd-key wide kbd-unsure" id="kbUnsure" onclick="kbUnsure()" aria-label="Not sure — check">Not sure</button>'
+         : '<button class="kbd-key wide'+(lit?' kbd-off':'')+'"'+(lit?' disabled':'')+' onclick="toggleKbdLang()" aria-label="Switch script">'+(isHe?'EN':'עב')+'</button>')+
+       '<button class="kbd-key wide'+(lit&&!lit[' ']?' kbd-off':'')+'"'+(lit&&!lit[' ']?' disabled':'')+' onclick="kbType(\' \')" aria-label="Space">'+
          '<span style="display:block;width:26px;height:1px;background:currentColor;opacity:.5"></span></button>'+
        '<button class="kbd-key wide" onclick="kbBack()" aria-label="Backspace">'+
          '<svg class="i"><use href="#i-backspace"/></svg></button>'+
@@ -4018,7 +4138,9 @@ function toggleKbdLang(){
   if(el){ var d=document.createElement('div'); d.innerHTML=buildKbd();
           el.parentNode.replaceChild(d.firstChild,el); kbSyncGo(); }
 }
-function kbType(c){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value+=c;kbSyncGo();}
+function kbType(c){var i=document.getElementById('ti');if(!i||ST.answered)return;
+  var k=document.querySelector('.kbd-key[data-ch="'+c+'"]'); if(k&&k.disabled) return;
+  i.value+=c;kbSyncGo();}
 function kbBack(){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value=i.value.slice(0,-1);kbSyncGo();}
 // ── KEY INPUT ────────────────────────────────────────────────
 // iOS only synthesises `click` for a clean single tap. A key pressed while
@@ -4250,8 +4372,8 @@ function typeHint(){
     b.disabled=true;
   }
 }
-function typeHTML(w){
-  _kbSubmit=checkType; _hint=0;
+function typeHTML(w,tiles){
+  _kbSubmit=checkType; _hint=0; _unsure=false;
   return '<div class="fs-prompt">'+
       '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
       '<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>'+
@@ -4261,7 +4383,15 @@ function typeHTML(w){
       'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" '+
       'oninput="kbSyncGo()" onkeydown="if(event.key===\'Enter\')checkType()">'+
     '<div class="fs-fb" id="tfb"></div>'+
-    buildKbd('checkType()');
+    buildKbd('checkType()',tiles?tileLetters(w):null,ROUND.active);
+}
+// Confidence without a timer: Check = sure, Not sure = check but unsure. An
+// unsure correct answer grades Hard; a SURE wrong answer is the one worth a
+// closer look (hypercorrection — research §8h).
+var _unsure=false;
+function kbUnsure(){
+  var i=document.getElementById('ti'); if(!i||ST.answered||!i.value.trim()) return;
+  _unsure=true; checkType();
 }
 function renderType(w){ document.getElementById('quizContent').innerHTML=typeHTML(w); }
 
@@ -4295,8 +4425,10 @@ function checkType(){
   ST.answered=true; ST.total++;
   if(ROUND.active) ROUND.lastTyped=inp.value.trim();
   // A hint means it was not produced from memory: Again, and it comes back.
-  // Hard is for a correct answer with a slip (research §8a.4).
-  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed||hinted)?false:(m==='close'?'hard':true));
+  // Hard is for a correct answer with a slip or said to be a guess (§8a.4, §8h).
+  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed||hinted)?false:((m==='close'||_unsure)?'hard':true));
+  var sureWrong=ROUND.active&&!_unsure&&!hinted&&!revealed&&m==='wrong';
+  var un=document.getElementById('kbUnsure'); if(un) un.disabled=true;
   trackW(ST.cur.he,m!=='wrong'&&!revealed);
   if(m==='close') typed=correct;
   var ok=(typed===correct)&&!revealed, fb=document.getElementById('tfb');
@@ -4312,9 +4444,11 @@ function checkType(){
   } else {
     inp.classList.add('bad'); ST.streak=0;
     var other=typed!==correct?wordByForm(typed):null;
+    if(other) recordMix(ST.cur,other);
     fb.innerHTML='<span class="was" lang="he" dir="rtl">'+diffMark(typed,correct)+'</span>'+
       '<span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>'+
       (other?'<span class="fs-note"><b lang="he" dir="rtl">'+esc(dHe(other))+'</b> is “'+esc(other.en)+'”</span>':'')+
+      (sureWrong?'<span class="fs-note">you were sure — this one comes back</span>':'')+
       (revealed&&typed===correct?'<span class="fs-note">shown, so it comes back</span>':'');
   }
   var _rv=afterReveal(ST.cur); if(_rv) fb.insertAdjacentHTML('beforeend',_rv);   // inside the reserved slot: nothing below moves
@@ -5005,7 +5139,21 @@ function candoDone(c){
 // catch-up day is capped rather than dumped on you.
 const LOAD={pauseNewAt:24, catchUpCap:40};   // 24 = two rounds of reviews
 function dueTotal(){ return dueList('R').length+dueList('P').length; }
-function newPaused(){ return dueTotal()>=LOAD.pauseNewAt; }
+function newPaused(){ return dueTotal()>=LOAD.pauseNewAt||pace()==='ease'; }
+function pausedWhy(){
+  return dueTotal()>=LOAD.pauseNewAt?'New words resume once these are cleared.'
+    :'New words pause for a round or two while recent answers settle.';
+}
+// THE DIFFICULTY CONTROLLER (research §8e): first-attempt success over the
+// last 30 round answers. Under 80% → new words pause and learning steps get the
+// easier format; over 92% → the letters-lit step is skipped. Due dates are
+// never moved to manage accuracy; FSRS already aims due reviews at 90%.
+function pace(){
+  var f=(ST.firsts||[]).slice(-30);
+  if(f.length<15) return 'normal';
+  var r=f.filter(Boolean).length/f.length;
+  return r<0.80?'ease':(r>0.92?'push':'normal');
+}
 
 // ══════════════════════════════════════════════════════════════
 // QUESTS — name a number and a thing; never reward opening the app
@@ -5144,7 +5292,7 @@ var VIEW='Today';
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
 // Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
-var APP_BUILD='jw-v60';
+var APP_BUILD='jw-v61';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
@@ -5297,7 +5445,7 @@ function startRound(){
   if(!ROUND.steps.length){ ROUND.active=false; renderToday(); return; }
   showView('Today'); roundStep();
 }
-var STEP_LABEL={mc:'recognise',type:'produce — type it',pattern:'use it in a sentence',intro:'new word',root:'word family'};
+var STEP_LABEL={mc:'recognise',type:'produce — type it',pick:'produce — choose the Hebrew',tiles:'produce — type it, letters lit',pattern:'use it in a sentence',intro:'new word',root:'word family'};
 // A quiet hairline: where you are in a short known sequence, with no
 // numbers to process mid-retrieval.
 function segBar(){
@@ -5319,6 +5467,8 @@ function roundStep(){
   if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=st.w||patternPickWord(st.p); st.w=PAT.w; PAT.answered=false; }
   else if(st.kind==='root'){ /* rootHTML sets ROOTQ */ }
   else ST.cur=st.w;
+  // Decided when shown, so a retest after a miss moves down the ramp.
+  st.fmt=st.kind==='type'?typeFormat(st.w):null;
   if(!document.body.classList.contains('focus')) window.scrollTo(0,0);   // BEFORE pinning
   document.body.classList.add('focus');
   var body=document.getElementById('todayBody');
@@ -5329,13 +5479,13 @@ function roundStep(){
           '<svg class="i"><use href="#i-close"/></svg></button>'+
         segBar()+
       '</div>'+
-      '<div class="focus-kind">'+STEP_LABEL[st.kind]+(st.retest?' · again':'')+'</div>'+
+      '<div class="focus-kind">'+STEP_LABEL[st.fmt||st.kind]+(st.retest?' · again':'')+'</div>'+
       '<div id="stepBody"></div>'+
     '</div>';
   var host=document.getElementById('stepBody');
   if(st.kind==='intro')   host.innerHTML=introHTML(st.w);
   if(st.kind==='mc')      host.innerHTML=mcHTML(st.w);
-  if(st.kind==='type')    host.innerHTML=typeHTML(st.w);
+  if(st.kind==='type')    host.innerHTML=st.fmt==='pick'?pickHTML(st.w):typeHTML(st.w,st.fmt==='tiles');
   if(st.kind==='pattern') host.innerHTML=patternHTML(PAT.p,PAT.w);
   if(st.kind==='root')    host.innerHTML=rootHTML(st.root);
   kbSyncGo();
@@ -5343,6 +5493,9 @@ function roundStep(){
 function roundNext(ok){
   var st=ROUND.steps[ROUND.i];
   if(st) st.ok=(ok!==false);
+  if(st&&!st.retest&&(st.kind==='mc'||st.kind==='type'||st.kind==='pattern')){
+    ST.firsts=(ST.firsts||[]).concat([ok!==false]).slice(-40);
+  }
   if(ok===false) ROUND.wrong++; else ROUND.right++;
   if(ok===false && st && st.w){
     // Corrected at once, then RETRIEVED again 3–5 steps later (immediate
@@ -5358,6 +5511,38 @@ function roundNext(ok){
   ROUND.lastTyped='';
   ROUND.i++; roundStep();
 }
+// TROUBLE WORDS (research §8a.6, §8f): a card at 8 lapses is a leech (Anki's
+// default). Instead of suspending it, it joins a drill with the words you
+// keep mixing up or mostly miss, and the round's lures pit each against its
+// partner. Practice points here rather than at the whole deck.
+function troubleWords(){
+  var out=[];
+  vocab.forEach(function(w){
+    var id=itemWord(w.he), r=getCard(id,'R'), p=getCard(id,'P');
+    if(!r.reps) return;
+    var m=(ST.mix||{})[w.he], s=ST.wordStats[w.he]||{c:0,w:0};
+    var score=0;
+    if(Math.max(r.lapses||0,p.lapses||0)>=CFG.leechLapses) score+=3;
+    if(m&&m.n>=2) score+=2;
+    if(s.w>=3&&s.w>=s.c) score+=1;
+    if(score) out.push({w:w,score:score+(m?m.n*0.01:0)});
+  });
+  return out.sort(function(a,b){ return b.score-a.score; }).map(function(o){ return o.w; });
+}
+function startTrouble(){
+  var ws=troubleWords().slice(0,10);
+  if(!ws.length) return;
+  var steps=[];
+  ws.forEach(function(w){
+    steps.push({kind:'mc',w:w});
+    if(getCard(itemWord(w.he),'P').reps>0) steps.push({kind:'type',w:w});
+  });
+  // Recognise first, then each word typed later, so the pair has been seen.
+  steps=steps.filter(function(s){return s.kind==='mc';}).concat(steps.filter(function(s){return s.kind==='type';})).slice(0,ROUND_LEN+4);
+  ROUND={active:true,steps:steps,i:0,right:0,wrong:0,started:Date.now()};
+  showView('Today'); roundStep();
+}
+
 // "Review these again": a short round of exactly the words missed.
 var _lastMisses=[];
 function reviewMisses(){
@@ -5556,7 +5741,8 @@ function upNextHTML(c){
   if(c.dueR||c.dueP) return '<div class="t-next"><div class="t-next-lbl">Waiting for review</div>'+
     '<div class="t-next-sum"><span class="num">'+c.dueR+'</span> to recognise · '+
     '<span class="num">'+c.dueP+'</span> to type</div>'+
-    (newPaused()?'<div class="t-next-note">New words resume once these are cleared.</div>':'')+'</div>';
+    (newPaused()?'<div class="t-next-note">'+pausedWhy()+'</div>':'')+'</div>';
+  if(pace()==='ease') return '<div class="t-next"><div class="t-next-note">'+pausedWhy()+'</div></div>';
   return '<div class="t-next"></div>';
 }
 
@@ -5643,6 +5829,13 @@ function appearanceRow(){
       return '<button class="'+(t===o[0]?'on':'')+'" aria-pressed="'+(t===o[0])+'" onclick="setTheme(\''+o[0]+'\')">'+o[1]+'</button>';
     }).join('')+'</span></div>';
 }
+// Due reviews of typing cards recalled, last 30 days, against FSRS's 90%. Well
+// below means grading is lenient or the defaults fit poorly (research §8g).
+function recallRow(){
+  var r=recallRate('P',30);
+  var v=r.tot>=20?Math.round(100*r.pass/r.tot)+'% · aim 90%':'after '+(20-r.tot)+' more reviews';
+  return '<div class="row"><span>Typing recall, 30 days</span><span class="row-meta num">'+v+'</span></div>';
+}
 function renderMe(){
   var acc=ST.total?Math.round(ST.correct/ST.total*100)+'%':'—';
   var secure=vocab.filter(function(w){var st=wordState(w.he);return st==='secure'||st==='mastered';}).length;
@@ -5671,7 +5864,8 @@ function renderMe(){
     '</div>'+
     (fresh?'':
     '<section class="group"><h3 class="group-h">Progress</h3><div class="group-b">'+
-      row('Secure words', secure+' / '+vocab.length)+
+      row('Secure — typed from memory', secure+' / '+vocab.length)+
+      recallRow()+
       row('Words met', met)+
       row('Accuracy', acc)+
       row('Days studied', Object.keys(ST.studied||{}).length)+
@@ -6794,7 +6988,7 @@ function saveProgress(){
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
       userVocab:ST.userVocab||[],grammarErrors:ST.grammarErrors||{},
       sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{},
-      studied:ST.studied||{}
+      studied:ST.studied||{},mix:ST.mix||{},revlog:ST.revlog||{},firsts:ST.firsts||[]
     }));
   }catch(e){}
 }
@@ -6827,6 +7021,7 @@ function loadProgress(){
     ST.quests=d.quests||{};ST.checkpoints=d.checkpoints||{};
     // Days studied (a calendar, not a streak). Older saves only know the last day.
     ST.studied=d.studied||{}; if(!d.studied&&d.lastDay) ST.studied[d.lastDay]=1;
+    ST.mix=d.mix||{}; ST.revlog=d.revlog||{}; ST.firsts=d.firsts||[];
     if(d.showVowels){ST.showVowels=true;
       var b=document.getElementById('vowelBtn');if(b)b.classList.add('on');
       var l=document.getElementById('vowelLbl');if(l)l.textContent='ON';}
