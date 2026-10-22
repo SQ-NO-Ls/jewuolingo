@@ -1104,6 +1104,9 @@ body{text-rendering:optimizeLegibility;font-kerning:normal;font-optical-sizing:a
    or its Done bar and to scroll the screen, which moved the keys out from
    under the finger. */
 #ti{pointer-events:none;caret-color:transparent;-webkit-user-select:none;user-select:none;}
+/* Contrast line under a wrong answer: the Hebrew must be readable, not note-sized. */
+.fs-note b[lang="he"]{font-family:var(--he-font);font-size:18px;font-weight:500;color:var(--text2);line-height:1.9;}
+body.cursive-on .fs-note b[lang="he"]{font-family:var(--he-cursive);}
 </style>
 </head>
 <body class="">
@@ -3852,10 +3855,88 @@ function gradeCard(knew){
 }
 
 // ── MULTIPLE CHOICE ───────────────────────────────────────────
+// ── LURES ─────────────────────────────────────────────────────
+// Multiple choice is only retrieval when the wrong options are plausible
+// (Little & Bjork; research §5.1): random off-topic options give the answer
+// away. Look-alike words are introduced on different days and only tested
+// against each other once both are recognised (research §8d, Ishii 2015).
+var _nbr={}, _byForm=null, _skel={};
+function lureSkel(w){ return _skel[w.he]||(_skel[w.he]=stripV(w.he).replace(/\s+/g,'')); }
+// Edit distance, abandoned as soon as it must exceed lim: neighbours() runs it
+// against all 1,441 words, so the full matrix was too slow on a phone.
+function levWithin(a,b,lim){
+  var m=a.length,n=b.length,prev=[],cur=[],i,j,best;
+  for(j=0;j<=n;j++) prev[j]=j;
+  for(i=1;i<=m;i++){
+    cur=[i]; best=i;
+    for(j=1;j<=n;j++){
+      cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a.charCodeAt(i-1)===b.charCodeAt(j-1)?0:1));
+      if(cur[j]<best) best=cur[j];
+    }
+    if(best>lim) return lim+1;
+    prev=cur;
+  }
+  return prev[n];
+}
+// Spelled one edit apart (two, for words of 5+ letters): הוא/היא, מה/מי.
+function neighbours(w){
+  if(_nbr[w.he]) return _nbr[w.he];
+  var a=lureSkel(w), out=[];
+  vocab.forEach(function(x){
+    if(x===w) return;
+    var b=lureSkel(x), lim=Math.min(a.length,b.length)>=5?2:1;
+    if(Math.abs(a.length-b.length)>lim) return;
+    var d=levWithin(a,b,lim);
+    if(d>0&&d<=lim) out.push(x);
+  });
+  return (_nbr[w.he]=out);
+}
+function wordByForm(t){
+  if(!_byForm){ _byForm={}; vocab.forEach(function(w){ _byForm[stripV(w.he)]=w; }); }
+  return _byForm[t]||null;
+}
+// Two glosses that share a sense ("to go / walk" and "to walk") would make
+// two options correct, so they never appear together.
+function glossParts(en){
+  return en.toLowerCase().split(/\s*[\/,;]\s*/).map(function(p){ return p.replace(/^to\s+/,'').trim(); }).filter(Boolean);
+}
+// Also a sense inside a longer one: "what" and "about what".
+function sameMeaning(a,b){
+  var pa=glossParts(a.en), pb=glossParts(b.en);
+  function inside(x,y){ return (' '+y+' ').indexOf(' '+x+' ')!==-1; }
+  return pa.some(function(p){ return pb.some(function(q){ return p===q||inside(p,q)||inside(q,p); }); });
+}
+function pickLures(w,pool){
+  var met=function(x){ return getCard(itemWord(x.he),'R').reps>0; };
+  var nb=neighbours(w), fam=familyOf(w.he), wFam=graduated(itemWord(w.he),'R');
+  var verb=/^to\s/i.test(w.en);
+  var scored=[];
+  pool.forEach(function(x){
+    if(x===w||x.en===w.en||sameMeaning(x,w)) return;
+    var sc;
+    if(nb.indexOf(x)!==-1){
+      // Test together only once both are recognised; until then keep apart.
+      if(!(wFam&&graduated(itemWord(x.he),'R'))) return;
+      sc=6+(confusableSwap(lureSkel(x),lureSkel(w))?1:0);
+    }
+    else if(fam.indexOf(x)!==-1&&met(x)) sc=4;
+    else if(x.cat===w.cat) sc=met(x)?3:(x.level<=w.level+1?2:0.5);
+    else sc=met(x)?1:0;
+    // A lone verb among nouns is guessable by its "to …".
+    if((/^to\s/i.test(x.en))!==verb) sc-=2;
+    scored.push({x:x,sc:sc+Math.random()*0.5});
+  });
+  scored.sort(function(a,b){ return b.sc-a.sc; });
+  return scored.slice(0,3).map(function(o){ return o.x; });
+}
+var _mcOpts=[];
+
 function mcHTML(w){
-  var pool=ROUND.active?vocab.filter(function(x){return x.level<=Math.max(2,w.level);}):filteredVocab();
-  if(pool.length<6) pool=vocab;
-  var opts=[...pool.filter(function(x){return x!==w&&x.en!==w.en;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
+  // Practice keeps to its own filter when it is big enough to choose from.
+  var pool=ROUND.active?vocab:filteredVocab();
+  if(pool.length<8) pool=vocab;
+  var opts=pickLures(w,pool).concat([w]).sort(function(){return Math.random()-.5;});
+  _mcOpts=opts;
   var html='<div class="fs-prompt">'+
       '<div class="fs-he" lang="he" dir="rtl">'+dHe(w)+'</div>'+
       pronBtn(w)+
@@ -3878,7 +3959,12 @@ function checkMC(i,correct){
   if(correct){ST.correct++;ST.score+=10+ST.streak;ST.streak++;ST.learned.add(ST.cur.he);}
   else{ST.streak=0;}
   var fb=document.getElementById('mcfb');
-  if(fb) fb.innerHTML=afterReveal(ST.cur);
+  // Show what the picked meaning really belongs to, when it is a word already
+  // met: the confusion itself is the thing to correct.
+  var picked=_mcOpts[i], contrast='';
+  if(!correct&&picked&&picked!==ST.cur&&getCard(itemWord(picked.he),'R').reps>0)
+    contrast='<div class="fs-note">“'+esc(picked.en)+'” is <b lang="he" dir="rtl">'+esc(dHe(picked))+'</b></div>';
+  if(fb) fb.innerHTML=contrast+afterReveal(ST.cur);
   updateStats(); hold(function(){advance(correct);});
   showCont(fb&&fb.nextElementSibling&&fb.nextElementSibling.classList.contains('fs-row')?fb.nextElementSibling:fb);
 }
@@ -4223,8 +4309,10 @@ function checkType(){
       (hinted?'<span class="fs-note">with a hint, so it comes back</span>':'');
   } else {
     inp.classList.add('bad'); ST.streak=0;
+    var other=typed!==correct?wordByForm(typed):null;
     fb.innerHTML='<span class="was" lang="he" dir="rtl">'+diffMark(typed,correct)+'</span>'+
       '<span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>'+
+      (other?'<span class="fs-note"><b lang="he" dir="rtl">'+esc(dHe(other))+'</b> is “'+esc(other.en)+'”</span>':'')+
       (revealed&&typed===correct?'<span class="fs-note">shown, so it comes back</span>':'');
   }
   var _rv=afterReveal(ST.cur); if(_rv) fb.insertAdjacentHTML('beforeend',_rv);   // inside the reserved slot: nothing below moves
@@ -5054,7 +5142,7 @@ var VIEW='Today';
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
 // Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
-var APP_BUILD='jw-v58';
+var APP_BUILD='jw-v59';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
@@ -5129,10 +5217,24 @@ function freshList(){
   // stops the review queue running away from you.
   if(newPaused()) return [];
   var lv=activeLevel(), left=Math.max(0,CFG.newPerDay-newToday());
-  return vocab.filter(function(w){
+  if(!left) return [];
+  // Look-alikes arrive on different days (research §8d): a word waits while
+  // a neighbour is new today or still in its learning steps.
+  var t0=fsrsDayStart(Date.now());
+  var busy=vocab.filter(function(w){
+    var c=getCard(itemWord(w.he),'R');
+    return c.reps>0&&(c.st==='learning'||c.st==='relearning'||c.f>=t0);
+  });
+  var out=[];
+  var cands=vocab.filter(function(w){
     return w.level<=lv && getCard(itemWord(w.he),'R').reps===0;
-  }).sort(function(a,b){ return a.rank-b.rank; })   // most frequent first
-    .slice(0,left);
+  }).sort(function(a,b){ return a.rank-b.rank; });   // most frequent first
+  for(var i=0;i<cands.length&&out.length<left;i++){
+    var nb=neighbours(cands[i]);
+    var clash=busy.concat(out).some(function(x){ return nb.indexOf(x)!==-1; });
+    if(!clash) out.push(cands[i]);
+  }
+  return out;
 }
 function roundCounts(){
   return {dueR:dueList('R').length, dueP:dueList('P').length, fresh:freshList().length};

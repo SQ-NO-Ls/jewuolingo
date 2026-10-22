@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v58`
+- **Deployed version:** service-worker `jw-v59`
 - **Vocabulary:** 1,441 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -204,6 +204,34 @@ legacy flashcard store `ST.srs` and for the migration.
 - Due order: learning steps first, then lowest retrievability (`fsrsR`).
   Round top-up takes review cards weakest-first and never a word waiting on
   a learning step.
+
+### Multiple-choice lures and look-alikes (jw-v59, 2026-10-22)
+Research §5 and §8d: multiple choice only works as retrieval when the wrong
+options are plausible; random off-topic options give the answer away.
+- **`pickLures(w,pool)`** scores every candidate and takes the top 3:
+  look-alike neighbour (only when BOTH words' R cards have graduated) 6, +1
+  for a `CONFUSABLE` letter swap · same curated root family and met 4 · same
+  category and met 3 · same category, level ≤ w+1 2 · any met word 1 ·
+  else 0. A lone "to …" verb among nouns (or the reverse) is −2. Ties are
+  broken randomly (+0–0.5).
+- **Never two right answers**: `sameMeaning` drops a lure that shares a sense
+  with the target, split on `/ , ;`, "to " removed, including a sense inside
+  a longer one ("what" / "about what"). Gender pairs like "you (m.)" /
+  "you (f.)" are deliberately still allowed — that contrast is the lesson.
+- **`neighbours(w)`**: words one edit apart on the vowel-less spelling (two
+  for words of 5+ letters), cached per word, using `levWithin` (abandons
+  early). All 1,441 at once ≈ 0.8 s on a Mac, so never precompute them all
+  on the main path; per word it is ~0.5 ms.
+- **Introduce apart, test together**: `freshList` skips a word while one of
+  its neighbours is new today or still in learning steps (and never takes
+  two neighbours on the same day). Day 1 of a fresh profile now defers מה
+  because of זה. Lures use a neighbour only once both are recognised.
+- **Contrast on a wrong answer**: picking a met word's meaning shows
+  "“this (m.)” is זה"; typing another real word shows "זה is “this (m.)”"
+  (`wordByForm`). The Hebrew there is styled at 18px
+  (`.fs-note b[lang="he"]`).
+- Practice multiple choice uses the same picker within its own filter
+  (whole vocab if the filter leaves fewer than 8 words).
 
 ### The round — one funnel
 `buildRound()` returns an array of steps; **it does not set `ROUND.steps`**
@@ -752,11 +780,15 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
     meaning has no vowels (verb infinitives often do).
 - **Register is a manual field** — no free resource carries it at usable coverage.
 - **Learning engine, next phases** (from `ui-context/LEARNING_RESEARCH.md` §8,
-  FSRS done in jw-v58): competitive distractors + confusable pairs (introduce
-  apart, test together); per-word format ramp chosen by card state; leech
+  FSRS done in jw-v58, lures + look-alikes in jw-v59): per-word format ramp
+  chosen by card state (incl. English → choose the Hebrew); leech
   handling at 8 lapses; Sure/Unsure on P items; a "words you can produce"
   line. The FSRS optimizer needs a few hundred reviews first.
 - Grammar tables → drills.
+- **Basic pronouns are ranked far too low** (found 2026-10-22): אני "I" #439
+  L3, אתה #551 L4, היא "she" #552 L4, אנחנו #572 L4, שלי #560 L4, while הוא
+  is #1. FDOSH lemmatises them together, so the frequency join lost them.
+  Needs a curated rank fix (like `CHUNK_RANK`), not a re-run.
 - Haptics: iOS Safari has never implemented the Vibration API. Since iOS 18 a
   native `<input type="checkbox" switch>` produces a Taptic tick, but it is an
   undocumented side-effect. Optional enhancement only, if ever.
