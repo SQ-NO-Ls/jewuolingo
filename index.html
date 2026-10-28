@@ -179,23 +179,10 @@ header{text-align:center;padding:10px 0 8px;}
 .he-text{font-family:var(--he-font);}
 body.cursive-on .he-text{font-family:var(--he-cursive);}
 
-/* FLASHCARD */
-.flashcard-wrap{perspective:1000px;height:280px;cursor:pointer;margin-bottom:16px;}
-.flashcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .28s var(--ease);}
-.flashcard.flipped{transform:rotateY(180deg);}
-.card-face{position:absolute;inset:0;backface-visibility:hidden;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;}
-.card-back{transform:rotateY(180deg);background:var(--surface);border-color:var(--border);}
-.card-he{font-size:72px;font-weight:700;color:var(--text);direction:rtl;line-height:1.1;}
-.card-en{font-size:28px;font-weight:400;color:var(--text);}
-.card-hint{font-size:13px;color:var(--muted);}
-.card-cat{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
-.srs-dots{display:flex;gap:4px;}
-.srs-dot{width:6px;height:6px;border-radius:50%;background:var(--border);}
-.srs-dot.lit{background:var(--blue);}
+
 
 /* MULTIPLE CHOICE */
-.mc-question{text-align:center;margin-bottom:24px;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.mc-he{font-size:72px;color:var(--text);direction:rtl;display:block;line-height:1.1;}
+
 .mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .mc-opt{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:18px 22px;cursor:pointer;font-size:17px;font-weight:500;transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);text-align:left;color:var(--text);font-family:var(--ui-font);}
 @media (hover:hover) and (pointer:fine){.mc-opt:hover:not(:disabled){border-color:var(--blue-dim);background:var(--blue-soft);}}
@@ -211,31 +198,6 @@ body.cursive-on .he-text{font-family:var(--he-cursive);}
 .type-input.good{border-color:var(--green);}
 .type-input.bad{border-color:var(--rose);}
 .type-feedback{text-align:center;font-size:17px;min-height:26px;margin-bottom:6px;}
-
-/* MATCH */
-.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.match-col{display:flex;flex-direction:column;gap:8px;}
-.match-item{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:16px 18px;cursor:pointer;transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);font-size:17px;font-weight:500;user-select:none;}
-.match-item.he-side{font-size:28px;direction:rtl;text-align:right;color:var(--text);line-height:1.3;font-family:var(--he-font);}
-body.cursive-on .match-item.he-side{font-family:var(--he-cursive);}
-@media (hover:hover) and (pointer:fine){.match-item:hover:not(.matched):not(.wrong-flash){border-color:var(--blue-dim);}}
-.match-item.selected{border-color:var(--blue);background:var(--blue-soft);}
-.match-item.matched{border-color:var(--green);color:var(--green);opacity:.65;pointer-events:none;}
-.match-item.wrong-flash{border-color:var(--rose);}
-.match-pron{font-size:12px;color:var(--text3);font-style:italic;margin-top:3px;direction:ltr;text-align:left;font-family:var(--ui-font);}
-
-/* FILL IN */
-.sentence-box{font-size:24px;line-height:2;margin-bottom:16px;text-align:center;padding:24px;background:var(--surface2);border-radius:var(--r-md);border:1px solid var(--border);}
-.blank-slot{display:inline-block;min-width:90px;max-width:100%;border-bottom:2px solid var(--blue);padding:2px 10px;font-size:28px;color:var(--text);direction:rtl;background:transparent;border-top:none;border-left:none;border-right:none;outline:none;vertical-align:middle;text-align:center;font-family:var(--he-font);}
-body.cursive-on .blank-slot{font-family:var(--he-cursive);}
-.sentence-hint-line{color:var(--muted);font-size:13px;text-align:center;margin-bottom:14px;}
-.word-bank{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:8px;}
-.bank-word{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:10px 16px;cursor:pointer;transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);color:var(--text);text-align:center;}
-@media (hover:hover) and (pointer:fine){.bank-word:hover{border-color:var(--blue-dim);}}
-.bank-word.used{opacity:.3;pointer-events:none;}
-.bank-he{font-size:28px;direction:rtl;display:block;font-family:var(--he-font);}
-body.cursive-on .bank-he{font-family:var(--he-cursive);}
-.bank-pron{font-size:12px;color:var(--text3);font-style:italic;display:block;margin-top:2px;}
 
 /* CONVERSATION */
 .conv-top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
@@ -268,28 +230,15 @@ body.cursive-on .conv-opt .opt-he{font-family:var(--he-cursive);}
 /* KEYBOARD */
 
 /* SHORESH MODE */
-.shoresh-root-display{text-align:center;margin-bottom:20px;}
+
 .shoresh-root-letters{display:flex;justify-content:center;gap:12px;margin:16px 0;direction:rtl;}
 .shoresh-letter-box{width:72px;height:72px;background:var(--surface2);border:2px solid var(--border);border-radius:var(--r-md);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--he-font);font-size:40px;font-weight:900;color:var(--text);position:relative;}
 body.cursive-on .shoresh-letter-box{font-family:var(--he-cursive);}
-.shoresh-letter-box .sh-num{font-family:var(--ui-font);font-size:12px;color:var(--blue);position:absolute;top:4px;right:6px;letter-spacing:1px;}
-.shoresh-letter-box.revealed{border-color:var(--accent-ink);background:var(--accent-muted);}
-.shoresh-words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0;}
-.shoresh-word-chip{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;text-align:center;}
-.shoresh-word-chip .sw-he{font-family:var(--he-font);font-size:22px;color:var(--text);direction:rtl;display:block;}
-body.cursive-on .shoresh-word-chip .sw-he{font-family:var(--he-cursive);}
-.shoresh-word-chip .sw-en{font-size:12px;color:var(--muted);display:block;margin-top:2px;}
-.shoresh-quiz-prompt{font-size:17px;text-align:center;color:var(--muted);margin-bottom:14px;}
-.shoresh-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .shoresh-opt{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;text-align:center;transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);font-family:var(--ui-font);}
 @media (hover:hover) and (pointer:fine){.shoresh-opt:hover:not(:disabled){border-color:var(--blue-dim);background:var(--blue-soft);}}
 .shoresh-opt.correct{border-color:var(--green);color:var(--green);}
 .shoresh-opt.wrong{border-color:var(--rose);color:var(--rose);}
 .shoresh-opt:disabled{cursor:default;}
-.shoresh-opt .sopt-root{font-family:var(--he-font);font-size:28px;color:var(--text);direction:rtl;display:block;margin-bottom:3px;}
-body.cursive-on .shoresh-opt .sopt-root{font-family:var(--he-cursive);}
-.shoresh-opt .sopt-pron{font-size:12px;color:var(--text3);font-style:italic;}
-.shoresh-opt .sopt-meaning{font-size:12px;color:var(--muted);margin-top:3px;display:block;}
 body.cursive-on .kbd-key{font-family:var(--he-cursive);}
 @media (hover:hover) and (pointer:fine){.kbd-key:hover{border-color:var(--blue-dim);background:var(--blue-soft);color:var(--blue);}}
 
@@ -333,7 +282,6 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .bar-en{font-size:12px;color:var(--muted);min-width:90px;}
 .bar-good{height:100%;border-radius:4px;background:var(--accent-line);transition:width .28s var(--ease);}
 .bar-cnt{font-size:13px;color:var(--muted);min-width:50px;text-align:right;}
-.an-missed-btn{background:var(--accent);color:var(--on-accent);border:none;border-radius:var(--r-md);padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--ui-font);margin-top:16px;}
 
 /* TOAST */
 .toast.show{transform:translateX(-50%) translateY(0);}
@@ -353,49 +301,13 @@ body.cursive-on .gram-he{font-family:var(--he-cursive);}
 .sel-panel.open{max-height:640px;margin-bottom:14px;overflow-y:auto;}
 .sel-panel .mode-grid,.sel-panel .category-tabs,.sel-panel .level-tabs{margin-bottom:0;padding-top:4px;}
 
-/* TEST MODE — full screen exam */
-.test-overlay{display:none;position:fixed;inset:0;background:var(--bg);z-index:400;overflow-y:auto;}
-.test-overlay.open{display:block;}
-.test-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
-.test-head .th-logo{font-family:var(--he-font);font-size:32px;font-weight:900;color:var(--text2);}
-@media (hover:hover) and (pointer:fine){.test-x:hover{border-color:var(--rose);color:var(--rose);}}
-.test-section{margin-bottom:var(--s6);}
-.test-section-lbl{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+/* Option chips (Settings, Sicha) */
+
+
 .test-opt-row{display:flex;gap:10px;flex-wrap:wrap;}
 @media (hover:hover) and (pointer:fine){.test-chip:hover{border-color:var(--blue-dim);}}
 .test-select{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px 16px;font-size:15px;color:var(--text);font-family:var(--ui-font);cursor:pointer;outline:none;}
 .test-select:focus{border-color:var(--blue-dim);}
-.test-avail{text-align:center;font-size:13px;color:var(--muted);margin:6px 0 22px;}
-.test-avail b{color:var(--blue);font-size:15px;}
-.test-start{width:100%;background:var(--accent);color:var(--on-accent);border:none;border-radius:var(--r-md);padding:18px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);}
-.test-start:disabled{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none;}
-.test-prog-bar{height:6px;background:var(--surface2);border-radius:var(--r-sm);overflow:hidden;margin-bottom:7px;}
-.test-prog-fill{height:100%;background:var(--accent-line);border-radius:var(--r-sm);transition:width .28s var(--ease);}
-.test-prog-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:30px;}
-.test-q-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;}
-.test-style-tag{text-align:center;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
-.test-prompt-big{font-size:72px;color:var(--text);text-align:center;direction:rtl;line-height:1.15;margin-bottom:6px;}
-.test-prompt-en{font-size:40px;font-weight:300;color:var(--text);text-align:center;margin-bottom:6px;}
-.test-feedback{text-align:center;font-size:17px;min-height:28px;margin-top:14px;}
-.test-result-score{font-size:84px;font-weight:800;text-align:center;line-height:1;}
-.test-result-grade{text-align:center;font-size:22px;font-weight:700;margin:8px 0 2px;}
-.test-result-sub{text-align:center;font-size:15px;color:var(--muted);margin-bottom:26px;}
-.test-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px;}
-.test-stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:18px 12px;text-align:center;}
-.test-stat-card .tsc-num{font-size:32px;font-weight:800;}
-.test-stat-card .tsc-lbl{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
-.test-breakdown{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 18px;margin-bottom:20px;}
-.test-bd-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);padding:10px 0;border-bottom:1px solid var(--border);}
-.test-bd-row:last-child{border-bottom:none;}
-.test-missed-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:2px 18px;margin-bottom:24px;max-height:300px;overflow-y:auto;}
-.test-missed-row{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
-.test-missed-row:last-child{border-bottom:none;}
-.test-missed-he{font-family:var(--he-font);font-size:28px;color:var(--text);direction:rtl;min-width:96px;text-align:right;}
-body.cursive-on .test-missed-he{font-family:var(--he-cursive);}
-.test-missed-en{font-size:13px;color:var(--text);flex:1;line-height:1.4;}
-.test-missed-yours{font-size:13px;color:var(--rose);white-space:nowrap;}
-.test-res-actions{display:flex;gap:10px;flex-wrap:wrap;}
-.test-res-actions .btn,.test-res-actions .btn-ghost{flex:1;text-align:center;min-width:120px;}
 
 /* ── SICHA (live AI conversation) ───────────────────────────── */
 .sch-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
@@ -505,10 +417,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--ui-font);min-heigh
     padding-bottom:max(60px, calc(env(safe-area-inset-bottom) + 40px));
     padding-left:max(20px, env(safe-area-inset-left));
     padding-right:max(20px, env(safe-area-inset-right));
-  }
-  .test-overlay .test-inner{
-    padding-top:max(20px, env(safe-area-inset-top));
-    padding-bottom:max(20px, calc(env(safe-area-inset-bottom) + 20px));
   }
 }
 /* Stop iOS zooming the page when a text field is focused (<16px triggers it). */
@@ -702,16 +610,6 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 .pr-gl{display:flex;align-items:baseline;gap:8px;font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--text3);padding-bottom:var(--s2);}
 .pr-gl .pct{letter-spacing:0;text-transform:none;font-size:13px;}
-.pr-item{display:flex;align-items:center;gap:14px;padding:13px 0;
-  border-bottom:1px solid var(--border);cursor:pointer;}
-.pr-item:active{background:var(--surface);}
-.pr-mark{width:30px;height:30px;flex:none;display:flex;align-items:center;justify-content:center;
-  font-family:var(--he-font);font-size:20px;color:var(--text3);
-  border:1px solid var(--border);border-radius:var(--r-sm);}
-.pr-item.on .pr-mark{color:var(--accent-ink);border-color:var(--accent-ink);}
-.pr-txt{flex:1;}
-.pr-nm{font-size:15px;color:var(--text);}
-.pr-ds{font-size:13px;color:var(--text3);padding-top:1px;}
 .pr-off{font-size:12px;color:var(--warning);letter-spacing:.08em;text-transform:uppercase;}
 
 
@@ -750,7 +648,6 @@ body.focus{position:fixed;inset:0;overflow:hidden;}
 #viewPractice .selector-bar{display:none;}
 #viewPractice #panelMode{display:block!important;max-height:none;overflow:visible;
   background:none;border:none;padding:0;margin:0;opacity:1;}
-.pr-nm,.pr-ds{display:block;}
 .pr-filters{display:flex;gap:var(--s3);padding:var(--s2) 0;}
 .pr-filters button{flex:1;min-height:44px;background:none;border:1px solid var(--border);
   border-radius:var(--r-sm);color:var(--text2);font-family:var(--ui-font);font-size:13px;
@@ -801,13 +698,12 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
    These are full screens, so they follow the same rules: no accent
    headline competing with content, hairlines instead of card stacks,
    one accent per screen reserved for the action. */
-.test-inner{position:relative;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;max-width:560px;padding:calc(var(--s5) + env(safe-area-inset-top)) var(--gutter) calc(var(--s7) + env(safe-area-inset-bottom));}
+
 .sch-sec-lbl{margin:16px 0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding:40px 0 var(--s3);}
 .test-chip{padding:13px 18px;min-height:44px;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);flex:1;text-align:center;min-width:78px;border:1px solid var(--border);border-radius:var(--r-sm);font-weight:400;font-size:15px;color:var(--text2);background:none;}
 .test-chip.sel{border-color:var(--accent-ink);background:var(--accent-muted);color:var(--text);}
 .test-chip .tc-sub{display:block;font-weight:400;margin-top:3px;color:var(--text3);font-size:12px;}
 .test-chip.sel .tc-sub{color:var(--text2);}
-.test-x{padding:8px 16px;min-height:40px;display:inline-flex;align-items:center;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--ui-font);transition:background .12s var(--ease),border-color .12s var(--ease),color .12s var(--ease);border:1px solid var(--border);background:none;color:var(--text2);border-radius:var(--r-sm);}
 .analytics-panel{width:100%;overflow-y:auto;position:relative;background:var(--bg);border:none;border-radius:0;max-width:560px;padding:calc(var(--s5) + env(safe-area-inset-top)) var(--gutter) calc(var(--s7) + env(safe-area-inset-bottom));max-height:100dvh;}
 .analytics-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;padding:20px;background:var(--bg);}
 .an-title{margin-bottom:var(--s2);font-family:var(--ui-font);font-size:22px;font-weight:400;color:var(--text);}
@@ -866,9 +762,7 @@ body.pfocus #quizContent.fsq{display:grid;grid-template-rows:1fr auto auto auto;
 
 
 /* One accent per screen, and it belongs to the action — not the headline. */
-.test-setup-title{text-align:center;margin-bottom:4px;font-family:var(--ui-font);font-size:28px;font-weight:400;color:var(--text);}
-.test-setup-sub{text-align:center;margin-bottom:30px;font-size:13px;color:var(--text3);}
-.th-logo{font-size:20px;}
+
 .sch-head .sch-gloss-btn,.sch-add{border-radius:var(--r-sm);}
 
 
@@ -921,12 +815,7 @@ body.cursive-on .intro-ex .exh{font-family:var(--he-cursive);}
 .intro-ex .gap{display:inline-block;width:2.2em;border-bottom:1px solid var(--text3);vertical-align:.1em;}
 
 /* ── PRACTICE ROWS ───────────────────────────────────────────*/
-.pr-item{min-height:64px;padding:var(--s4) 0;gap:var(--s4);}
-.pr-mark{width:32px;height:32px;border:none;color:var(--text3);}
-.pr-mark .i{width:22px;height:22px;}
-.pr-item.on .pr-mark{color:var(--accent-ink);}
-.pr-nm{font-size:17px;}
-.pr-ds{font-size:13px;}
+
 .pr-gl .pct.weak{color:var(--text2);font-style:italic;}
 
 
@@ -1112,6 +1001,88 @@ body.cursive-on .fs-note b[lang="he"]{font-family:var(--he-cursive);}
 body.cursive-on .fs-opt.he-opt{font-family:var(--he-cursive);}
 .kbd-key.kbd-off{opacity:.22;}
 .kbd-key.kbd-unsure{font-family:var(--ui-font);font-size:13px;color:var(--text2);}
+/* Differing letters: the underline clears the descenders of ק ך ן ף ץ. */
+.fs-fb u,.dm-he u{text-decoration-line:underline;text-decoration-color:var(--rose);text-decoration-thickness:2px;
+  text-underline-offset:.3em;text-decoration-skip-ink:none;}
+/* ── Subject tests and Learn (2026-10-27) ── */
+.fs-gap{color:var(--text3);padding:0 .15em;}
+.mt-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);padding:var(--s3) 0 var(--s2);}
+.mt-grid .fs-opt{min-height:52px;font-size:15px;justify-content:center;text-align:center;}
+.mt-grid .fs-opt.he-opt{font-size:24px;}
+.fs-opt.sel{border-color:var(--text2);background:var(--surface2);}
+.sd-wrap{display:flex;flex-direction:column;gap:var(--s2);padding:var(--s5) 0 calc(var(--s4) + env(safe-area-inset-bottom));
+  min-height:calc(100dvh - 59px - 80px - env(safe-area-inset-top) - env(safe-area-inset-bottom));}
+.sd-head{padding-bottom:var(--s3);}
+.sd-t{font-size:20px;color:var(--text);}
+.sd-n{font-size:15px;color:var(--text2);padding-top:var(--s1);}
+.sd-list{padding-top:var(--s4);}
+.sd-list summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:var(--s2);}
+.sd-list summary::-webkit-details-marker{display:none;}
+.sd-list summary::after{content:'';width:7px;height:7px;border-right:1.5px solid var(--text3);border-bottom:1.5px solid var(--text3);
+  transform:rotate(-45deg);margin-inline-start:auto;}
+.sd-list[open] summary::after{transform:rotate(45deg);}
+.sd-actions{display:flex;flex-direction:column;gap:var(--s3);margin-top:auto;padding-top:var(--s5);}
+.sd-actions .btn,.sd-actions .btn-quiet{width:100%;flex:none;}
+/* The Practice layer as a sheet: top-aligned, and a chip tap is not a new step. */
+body.pfocus #quizContent[data-mode="sheet"]::before,body.pfocus #quizContent[data-mode="sheet"]::after{display:none;}
+body.pfocus #quizContent[data-mode="sheet"]>*{animation:none;}
+.segc.full{display:flex;width:100%;}
+.segc.full button{flex:1;min-width:0;padding:4px 2px;font-size:13px;}
+.segc.plain button{border-bottom:2px solid transparent;}
+.segc.plain button.on{background:var(--surface2);border-bottom-color:var(--text2);}
+/* five segments at 375px: "Categories" needs the 12px floor to fit */
+.segc.full button:first-child:nth-last-child(n+5),.segc.full button:first-child:nth-last-child(n+5)~button{font-size:12px;}
+.tb-subj{padding:var(--s4) 0 var(--s2);}
+.tb-sec{padding-top:var(--s5);}
+.tb-h{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);padding-bottom:var(--s3);}
+.tb-chips{display:flex;flex-wrap:wrap;gap:var(--s2);}
+.tb-many{padding-top:var(--s3);}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px var(--s3);background:none;
+  border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text2);font-size:15px;cursor:pointer;}
+.chip .i{width:16px;height:16px;}
+.chip.on{background:var(--surface2);border-color:var(--text2);color:var(--text);}
+.chip:disabled{color:var(--text3);opacity:.6;cursor:default;}
+.chip span[lang="he"]{font-family:var(--he-font);font-size:18px;}
+.chip-n{color:var(--text3);font-size:13px;}
+.tb-why{font-size:13px;line-height:1.5;color:var(--text3);padding-top:var(--s2);}
+.tb-go{position:sticky;margin-top:var(--s6);background:var(--bg);
+  /* reach past the layer's bottom padding, so nothing scrolls visibly under it */
+  bottom:calc(-1 * (var(--s5) + env(safe-area-inset-bottom)));
+  margin-bottom:calc(-1 * (var(--s5) + env(safe-area-inset-bottom)));
+  padding:var(--s3) 0 calc(var(--s2) + var(--s5) + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;gap:var(--s2);}
+.tb-go .btn{width:100%;}
+/* The hub: subject rows with the Today bar, thin. */
+#viewPractice .pr-filters{display:none;}
+.hub-list{margin-top:var(--s3);}
+.group-b .row.sj-row{flex-direction:column;align-items:stretch;gap:var(--s2);padding-block:var(--s3);text-align:start;}
+.sj-top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3);}
+.sj-nm{color:var(--text);min-width:0;}
+.sj-sub{color:var(--text3);font-size:13px;}
+.sj-line{display:block;padding-top:2px;}
+.sj-top .row-meta{white-space:nowrap;flex:none;}
+.sj-he{font-family:var(--he-font);font-size:20px;}
+.t-bar.sj-bar{height:4px;margin-top:0;display:block;}
+.tb-subj .t-bar.sj-bar{margin-top:var(--s3);}
+.row-chev.ss-down{transform:none;}
+.sj-empty{color:var(--text3);font-size:15px;line-height:1.5;}
+.group-b .row.ss-row{justify-content:space-between;text-align:start;}
+.ss-row .dm-he{font-size:22px;}
+.ss-row .dm-en{text-align:start;}
+.ss-unmet{padding-top:var(--s4);}
+.ss-btns{display:flex;gap:var(--s3);}
+.ss-btns .btn,.ss-btns .btn-quiet{flex:1;width:auto;}
+.ss-nav{padding-top:var(--s5);}
+.ss-nav .btn-quiet{flex:1;display:flex;align-items:center;justify-content:center;}
+.ss-next{transform:rotate(180deg);}
+.ss-root .shoresh-letter-box{width:56px;height:56px;font-size:32px;}
+.ss-card{padding-top:var(--s5);}
+.ss-pair{font-family:var(--he-font);font-size:64px;line-height:1.3;color:var(--text);display:flex;justify-content:center;gap:var(--s5);}
+body.cursive-on .ss-pair{font-family:var(--he-cursive);}
+.ss-vs{color:var(--text3);font-size:32px;align-self:center;}
+.ss-cue b{font-family:var(--he-font);font-weight:500;font-size:18px;color:var(--text);}
+.done-link{min-height:44px;background:none;border:0;color:var(--text2);font-size:15px;
+  text-decoration:underline;text-underline-offset:.25em;text-decoration-color:var(--border);cursor:pointer;}
 </style>
 </head>
 <body class="">
@@ -1138,19 +1109,6 @@ body.cursive-on .fs-opt.he-opt{font-family:var(--he-cursive);}
 <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></symbol>
 <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.5"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
-<symbol id="i-m-flashcard" viewBox="0 0 24 24"><rect x="3" y="8" width="14" height="12" rx="2"/><path d="M7 5h11a3 3 0 013 3v9"/></symbol>
-<symbol id="i-m-multiple" viewBox="0 0 24 24"><circle cx="5" cy="7" r="1.5"/><circle cx="5" cy="12" r="1.5"/><circle cx="5" cy="17" r="1.5"/><path d="M9.5 7H20M9.5 12H20M9.5 17H20"/></symbol>
-<symbol id="i-m-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="14" width="7" height="6" rx="1.5"/><path d="M10 7h2.5a3 3 0 013 3v4"/></symbol>
-<symbol id="i-m-alphabet" viewBox="0 0 24 24"><path d="M6 5l12 14.5M4.5 5h3"/><path d="M17.5 4.5v1.8c0 2.2-1.6 3.5-4.2 4.1"/><path d="M10.6 13.4c-2.2.7-3.6 2-3.6 4.2v1.9M5.5 19.5h3.5"/></symbol>
-<symbol id="i-m-type" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7.5 14h9"/></symbol>
-<symbol id="i-m-sentence" viewBox="0 0 24 24"><path d="M3 13h4M17 13h4"/><path d="M10 6h4M12 6v12M10 18h4"/></symbol>
-<symbol id="i-m-pattern" viewBox="0 0 24 24"><path d="M8 4H5v16h3M16 4h3v16h-3"/><path d="M9.5 12h5"/></symbol>
-<symbol id="i-m-grammar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9.5 10v10"/></symbol>
-<symbol id="i-m-conversation" viewBox="0 0 24 24"><path d="M4 5h11v8H8.5L4 16.5z"/><path d="M15 9h5v8.5L16.5 15H11v-2"/></symbol>
-<symbol id="i-m-sicha" viewBox="0 0 24 24"><path d="M4 5h16v11H9.5L4 20z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/></symbol>
-<symbol id="i-m-shoresh" viewBox="0 0 24 24"><path d="M12 3v8M12 11c-1 4-3 6-6 9M12 11v9M12 11c1 4 3 6 6 9"/></symbol>
-<symbol id="i-m-roots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v10M12 11l-5.6 6.4M12 11l5.6 6.4"/></symbol>
-<symbol id="i-m-test" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/></symbol>
 </defs></svg>
 
 
@@ -1223,7 +1181,6 @@ body.cursive-on .fs-opt.he-opt{font-family:var(--he-cursive);}
       <div class="atab" onclick="setATab(&#39;all&#39;,this)"><svg class="i" aria-hidden="true"><use href="#i-practice"/></svg> All Words</div>
     </div>
     <div id="analyticsContent"></div>
-    <button class="an-missed-btn" id="practiceMissedBtn" onclick="practiceMissed()" style=""><svg class="i" aria-hidden="true"><use href="#i-today"/></svg> Practice Missed Words Only</button>
     <button class="btn-ghost" style="margin-top:16px;margin-left:10px;padding:10px 20px;font-size:13px" onclick="resetProgress()"><svg class="i" aria-hidden="true"><use href="#i-trash"/></svg> Reset Progress</button>
   </div>
 </div>
@@ -1235,7 +1192,6 @@ body.cursive-on .fs-opt.he-opt{font-family:var(--he-cursive);}
   <button id="tabMe"                onclick="goTab('Me')"><span class="ti"><svg class="i" aria-hidden="true"><use href="#i-me"/></svg></span>Me</button>
 </nav>
 
-<div class="test-overlay" id="testOverlay"></div>
 
 <div class="analytics-overlay" id="settingsOverlay">
   <div class="analytics-panel" id="settingsPanel"></div>
@@ -3267,18 +3223,10 @@ function patternFillers(p){
 }
 
 const MODES=[
-  {id:'flashcard',  icon:'🃏', he:'כרטיסיות', en:'Flashcards'},
-  {id:'multiple',   icon:'', he:'בחירה',     en:'Multiple Choice'},
   {id:'type',       icon:'⌨️', he:'כתיבה',     en:'Type It'},
-  {id:'match',      icon:'🔗', he:'התאמה',     en:'Match'},
-  {id:'sentence',   icon:'📖', he:'מילוי',     en:'Fill the Gap'},
   {id:'conversation',icon:'',he:'תרגול',     en:'Dialogue'},
-  {id:'shoresh',    icon:'', he:'שורש',      en:'Roots'},
   {id:'alphabet',   icon:'🔤', he:'אלף-בית',   en:'Aleph-Bet'},
   {id:'grammar',    icon:'', he:'דקדוק',     en:'Grammar'},
-  {id:'test',       icon:'', he:'מבחן',      en:'Test'},
-  {id:'pattern',    icon:'', he:'תבנית',     en:'Patterns'},
-  {id:'roots',      icon:'', he:'משפחות',    en:'Word Families'},
   {id:'sicha',      icon:'🗣️', he:'שיחה',      en:'Sicha'},
 ];
 
@@ -3301,13 +3249,13 @@ const LEVELS=[
 function levelOf(w){ return w.level||6; }
 
 const ST={
-  mode:'multiple', cat:'All', level:0,
+  mode:'type', cat:'All', level:0,
   score:0, streak:0, total:0, correct:0,
   learned:new Set(), srs:{}, cards:{},
   cur:null, answered:false,
   matchSel:null, matchPairs:[], matchDone:[],
   convIdx:0, convDone:0, convTotal:0, convRight:0,
-  wordStats:{}, missedMode:false, atab:'missed',
+  wordStats:{}, atab:'missed',
   showVowels:false, cursiveOn:false,
   // ── Sicha (live AI conversation) ──
   gender:null,          // 'm' | 'f' — drives Hebrew agreement in every prompt
@@ -3562,9 +3510,12 @@ function migrateCards(raw){
 // nothing; a failure is always real information. Practice also never creates
 // a card for a word that was never taught, and never moves learning steps.
 // Inside a round, learning steps do move early: that is the in-round retest.
+// Test follows Practice's rules (never creates a card, never moves a learning
+// step); Learn follows a round's. Both write every answer to the study log.
 function reviewItem(id,dim,grade){
   var was=getCard(id,dim), now=Date.now(), bad=(grade===false||grade==='again');
-  var practice=!ROUND.active&&!CHK.active;
+  var ctx=sessionCtx(), practice=(ctx==='practice'||ctx==='test');
+  if(ctx==='test'||ctx==='learn') logStudy(id,dim,!bad,was.reps>0&&was.due<=now);
   if(!was.reps){ if(practice) return was; }
   else if(was.due>now&&!bad&&(was.st==='review'||practice)) return was;
   if((dim==='R'||dim==='P') && was.reps>0 && was.due<=now) questReviewed();
@@ -3574,6 +3525,24 @@ function reviewItem(id,dim,grade){
   return nc;
 }
 function cardDue(id,dim){ return getCard(id,dim).due<=Date.now(); }
+// Where an answer is being given. Rounds, the Trouble drill and "Review these
+// again" are 'round'; Test and Learn run on the same runner with ROUND.ctx.
+function sessionCtx(){
+  if(CHK.active) return 'checkpoint';
+  if(ROUND.active) return ROUND.ctx||'round';
+  return 'practice';
+}
+// Every Test and Learn answer, scheduled or not: {t, he, f, ok, due, s}
+// (time, word or item id, format, correct, was due, session). Last 2,000 kept.
+// Formats that touch no card (root link, match) call this directly with dim null.
+function logStudy(id,dim,ok,due){
+  if(!ROUND.sid) return;
+  var st=ROUND.steps[ROUND.i]||{}, L=ST.studyLog=ST.studyLog||[];
+  var e={t:Date.now(),he:id.replace(/^w:/,''),f:st.fmt||st.kind||dim||'',ok:ok?1:0,due:due?1:0,s:ROUND.sid};
+  if(st.retest) e.r=1;
+  L.push(e);
+  if(L.length>2000) L.splice(0,L.length-2000);
+}
 // The calibration check (research §8g): how often a DUE review of a graduated
 // card is actually recalled, against the 90% FSRS schedules for.
 function logReview(dim,pass){
@@ -3633,8 +3602,7 @@ function filteredVocab(){
     var fl=vocab.filter(function(w){return ST.focusList.indexOf(w.he)>-1;});
     if(fl.length) return fl;
   }
-  if(ST.missedMode){ var m=vocab.filter(function(w){var s=ST.wordStats[w.he];return s&&s.w>0;}); if(m.length) base=m; }
-  else if(ST.cat!=='All') base=vocab.filter(function(v){return v.cat===ST.cat;});
+  if(ST.cat!=='All') base=vocab.filter(function(v){return v.cat===ST.cat;});
   // Narrow by level ONLY if that produces a non-empty set; otherwise keep the
   // category set (never fall back to the whole vocab, which leaks other categories).
   if(ST.level>0){
@@ -3661,55 +3629,14 @@ function randWord(ex){
 
 // Practice is grouped by the app's own knowledge model, so choosing what to
 // practise and seeing where you are weak become the same action.
-var MODE_DIM={
-  flashcard:'R', multiple:'R', match:'R', alphabet:'R',
-  type:'P',
-  sentence:'U', pattern:'U', grammar:'U', conversation:'U', sicha:'U',
-  shoresh:'C', roots:'C'
-};
-var MODE_DESC={
-  flashcard:'flip and self-grade', multiple:'pick the meaning',
-  match:'pair Hebrew to English', alphabet:'letters and sounds',
-  type:'write it from the English', sentence:'fill the gap',
-  pattern:'build a sentence frame', grammar:'tables and drills',
-  conversation:'scripted exchanges', sicha:'live chat with an AI',
-  shoresh:'browse roots', roots:'spot the word family'
-};
-
+// Practice is one study hub: Subjects (most of the screen), Tests, Tools
+// (2026-10-27). The old modes are formats inside Test and Learn now; the
+// reference modes stay as Tools.
 function renderModes(){
   var host=document.getElementById('modeGrid'); if(!host) return;
-  var sh=levelShape(activeLevel());
-  var order=['R','P','U','C'], h='';
-  var tw=troubleWords();
-  if(tw.length) h+='<div class="pr-group"><div class="pr-gl"><span>Trouble words</span><span class="pct">'+tw.length+'</span></div>'+
-    '<div class="pr-item" onclick="startTrouble()">'+
-      '<span class="pr-mark"><svg class="i" aria-hidden="true"><use href="#i-m-test"/></svg></span>'+
-      '<span class="pr-txt"><span class="pr-nm">Drill the words you miss</span>'+
-        '<span class="pr-ds">the ones you keep missing or mixing up, each against its look-alike</span></span>'+
-    '</div></div>';
-  // Lead with the weakest dimension, so the obvious next tap is the useful one.
-  var weakest=order.filter(function(d){return sh[d]!==null;})
-    .sort(function(a,b){return sh[a]-sh[b];})[0];
-  order.forEach(function(d){
-    var ms=MODES.filter(function(m){return MODE_DIM[m.id]===d;});
-    if(!ms.length) return;
-    h+='<div class="pr-group"><div class="pr-gl"><span>'+DIMS[d]+'</span>'+
-       (d===weakest?'<span class="pct weak">weakest — start here</span>':
-         (sh[d]===null?'':'<span class="pct">'+sh[d]+'%</span>'))+'</div>';
-    ms.forEach(function(m){
-      var off=(m.id==='sicha');
-      h+='<div class="pr-item'+(ST.mode===m.id?' on':'')+'" onclick="openPractice(\''+m.id+'\')">'+
-         '<span class="pr-mark"><svg class="i" aria-hidden="true"><use href="#i-m-'+m.id+'"/></svg></span>'+
-         '<span class="pr-txt"><span class="pr-nm">'+esc(m.en)+'</span>'+
-           '<span class="pr-ds">'+esc(MODE_DESC[m.id]||'')+'</span></span>'+
-         (off?'<span class="pr-off">online</span>':'')+
-         '</div>';
-    });
-    h+='</div>';
-  });
-  host.innerHTML=h;
+  host.innerHTML=hubHTML();
 }
-function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='shoresh'||ST.mode==='test'||ST.mode==='sicha'||ST.mode==='pattern'||ST.mode==='roots';}
+function _modeHidesFilters(){return ST.mode==='conversation'||ST.mode==='alphabet'||ST.mode==='grammar'||ST.mode==='sicha';}
 function renderCats(){
   var el=document.getElementById('catTabs');
   if(!el) return;
@@ -3719,7 +3646,6 @@ function renderCats(){
   var html=CATS.map(function(c){
     return '<button class="cat-tab'+(ST.cat===c?' active':'')+'" onclick="setCat(\''+encodeURIComponent(c)+'\')">'+c+'</button>';
   }).join('');
-  if(ST.missedMode) html+='<button class="cat-tab active" style="border-color:var(--rose);color:var(--rose)" onclick="exitMissed()"> Missed Mode — Exit</button>';
   if(ST.focusList&&ST.focusList.length) html+='<button class="cat-tab active" style="border-color:var(--teal);color:var(--teal)" onclick="exitFocus()"> Sicha Focus ('+ST.focusList.length+') — Exit</button>';
   el.innerHTML=html;
   updateSelLabels();
@@ -3766,7 +3692,7 @@ function updateSelLabels(){
   if(b) b.textContent=(ST.level>0?('L'+ST.level):'All');
   var mode=MODES.filter(function(m){return m.id===ST.mode;})[0];
   var mv=document.getElementById('selValMode'); if(mv&&mode) mv.textContent=mode.en;
-  var cv=document.getElementById('selValCat'); if(cv) cv.textContent=ST.missedMode?'Missed Words':ST.cat;
+  var cv=document.getElementById('selValCat'); if(cv) cv.textContent=ST.cat;
   var lm=LEVELS.filter(function(l){return l.n===ST.level;})[0];
   var lv=document.getElementById('selValLevel'); if(lv) lv.textContent=lm?(lm.n?lm.lbl+' · '+lm.sub:lm.lbl):'All Levels';
 }
@@ -3789,13 +3715,12 @@ function updateStats(){
   renderHead();
   saveProgress();
 }
-function setMode(m){if(m==='test'&&ST.mode!=='test')_preTestMode=ST.mode;ST.mode=m;renderModes();renderCats();renderLevels();closeAllSel();updateSelLabels();prFrame();newQ();}
+function setMode(m){ST.mode=m;renderModes();renderCats();renderLevels();closeAllSel();updateSelLabels();prFrame();newQ();}
 // Practice opens a mode as a full-screen layer, like a round step. The list
 // stays mounted underneath, so closing returns to the same scroll position.
 var _prScroll=0;
-var FSQ_MODES={multiple:1,type:1,pattern:1,roots:1};   // built from the shared step bodies
+var FSQ_MODES={type:1};   // built from the shared step bodies
 function openPractice(m){
-  if(m==='test'){ setMode(m); return; }                // the exam has its own overlay
   _prScroll=window.scrollY;
   window.scrollTo(0,0);                 // BEFORE pinning — see _unshift below
   document.body.classList.add('focus','pfocus');
@@ -3816,76 +3741,19 @@ function closePractice(){
   renderModes();
   window.scrollTo(0,_prScroll);
 }
-function exitMissed(){ST.missedMode=false;renderCats();updateSelLabels();newQ();}
 function exitFocus(){ST.focusList=null;renderCats();updateSelLabels();newQ();}
-function practiceMissed(){
-  ST.missedMode=true; closeAnalytics(); renderCats(); showView('Practice');
-  openPractice(['flashcard','multiple','type','match','sentence'].indexOf(ST.mode)>=0?ST.mode:'multiple');
-}
 
 // ── NEW QUESTION DISPATCHER ───────────────────────────────────
 function newQ(){
   _pid=0; ST.answered=false; _cont=null;
-  if(ST.mode==='test'){openTest();return;}
   if(ST.mode==='sicha'){renderSicha();return;}
-  if(ST.mode==='pattern'){renderPattern();return;}
-  if(ST.mode==='roots'){renderRoots();return;}
   if(ST.mode==='conversation'){renderConv();return;}
   if(ST.mode==='alphabet'){renderAlphabet();return;}
   if(ST.mode==='grammar'){renderGrammar();return;}
-  if(ST.mode==='shoresh'){renderShoresh();return;}
+  // Type It is the one word mode left: Sicha's "Practice these now" drills
+  // its focus words here. The rest became Test and Learn formats (2026-10-27).
   ST.cur=randWord(ST.cur);
-  var w=ST.cur;
-  if(ST.mode==='flashcard') renderFlashcard(w);
-  else if(ST.mode==='multiple') renderMultiple(w);
-  else if(ST.mode==='type') renderType(w);
-  else if(ST.mode==='match') renderMatch();
-  else if(ST.mode==='sentence') renderSentence(w);
-}
-
-// ── FLASHCARD ────────────────────────────────────────────────
-function renderFlashcard(w){
-  var lvl=(ST.srs[w.he]||{level:0}).level;
-  var dots=''; for(var i=0;i<5;i++) dots+='<div class="srs-dot'+(i<lvl?' lit':'')+'"></div>';
-  document.getElementById('quizContent').innerHTML=
-    '<div class="progress-label"><span>הקש לגלות — tap to reveal</span><div class="srs-dots">'+dots+'</div></div>'+
-    '<div class="flashcard-wrap" onclick="flipCard()">'+
-      '<div class="flashcard" id="fc">'+
-        '<div class="card-face">'+
-          '<div class="card-cat">'+w.cat+'</div>'+
-          '<div class="card-he he-text">'+dHe(w)+'</div>'+
-          pronBtn(w)+
-          '<div class="card-hint">tap to reveal</div>'+
-        '</div>'+
-        '<div class="card-face card-back">'+
-          '<div class="card-cat">Translation</div>'+
-          '<div class="card-en">'+w.en+'</div>'+
-          '<div class="card-he he-text" style="font-size:40px">'+dHe(w)+'</div>'+
-          pronBtn(w)+
-        '</div>'+
-      '</div>'+
-    '</div>'+
-    '<div class="quiz-actions" id="fcAct" style="display:none">'+
-      '<button class="btn-ghost" onclick="gradeCard(false)"> Missed</button>'+
-      '<div class="streak-badge"> '+ST.streak+'</div>'+
-      '<button class="btn" onclick="gradeCard(true)">Got it</button>'+
-    '</div>'+
-    '<div id="fcTip" style="text-align:center;color:var(--muted);font-size:13px;margin-top:10px">SRS — missed = seen sooner</div>';
-}
-function flipCard(){
-  document.getElementById('fc').classList.toggle('flipped');
-  document.getElementById('fcAct').style.display='flex';
-  document.getElementById('fcTip').style.display='none';
-}
-function gradeCard(knew){
-  reviewItem(itemWord(ST.cur.he),'R',knew);
-  var s=ST.srs[ST.cur.he]||{level:0,nextAt:0};
-  var lvl=knew?Math.min(s.level+1,5):Math.max(s.level-1,0);
-  ST.srs[ST.cur.he]={level:lvl,nextAt:Date.now()+srsInt(lvl)};
-  ST.total++; trackW(ST.cur.he,knew);
-  if(knew){ST.correct++;ST.score+=10+lvl*5;ST.streak++;ST.learned.add(ST.cur.he);toast('' +(lvl===5?'Mastered!':'Got it!'),'good');}
-  else{ST.streak=0;toast('Reviewing soon','bad');}
-  updateStats();setTimeout(function(){advance(knew);},600);
+  renderType(ST.cur);
 }
 
 // ── MULTIPLE CHOICE ───────────────────────────────────────────
@@ -3940,13 +3808,13 @@ function sameMeaning(a,b){
   function inside(x,y){ return (' '+y+' ').indexOf(' '+x+' ')!==-1; }
   return pa.some(function(p){ return pb.some(function(q){ return p===q||inside(p,q)||inside(q,p); }); });
 }
-// heDir: the options are HEBREW (English → choose the Hebrew). Then a word
-// never met is a last resort (research §8d: showing untaught forms as options
-// plants false memories), and no option may share the target's spelling.
+// heDir: the options are HEBREW (English → choose the Hebrew); no option may
+// then share the target's spelling. In both directions a word never met is a
+// last resort (research §8d: untaught options plant false memories).
 function pickLures(w,pool,heDir){
   var met=function(x){ return getCard(itemWord(x.he),'R').reps>0; };
   var nb=neighbours(w), fam=familyOf(w.he), wFam=graduated(itemWord(w.he),'R');
-  var verb=/^to\s/i.test(w.en);
+  var verb=/^to\s/i.test(w.en), aw=ANN[w.he];
   var scored=[];
   pool.forEach(function(x){
     if(x===w||x.en===w.en||sameMeaning(x,w)) return;
@@ -3963,9 +3831,19 @@ function pickLures(w,pool,heDir){
     else if(fam.indexOf(x)!==-1&&met(x)) sc=4;
     else if(x.cat===w.cat) sc=met(x)?3:(x.level<=w.level+1?2:0.5);
     else sc=met(x)?1:0;
-    // A lone verb among nouns is guessable by its "to …".
-    if((/^to\s/i.test(x.en))!==verb) sc-=2;
-    if(heDir&&!met(x)) sc-=5;
+    // Same part of speech (and gender, for nouns), from the annotations where
+    // both words have them; otherwise a lone verb among nouns is guessable by
+    // its "to …".
+    var ax=ANN[x.he];
+    if(aw&&ax){
+      if(ax.pos===aw.pos){ sc+=1; if(aw.gender&&ax.gender===aw.gender) sc+=0.5; }
+      else sc-=2;
+    } else if((/^to\s/i.test(x.en))!==verb) sc-=2;
+    // Close in frequency: words met around the same time, so neither is a giveaway.
+    sc+=0.5*Math.max(0,1-Math.abs((x.rank||9999)-(w.rank||9999))/300);
+    // Untaught words only fill in when the met ones run out (research §8d);
+    // a mix-up partner is the exception, since you produced it yourself.
+    if(!met(x)&&!mixedWith(w,x)) sc-=5;
     scored.push({x:x,sc:sc+Math.random()*0.5});
   });
   scored.sort(function(a,b){ return b.sc-a.sc; });
@@ -3999,7 +3877,6 @@ function mcHTML(w){
   });
   return html+'</div><div class="fs-fb" id="mcfb"></div><div class="fs-row"></div>';
 }
-function renderMultiple(w){ document.getElementById('quizContent').innerHTML=mcHTML(w); }
 
 // ── THE PRODUCTION RAMP ───────────────────────────────────────
 // A word's typing card is met in three formats chosen by its FSRS state, not
@@ -4014,7 +3891,10 @@ function typeFormat(w){
   return 'type';
 }
 function pickHTML(w){
-  var opts=pickLures(w,vocab,true).concat([w]).sort(function(){return Math.random()-.5;});
+  // A Look-alike letters item always shows the word's minimal-pair partner.
+  var lures=pickLures(w,vocab,true), st=ROUND.active&&ROUND.steps[ROUND.i];
+  if(st&&st.lure&&lures.indexOf(st.lure)<0) lures=[st.lure].concat(lures).slice(0,3);
+  var opts=lures.concat([w]).sort(function(){return Math.random()-.5;});
   _mcOpts=opts;
   var html='<div class="fs-prompt">'+
       '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
@@ -4027,7 +3907,7 @@ function pickHTML(w){
 function checkPick(i){
   if(ST.answered) return; ST.answered=true; ST.total++;
   var picked=_mcOpts[i], correct=picked===ST.cur;
-  reviewItem(itemWord(ST.cur.he),'P',correct);
+  gradeStep(itemWord(ST.cur.he),'P',correct);
   trackW(ST.cur.he,correct);
   var btns=document.querySelectorAll('.fs-opt');
   btns.forEach(function(b){ b.disabled=true; });
@@ -4036,7 +3916,7 @@ function checkPick(i){
   if(correct){ ST.correct++; ST.score+=10+ST.streak; ST.streak++; }
   else ST.streak=0;
   var fb=document.getElementById('mcfb');
-  if(!correct&&picked) recordMix(ST.cur,picked);
+  if(!correct&&picked){ recordMix(ST.cur,picked); recordConfusion(lookAlikePair(picked.he,ST.cur.he)); }
   var contrast=(!correct&&picked)?'<div class="fs-note"><b lang="he" dir="rtl">'+esc(dHe(picked))+'</b> is “'+esc(picked.en)+'”</div>':'';
   if(fb) fb.innerHTML=contrast+'<div class="fs-note"><span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span></div>'+afterReveal(ST.cur);
   updateStats(); hold(function(){ advance(correct); });
@@ -4064,7 +3944,7 @@ function tileLetters(w){
 
 function checkMC(i,correct){
   if(ST.answered)return; ST.answered=true; ST.total++;
-  reviewItem(itemWord(ST.cur.he),'R',correct);
+  gradeStep(itemWord(ST.cur.he),'R',correct);
   trackW(ST.cur.he,correct);
   var btns=document.querySelectorAll('.fs-opt,.mc-opt');
   btns.forEach(function(b){b.disabled=true;});
@@ -4192,165 +4072,6 @@ function kbToContinue(){
 }
 function kbClear(){var i=document.getElementById('ti');if(!i||ST.answered)return;i.value='';kbSyncGo();}
 
-// ── SHORESH (ROOT) MODE ────────────────────────────────────────
-// Roots database: each entry has the 3 root letters, meaning, and linked words
-var shorashim=[
-  {root:['כ','ת','ב'],pron:"k-t-v",meaning:"write",words:[
-    {he:'כתב',en:'he wrote'},{he:'כותב',en:'writes'},{he:'כתיבה',en:'writing'},{he:'מכתב',en:'letter'}]},
-  {root:['ל','מ','ד'],pron:"l-m-d",meaning:"learn/study",words:[
-    {he:'למד',en:'he learned'},{he:'לומד',en:'studies'},{he:'מלמד',en:'teacher (m.)'},{he:'תלמיד',en:'student'}]},
-  {root:['ד','ב','ר'],pron:"d-v-r",meaning:"speak",words:[
-    {he:'דיבר',en:'he spoke'},{he:'מדבר',en:'speaks'},{he:'דיבור',en:'speech'},{he:'דבר',en:'word / thing'}]},
-  {root:['ה','ל','כ'],pron:"h-l-kh",meaning:"go / walk",words:[
-    {he:'הלך',en:'he went'},{he:'הולך',en:'goes/walks'},{he:'הליכה',en:'walking'},{he:'מהלך',en:'process'}]},
-  {root:['א','כ','ל'],pron:"a-kh-l",meaning:"eat",words:[
-    {he:'אכל',en:'he ate'},{he:'אוכל',en:'eats / food'},{he:'אכילה',en:'eating'},{he:'מאכל',en:'dish / food'}]},
-  {root:['ש','ת','ה'],pron:"sh-t-h",meaning:"drink",words:[
-    {he:'שתה',en:'he drank'},{he:'שותה',en:'drinks'},{he:'שתייה',en:'drinking'},{he:'משקה',en:'beverage'}]},
-  {root:['ר','א','ה'],pron:"r-a-h",meaning:"see",words:[
-    {he:'ראה',en:'he saw'},{he:'רואה',en:'sees'},{he:'ראייה',en:'vision'},{he:'מראה',en:'mirror / sight'}]},
-  {root:['י','ד','ע'],pron:"y-d-a",meaning:"know",words:[
-    {he:'ידע',en:'he knew'},{he:'יודע',en:'knows'},{he:'ידיעה',en:'knowledge'},{he:'מידע',en:'information'}]},
-  {root:['ב','א','ה'],pron:"b-a-h",meaning:"come",words:[
-    {he:'בא',en:'he came'},{he:'בא',en:'comes'},{he:'ביאה',en:'arrival'},{he:'מגיע',en:'arrives'}]},
-  {root:['נ','ת','נ'],pron:"n-t-n",meaning:"give",words:[
-    {he:'נתן',en:'he gave'},{he:'נותן',en:'gives'},{he:'מתנה',en:'gift'},{he:'תורם',en:'contributes'}]},
-  {root:['פ','ת','ח'],pron:"p-t-kh",meaning:"open",words:[
-    {he:'פתח',en:'he opened'},{he:'פותח',en:'opens'},{he:'פתח',en:'opening / door'},{he:'מפתח',en:'key'}]},
-  {root:['ש','מ','ע'],pron:"sh-m-a",meaning:"hear/listen",words:[
-    {he:'שמע',en:'he heard'},{he:'שומע',en:'hears'},{he:'שמיעה',en:'hearing'},{he:'מוסיקה',en:'music (related)'}]},
-  {root:['ע','ז','ר'],pron:"a-z-r",meaning:"help",words:[
-    {he:'עזר',en:'he helped'},{he:'עוזר',en:'helps'},{he:'עזרה',en:'help'},{he:'מועיל',en:'useful'}]},
-  {root:['ח','ש','ב'],pron:"kh-sh-v",meaning:"think",words:[
-    {he:'חשב',en:'he thought'},{he:'חושב',en:'thinks'},{he:'מחשבה',en:'thought'},{he:'מחשב',en:'computer'}]},
-  {root:['ע','ב','ד'],pron:"a-v-d",meaning:"work / serve",words:[
-    {he:'עבד',en:'he worked'},{he:'עובד',en:'works'},{he:'עבודה',en:'work / job'},{he:'עובד',en:'worker'}]},
-  {root:['י','ש','ב'],pron:"y-sh-v",meaning:"sit / live",words:[
-    {he:'ישב',en:'he sat'},{he:'יושב',en:'sits'},{he:'ישיבה',en:'sitting / yeshiva'},{he:'תושב',en:'resident'}]},
-  {root:['ע','ל','ה'],pron:"a-l-h",meaning:"go up / rise",words:[
-    {he:'עלה',en:'he went up'},{he:'עולה',en:'goes up / immigrant'},{he:'עלייה',en:'ascent / aliyah'},{he:'מעלה',en:'advantage'}]},
-  {root:['י','צ','א'],pron:"y-tz-a",meaning:"go out / exit",words:[
-    {he:'יצא',en:'he went out'},{he:'יוצא',en:'goes out'},{he:'יציאה',en:'exit / departure'},{he:'מוצא',en:'origin / exit'}]},
-  {root:['ש','מ','ר'],pron:"sh-m-r",meaning:"keep / guard",words:[
-    {he:'שמר',en:'he kept'},{he:'שומר',en:'guard'},{he:'שמירה',en:'keeping'},{he:'משמר',en:'guard / shift'}]},
-  {root:['ב','ר','כ'],pron:"b-r-kh",meaning:"bless",words:[
-    {he:'ברך',en:'he blessed'},{he:'מברך',en:'blesses'},{he:'ברכה',en:'blessing'},{he:'מבורך',en:'blessed'}]},
-];
-
-var _shIdx=0; var _shMode='browse'; var _shAns=false;
-function renderShoresh(){
-  if(_shMode==='quiz') renderShorashQuiz();
-  else renderShorashBrowse();
-}
-function renderShorashBrowse(){
-  _shMode='browse';
-  var sr=shorashim[_shIdx];
-  var rootLetters=sr.root.map(function(l,i){
-    return '<div class="shoresh-letter-box revealed">'+
-      '<span class="sh-num">'+(i===0?'1st':i===1?'2nd':'3rd')+'</span>'+l+'</div>';
-  }).join('');
-  var wordChips=sr.words.map(function(w){
-    return '<div class="shoresh-word-chip"><span class="sw-he">'+w.he+'</span><span class="sw-en">'+w.en+'</span></div>';
-  }).join('');
-  var pips=shorashim.map(function(_,i){
-    return '<div style="display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 2px;background:'+(i===_shIdx?'var(--blue)':'var(--border)')+'"></div>';
-  }).join('');
-  var html='<div class="progress-label"><span>שורשים — Hebrew Roots</span><span>'+(_shIdx+1)+'/'+shorashim.length+'</span></div>'+
-    '<div style="text-align:center;margin-bottom:6px">'+pips+'</div>'+
-    '<div class="shoresh-root-display">'+
-      '<div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Root · שורש</div>'+
-      '<div class="shoresh-root-letters">'+rootLetters+'</div>'+
-      '<div style="font-size:15px;color:var(--blue);font-style:italic;margin-bottom:4px">'+sr.pron+'</div>'+
-      '<div style="font-size:20px;font-weight:600;color:var(--text)">meaning: '+sr.meaning+'</div>'+
-    '</div>'+
-    '<div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:8px">Words from this root</div>'+
-    '<div class="shoresh-words">'+wordChips+'</div>'+
-    '<div class="quiz-actions" style="margin-top:16px">'+
-      '<button class="btn-ghost" onclick="shPrev()">Prev</button>'+
-      '<button class="btn" onclick="_shMode=\'quiz\';_shAns=false;renderShorashQuiz()"> Quiz Me</button>'+
-      '<button class="btn-ghost" onclick="shNext()">Next </button>'+
-    '</div>';
-  document.getElementById('quizContent').innerHTML=html;
-}
-function shNext(){_shIdx=(_shIdx+1)%shorashim.length;renderShorashBrowse();}
-function shPrev(){_shIdx=(_shIdx-1+shorashim.length)%shorashim.length;renderShorashBrowse();}
-
-function renderShorashQuiz(){
-  _shMode='quiz'; _shAns=false;
-  // Pick quiz type: 0=given root letters, pick meaning; 1=given meaning, pick root; 2=given word, pick root
-  var qtype=Math.floor(Math.random()*3);
-  var correct=shorashim[Math.floor(Math.random()*shorashim.length)];
-  var others=shorashim.filter(function(s){return s!==correct;}).sort(function(){return Math.random()-.5;}).slice(0,3);
-  var opts=[...others,correct].sort(function(){return Math.random()-.5;});
-  var html='<div class="progress-label"><span>Shoresh Quiz</span><button class="btn-ghost" style="padding:4px 12px;font-size:13px" onclick="_shMode=\'browse\';renderShorashBrowse()">Browse</button></div>';
-
-  if(qtype===0){
-    // Show root letters, pick the meaning
-    var rootLetters=correct.root.map(function(l){
-      return '<div class="shoresh-letter-box revealed">'+l+'</div>';
-    }).join('');
-    html+='<div class="shoresh-root-letters" style="justify-content:center;margin-bottom:8px">'+rootLetters+'</div>'+
-      '<div style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px;font-style:italic">'+correct.pron+'</div>'+
-      '<div class="shoresh-quiz-prompt">What does this root mean?</div>'+
-      '<div class="shoresh-opts">';
-    opts.forEach(function(o,i){
-      html+='<button class="shoresh-opt" onclick="checkShoresh('+i+','+(o===correct)+')">'+
-        '<span style="font-size:20px;font-weight:600">'+o.meaning+'</span>'+
-      '</button>';
-    });
-  } else if(qtype===1){
-    // Show meaning, pick the root letters
-    html+='<div style="text-align:center;margin-bottom:6px;font-size:13px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Meaning</div>'+
-      '<div style="font-size:36px;font-weight:700;color:var(--text);text-align:center;margin-bottom:20px">'+correct.meaning+'</div>'+
-      '<div class="shoresh-quiz-prompt">Which root (שורש) gives this meaning?</div>'+
-      '<div class="shoresh-opts">';
-    opts.forEach(function(o,i){
-      var rl=o.root.map(function(l){return '<span style="font-family:var(--he-font);font-size:28px;margin:0 3px">'+l+'</span>';}).join('-');
-      html+='<button class="shoresh-opt" onclick="checkShoresh('+i+','+(o===correct)+')">'+
-        '<span class="sopt-root" style="font-size:17px;direction:ltr;display:flex;justify-content:center;gap:4px;align-items:center">'+rl+'</span>'+
-        '<span class="sopt-pron">'+o.pron+'</span>'+
-      '</button>';
-    });
-  } else {
-    // Show a word, pick which root it comes from
-    var word=correct.words[Math.floor(Math.random()*correct.words.length)];
-    html+='<div style="text-align:center;margin-bottom:4px;font-size:13px;letter-spacing:2px;color:var(--muted);text-transform:uppercase">Word</div>'+
-      '<div class="mc-he he-text" style="text-align:center;display:block;margin-bottom:6px">'+word.he+'</div>'+
-      '<div style="font-size:15px;color:var(--muted);text-align:center;margin-bottom:18px;font-style:italic">'+word.en+'</div>'+
-      '<div class="shoresh-quiz-prompt">Which root (שורש) does this word come from?</div>'+
-      '<div class="shoresh-opts">';
-    opts.forEach(function(o,i){
-      var rl=o.root.map(function(l){return '<span style="font-family:var(--he-font);font-size:28px;margin:0 2px">'+l+'</span>';}).join('-');
-      html+='<button class="shoresh-opt" onclick="checkShoresh('+i+','+(o===correct)+')">'+
-        '<span class="sopt-root" style="font-size:15px;direction:ltr;display:flex;justify-content:center;gap:4px;align-items:center">'+rl+'</span>'+
-        '<span class="sopt-pron">'+o.pron+'</span>'+
-        '<span class="sopt-meaning">'+o.meaning+'</span>'+
-      '</button>';
-    });
-  }
-  html+='</div><div class="quiz-actions" style="margin-top:16px"><span style="color:var(--muted);font-size:13px">Shoresh Quiz</span><div class="streak-badge">'+ST.score+' pts</div></div>';
-  document.getElementById('quizContent').innerHTML=html;
-  document.getElementById('quizContent')._shCorrect=correct;
-}
-function checkShoresh(i,correct){
-  if(_shAns)return; _shAns=true;
-  var btns=document.querySelectorAll('.shoresh-opt');
-  btns.forEach(function(b){b.disabled=true;});
-  btns[i].classList.add(correct?'correct':'wrong');
-  if(!correct){
-    btns.forEach(function(b,bi){
-      var ans=([...(document.getElementById('quizContent')._shCorrect.root||[])]);
-      if(b.querySelector('.sopt-pron')&&b.querySelector('.sopt-pron').textContent===document.getElementById('quizContent')._shCorrect.pron) b.classList.add('correct');
-      if(b.querySelector('span[style*="font-weight:600"]')&&b.querySelector('span[style*="font-weight:600"]').textContent===document.getElementById('quizContent')._shCorrect.meaning) b.classList.add('correct');
-    });
-  }
-  ST.total++;
-  if(correct){ST.correct++;ST.score+=15;ST.streak++;toast('Correct','good');}
-  else{ST.streak=0;toast(''+document.getElementById('quizContent')._shCorrect.meaning,'bad');}
-  updateStats();
-  hold(renderShorashQuiz); showCont(btns[0]&&btns[0].parentNode);
-}
-
 // ── GRAMMAR MODE ──────────────────────────────────────────────
 // A hint ladder instead of a pronunciation reveal: showing how the ANSWER
 // sounds gives it away. Hint 1 = first letter + a slot per letter (a correct
@@ -4376,7 +4097,7 @@ function typeHTML(w,tiles){
   _kbSubmit=checkType; _hint=0; _unsure=false;
   return '<div class="fs-prompt">'+
       '<div class="fs-en" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
-      '<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>'+
+      (sessionCtx()==='test'?'':'<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>')+
       '<div class="hint-out" id="hintOut" lang="he" dir="rtl"></div>'+
     '</div>'+
     '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" readonly tabindex="-1" '+
@@ -4420,13 +4141,15 @@ function checkType(){
   if(ST.answered){ cont(); return; }
   var inp=document.getElementById('ti');
   var typed=stripV(inp.value.trim()), correct=stripV(ST.cur.he);
-  var m=matchAnswer(inp.value,ST.cur.he);
+  var m=matchAnswer(inp.value,ST.cur.he,sessionCtx()==='test');
   var revealed=_hint>=2, hinted=_hint===1;
+  var pair=m==='wrong'?lookAlikePair(inp.value,ST.cur.he):null;
+  recordConfusion(pair);
   ST.answered=true; ST.total++;
   if(ROUND.active) ROUND.lastTyped=inp.value.trim();
   // A hint means it was not produced from memory: Again, and it comes back.
   // Hard is for a correct answer with a slip or said to be a guess (§8a.4, §8h).
-  reviewItem(itemWord(ST.cur.he),'P', (m==='wrong'||revealed||hinted)?false:((m==='close'||_unsure)?'hard':true));
+  gradeStep(itemWord(ST.cur.he),'P', (m==='wrong'||revealed||hinted)?false:((m==='close'||_unsure)?'hard':true));
   var sureWrong=ROUND.active&&!_unsure&&!hinted&&!revealed&&m==='wrong';
   var un=document.getElementById('kbUnsure'); if(un) un.disabled=true;
   trackW(ST.cur.he,m!=='wrong'&&!revealed);
@@ -4447,92 +4170,13 @@ function checkType(){
     if(other) recordMix(ST.cur,other);
     fb.innerHTML='<span class="was" lang="he" dir="rtl">'+diffMark(typed,correct)+'</span>'+
       '<span class="fs-translit" lang="he-Latn" dir="ltr">'+esc(ST.cur.pron)+'</span>'+
+      almostNote(pair)+
       (other?'<span class="fs-note"><b lang="he" dir="rtl">'+esc(dHe(other))+'</b> is “'+esc(other.en)+'”</span>':'')+
       (sureWrong?'<span class="fs-note">you were sure — this one comes back</span>':'')+
       (revealed&&typed===correct?'<span class="fs-note">shown, so it comes back</span>':'');
   }
   var _rv=afterReveal(ST.cur); if(_rv) fb.insertAdjacentHTML('beforeend',_rv);   // inside the reserved slot: nothing below moves
   updateStats(); hold(function(){advance(ok&&!hinted);}); kbToContinue();
-}
-
-// ── MATCH ─────────────────────────────────────────────────────
-function renderMatch(){
-  var pool=filteredVocab();
-  var sample=[...pool].sort(function(){return Math.random()-.5;}).slice(0,5);
-  var heW=[...sample].sort(function(){return Math.random()-.5;});
-  var enW=[...sample].sort(function(){return Math.random()-.5;});
-  ST.matchPairs=sample; ST.matchDone=[]; ST.matchSel=null;
-  var html='<div class="progress-label"><span>התאם — Match Hebrew to English</span><span>'+(ST.streak>0?''+ST.streak:'')+'</span></div>'+
-    '<div class="match-grid"><div class="match-col">';
-  heW.forEach(function(w,i){
-    html+='<div class="match-item he-side" id="he'+i+'" data-w="'+w.he+'" data-t="he" onclick="selMatch(this,\''+w.he+'\',\'he\')">'+dHe(w)+'<div class="match-pron">'+w.pron+'</div></div>';
-  });
-  html+='</div><div class="match-col">';
-  enW.forEach(function(w,i){
-    html+='<div class="match-item" id="en'+i+'" data-w="'+w.he+'" data-t="en" onclick="selMatch(this,\''+w.he+'\',\'en\')">'+w.en+'</div>';
-  });
-  html+='</div></div>';
-  document.getElementById('quizContent').innerHTML=html;
-}
-function selMatch(el,word,type){
-  if(el.classList.contains('matched'))return;
-  if(!ST.matchSel){ST.matchSel={el,word,type};el.classList.add('selected');return;}
-  var prev=ST.matchSel;
-  if(prev.type===type){prev.el.classList.remove('selected');el.classList.add('selected');ST.matchSel={el,word,type};return;}
-  if(prev.word===word){
-    prev.el.classList.remove('selected');prev.el.classList.add('matched');el.classList.add('matched');
-    ST.matchDone.push(word);ST.matchSel=null;
-    ST.score+=15;ST.streak++;ST.learned.add(word);ST.total++;ST.correct++;
-    trackW(word,true);updateStats();toast('Match','good');
-    if(ST.matchDone.length===ST.matchPairs.length){ toast('All matched','good'); hold(renderMatch); showCont(document.querySelector('#quizContent .match-grid'),'Next set'); }
-  } else {
-    prev.el.classList.remove('selected');
-    el.classList.add('wrong-flash');prev.el.classList.add('wrong-flash');
-    ST.matchSel=null;ST.streak=0;ST.total++;trackW(word,false);updateStats();toast('Try again','bad');
-    setTimeout(function(){el.classList.remove('wrong-flash');prev.el.classList.remove('wrong-flash');},700);
-  }
-}
-
-// ── SENTENCE FILL ─────────────────────────────────────────────
-function renderSentence(w){
-  var pool=filteredVocab();
-  var bank=[...pool.filter(function(x){return x!==w;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
-  var disp=(w.sentence||'___').replace('___','<input class="blank-slot he-text" id="bs" readonly placeholder="___">');
-  var html='<div class="progress-label"><span>מלא את החסר — Fill in the blank</span><span>'+(ST.streak>0?''+ST.streak:'')+'</span></div>'+
-    '<div class="sentence-box he-text" dir="rtl">'+disp+'</div>'+
-    '<div class="sentence-hint-line">'+( w.sentenceEn||'')+'</div>'+
-    '<div class="word-bank">';
-  bank.forEach(function(bw,i){
-    html+='<div class="bank-word" id="bw'+i+'" onclick="pickBank(\''+bw.he.replace(/'/g,"\\'")+ '\','+i+')"><span class="bank-he">'+dHe(bw)+'</span><span class="bank-pron">'+bw.pron+'</span></div>';
-  });
-  html+='</div><div class="type-feedback" id="sfb" style="margin-top:10px"></div>';
-  document.getElementById('quizContent').innerHTML=html;
-}
-function pickBank(word,idx){
-  if(ST.answered)return;
-  var bs=document.getElementById('bs');
-  if(bs) bs.value=word;
-  ST.answered=true;ST.total++;
-  var ok=stripV(ST.cur.he)===stripV(word);
-  // Picking from a word bank is recognition in context, so it reports to R.
-  reviewItem(itemWord(ST.cur.he),'R',ok);
-  trackW(ST.cur.he,ok);
-  var bw=document.getElementById('bw'+idx);
-  if(bw) bw.classList.add('used');
-  var inp=document.getElementById('bs');
-  var fb=document.getElementById('sfb');
-  if(ok){
-    if(inp){inp.style.color='var(--green)';inp.style.borderColor='var(--green)';}
-    ST.correct++;ST.score+=15+ST.streak;ST.streak++;ST.learned.add(ST.cur.he);
-    if(fb) fb.innerHTML='<span style="color:var(--green)">נכון</span>';
-    toast('Correct','good');
-  } else {
-    if(inp){inp.style.color='var(--rose)';inp.style.borderColor='var(--rose)';}
-    ST.streak=0;
-    if(fb) fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:22px;color:var(--blue)">'+dHe(ST.cur)+'</span> <em style="color:var(--blue);font-size:13px">('+ST.cur.pron+')</em>';
-    toast(''+ST.cur.en,'bad');
-  }
-  updateStats(); hold(function(){advance(ok);}); showCont(document.getElementById('sfb'));
 }
 
 // ── CONVERSATION ──────────────────────────────────────────────
@@ -4771,13 +4415,12 @@ function closeAnalytics(){document.getElementById('analyticsOverlay').classList.
 function setATab(tab,el){ST.atab=tab;document.querySelectorAll('.atab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');renderAnalytics(tab);}
 function renderAnalytics(tab){
   var content=document.getElementById('analyticsContent');
-  var missedBtn=document.getElementById('practiceMissedBtn');
   var tracked=vocab.filter(function(w){return ST.wordStats[w.he];});
-  if(!tracked.length){content.innerHTML='<div class="empty-state"> No data yet. Start studying to see analytics!</div>';missedBtn.style.display='none';return;}
+  if(!tracked.length){content.innerHTML='<div class="empty-state"> No data yet. Start studying to see analytics!</div>';return;}
   var words=[];
-  if(tab==='missed'){words=tracked.filter(function(w){return ST.wordStats[w.he].w>0;}).sort(function(a,b){return ST.wordStats[b.he].w-ST.wordStats[a.he].w;}).slice(0,20);missedBtn.style.display=words.length?'':'none';}
-  else if(tab==='best'){words=tracked.filter(function(w){return ST.wordStats[w.he].c>0;}).sort(function(a,b){return ST.wordStats[b.he].c-ST.wordStats[a.he].c;}).slice(0,20);missedBtn.style.display='none';}
-  else{words=tracked.sort(function(a,b){var sa=ST.wordStats[a.he],sb=ST.wordStats[b.he];return(sb.w+sb.c)-(sa.w+sa.c);}).slice(0,30);missedBtn.style.display=tracked.some(function(w){return ST.wordStats[w.he].w>0;})?'':'none';}
+  if(tab==='missed'){words=tracked.filter(function(w){return ST.wordStats[w.he].w>0;}).sort(function(a,b){return ST.wordStats[b.he].w-ST.wordStats[a.he].w;}).slice(0,20);}
+  else if(tab==='best'){words=tracked.filter(function(w){return ST.wordStats[w.he].c>0;}).sort(function(a,b){return ST.wordStats[b.he].c-ST.wordStats[a.he].c;}).slice(0,20);}
+  else{words=tracked.sort(function(a,b){var sa=ST.wordStats[a.he],sb=ST.wordStats[b.he];return(sb.w+sb.c)-(sa.w+sa.c);}).slice(0,30);}
   if(!words.length){content.innerHTML='<div class="empty-state">'+(tab==='missed'?'No mistakes yet.':'No data yet.')+'</div>';return;}
   var maxV=Math.max.apply(null,words.map(function(w){var s=ST.wordStats[w.he];return tab==='missed'?s.w:tab==='best'?s.c:s.w+s.c;}));
   var html='<div style="margin-bottom:20px">';
@@ -4814,241 +4457,6 @@ function toast(msg,type){
   clearTimeout(_toastTimer);_toastTimer=setTimeout(function(){t.classList.remove('show');},1500);
 }
 
-// ── TEST MODE (full-screen exam) ──────────────────────────────
-// Research-backed: interleaved retrieval practice (testing effect),
-// recall (typing) + recognition (MC), bidirectional EN<->HE, immediate feedback.
-var TST={active:false,phase:'setup',style:'mixed',length:10,cats:[],levels:[],
-  queue:[],idx:0,answered:false,correct:0,wrong:0,results:[]};
-var _preTestMode='multiple';
-
-function testPool(){
-  // STRICT: only words matching the chosen categories AND levels (multi-select).
-  // Empty cats = all categories; empty levels = all levels. No fallback to all vocab.
-  var base=(TST.cats.length===0)?vocab.slice():vocab.filter(function(v){return TST.cats.indexOf(v.cat)>-1;});
-  if(TST.levels.length) base=base.filter(function(v){return TST.levels.indexOf(v.level||2)>-1;});
-  return base;
-}
-function testAvail(){ return testPool().length; }
-
-function openTest(){
-  document.getElementById('testOverlay').classList.add('open');
-  // clear the main quiz card so its element ids (e.g. pron 'p1') don't shadow the overlay's
-  var qc=document.getElementById('quizContent'); if(qc) qc.innerHTML='';
-  if(!TST.active) renderTestSetup();
-}
-function closeTest(){
-  document.getElementById('testOverlay').classList.remove('open');
-  TST.active=false; TST.phase='setup';
-  setMode((_preTestMode&&_preTestMode!=='test')?_preTestMode:'multiple');
-}
-function setTestLen(n){ TST.length=n; renderTestSetup(); }
-function setTestStyle(s){ TST.style=s; renderTestSetup(); }
-function toggleTestCat(c){ var i=TST.cats.indexOf(c); if(i>-1)TST.cats.splice(i,1); else TST.cats.push(c); renderTestSetup(); }
-function clearTestCats(){ TST.cats=[]; renderTestSetup(); }
-function toggleTestLevel(n){ var i=TST.levels.indexOf(n); if(i>-1)TST.levels.splice(i,1); else TST.levels.push(n); renderTestSetup(); }
-function clearTestLevels(){ TST.levels=[]; renderTestSetup(); }
-
-function renderTestSetup(){
-  TST.phase='setup'; TST.active=false;
-  var avail=testAvail();
-  var lens=[{n:10},{n:20},{n:30},{n:0,lbl:'All'}];
-  var lenHtml=lens.map(function(l){
-    var label=l.lbl?l.lbl:(''+l.n);
-    var sub=l.n===0?(avail+' words'):(avail<l.n?('max '+avail):'questions');
-    return '<div class="test-chip'+(TST.length===l.n?' sel':'')+'" onclick="setTestLen('+l.n+')">'+label+'<span class="tc-sub">'+sub+'</span></div>';
-  }).join('');
-  var styles=[
-    {id:'mixed',lbl:'Mixed',sub:'all styles · best recall'},
-    {id:'mc',lbl:'Multiple Choice',sub:'pick from 4'},
-    {id:'type',lbl:'Fill the Blank',sub:'type the Hebrew'}
-  ];
-  var styleHtml=styles.map(function(s){
-    return '<div class="test-chip'+(TST.style===s.id?' sel':'')+'" onclick="setTestStyle(\''+s.id+'\')">'+s.lbl+'<span class="tc-sub">'+s.sub+'</span></div>';
-  }).join('');
-  var chipCss='flex:0 0 auto;min-width:auto;padding:8px 14px;font-size:13px';
-  var catHtml='<div class="test-chip" style="'+chipCss+(TST.cats.length===0?';border-color:var(--blue);background:var(--blue-soft);color:var(--blue)':'')+'" onclick="clearTestCats()">All</div>'+
-    CATS.filter(function(c){return c!=='All';}).map(function(c){
-      return '<div class="test-chip'+(TST.cats.indexOf(c)>-1?' sel':'')+'" style="'+chipCss+'" onclick="toggleTestCat(\''+c.replace(/'/g,"\\'")+'\')">'+c+'</div>';
-    }).join('');
-  var lvlHtml='<div class="test-chip'+(TST.levels.length===0?' sel':'')+'" onclick="clearTestLevels()">All</div>'+
-    [1,2,3,4,5,6].map(function(n){
-      return '<div class="test-chip'+(TST.levels.indexOf(n)>-1?' sel':'')+'" onclick="toggleTestLevel('+n+')">'+n+'</div>';
-    }).join('');
-  var html='<div class="test-inner">'+
-    '<div class="test-head"><div class="th-logo">מבחן</div>'+
-      '<button class="test-x" onclick="closeTest()">× Close</button></div>'+
-    '<div class="test-setup-title">Test Yourself</div>'+
-    '<div class="test-setup-sub">Science-based retrieval practice — no audio, just recall</div>'+
-    '<div class="test-section"><div class="test-section-lbl">Length</div><div class="test-opt-row">'+lenHtml+'</div></div>'+
-    '<div class="test-section"><div class="test-section-lbl">Question Style</div><div class="test-opt-row">'+styleHtml+'</div></div>'+
-    '<div class="test-section"><div class="test-section-lbl">Categories · tap to combine</div><div class="test-opt-row" style="gap:7px">'+catHtml+'</div></div>'+
-    '<div class="test-section"><div class="test-section-lbl">Levels · tap to combine</div><div class="test-opt-row">'+lvlHtml+'</div></div>'+
-    '<div class="test-avail"><b>'+avail+'</b> words available with these filters</div>'+
-    '<button class="test-start"'+(avail<1?' disabled':'')+' onclick="startTest()">Start Test </button>'+
-  '</div>';
-  document.getElementById('testOverlay').innerHTML=html;
-}
-
-function _testPickStyle(){
-  if(TST.style==='mc') return Math.random()<.5?'mc_he2en':'mc_en2he';
-  if(TST.style==='type') return 'type';
-  var r=Math.random();
-  if(r<.34) return 'mc_he2en';
-  if(r<.67) return 'mc_en2he';
-  return 'type';
-}
-function startTest(){
-  var pool=testPool();
-  if(!pool.length){ renderTestSetup(); return; } // no words for this category+level combo
-  var n=(TST.length===0)?pool.length:Math.min(TST.length,pool.length);
-  var picked=[...pool].sort(function(){return Math.random()-.5;}).slice(0,n);
-  TST.queue=picked.map(function(w){return {w:w,style:_testPickStyle()};});
-  TST.idx=0; TST.correct=0; TST.wrong=0; TST.results=[]; TST.answered=false; TST.active=true;
-  document.getElementById('testOverlay').classList.add('open');
-  var qc=document.getElementById('quizContent'); if(qc) qc.innerHTML='';
-  renderTestQ();
-}
-
-function renderTestQ(){
-  TST.phase='quiz'; TST.answered=false; ST.answered=false; _pid=0;
-  var item=TST.queue[TST.idx], w=item.w, pool=testPool();
-  var pct=Math.round(TST.idx/TST.queue.length*100);
-  var head='<div class="test-head"><div class="th-logo">מבחן</div>'+
-      '<button class="test-x" onclick="closeTest()">× End</button></div>'+
-    '<div class="test-prog-bar"><div class="test-prog-fill" style="width:'+pct+'%"></div></div>'+
-    '<div class="test-prog-meta"><span>Question '+(TST.idx+1)+' of '+TST.queue.length+'</span>'+
-      '<span class="num">'+TST.correct+' right · '+TST.wrong+' wrong</span></div>';
-  var body='';
-  if(item.style==='mc_he2en'){
-    var o1=[...pool.filter(function(x){return x!==w;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
-    body='<div class="test-prompt-big he-text">'+dHe(w)+'</div>'+pronBtn(w,'margin-bottom:20px')+'<div class="mc-grid">';
-    o1.forEach(function(o){ body+='<button class="mc-opt" onclick="checkTestMC(this,'+(o===w)+')">'+o.en+'</button>'; });
-    body+='</div><div class="test-feedback" id="tfb"></div>';
-  } else if(item.style==='mc_en2he'){
-    var o2=[...pool.filter(function(x){return x!==w;}).sort(function(){return Math.random()-.5;}).slice(0,3),w].sort(function(){return Math.random()-.5;});
-    body='<div class="test-prompt-en">'+w.en+'</div><div class="mc-grid">';
-    o2.forEach(function(o){ body+='<button class="mc-opt he-text" style="font-size:28px;direction:rtl;text-align:center" onclick="checkTestMC(this,'+(o===w)+')">'+dHe(o)+'</button>'; });
-    body+='</div><div class="test-feedback" id="tfb"></div>';
-  } else {
-    body='<div class="test-style-tag">Fill the blank — type the Hebrew</div>'+
-      '<div class="test-prompt-en">'+w.en+'</div>'+pronBtn(w,'margin:6px 0 16px')+
-      '<div class="type-input-wrap"><input class="type-input he-text" id="ti" placeholder="כתוב כאן..." autocomplete="off" spellcheck="false" inputmode="none" readonly tabindex="-1" onkeydown="if(event.key===\'Enter\')checkTestType()"></div>'+
-      '<div class="test-feedback" id="tfb"></div>'+
-      '<div class="quiz-actions" style="margin-top:12px;justify-content:flex-end"><button class="btn" onclick="checkTestType()">Check </button></div>'+
-      buildKbd();
-  }
-  document.getElementById('testOverlay').innerHTML='<div class="test-inner">'+head+'<div class="test-q-wrap">'+body+'</div></div>';
-  var ti=document.getElementById('ti'); if(ti) ti.focus();
-}
-
-function checkTestMC(btn,ok){
-  if(TST.answered)return; TST.answered=true; ST.answered=true;
-  var item=TST.queue[TST.idx], w=item.w;
-  var btns=btn.parentNode.querySelectorAll('.mc-opt');
-  btns.forEach(function(b){b.disabled=true;});
-  btn.classList.add(ok?'correct':'wrong');
-  if(!ok){
-    btns.forEach(function(b){
-      if(item.style==='mc_en2he'){ if(stripV(b.textContent.trim())===stripV(dHe(w))) b.classList.add('correct'); }
-      else { if(b.textContent.trim()===w.en) b.classList.add('correct'); }
-    });
-  }
-  var fb=document.getElementById('tfb');
-  if(fb) fb.innerHTML=ok?'<span style="color:var(--green)"><svg class="i"><use href="#i-check"/></svg></span>':'<span style="color:var(--rose)">'+(item.style==='mc_en2he'?esc(w.en)+' = ':'')+'</span>'+(item.style==='mc_en2he'?'<span class="he-text" style="color:var(--blue);font-size:20px">'+dHe(w)+'</span>':'<span class="he-text" style="color:var(--blue);font-size:20px">'+dHe(w)+'</span>');
-  _testRecord(ok,'');
-  hold(_testNext); showCont(fb);
-}
-
-function checkTestType(){
-  if(TST.answered){ cont(); return; } TST.answered=true; ST.answered=true;
-  var w=TST.queue[TST.idx].w;
-  var inp=document.getElementById('ti');
-  var typed=stripV((inp?inp.value:'').trim());
-  var ok=typed===stripV(w.he);
-  if(inp){ inp.classList.add(ok?'good':'bad'); inp.disabled=true; }
-  var fb=document.getElementById('tfb');
-  if(fb){
-    if(ok) fb.innerHTML='<span style="color:var(--green)">מעולה</span>';
-    else fb.innerHTML='<span style="color:var(--rose)">Answer: </span><span class="he-text" style="font-size:24px;color:var(--blue)">'+dHe(w)+'</span> <em style="color:var(--blue);font-size:13px">('+w.pron+')</em>';
-  }
-  _testRecord(ok, typed||'(blank)');
-  hold(_testNext); kbToContinue(); showCont(fb);
-}
-
-function _testRecord(ok,your){
-  var item=TST.queue[TST.idx], w=item.w;
-  ST.total++; trackW(w.he,ok);
-  if(ok){ TST.correct++; ST.correct++; ST.score+=10; ST.streak++; ST.learned.add(w.he); }
-  else { TST.wrong++; ST.streak=0; }
-  TST.results.push({w:w,ok:ok,style:item.style,your:your||''});
-  updateStats();
-}
-function _testNext(){
-  TST.idx++;
-  if(TST.idx>=TST.queue.length) renderTestResults();
-  else renderTestQ();
-}
-
-function renderTestResults(){
-  TST.phase='results'; TST.active=true; ST.answered=false;
-  var total=TST.queue.length;
-  var pct=total?Math.round(TST.correct/total*100):0;
-  var grade,gcolor;
-  if(pct>=90){grade='מצוין — Excellent!';gcolor='var(--green)';}
-  else if(pct>=75){grade='כל הכבוד — Great work';gcolor='var(--green)';}
-  else if(pct>=60){grade='טוב — Good, keep going';gcolor='var(--blue)';}
-  else if(pct>=40){grade='Keep practicing';gcolor='var(--blue)';}
-  else{grade='Needs review';gcolor='var(--rose)';}
-  var styleNames={mc_he2en:'Hebrew to English',mc_en2he:'English to Hebrew',type:'Fill the Blank (typed)'};
-  var byStyle={};
-  TST.results.forEach(function(r){var s=byStyle[r.style]||{c:0,t:0};s.t++;if(r.ok)s.c++;byStyle[r.style]=s;});
-  var bdHtml='';
-  Object.keys(byStyle).forEach(function(k){
-    var s=byStyle[k];
-    bdHtml+='<div class="test-bd-row"><span>'+styleNames[k]+'</span><span><b style="color:var(--text)">'+s.c+'/'+s.t+'</b> &nbsp;·&nbsp; '+Math.round(s.c/s.t*100)+'%</span></div>';
-  });
-  var missed=TST.results.filter(function(r){return !r.ok;});
-  var missedHtml='';
-  if(missed.length){
-    missedHtml='<div class="test-section-lbl" style="margin-bottom:8px">Review these '+missed.length+'</div><div class="test-missed-list">';
-    missed.forEach(function(r){
-      var yours=(r.your&&r.style==='type')?'<span class="test-missed-yours">you: '+r.your+'</span>':'';
-      missedHtml+='<div class="test-missed-row"><span class="test-missed-he">'+dHe(r.w)+'</span>'+
-        '<span class="test-missed-en">'+r.w.en+'<br><em style="color:var(--blue);font-size:12px">'+r.w.pron+'</em></span>'+yours+'</div>';
-    });
-    missedHtml+='</div>';
-  } else {
-    missedHtml='<div class="test-avail" style="margin:18px 0;font-size:15px">Perfect — nothing to review.</div>';
-  }
-  var html='<div class="test-inner">'+
-    '<div class="test-head"><div class="th-logo">מבחן</div><button class="test-x" onclick="closeTest()">× Close</button></div>'+
-    '<div class="test-result-score" style="color:'+gcolor+'">'+pct+'%</div>'+
-    '<div class="test-result-grade" style="color:'+gcolor+'">'+grade+'</div>'+
-    '<div class="test-result-sub">'+TST.correct+' of '+total+' correct</div>'+
-    '<div class="test-stat-grid">'+
-      '<div class="test-stat-card"><div class="tsc-num" style="color:var(--green)">'+TST.correct+'</div><div class="tsc-lbl">Correct</div></div>'+
-      '<div class="test-stat-card"><div class="tsc-num" style="color:var(--rose)">'+TST.wrong+'</div><div class="tsc-lbl">Wrong</div></div>'+
-      '<div class="test-stat-card"><div class="tsc-num">'+total+'</div><div class="tsc-lbl">Total</div></div>'+
-    '</div>'+
-    (bdHtml?'<div class="test-breakdown">'+bdHtml+'</div>':'')+
-    missedHtml+
-    '<div class="test-res-actions">'+
-      '<button class="btn" onclick="startTest()">↻ Retake</button>'+
-      (missed.length?'<button class="btn-quiet" style="border-color:var(--rose);color:var(--rose)" onclick="retestMissed()">Review missed</button>':'')+
-      '<button class="btn-ghost" onclick="renderTestSetup()">New Test</button>'+
-      '<button class="btn-ghost" onclick="closeTest()">Done</button>'+
-    '</div>'+
-  '</div>';
-  document.getElementById('testOverlay').innerHTML=html;
-}
-function retestMissed(){
-  var mw=TST.results.filter(function(r){return !r.ok;}).map(function(r){return r.w;});
-  if(!mw.length){ renderTestSetup(); return; }
-  TST.queue=mw.map(function(w){return {w:w,style:_testPickStyle()};});
-  TST.idx=0; TST.correct=0; TST.wrong=0; TST.results=[]; TST.answered=false; TST.active=true;
-  renderTestQ();
-}
-
 // ══════════════════════════════════════════════════════════════
 // ANSWER MATCHING — typo tolerance
 // ══════════════════════════════════════════════════════════════
@@ -5079,10 +4487,12 @@ function vocabSet(){
   vocab.forEach(function(w){ _vocabSet[stripV(w.he)]=1; });
   return _vocabSet;
 }
-function matchAnswer(typed,want){
+// strict (Test): vowel-blind equality only, no slip allowance.
+function matchAnswer(typed,want,strict){
   var t=stripV(typed||'').trim(), w=stripV(want||'').trim();
   if(!t) return 'wrong';
   if(t===w) return 'exact';
+  if(strict) return 'wrong';
   // 4, not 5: Hebrew drops its vowels, so a 4-letter word is already
   // substantial. Below that a single character is too much of the word.
   if(w.length>=4 && lev(t,w)===1 && !vocabSet()[t] && !confusableSwap(t,w)) return 'close';
@@ -5091,7 +4501,8 @@ function matchAnswer(typed,want){
 // Letters that sound or look alike to an English speaker. Swapping one is a
 // spelling error, not a slip of the finger, so it is never "close enough"
 // (research §8d — an inference, no Hebrew-specific study exists).
-var CONFUSABLE=['בכ','חכ','סש','טת','אע','קכ','וב'];
+// ד/ר, ה/ח and ו/ז added with Test (2026-10-27): look-alikes in print.
+var CONFUSABLE=['בכ','חכ','סש','טת','אע','קכ','וב','דר','הח','וז'];
 var FINAL_BASE={'ך':'כ','ם':'מ','ן':'נ','ף':'פ','ץ':'צ'};
 function confusableSwap(t,w){
   if(t.length!==w.length) return false;
@@ -5101,6 +4512,26 @@ function confusableSwap(t,w){
     return CONFUSABLE.some(function(p){ return (p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a); });
   }
   return false;
+}
+// The one look-alike letter swapped, as [typed, wanted] (finals folded), when
+// that is the ONLY difference: the "Almost: ס not ש" label and ST.confusions.
+function lookAlikePair(typed,want){
+  var t=stripV(typed||'').replace(/\s+/g,''), w=stripV(want||'').replace(/\s+/g,'');
+  if(t.length!==w.length||t===w) return null;
+  var at=-1;
+  for(var i=0;i<w.length;i++){ if(t[i]!==w[i]){ if(at>-1) return null; at=i; } }
+  var a=FINAL_BASE[t[at]]||t[at], b=FINAL_BASE[w[at]]||w[at];
+  if(a===b) return null;
+  return CONFUSABLE.some(function(p){ return (p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a); })?[a,b]:null;
+}
+// Letter-pair counts, beside ST.mix's word pairs: {"ס|ש": 3}, pair sorted.
+function recordConfusion(pair){
+  if(!pair) return;
+  var k=[pair[0],pair[1]].sort().join('|');
+  ST.confusions=ST.confusions||{}; ST.confusions[k]=(ST.confusions[k]||0)+1;
+}
+function almostNote(pair){
+  return pair?'<span class="fs-note">Almost: <b lang="he" dir="rtl">'+esc(pair[1])+'</b> not <b lang="he" dir="rtl">'+esc(pair[0])+'</b></span>':'';
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -5292,7 +4723,7 @@ var VIEW='Today';
 // user has not asked for reduced motion; everywhere else they are instant.
 // The DOM update runs either way — the transition is decoration, never a gate.
 // Shown at the bottom of Me. Bump together with CACHE_VERSION in sw.js.
-var APP_BUILD='jw-v61';
+var APP_BUILD='jw-v62';
 var _rm=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
 function goTab(v){
   if(v===VIEW || !document.startViewTransition || (_rm&&_rm.matches)) return showView(v);
@@ -5368,17 +4799,20 @@ function freshList(){
   if(newPaused()) return [];
   var lv=activeLevel(), left=Math.max(0,CFG.newPerDay-newToday());
   if(!left) return [];
-  // Look-alikes arrive on different days (research §8d): a word waits while
-  // a neighbour is new today or still in its learning steps.
+  return freshPick(vocab.filter(function(w){ return w.level<=lv; }),left);
+}
+// The words to introduce from cands, most frequent first, at most `left`.
+// Look-alikes arrive on different days (research §8d): a word waits while
+// a neighbour is new today or still in its learning steps.
+function freshPick(cands,left){
   var t0=fsrsDayStart(Date.now());
   var busy=vocab.filter(function(w){
     var c=getCard(itemWord(w.he),'R');
     return c.reps>0&&(c.st==='learning'||c.st==='relearning'||c.f>=t0);
   });
   var out=[];
-  var cands=vocab.filter(function(w){
-    return w.level<=lv && getCard(itemWord(w.he),'R').reps===0;
-  }).sort(function(a,b){ return a.rank-b.rank; });   // most frequent first
+  cands=cands.filter(function(w){ return getCard(itemWord(w.he),'R').reps===0; })
+    .sort(function(a,b){ return a.rank-b.rank; });   // most frequent first
   for(var i=0;i<cands.length&&out.length<left;i++){
     var nb=neighbours(cands[i]);
     var clash=busy.concat(out).some(function(x){ return nb.indexOf(x)!==-1; });
@@ -5455,9 +4889,10 @@ function segBar(){
   return h+'</div>';
 }
 function exitRound(){
+  var back=ROUND.ctx?'Practice':'Today';
   ROUND.active=false; _cont=null;
   document.body.classList.remove('focus');
-  saveProgress(); renderToday(); showView('Today');
+  saveProgress(); renderToday(); showView(back);
 }
 function roundStep(){
   _cont=null;
@@ -5467,8 +4902,9 @@ function roundStep(){
   if(st.kind==='pattern'){ PAT.p=st.p; PAT.w=st.w||patternPickWord(st.p); st.w=PAT.w; PAT.answered=false; }
   else if(st.kind==='root'){ /* rootHTML sets ROOTQ */ }
   else ST.cur=st.w;
-  // Decided when shown, so a retest after a miss moves down the ramp.
-  st.fmt=st.kind==='type'?typeFormat(st.w):null;
+  // A test fixes the format (ff); a round decides it when shown, so a retest
+  // after a miss moves down the ramp.
+  if(!st.ff) st.fmt=st.kind==='type'?typeFormat(st.w):null;
   if(!document.body.classList.contains('focus')) window.scrollTo(0,0);   // BEFORE pinning
   document.body.classList.add('focus');
   var body=document.getElementById('todayBody');
@@ -5479,21 +4915,23 @@ function roundStep(){
           '<svg class="i"><use href="#i-close"/></svg></button>'+
         segBar()+
       '</div>'+
-      '<div class="focus-kind">'+STEP_LABEL[st.fmt||st.kind]+(st.retest?' · again':'')+'</div>'+
+      '<div class="focus-kind">'+((ROUND.ctx==='test'&&st.m)?TEST_LABEL[st.m]:(STEP_LABEL[st.fmt||st.kind]||''))+(st.retest?' · again':'')+'</div>'+
       '<div id="stepBody"></div>'+
     '</div>';
   var host=document.getElementById('stepBody');
   if(st.kind==='intro')   host.innerHTML=introHTML(st.w);
   if(st.kind==='mc')      host.innerHTML=mcHTML(st.w);
-  if(st.kind==='type')    host.innerHTML=st.fmt==='pick'?pickHTML(st.w):typeHTML(st.w,st.fmt==='tiles');
+  if(st.kind==='type')    host.innerHTML=st.fmt==='pick'?pickHTML(st.w):(st.fmt==='blank'?blankHTML(st.w):typeHTML(st.w,st.fmt==='tiles'));
   if(st.kind==='pattern') host.innerHTML=patternHTML(PAT.p,PAT.w);
-  if(st.kind==='root')    host.innerHTML=rootHTML(st.root);
+  if(st.kind==='root')    host.innerHTML=rootHTML(st.root,st.w);
+  if(st.kind==='match')   host.innerHTML=matchStepHTML(st.ws);
   kbSyncGo();
 }
 function roundNext(ok){
   var st=ROUND.steps[ROUND.i];
-  if(st) st.ok=(ok!==false);
-  if(st&&!st.retest&&(st.kind==='mc'||st.kind==='type'||st.kind==='pattern')){
+  if(st){ st.ok=(ok!==false); st.typed=ROUND.lastTyped||''; st.unsure=(st.kind==='type'&&st.fmt!=='pick'&&_unsure); }
+  // Subject sessions are chosen by the learner, so they do not steer pace().
+  if(st&&!st.retest&&!ROUND.ctx&&(st.kind==='mc'||st.kind==='type'||st.kind==='pattern')){
     ST.firsts=(ST.firsts||[]).concat([ok!==false]).slice(-40);
   }
   if(ok===false) ROUND.wrong++; else ROUND.right++;
@@ -5502,7 +4940,11 @@ function roundNext(ok){
     // correction + delayed re-test). Once per item, at most 4 per round.
     if(!st.retest && (st.kind==='mc'||st.kind==='type'||st.kind==='pattern') && (ROUND.retests||0)<4){
       var at=Math.min(ROUND.steps.length, ROUND.i+1+3+Math.floor(Math.random()*3));
-      ROUND.steps.splice(at,0,{kind:st.kind,w:st.w,p:st.p,retest:true});
+      var re={kind:st.kind,w:st.w,p:st.p,retest:true,m:st.m,root:st.root};
+      if(st.ff){ re.ff=1; re.fmt=st.fmt; }
+      // In a test only the first attempt is graded; the re-ask is for learning.
+      if(ROUND.ctx==='test') re.dim=null; else if(st.dim!==undefined) re.dim=st.dim;
+      ROUND.steps.splice(at,0,re);
       ROUND.retests=(ROUND.retests||0)+1;
     }
     ROUND.misses=ROUND.misses||[];
@@ -5529,19 +4971,6 @@ function troubleWords(){
   });
   return out.sort(function(a,b){ return b.score-a.score; }).map(function(o){ return o.w; });
 }
-function startTrouble(){
-  var ws=troubleWords().slice(0,10);
-  if(!ws.length) return;
-  var steps=[];
-  ws.forEach(function(w){
-    steps.push({kind:'mc',w:w});
-    if(getCard(itemWord(w.he),'P').reps>0) steps.push({kind:'type',w:w});
-  });
-  // Recognise first, then each word typed later, so the pair has been seen.
-  steps=steps.filter(function(s){return s.kind==='mc';}).concat(steps.filter(function(s){return s.kind==='type';})).slice(0,ROUND_LEN+4);
-  ROUND={active:true,steps:steps,i:0,right:0,wrong:0,started:Date.now()};
-  showView('Today'); roundStep();
-}
 
 // "Review these again": a short round of exactly the words missed.
 var _lastMisses=[];
@@ -5553,7 +4982,713 @@ function reviewMisses(){
   ROUND={active:true,steps:steps,i:0,right:0,wrong:0,started:Date.now()};
   showView('Today'); roundStep();
 }
+// ══════════════════════════════════════════════════════════════
+// SUBJECT TESTS AND LEARN SESSIONS (2026-10-27)
+// ══════════════════════════════════════════════════════════════
+// A second way into the same engine: pick a subject, mix formats, run it on
+// the round screen. Spec: ui-context/TESTS_SUBJECT_STUDY_SPEC.md, with the
+// Step 0 corrections in HANDOVER §5. Test = Practice's scheduling rules,
+// cold, no hints, met words only; Learn = a round's rules on one subject.
+
+// A subject is {type, ids}: cat (category), root, level, gram (f<level> =
+// sentence frames of that level, b:<binyan>), letters, weak.
+function subjectKey(sj){ return sj.type+':'+sj.ids.slice().sort().join('+'); }
+function subjectName(sj){
+  return sj.ids.map(function(id){
+    if(sj.type==='level') return 'Level '+id;
+    if(sj.type==='root') return id;
+    if(sj.type==='gram') return id.charAt(0)==='f'?'Sentence frames · Level '+id.slice(1):(BINYAN_EN[id.slice(2)]||id.slice(2));
+    if(sj.type==='weak') return 'Weak words';
+    if(sj.type==='letters') return id.split('|').join(' / ');
+    return id;
+  }).join(' + ');
+}
+var BINYAN_EN={"pa'al":"Verbs · pa'al","pi'el":"Verbs · pi'el","hif'il":"Verbs · hif'il","hitpa'el":"Verbs · hitpa'el","nif'al":"Verbs · nif'al"};
+function framePatterns(lv){ return PATTERNS.filter(function(p){ return p.level===lv; }); }
+// Every word in a subject, met or not (the sheet counts the unmet ones).
+function subjectWords(sj){
+  var out=[], seen={};
+  function add(w){ if(w&&!seen[w.he]){ seen[w.he]=1; out.push(w); } }
+  sj.ids.forEach(function(id){
+    if(sj.type==='cat') vocab.forEach(function(w){ if(w.cat===id) add(w); });
+    else if(sj.type==='level') vocab.forEach(function(w){ if(levelOf(w)===+id) add(w); });
+    else if(sj.type==='root') (rootFamilies()[id]||[]).forEach(add);
+    else if(sj.type==='gram'){
+      if(id.charAt(0)==='f') framePatterns(+id.slice(1)).forEach(function(p){ patternFillers(p).forEach(add); });
+      else vocab.forEach(function(w){ var a=ANN[w.he]; if(a&&a.binyan===id.slice(2)) add(w); });
+    }
+    else if(sj.type==='weak') weakWords().forEach(add);
+    else if(sj.type==='letters') letterPairWords(id).forEach(add);
+  });
+  return out;
+}
+// Weak words: leeches and mix-ups (troubleWords), 3+ lapses, or missed in
+// either of the last two tests.
+function weakWords(){
+  var out=troubleWords().slice(), seen={};
+  out.forEach(function(w){ seen[w.he]=1; });
+  var lastTests={}, sids=[];
+  (ST.studyLog||[]).forEach(function(e){ if(e.s.charAt(0)==='t'&&sids.indexOf(e.s)<0) sids.push(e.s); });
+  // A leech is also a word missed in more than 4 tests (spec §6).
+  var missTests={};
+  (ST.studyLog||[]).forEach(function(e){
+    if(e.ok||e.r||e.s.charAt(0)!=='t') return;
+    var m=missTests[e.he]=missTests[e.he]||[]; if(m.indexOf(e.s)<0) m.push(e.s);
+  });
+  sids=sids.slice(-2);
+  (ST.studyLog||[]).forEach(function(e){ if(!e.ok&&!e.r&&(sids.indexOf(e.s)>-1||(missTests[e.he]||[]).length>4)) lastTests[e.he]=1; });
+  vocab.forEach(function(w){
+    if(seen[w.he]) return;
+    var id=itemWord(w.he);
+    if(Math.max(getCard(id,'R').lapses||0,getCard(id,'P').lapses||0)>=3||lastTests[w.he]){ seen[w.he]=1; out.push(w); }
+  });
+  return out.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; });
+}
+// ── Look-alike letters ──
+// Minimal pairs: two words that differ only by one look-alike letter (כל/קל,
+// מחר/מהר). About 38 in the vocabulary; a pair becomes a subject once both
+// words are recognised (R graduated, research §8d: introduce apart, test
+// together), and items pit each against its partner.
+var _minPairs=null;
+function minimalPairs(){
+  if(_minPairs) return _minPairs;
+  var by={}; _minPairs=[];
+  vocab.forEach(function(w){ var n=lureSkel(w).length; (by[n]=by[n]||[]).push(w); });
+  Object.keys(by).forEach(function(n){
+    var g=by[n];
+    for(var i=0;i<g.length;i++) for(var j=i+1;j<g.length;j++){
+      var p=lookAlikePair(g[i].he,g[j].he);
+      if(p) _minPairs.push({a:g[i],b:g[j],k:[p[0],p[1]].sort().join('|')});
+    }
+  });
+  return _minPairs;
+}
+function metPairs(id){ return minimalPairs().filter(function(p){ return (!id||p.k===id)&&graduated(itemWord(p.a.he),'R')&&graduated(itemWord(p.b.he),'R'); }); }
+function letterPairWords(id){ var out=[]; metPairs(id).forEach(function(p){ out.push(p.a,p.b); }); return out; }
+function letterPartner(w,id){ var p=metPairs(id).filter(function(p){ return p.a===w||p.b===w; })[0]; return p?(p.a===w?p.b:p.a):null; }
+// What tells the two apart, in one line.
+var LETTER_CUE={'ב|כ':'ב has a foot at the bottom right; כ is round','ח|כ':'Both can say kh: ח stands on two legs, כ is a rounded hook',
+  'ס|ש':'Both can say s: ס is a closed circle, ש has three arms','ט|ת':'Both say t: ט curls in at the top, ת has a foot on the left',
+  'א|ע':'Both are near-silent: א is a slanted bar, ע a forked V','כ|ק':'Both say k: ק drops a leg below the line',
+  'ב|ו':'Both can say v: ב is a box, ו a single stroke','ד|ר':'ד has a corner sticking out at the top right; ר is rounded',
+  'ה|ח':'ה has a gap at the top left; ח is closed','ו|ז':'ז has a cap across the top; ו only hooks to the left'};
+
+function isMet(w){ return getCard(itemWord(w.he),'R').reps>0; }
+// Weakest first: lowest chance of recall on R, then P, more lapses first.
+function weakKey(w){
+  var now=Date.now(), id=itemWord(w.he), r=getCard(id,'R'), p=getCard(id,'P');
+  function rr(c){ return c.st==='review'?fsrsR(Math.max(0,(now-c.last)/864e5),c.s):(c.reps?0.3:0); }
+  return rr(r)+0.5*rr(p)-0.1*Math.max(r.lapses||0,p.lapses||0)-((ST.mix||{})[w.he]?0.2:0);
+}
+function shuffled(a){ return a.slice().sort(function(){ return Math.random()-.5; }); }
+
+// The formats a test can mix. P formats are typed; the rest recognise.
+var TEST_MODES=[
+  {id:'mc',   en:'Choose meaning'},
+  {id:'type', en:'Type the Hebrew'},
+  {id:'pick', en:'Choose from similar'},
+  {id:'blank',en:'Fill the blank'},
+  {id:'root', en:'Root link'},
+  {id:'match',en:'Match (warm-up)'}
+];
+var TEST_LABEL={mc:'choose the meaning',pick:'choose from similar',type:'type the Hebrew',
+  blank:'fill the blank',root:'root link',match:'match · warm-up'};
+function isTypedMode(m){ return m==='type'||m==='blank'; }
+function wordFrame(sj,w){
+  if(sj.type!=='gram') return null;
+  var ps=[];
+  sj.ids.forEach(function(id){ if(id.charAt(0)==='f') ps=ps.concat(framePatterns(+id.slice(1))); });
+  ps=ps.filter(function(p){ return patternFillers(p).indexOf(w)>-1; });
+  return ps.length?ps[Math.floor(Math.random()*ps.length)]:null;
+}
+// Can this word be asked in this format? Typing needs the R card graduated
+// (the P unlock); a root link needs a met relative.
+function modeFits(m,w,sj){
+  var id=itemWord(w.he);
+  if(m==='mc'||m==='pick') return true;
+  if(m==='type') return graduated(id,'R');
+  if(m==='blank') return graduated(id,'R')&&(!!wordFrame(sj,w)||/___/.test(w.sentence||''));
+  if(m==='root'){ var f=familyOf(w.he); return f.length>0&&f.some(isMet); }
+  return false;
+}
+// Which chosen formats this subject can supply at all, for the chips.
+function subjectModes(sj,pool){
+  pool=pool||subjectWords(sj).filter(isMet);
+  var out={};
+  TEST_MODES.forEach(function(m){
+    out[m.id]=m.id==='match'?pool.length>=5:pool.some(function(w){ return modeFits(m.id,w,sj); });
+  });
+  return out;
+}
+function testPoolFor(sj,words){
+  var pool=subjectWords(sj).filter(isMet);
+  if(words==='weak'){ var wk={}; weakWords().forEach(function(w){ wk[w.he]=1; }); pool=pool.filter(function(w){ return wk[w.he]; }); }
+  return pool;
+}
+// buildTest: met words of the subject, weakest first, one item each,
+// rotating through the chosen formats; at least half typed when typing is
+// chosen (production transfers to recognition, not the reverse); typed before
+// any multiple choice of the same word and 4+ apart; never 3 of a format in a
+// row; sub-groups interleaved.
+function buildTest(sj,o){
+  var modes=(o.modes||[]).filter(function(m){ return m!=='match'; });
+  var N=Math.min(o.len||40,40);
+  var pool=testPoolFor(sj,o.words);
+  if(!pool.length||!modes.length) return [];
+  var ranked=pool.slice().sort(function(a,b){ return weakKey(a)-weakKey(b); });
+  // With typing chosen, half the words come from those that can be typed
+  // (weakest first), or the weakest would all be words still in learning.
+  if(modes.indexOf('type')>-1){
+    var canType=ranked.filter(function(w){ return modeFits('type',w,sj); }).slice(0,Math.ceil(Math.min(N,pool.length)/2));
+    ranked=canType.concat(ranked.filter(function(w){ return canType.indexOf(w)<0; }));
+  }
+  var nWeak=Math.ceil(N*0.6);
+  var words=ranked.slice(0,nWeak).concat(shuffled(ranked.slice(nWeak))).slice(0,N);
+  var items=[], rot=0, has={};
+  function add(w,m){ items.push({w:w,m:m}); (has[w.he]=has[w.he]||[]).push(m); }
+  function fits(w){ return modes.filter(function(m){ return modeFits(m,w,sj); }); }
+  words.forEach(function(w){ var av=fits(w); if(av.length) add(w,av[(rot++)%av.length]); });
+  // A small pool: each word once more at most, in a format it has not had.
+  words.forEach(function(w){
+    if(items.length>=N||!has[w.he]) return;
+    var av=fits(w).filter(function(m){ return has[w.he].indexOf(m)<0&&!(isTypedMode(m)&&has[w.he].some(isTypedMode)); });
+    if(av.length) add(w,av[(rot++)%av.length]);
+  });
+  if(modes.indexOf('type')>-1){
+    var need=Math.ceil(items.length/2), typed=items.filter(function(it){ return isTypedMode(it.m); }).length;
+    items.forEach(function(it){
+      if(typed>=need||isTypedMode(it.m)||has[it.w.he].some(isTypedMode)||!modeFits('type',it.w,sj)) return;
+      has[it.w.he].splice(has[it.w.he].indexOf(it.m),1,'type'); it.m='type'; typed++;
+    });
+  }
+  var group=function(w){ return sj.type==='root'?rootOf(w.he):(sj.type==='cat'&&sj.ids.length>1?w.cat:(rootOf(w.he)||w.cat)); };
+  // Greedy with randomness, retried; the order with the fewest broken rules wins.
+  function order(){
+    var rest=shuffled(items), out=[], bad=0;
+    while(rest.length){
+      var best=0, bestSc=-1e9, n=out.length;
+      rest.forEach(function(it,i){
+        var sc=Math.random();
+        if(n>=2&&out[n-1].m===it.m&&out[n-2].m===it.m) sc-=100;
+        for(var k=Math.max(0,n-4);k<n;k++) if(out[k].w===it.w) sc-=100;
+        if(!isTypedMode(it.m)&&rest.some(function(x){ return x!==it&&x.w===it.w&&isTypedMode(x.m); })) sc-=1000;
+        if(n&&group(out[n-1].w)===group(it.w)) sc-=0.5;
+        if(sc>bestSc){ bestSc=sc; best=i; }
+      });
+      if(bestSc<-50) bad+=Math.round(-bestSc/100);
+      out.push(rest.splice(best,1)[0]);
+    }
+    return {out:out,bad:bad};
+  }
+  var o1=order();
+  for(var tries=0;o1.bad&&tries<40;tries++){ var o2=order(); if(o2.bad<o1.bad) o1=o2; }
+  // A repeat that still lands within 4 items of its pair is dropped (only a
+  // pool of 2–3 words can force this): a shorter test beats one that shows
+  // the answer straight back.
+  var lastAt={}, out=[];
+  o1.out.forEach(function(it){
+    var p=lastAt[it.w.he];
+    if(p!==undefined&&out.length-p<4) return;
+    lastAt[it.w.he]=out.length; out.push(it);
+  });
+  var steps=out.map(function(it){ return testStep(it.w,it.m,sj); });
+  if((o.modes||[]).indexOf('match')>-1&&pool.length>=5) steps.unshift({kind:'match',m:'match',dim:null,ws:shuffled(pool).slice(0,5)});
+  return steps;
+}
+// One item as a round step. dim: the card the format may touch (R for
+// multiple choice, P for typed); null = logged only.
+function testStep(w,m,sj){
+  if(m==='mc') return {kind:'mc',w:w,m:m,dim:'R'};
+  if(m==='pick'){
+    var st={kind:'type',fmt:'pick',ff:1,w:w,m:m,dim:'R'};
+    if(sj.type==='letters') sj.ids.some(function(id){ return (st.lure=letterPartner(w,id)); });
+    return st;
+  }
+  if(m==='type') return {kind:'type',fmt:'type',ff:1,w:w,m:m,dim:'P'};
+  if(m==='blank'){
+    var p=wordFrame(sj,w);
+    return p?{kind:'pattern',p:p,w:w,m:m}:{kind:'type',fmt:'blank',ff:1,w:w,m:m,dim:'P'};
+  }
+  if(m==='root') return {kind:'root',root:rootOf(w.he),w:w,m:m,dim:null};
+}
+// Route a graded answer to the card the step allows (see testStep).
+function gradeStep(id,dim,grade){
+  var st=ROUND.active&&ROUND.steps[ROUND.i];
+  if(st&&st.dim!==undefined){
+    if(st.dim===null){
+      var c=sessionCtx(); if(c==='test'||c==='learn') logStudy(id,null,!(grade===false||grade==='again'),false);
+      return getCard(id,dim);
+    }
+    dim=st.dim;
+  }
+  return reviewItem(id,dim,grade);
+}
+// Fill the blank from the word's own example sentence: type the missing word.
+function blankHTML(w){
+  _kbSubmit=checkType; _hint=0; _unsure=false;
+  var he=(w.sentence||'').split('___');
+  return '<div class="fs-prompt">'+
+      '<div class="fs-he sm" lang="he" dir="rtl">'+esc(he[0])+'<span class="fs-gap">___</span>'+esc(he[1]||'')+'</div>'+
+      '<div class="fs-en" style="font-size:20px" lang="en" dir="ltr">'+esc(w.sentenceEn||'')+'</div>'+
+      '<div class="fs-note" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
+      (sessionCtx()==='test'?'':'<button class="hint-btn" id="hintBtn" onclick="typeHint()">Hint</button>')+
+      '<div class="hint-out" id="hintOut" lang="he" dir="rtl"></div>'+
+    '</div>'+
+    '<input class="fs-field" id="ti" lang="he" dir="rtl" inputmode="none" readonly tabindex="-1" '+
+      'autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" '+
+      'oninput="kbSyncGo()" onkeydown="if(event.key===\'Enter\')checkType()">'+
+    '<div class="fs-fb" id="tfb"></div>'+
+    buildKbd('checkType()',null,true);
+}
+// Match: an untimed warm-up, five pairs, logged only and never graded.
+var MT={ws:[],sel:null,left:0};
+function matchStepHTML(ws){
+  MT={ws:ws,sel:null,left:ws.length};
+  var he=shuffled(ws), en=shuffled(ws), h='';
+  for(var i=0;i<ws.length;i++){
+    h+='<button class="fs-opt he-opt" data-i="'+ws.indexOf(he[i])+'" lang="he" dir="rtl" onclick="mtTap(this)">'+esc(dHe(he[i]))+'</button>'+
+       '<button class="fs-opt" data-i="'+ws.indexOf(en[i])+'" lang="en" dir="ltr" onclick="mtTap(this)">'+esc(en[i].en)+'</button>';
+  }
+  return '<div class="fs-prompt"><div class="fs-en" style="font-size:20px">Pair each word with its meaning</div></div>'+
+    '<div class="mt-grid">'+h+'</div><div class="fs-fb" id="mtfb"></div><div class="fs-row"></div>';
+}
+function mtTap(b){
+  if(b.disabled) return;
+  var fb=document.getElementById('mtfb'); if(fb) fb.innerHTML='';
+  var heSide=b.getAttribute('lang')==='he';
+  if(!MT.sel||MT.sel===b||(MT.sel.getAttribute('lang')==='he')===heSide){
+    if(MT.sel) MT.sel.classList.remove('sel');
+    MT.sel=MT.sel===b?null:b; if(MT.sel) b.classList.add('sel');
+    return;
+  }
+  var a=MT.sel; a.classList.remove('sel'); MT.sel=null;
+  var w=MT.ws[+b.getAttribute('data-i')];
+  if(a.getAttribute('data-i')!==b.getAttribute('data-i')){ if(fb) fb.innerHTML='<span class="fs-note">not a pair — try again</span>'; return; }
+  a.disabled=b.disabled=true; a.classList.add('correct'); b.classList.add('correct');
+  logStudy(itemWord(w.he),null,true,false);
+  if(--MT.left===0){ ST.answered=true; hold(function(){ advance(true); }); var host=document.getElementById('stepBody'); showCont(host&&host.querySelector('.fs-row')); }
+}
+
+// Results: lists, not a score. Missed (with the attempt), Shaky (right but
+// "Not sure"), Solid. Only first attempts count; a word asked twice is
+// missed if either attempt was.
+var _subjLast=null;
+function subjectDone(){
+  var R=ROUND;
+  R.active=false; _cont=null;
+  document.body.classList.remove('focus');
+  bumpDay();
+  var firsts=R.steps.filter(function(s){ return !s.retest&&s.kind!=='match'&&s.kind!=='intro'&&s.ok!==undefined&&s.w; });
+  var by={}, order=[];
+  firsts.forEach(function(s){
+    var k=s.w.he;
+    if(!by[k]){ by[k]={w:s.w,ok:true,unsure:false,typed:'',st:s}; order.push(k); }
+    if(!s.ok){ by[k].ok=false; by[k].st=s; if(s.typed) by[k].typed=s.typed; }
+    else if(s.unsure) by[k].unsure=true;
+  });
+  var miss=[], shaky=[], solid=[];
+  order.forEach(function(k){ var o=by[k]; (o.ok?(o.unsure?shaky:solid):miss).push(o); });
+  var right=firsts.filter(function(s){ return s.ok; }).length;
+  if(R.ctx==='test'&&R.sid.charAt(0)==='t'){
+    ST.subjects=ST.subjects||{};
+    ST.subjects[subjectKey(R.subj)]={t:Date.now(),n:firsts.length,ok:right};
+  }
+  saveProgress();
+  _subjLast={subj:R.subj,opts:R.opts,ctx:R.ctx,miss:miss.map(function(o){ return o.st; })};
+  function list(title,arr,open){
+    if(!arr.length) return '';
+    return '<details class="sd-list"'+(open?' open':'')+'><summary class="done-miss-h">'+title+' <span class="num">'+arr.length+'</span></summary>'+
+      arr.map(function(o){
+        return '<div class="dm-row"><div class="dm-l">'+
+          (o.typed?'<span class="dm-typed" lang="he" dir="rtl">'+esc(o.typed)+'</span>':'')+
+          '<span class="dm-he" lang="he" dir="rtl">'+esc(dHe(o.w))+'</span></div>'+
+          '<span class="dm-en">'+esc(o.w.en)+'</span></div>';
+      }).join('')+'</details>';
+  }
+  var test=R.ctx==='test', retry=R.sid.charAt(0)==='r';
+  document.getElementById('todayBody').innerHTML=
+    '<div class="sd-wrap">'+
+      '<div class="sd-head"><div class="sd-t">'+esc(subjectName(R.subj))+' · '+(retry?'Retry':(test?'Test':'Learn'))+'</div>'+
+        '<div class="sd-n"><span class="num">'+right+'</span> of <span class="num">'+firsts.length+'</span>'+(test?'':' right first time')+'</div></div>'+
+      list('Missed',miss,true)+list('Shaky',shaky,true)+list('Solid',solid,false)+
+      '<div class="sd-actions">'+
+        (miss.length?'<button class="btn" onclick="retryMisses()">Retry misses</button>'+
+          (retry?'':'<button class="btn-quiet" id="sdFwd" onclick="bringForward()">Bring misses forward</button>'):'')+
+        (test?'<button class="'+(miss.length?'btn-quiet':'btn')+'" onclick="studySubject()">Study this subject</button>'
+             :'<button class="'+(miss.length?'btn-quiet':'btn')+'" onclick="studySubject()">Another 12</button>')+
+        '<button class="btn-quiet" onclick="subjectExit()">Done</button>'+
+      '</div>'+
+    '</div>';
+  // Results draw where rounds draw (Today's view), but a session always
+  // starts from Practice, so that is the tab shown as current.
+  var tt=document.getElementById('tabToday'), tp=document.getElementById('tabPractice');
+  if(tt) tt.classList.remove('on'); if(tp) tp.classList.add('on');
+}
+// Retry misses: the same items again, now, logged only and never scheduled.
+function retryMisses(){
+  if(!_subjLast||!_subjLast.miss.length) return;
+  var steps=_subjLast.miss.map(function(s){
+    var c={kind:s.kind,w:s.w,p:s.p,root:s.root,m:s.m,fmt:s.fmt,ff:s.ff,ws:s.ws,dim:null};
+    if(!c.ff&&c.kind==='type'){ c.ff=1; c.fmt='type'; }
+    return c;
+  });
+  ROUND={active:true,ctx:'test',sid:'r'+Date.now().toString(36),subj:_subjLast.subj,opts:_subjLast.opts,
+    steps:steps,i:0,right:0,wrong:0,started:Date.now()};
+  showView('Today'); roundStep();
+}
+// Bring misses forward: due now, so they lead the next Start round. The card
+// is otherwise untouched (no grade, no shape change).
+function bringForward(){
+  if(!_subjLast) return;
+  var n=0, now=Date.now();
+  _subjLast.miss.forEach(function(s){
+    if(!s.w||s.dim===null) return;
+    var dim=s.dim||(s.kind==='mc'?'R':'P'), k=itemWord(s.w.he)+'|'+dim, c=ST.cards[k];
+    if(c&&c.reps&&c.due>now){ c.due=now; n++; }
+  });
+  saveProgress(); renderHead();
+  var b=document.getElementById('sdFwd');
+  if(b){ b.disabled=true; b.textContent=n?(n+' will lead your next round'):'Already due'; }
+}
+function studySubject(){
+  if(!_subjLast) return;
+  if(!startSubject('learn',_subjLast.subj,{})) subjectExit();
+}
+function subjectExit(){ renderToday(); showView('Practice'); }
+
+// ── Subject lists, for the hub and the builder ──
+var SUBJ_TYPES=[{id:'cat',en:'Categories'},{id:'root',en:'Roots'},{id:'level',en:'Levels'},{id:'gram',en:'Grammar'},{id:'letters',en:'Letters'}];
+function subjectList(type){
+  var out=[];
+  if(type==='cat') CATS.slice(1).forEach(function(c){ out.push({type:'cat',ids:[c]}); });
+  if(type==='root') Object.keys(rootFamilies()).forEach(function(r){ out.push({type:'root',ids:[r]}); });
+  if(type==='level') [1,2,3,4,5,6].forEach(function(n){ out.push({type:'level',ids:[n]}); });
+  if(type==='gram'){
+    [1,2,3,4,5,6].forEach(function(n){ if(framePatterns(n).length) out.push({type:'gram',ids:['f'+n]}); });
+    Object.keys(BINYAN_EN).forEach(function(b){ out.push({type:'gram',ids:['b:'+b]}); });
+  }
+  if(type==='letters') letterSubjects().forEach(function(id){ out.push({type:'letters',ids:[id]}); });
+  return out.map(function(sj){
+    var ws=subjectWords(sj), met=ws.filter(isMet);
+    var sec=ws.filter(function(w){ var s=wordState(w.he); return s==='secure'||s==='mastered'; }).length;
+    return {sj:sj,total:ws.length,met:met.length,sec:sec};
+  });
+}
+// Pairs with a met minimal pair, the ones you actually confuse first.
+function letterSubjects(){
+  var ks=[]; metPairs().forEach(function(p){ if(ks.indexOf(p.k)<0) ks.push(p.k); });
+  var c=ST.confusions||{};
+  return ks.sort(function(a,b){ return (c[b]||0)-(c[a]||0); });
+}
+
+// ── The Practice layer as a sheet (builder, subject sheet) ──
+function openLayer(title,html){
+  if(!document.body.classList.contains('pfocus')){
+    _prScroll=window.scrollY; window.scrollTo(0,0);          // BEFORE pinning (trap 18)
+    document.body.classList.add('focus','pfocus');
+  }
+  _cont=null;
+  var t=document.getElementById('prTitle'); if(t) t.textContent=title;
+  var qc=document.getElementById('quizContent');
+  qc.classList.remove('fsq'); qc.setAttribute('data-mode','sheet');
+  qc.innerHTML=html; qc.scrollTop=0;
+}
+// Re-render in place, keeping the scroll position (a chip tap is not a new screen).
+function relayer(html){ var qc=document.getElementById('quizContent'), y=qc.scrollTop; qc.innerHTML=html; qc.scrollTop=y; }
+
+// ── Test builder ──
+// Subject, formats, length, words. Remembered per subject (ST.testPrefs).
+var TB={type:'cat',ids:[],preset:false,modes:null,len:20,words:'all'};
+var TB_DEFAULT=['mc','type','pick','blank','root'];
+var _tbList=[];
+function openTestBuilder(sj){
+  TB={type:sj?sj.type:'cat',ids:sj?sj.ids.slice():[],preset:!!sj};
+  tbPrefs();
+  openLayer('Test',testBuilderHTML());
+}
+function tbSubject(){ return TB.ids.length?{type:TB.type,ids:TB.ids}:null; }
+// A subject's saved setup wins; otherwise the choices already made on this
+// screen stand (adding a second subject must not reset the formats).
+function tbPrefs(){
+  var sj=tbSubject(), p=sj&&(ST.testPrefs||{})[subjectKey(sj)];
+  if(p&&p.modes){ TB.modes=p.modes.slice(); TB.len=p.len; TB.words=p.words; return; }
+  if(TB.len===undefined){ TB.modes=null; TB.len=20; TB.words='all'; }
+}
+function tbModes(av){ return (TB.modes||TB_DEFAULT).filter(function(m){ return av[m]; }); }
+var TB_WHY={type:'nothing here is ready to type yet — recognise it first',
+  blank:'nothing here is ready to type yet',root:'no root families here',match:'needs 5 words you have met'};
+function chip(on,label,fn,off,cls){
+  return '<button class="chip'+(on?' on':'')+(cls?' '+cls:'')+'"'+(off?' disabled':'')+' aria-pressed="'+(on?'true':'false')+'" onclick="'+fn+'">'+
+    (on?'<svg class="i" aria-hidden="true"><use href="#i-check"/></svg>':'')+label+'</button>';
+}
+// Full-width segmented control (Me's .segc), neutral when on: the accent
+// belongs to the screen's primary button.
+function segcHTML(items,cur,fn,label){
+  return '<div class="segc full plain" role="group" aria-label="'+esc(label)+'">'+items.map(function(t){
+    return '<button class="'+(cur===t.id?'on':'')+'" aria-pressed="'+(cur===t.id)+'" onclick="'+fn+'(\''+t.id+'\')">'+esc(t.en)+'</button>';
+  }).join('')+'</div>';
+}
+function testBuilderHTML(){
+  var sj=tbSubject(), pool=sj?testPoolFor(sj,TB.words):[], allMet=sj?testPoolFor(sj,'all'):[];
+  var av=sj?subjectModes(sj,pool):{}, modes=tbModes(av), h='';
+  if(TB.preset){
+    h+='<div class="tb-subj"><div class="sd-t">'+esc(subjectName(sj))+'</div>'+
+       '<div class="sd-n"><span class="num">'+allMet.length+'</span> words met</div></div>';
+  } else {
+    h+='<div class="tb-sec"><div class="tb-h">Subject</div>'+
+      segcHTML(SUBJ_TYPES.filter(function(t){ return t.id!=='letters'; }),TB.type,'tbType','Subject type');
+    _tbList=subjectList(TB.type).filter(function(s){ return s.met>0; });
+    h+=_tbList.length?'<div class="tb-chips tb-many">'+_tbList.map(function(s,i){
+        var on=TB.ids.indexOf(s.sj.ids[0])>-1;
+        return chip(on,'<span'+(TB.type==='root'?' lang="he" dir="rtl"':'')+'>'+esc(subjectName(s.sj))+'</span> <span class="num chip-n">'+s.met+'</span>','tbPick('+i+')');
+      }).join('')+'</div>'
+      :'<div class="group-f">No words met here yet.</div>';
+    h+='</div>';
+  }
+  var why=[];
+  h+='<div class="tb-sec"><div class="tb-h">Formats</div><div class="tb-chips">'+
+    TEST_MODES.map(function(m){
+      var ok=!!av[m.id]; if(sj&&!ok&&TB_WHY[m.id]) why.push(m.en+': '+TB_WHY[m.id]);
+      return chip(ok&&modes.indexOf(m.id)>-1,esc(m.en),'tbMode(\''+m.id+'\')',!ok);
+    }).join('')+'</div>'+
+    (why.length?'<div class="tb-why">'+why.map(esc).join('<br>')+'</div>':'')+'</div>';
+  var mx=Math.min(pool.length*2,40);
+  h+='<div class="tb-sec"><div class="tb-h">Length</div><div class="tb-chips">'+
+    [10,20,30,0].map(function(n){ return chip(TB.len===n,n?(''+n):'All','tbLen('+n+')'); }).join('')+'</div>'+
+    (sj&&pool.length&&(TB.len===0||TB.len>mx)?'<div class="tb-why">'+(TB.len===0?'All':'This subject')+' gives up to '+Math.min(TB.len||40,mx)+' questions</div>':'')+'</div>';
+  var nWeak=sj?testPoolFor(sj,'weak').length:0;
+  h+='<div class="tb-sec"><div class="tb-h">Words</div><div class="tb-chips">'+
+    chip(TB.words==='all','All met','tbWords(\'all\')')+
+    chip(TB.words==='weak','Weak only'+(sj?' <span class="num chip-n">'+nWeak+'</span>':''),'tbWords(\'weak\')',sj&&!nWeak)+'</div></div>';
+  var graded=modes.filter(function(m){ return m!=='match'; });
+  var can=sj&&pool.length>=2&&graded.length;
+  var msg=!sj?'Choose a subject':(pool.length<2?(TB.words==='weak'?'Fewer than 2 weak words here':'You need 2 met words here to test')
+    :(!modes.length?'Choose a format':(!graded.length?'Match is only a warm-up: add a format':'')));
+  h+='<div class="tb-go">'+(msg?'<div class="tb-why">'+esc(msg)+'</div>':'')+
+    '<button class="btn" onclick="tbStart()"'+(can?'':' disabled')+'>Start test</button></div>';
+  return h;
+}
+function tbType(t){ if(TB.type===t) return; TB.type=t; TB.ids=[]; tbPrefs(); relayer(testBuilderHTML()); }
+function tbPick(i){
+  var s=_tbList[i]; if(!s) return;
+  var id=s.sj.ids[0], k=TB.ids.indexOf(id);
+  if(k>-1) TB.ids.splice(k,1); else TB.ids.push(id);
+  tbPrefs(); relayer(testBuilderHTML());
+}
+function tbMode(m){
+  var cur=(TB.modes||TB_DEFAULT).slice(), k=cur.indexOf(m);
+  if(k>-1) cur.splice(k,1); else cur.push(m);
+  TB.modes=cur; relayer(testBuilderHTML());
+}
+function tbLen(n){ TB.len=n; relayer(testBuilderHTML()); }
+function tbWords(w){ TB.words=w; relayer(testBuilderHTML()); }
+function tbStart(){
+  var sj=tbSubject(); if(!sj) return;
+  var av=subjectModes(sj,testPoolFor(sj,TB.words)), modes=tbModes(av);
+  var o={modes:modes,len:TB.len||40,words:TB.words};
+  ST.testPrefs=ST.testPrefs||{};
+  ST.testPrefs[subjectKey(sj)]={modes:(TB.modes||TB_DEFAULT).slice(),len:TB.len,words:TB.words};
+  saveProgress();
+  closePractice();
+  if(!startSubject('test',sj,o)) openTestBuilder(sj);
+}
+
+// ── The hub ──
+var HUB={type:'cat'}, _hubList=[];
+function subjectLabel(sj){
+  if(sj.type==='root') return '<span lang="he" dir="rtl" class="sj-he">'+esc(sj.ids[0].split('־').join(' · '))+'</span>';
+  return esc(subjectName(sj));
+}
+// A root family has no English name: the gloss of its most frequent word.
+function subjectSub(sj){
+  if(sj.type==='root'){ var f=(rootFamilies()[sj.ids[0]]||[]).slice().sort(function(a,b){ return a.rank-b.rank; }); return f[0]?f[0].en:''; }
+  if(sj.type==='level'){ var l=LEVELS[+sj.ids[0]]; return l?l.sub:''; }
+  if(sj.type==='gram'&&sj.ids[0].charAt(0)==='f') return framePatterns(+sj.ids[0].slice(1)).map(function(p){ return p.en.replace(/\s*_+\s*\??/g,' … ').replace(/\s+/g,' ').trim(); }).slice(0,2).join(' · ');
+  return '';
+}
+// The Today bar, thin: Secure, then met, filling from the right. Position and
+// lightness, never hue (Ledger §6).
+function sjBar(s){
+  var t=s.total||1;
+  return '<span class="t-bar sj-bar" aria-hidden="true"><i class="met" style="transform:scaleX('+(s.met/t).toFixed(4)+')"></i>'+
+    '<i class="sec" style="transform:scaleX('+(s.sec/t).toFixed(4)+')"></i></span>';
+}
+function hubHTML(){
+  var list=subjectList(HUB.type);
+  // Subjects you have started first, then by size.
+  if(HUB.type==='cat'||HUB.type==='root') list.sort(function(a,b){ return (b.met>0)-(a.met>0)||b.met-a.met||b.total-a.total; });
+  _hubList=list;
+  // A long list folds the subjects not started yet, so Tests and Tools stay near.
+  var cut=list.length;
+  if(list.length>8&&!HUB.more){ var started=list.filter(function(s){ return s.met>0; }).length; if(started<list.length) cut=Math.max(started,3); }
+  var rows=list.slice(0,cut).map(function(s,i){
+    var sub=subjectSub(s.sj);
+    return '<button class="row sj-row" onclick="hubOpen('+i+')">'+
+      '<span class="sj-top"><span class="sj-nm">'+subjectLabel(s.sj)+(sub?'<span class="sj-sub sj-line">'+esc(sub)+'</span>':'')+'</span>'+
+        '<span class="row-meta"><span class="num">'+s.met+'</span> of <span class="num">'+s.total+'</span> met</span></span>'+
+      sjBar(s)+'</button>';
+  }).join('');
+  if(cut<list.length) rows+='<button class="row" onclick="HUB.more=true;renderModes()"><span class="sj-sub"><span class="num">'+(list.length-cut)+'</span> not started yet</span>'+
+    '<svg class="i sm row-chev ss-down" aria-hidden="true"><use href="#i-chevron"/></svg></button>';
+  if(!list.length) rows='<div class="row sj-empty"><span>'+(HUB.type==='letters'?'Look-alike pairs appear once you recognise two words that differ by one look-alike letter.':'Nothing here yet.')+'</span></div>';
+  var nWeak=weakWords().length;
+  function tool(id,en,ds,off){
+    return '<button class="row" onclick="openPractice(\''+id+'\')"><span>'+esc(en)+'<span class="sj-sub"> '+esc(ds)+'</span></span>'+
+      (off?'<span class="pr-off">online</span>':'')+'<svg class="i sm row-chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>';
+  }
+  return '<div class="pr-group"><div class="pr-gl"><span>Subjects</span></div>'+
+      segcHTML(SUBJ_TYPES,HUB.type,'hubType','Subject type')+
+      '<div class="group-b hub-list">'+rows+'</div></div>'+
+    '<div class="pr-group"><div class="pr-gl"><span>Tests</span></div><div class="group-b">'+
+      '<button class="row" onclick="openTestBuilder()"><span>Build a test<span class="sj-sub"> mix subjects and formats</span></span><svg class="i sm row-chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>'+
+      '<button class="row" onclick="openSubjectSheet({type:\'weak\',ids:[\'weak\']})"><span>Weak words<span class="sj-sub"> the ones you miss or mix up</span></span>'+
+        '<span class="row-meta num">'+nWeak+'</span><svg class="i sm row-chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>'+
+    '</div></div>'+
+    '<div class="pr-group"><div class="pr-gl"><span>Tools</span></div><div class="group-b">'+
+      tool('alphabet','Alphabet & look-alikes','letters and sounds')+
+      tool('grammar','Grammar tables','forms and tenses')+
+      tool('conversation','Dialogues','scripted exchanges')+
+      tool('sicha','Sicha','live chat with an AI',true)+
+    '</div></div>';
+}
+function hubType(t){ HUB.type=t; HUB.more=false; renderModes(); }
+function hubOpen(i){ var s=_hubList[i]; if(s) openSubjectSheet(s.sj); }
+
+// ── The subject sheet: words by state, browse, Learn and Test ──
+var SS={sj:null,newOn:false,card:-1,list:[]};
+function openSubjectSheet(sj){
+  SS={sj:sj,newOn:false,card:-1,list:[]};
+  openLayer(sj.type==='root'?'Word family':subjectName(sj),subjectSheetHTML());
+}
+// Up to 3 new words from the subject, inside the daily cap and the load
+// governor, kept apart from their look-alikes like a round's.
+function learnFresh(sj){
+  if(newPaused()) return [];
+  var left=Math.min(3,Math.max(0,CFG.newPerDay-newToday()));
+  return left?freshPick(subjectWords(sj),left):[];
+}
+function learnNewWhy(sj){
+  if(newPaused()) return pausedWhy();
+  if(CFG.newPerDay-newToday()<=0) return 'Today\'s '+CFG.newPerDay+' new words are in, so Learn uses words you have met.';
+  return '';
+}
+function subjectSheetHTML(){
+  if(SS.card>-1) return browseHTML();
+  var sj=SS.sj, ws=subjectWords(sj).slice().sort(function(a,b){ return a.rank-b.rank; });
+  var G={type:[],rec:[],learn:[]}, unmet=0;
+  ws.forEach(function(w){
+    var s=wordState(w.he);
+    if(s==='secure'||s==='mastered') G.type.push(w); else if(s==='familiar') G.rec.push(w);
+    else if(s==='learning') G.learn.push(w); else unmet++;
+  });
+  SS.list=G.type.concat(G.rec,G.learn);
+  var met=SS.list.length, i0=0, h='';
+  h+='<div class="tb-subj">';
+  if(sj.type==='root') h+='<div class="shoresh-root-letters ss-root">'+sj.ids[0].split('־').map(function(c){ return '<div class="shoresh-letter-box">'+esc(c)+'</div>'; }).join('')+'</div>';
+  else if(sj.type==='letters') h+='<div class="ss-pair" lang="he" dir="rtl">'+sj.ids[0].split('|').map(esc).join('<span class="ss-vs">·</span>')+'</div>'+
+    '<div class="sd-n ss-cue">'+esc(LETTER_CUE[sj.ids[0]]||'').replace(/([א-ת])/g,'<b lang="he">$1</b>')+'</div>';
+  else h+='<div class="sd-t">'+esc(subjectName(sj))+'</div>';
+  h+='<div class="sd-n"><span class="num">'+met+'</span> of <span class="num">'+ws.length+'</span> met · <span class="num">'+G.type.length+'</span> secure</div>'+
+    sjBar({total:ws.length,met:met,sec:G.type.length})+'</div>';
+  function group(title,arr){
+    if(!arr.length){ return ''; }
+    var start=i0; i0+=arr.length;
+    return '<div class="tb-sec"><div class="tb-h">'+title+' <span class="num">'+arr.length+'</span></div><div class="group-b">'+
+      arr.map(function(w,k){
+        return '<button class="row ss-row" onclick="ssCard('+(start+k)+')"><span class="dm-en">'+esc(w.en)+'</span>'+
+          '<span class="dm-he" lang="he" dir="rtl">'+esc(dHe(w))+'</span></button>';
+      }).join('')+'</div></div>';
+  }
+  h+=group('Can type it',G.type)+group('Recognise it',G.rec)+group('Learning',G.learn);
+  if(unmet) h+='<div class="tb-why ss-unmet">'+(sj.type==='root'?('<span class="num">'+unmet+'</span> more in this family'):('<span class="num">'+unmet+'</span> not met yet'))+'</div>';
+  // Learn, Test, pinned in thumb reach.
+  var fresh=sj.type==='weak'?[]:learnFresh(sj), why=sj.type==='weak'?'':learnNewWhy(sj), go='';
+  if(met<2){
+    if(fresh.length) SS.newOn=true;
+    go='<div class="tb-why">'+(met?'You\'ve met 1 word here.':'You haven\'t met a word here yet.')+
+      (fresh.length?' Learn can add up to '+fresh.length+' new '+(fresh.length>1?'ones':'one')+'.':(why?' '+esc(why):''))+'</div>'+
+      '<button class="btn" onclick="ssLearn()"'+(fresh.length||met?'':' disabled')+'>Learn</button>';
+  } else {
+    go=(fresh.length?chip(SS.newOn,'Include new words · up to '+fresh.length,'ssNew()'):(why&&unmet?'<div class="tb-why">'+esc(why)+'</div>':''))+
+      '<div class="ss-btns"><button class="btn" onclick="ssLearn()">Learn</button>'+
+      '<button class="btn-quiet" onclick="openTestBuilder(SS.sj)">Test</button></div>';
+  }
+  return h+'<div class="tb-go">'+(SS.note?'<div class="tb-why">'+esc(SS.note)+'</div>':'')+go+'</div>';
+}
+function ssNew(){ SS.newOn=!SS.newOn; relayer(subjectSheetHTML()); }
+function ssLearn(){
+  var sj=SS.sj, o={newOn:SS.newOn};
+  closePractice();
+  if(startSubject('learn',sj,o)) return;
+  // Nothing to study yet: every word met here is waiting on its learning step.
+  openSubjectSheet(sj);
+  SS.note='The words you have met here are resting for a few minutes after your round. Try again shortly, or take a Test.';
+  relayer(subjectSheetHTML());
+}
+// Browse: a word as a card, never graded.
+function ssCard(i){ SS.card=i; var qc=document.getElementById('quizContent'); qc.innerHTML=subjectSheetHTML(); qc.scrollTop=0; }
+function browseHTML(){
+  var w=SS.list[SS.card]; if(!w){ SS.card=-1; return subjectSheetHTML(); }
+  var n=stripV(w.he).replace(/\s/g,'').length, sz=n>11?' xlong':n>7?' long':'';
+  var exHe=w.sentence?esc(w.sentence).replace('___','<b>'+esc(dHe(w))+'</b>'):'';
+  var exEn=w.sentenceEn?esc(w.sentenceEn).replace('___','<span class="gap"></span>'):'';
+  return '<div class="fs-prompt intro ss-card">'+
+      '<div class="fs-he hero'+sz+'" lang="he" dir="rtl">'+esc(dHe(w))+'</div>'+
+      '<div class="fs-translit" lang="he-Latn" dir="ltr">'+esc(w.pron)+'</div>'+
+      '<div class="intro-gloss" lang="en" dir="ltr">'+esc(w.en)+'</div>'+
+      (exHe?'<div class="intro-ex"><div class="exh" lang="he" dir="rtl">'+exHe+'</div><div class="exe" lang="en" dir="ltr">'+exEn+'</div></div>':'')+
+      afterReveal(w)+
+    '</div>'+
+    '<div class="ss-btns ss-nav">'+
+      '<button class="btn-quiet" onclick="ssCard('+(SS.card-1)+')"'+(SS.card>0?'':' disabled')+' aria-label="Previous word"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></button>'+
+      '<button class="btn-quiet" onclick="SS.card=-1;relayer(subjectSheetHTML())">All words</button>'+
+      '<button class="btn-quiet" onclick="ssCard('+(SS.card+1)+')"'+(SS.card<SS.list.length-1?'':' disabled')+' aria-label="Next word"><svg class="i ss-next" aria-hidden="true"><use href="#i-back"/></svg></button>'+
+    '</div>';
+}
+
+// ── Learn: a round on one subject ──
+// Due cards first, then the weakest, then the rest. Each word twice: first
+// recognised, then in its hardest unlocked format (the round's production
+// ramp: choose the Hebrew → letters lit → cold), 4+ items apart. Misses come
+// back as in a round. Hints allowed; a hint grades Again. Optional new words
+// (intro + echo) count toward the daily cap.
+function buildLearn(sj,o){
+  var now=Date.now();
+  // A word waiting on its learning step (the 10-minute wait after a round)
+  // sits out, as in a round's top-up: answering it early would skip the wait.
+  function waiting(w){ var id=itemWord(w.he); return ['R','P'].some(function(d){
+    var c=getCard(id,d); return (c.st==='learning'||c.st==='relearning')&&c.due>now; }); }
+  var met=subjectWords(sj).filter(function(w){ return isMet(w)&&!waiting(w); });
+  function due(w){ var id=itemWord(w.he); return ['R','P'].some(function(d){ var c=getCard(id,d); return c.reps>0&&c.due<=now; }); }
+  var byWeak=function(a,b){ return weakKey(a)-weakKey(b); };
+  var order=met.filter(due).sort(byWeak).concat(met.filter(function(w){ return !due(w); }).sort(byWeak));
+  var fresh=(o.newOn&&sj.type!=='weak')?learnFresh(sj):[];
+  var nWords=Math.max(0,Math.floor((ROUND_LEN-2*fresh.length)/2));
+  var ws=order.slice(0,nWords);
+  var firsts=ws.map(function(w){ return {kind:'mc',w:w}; });
+  var seconds=ws.map(function(w){ return graduated(itemWord(w.he),'R')?{kind:'type',w:w}:{kind:'mc',w:w}; });
+  var intros=fresh.map(function(w){ return {kind:'intro',w:w}; });
+  var echoes=fresh.map(function(w){ return {kind:'mc',w:w,echo:true}; });
+  // Firsts in one block and seconds in the same order after it, the new
+  // words' echoes between: a word's two items sit a whole block apart.
+  firsts=shuffled(firsts); var pos={}; firsts.forEach(function(s,i){ pos[s.w.he]=i; });
+  seconds.sort(function(a,b){ return pos[a.w.he]-pos[b.w.he]; });
+  return intros.concat(firsts,echoes,seconds);
+}
+
+function startSubject(ctx,sj,o){
+  var steps=ctx==='test'?buildTest(sj,o):buildLearn(sj,o);
+  if(!steps.length) return false;
+  var sid=(ctx==='test'?'t':'l')+Date.now().toString(36);   // weakWords() reads the 't'
+  ROUND={active:true,ctx:ctx,sid:sid,subj:sj,opts:o,steps:steps,i:0,right:0,wrong:0,started:Date.now()};
+  showView('Today'); roundStep();
+  return true;
+}
+
+var _roundTestCat=null;
+function testRoundCat(){ if(!_roundTestCat) return; showView('Practice'); openTestBuilder({type:'cat',ids:[_roundTestCat]}); }
 function roundDone(){
+  if(ROUND.ctx) return subjectDone();
   ROUND.active=false;
   document.body.classList.remove('focus');
   var mins=Math.max(1,Math.round((Date.now()-ROUND.started)/60000));
@@ -5562,6 +5697,11 @@ function roundDone(){
   bumpDay(); saveProgress();
   var lv=activeLevel(), sh=levelShape(lv);
   var miss=ROUND.misses||[]; _lastMisses=miss.map(function(m){ return m.w; });
+  // 3+ misses in one category: one quiet way into a test on it.
+  var byCat={}, tcat=null;
+  miss.forEach(function(m){ if(m.w) byCat[m.w.cat]=(byCat[m.w.cat]||0)+1; });
+  Object.keys(byCat).forEach(function(c){ if(byCat[c]>=3&&(!tcat||byCat[c]>byCat[tcat])) tcat=c; });
+  _roundTestCat=tcat;
   // What you got wrong, your attempt (muted) above the right form.
   var missHTML=miss.length?'<div class="done-miss"><div class="done-miss-h">To review</div>'+
     miss.map(function(m){
@@ -5586,6 +5726,7 @@ function roundDone(){
             '<button class="btn-quiet" onclick="startRound()">Another round</button>'
           : '<button class="btn" onclick="startRound()">Another round</button>'+
             '<button class="btn-quiet" onclick="goTab(\'Levels\')">See the map</button>')+
+        (tcat?'<button class="done-link" onclick="testRoundCat()">Test '+esc(tcat)+' words</button>':'')+
       '</div>'+
     '</div>';
 }
@@ -5925,19 +6066,23 @@ function rootDue(){
   keys.sort(function(a,b){ return getCard(itemRoot(a),'C').reps-getCard(itemRoot(b),'C').reps; });
   return keys[0];
 }
-function rootHTML(root){
+// anchor: a test's word, which the question then starts from.
+function rootHTML(root,anchor){
   var fam=rootFamilies()[root]||[];
   // Anchor on a word the learner has met, so the clue bridges from the
   // known to the new rather than pairing two unknowns.
   var met=fam.filter(function(w){ return getCard(itemWord(w.he),'R').reps>0; });
   var pool=met.length?met:fam;
-  var pick=pool[Math.floor(Math.random()*pool.length)];
+  var pick=(anchor&&fam.indexOf(anchor)>-1)?anchor:pool[Math.floor(Math.random()*pool.length)];
   var known=met.indexOf(pick)>=0;
   var others=fam.filter(function(w){ return w!==pick; });
+  // A test asks only about words already met.
+  if(ROUND.ctx==='test'){ var mo=others.filter(isMet); if(mo.length) others=mo; }
   var answer=others[Math.floor(Math.random()*others.length)];
   ROOTQ={root:root,answer:answer,answered:false};
-  var distract=vocab.filter(function(w){ return rootOf(w.he)!==root && w.he.indexOf(' ')<0; })
-    .sort(function(){ return Math.random()-.5; }).slice(0,3);
+  var distract=vocab.filter(function(w){ return rootOf(w.he)!==root && w.he.indexOf(' ')<0; });
+  if(ROUND.ctx){ var md=distract.filter(isMet); if(md.length>=3) distract=md; }
+  distract=distract.sort(function(){ return Math.random()-.5; }).slice(0,3);
   var opts=distract.concat([answer]).sort(function(){ return Math.random()-.5; });
   return '<div class="fs-prompt">'+
       '<div class="fs-he sm" lang="he" dir="rtl">'+esc(root)+'</div>'+
@@ -5954,7 +6099,7 @@ function rootHTML(root){
 function checkRoot(btn,ok){
   if(ROOTQ.answered) return;
   ROOTQ.answered=true; ST.total++;
-  reviewItem(itemRoot(ROOTQ.root),'C',ok);
+  gradeStep(itemRoot(ROOTQ.root),'C',ok);
   document.querySelectorAll('.fs-opt,.mc-opt').forEach(function(b){ b.disabled=true; });
   btn.classList.add(ok?'correct':'wrong');
   if(!ok) document.querySelectorAll('.fs-opt,.mc-opt').forEach(function(b){
@@ -5965,12 +6110,6 @@ function checkRoot(btn,ok){
   hold(function(){ advance(ok); });
   var host=btn.closest('#stepBody,#quizContent'); showCont(host&&host.querySelector('.fs-row'));
 }
-function renderRoots(){
-  var r=rootDue();
-  document.getElementById('quizContent').innerHTML = r ? rootHTML(r)
-    : '<div class="sch-task"><div class="sch-task-title">Word families open up once you know a word from one</div>'+
-      '<div class="sch-task-sub">Do a round from Today first; families appear as you meet their words.</div></div>';
-}
 
 // ── PATTERN DRILL ─────────────────────────────────────────────
 // The frame is shown with its slot empty and the English spelled out; you type
@@ -5979,7 +6118,7 @@ function renderRoots(){
 var PAT={p:null,w:null,answered:false};
 // Every mode funnels through here, so a round can take over the flow without
 // each mode knowing anything about rounds.
-function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern') renderPattern(); else if(ST.mode==='roots') renderRoots(); else newQ(); }
+function advance(ok){ if(ROUND.active) roundNext(ok); else newQ(); }
 
 // NOTHING IS TESTED BEFORE IT IS TAUGHT. A pattern asks you to TYPE the
 // filler, so it may only use words you have already met; a pattern with no
@@ -5987,21 +6126,10 @@ function advance(ok){ if(ROUND.active) roundNext(ok); else if(ST.mode==='pattern
 // three words and then asked you to type לעבור, סבא and שקל.)
 function knownWord(w){ return getCard(itemWord(w.he),'R').reps>0; }
 function patternKnownFillers(p){ return patternFillers(p).filter(knownWord); }
-function patternDue(){
-  var pool=PATTERNS.filter(function(p){return patternKnownFillers(p).length>0;});
-  if(!pool.length) return null;
-  var due=pool.filter(function(p){return cardDue(itemPattern(p.id),'U');});
-  var pick=(due.length?due:pool);
-  // Least-practised first, so a pattern you keep dodging surfaces.
-  pick.sort(function(a,b){
-    return getCard(itemPattern(a.id),'U').reps-getCard(itemPattern(b.id),'U').reps;
-  });
-  return pick[0];
-}
 function patternPickWord(p){
   // Only words already met: the pattern is the new thing here, not the word.
   var pool=patternKnownFillers(p);
-  if(!pool.length) pool=patternFillers(p);   // unreachable via patternDue/buildRound
+  if(!pool.length) pool=patternFillers(p);   // unreachable via buildRound
   return pool[Math.floor(Math.random()*pool.length)];
 }
 
@@ -6048,18 +6176,6 @@ function introDone(){
   // first review is the echo later in this round.
   saveProgress(); advance(true);
 }
-function renderPattern(){
-  PAT.p=patternDue();
-  if(!PAT.p){
-    document.getElementById('quizContent').innerHTML=
-      '<div class="progress-label"><span>תבנית — Patterns</span><span></span></div>'+
-      '<div class="sch-task"><div class="sch-task-title">Patterns open up once you know a word that fits one</div>'+
-      '<div class="sch-task-sub">Do a round from Today first; each pattern only ever asks for words you have met.</div></div>';
-    return;
-  }
-  PAT.w=patternPickWord(PAT.p); PAT.answered=false; ST.answered=false;
-  document.getElementById('quizContent').innerHTML=patternHTML(PAT.p,PAT.w);
-}
 
 
 function checkPattern(){
@@ -6069,11 +6185,14 @@ function checkPattern(){
   if(!typed) return;
   PAT.answered=true; ST.answered=true; ST.total++;
   if(ROUND.active) ROUND.lastTyped=inp.value.trim();
-  var m=matchAnswer(inp.value,PAT.w.he), ok=(m!=='wrong');
+  var m=matchAnswer(inp.value,PAT.w.he,sessionCtx()==='test'), ok=(m!=='wrong');
   var g=(m==='wrong')?false:(m==='close'?'hard':true);
-  // One answer, two dimensions.
-  reviewItem(itemPattern(PAT.p.id),'U',g);
-  reviewItem(itemWord(PAT.w.he),'P',g);
+  var pair=ok?null:lookAlikePair(inp.value,PAT.w.he); recordConfusion(pair);
+  // One answer, two dimensions in a round. In a Test a sentence frame is Fill
+  // the blank, which touches the word's P card only. gradeStep: a Test's
+  // re-ask and Retry misses are logged only.
+  if(sessionCtx()!=='test') gradeStep(itemPattern(PAT.p.id),'U',g);
+  gradeStep(itemWord(PAT.w.he),'P',g);
   trackW(PAT.w.he,ok);
   var full=PAT.p.t.replace('___',PAT.w.he);
   var fb=document.getElementById('pfb');
@@ -6086,7 +6205,7 @@ function checkPattern(){
     inp.classList.add('bad'); ST.streak=0;
     if(fb) fb.innerHTML='<div class="conv-result bad">'+
       '<span class="heb" style="font-size:20px">'+esc(full)+'</span><br>'+
-      '<em style="font-size:13px">'+esc(PAT.w.pron)+'</em></div>';
+      '<em style="font-size:13px">'+esc(PAT.w.pron)+'</em>'+(pair?'<br>'+almostNote(pair):'')+'</div>';
     toast(''+PAT.w.he,'bad');
   }
   updateStats();
@@ -6988,7 +7107,9 @@ function saveProgress(){
       gender:ST.gender||null,sichaSupport:ST.sichaSupport||{},
       userVocab:ST.userVocab||[],grammarErrors:ST.grammarErrors||{},
       sichaMinutes:ST.sichaMinutes||0,quests:ST.quests||{},checkpoints:ST.checkpoints||{},
-      studied:ST.studied||{},mix:ST.mix||{},revlog:ST.revlog||{},firsts:ST.firsts||[]
+      studied:ST.studied||{},mix:ST.mix||{},revlog:ST.revlog||{},firsts:ST.firsts||[],
+      studyLog:ST.studyLog||[],subjects:ST.subjects||{},testPrefs:ST.testPrefs||{},
+      confusions:ST.confusions||{}
     }));
   }catch(e){}
 }
@@ -7022,6 +7143,8 @@ function loadProgress(){
     // Days studied (a calendar, not a streak). Older saves only know the last day.
     ST.studied=d.studied||{}; if(!d.studied&&d.lastDay) ST.studied[d.lastDay]=1;
     ST.mix=d.mix||{}; ST.revlog=d.revlog||{}; ST.firsts=d.firsts||[];
+    ST.studyLog=d.studyLog||[]; ST.subjects=d.subjects||{};
+    ST.testPrefs=d.testPrefs||{}; ST.confusions=d.confusions||{};
     if(d.showVowels){ST.showVowels=true;
       var b=document.getElementById('vowelBtn');if(b)b.classList.add('on');
       var l=document.getElementById('vowelLbl');if(l)l.textContent='ON';}
@@ -7083,20 +7206,11 @@ document.addEventListener('keydown',function(e){
   }
   var t=e.target;
   if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
-  var inTest=document.getElementById('testOverlay').classList.contains('open');
-  var scope=inTest?'#testOverlay ':'#quizContent ';
+  var scope='#quizContent ';
   var n=parseInt(e.key,10);
   if(n>=1&&n<=9){
-    // flashcard grading: 1 = missed, 2 = got it (when actions are showing)
-    if(!inTest&&ST.mode==='flashcard'){
-      var act=document.getElementById('fcAct');
-      if(act&&act.style.display!=='none'){ if(n===1)gradeCard(false); else if(n===2)gradeCard(true); return; }
-    }
     var btns=document.querySelectorAll(scope+'.mc-opt:not(:disabled), '+scope+'.conv-opt, '+scope+'.shoresh-opt:not(:disabled)');
     if(btns[n-1])btns[n-1].click();
-  } else if(e.key===' '&&!inTest&&ST.mode==='flashcard'){
-    var fc=document.getElementById('fc');
-    if(fc){e.preventDefault();flipCard();}
   }
 });
 
@@ -7118,8 +7232,7 @@ if('serviceWorker' in navigator){
   var _hadSW=!!navigator.serviceWorker.controller;
   navigator.serviceWorker.addEventListener('controllerchange',function(){
     if(!_hadSW) return;
-    var tst=document.getElementById('testOverlay');
-    if(ROUND.active||CHK.active||document.body.classList.contains('pfocus')||(tst&&tst.classList.contains('open'))) return;
+    if(ROUND.active||CHK.active||document.body.classList.contains('pfocus')) return;
     location.reload();
   });
   // Standalone apps resume without navigating, so check for updates on return.

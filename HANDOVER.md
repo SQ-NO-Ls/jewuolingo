@@ -2,7 +2,7 @@
 
 **Read this file first. It is the source of truth for the project.**
 
-Last updated: 2026-10-17, after the parallel polish (Paper theme, self-hosted fonts, L3–L6 vowel audit, update flow).
+Last updated: 2026-10-27, subject Tests and Learn sessions and the Practice hub (built locally, not yet deployed; jw-v62 when it ships).
 
 ---
 
@@ -13,7 +13,7 @@ as a PWA. Free to run, works fully offline, no accounts, no backend.
 
 - **Live:** https://sq-no-ls.github.io/jewuolingo/
 - **Repo:** `~/projects/jewuolingo` → `github.com/SQ-NO-Ls/jewuolingo` (branch `main`)
-- **Deployed version:** service-worker `jw-v61`
+- **Deployed version:** service-worker `jw-v62`
 - **Vocabulary:** 1,443 words · 42 categories · 6 frequency levels · 13 modes
   · 30 sentence patterns · 57 root families · 1,149 annotated words
 
@@ -35,7 +35,7 @@ If the clean URL is ever wanted, it needs: export progress → rename → re-ins
 ## 2. Files
 
 ```
-index.html              ~6,470 lines — THE APP. Everything: markup, CSS, JS, vocab.
+index.html              ~7,240 lines — THE APP. Everything: markup, CSS, JS, vocab.
 sw.js                   Service worker. Offline shell + font cache.
 fonts/                  Self-hosted woff2 (Google Fonts subsets, unmodified) + OFL.txt.
                         frl-* Frank Ruhl Libre, ss4-* Source Serif 4 (roman+italic,
@@ -242,8 +242,8 @@ options are plausible; random off-topic options give the answer away.
   "“this (m.)” is זה"; typing another real word shows "זה is “this (m.)”"
   (`wordByForm`). The Hebrew there is styled at 18px
   (`.fs-note b[lang="he"]`).
-- Practice multiple choice uses the same picker within its own filter
-  (whole vocab if the filter leaves fewer than 8 words).
+- Tests and Learn use the same picker over the whole vocabulary (the old
+  Practice Multiple Choice mode is gone since 2026-10-27).
 
 ### The production ramp (jw-v61, 2026-10-22)
 Research §8c: a word's typing (P) card is met in three formats chosen by its
@@ -274,11 +274,11 @@ errors, backlog steady at 16–20.
   a wrong "choose the Hebrew" pick, or a typed answer that is another real
   word. From then on `pickLures` gives that partner the top score (8), even
   if it was never taught — the pair is always tested against each other.
-- **Trouble words** (`troubleWords`, `startTrouble`): leeches (R or P lapses
+- **Trouble words** (`troubleWords`): leeches (R or P lapses
   ≥ `CFG.leechLapses` = 8, Anki's default — not suspended, drilled), words
   mixed up 2+ times, and words missed at least as often as got (3+ misses).
-  Shown at the top of Practice only when there are any; the drill is a round
-  (recognise each, then type each), so grading follows the round rules.
+  Since 2026-10-27 they feed the **Weak words** subject (Practice → Tests),
+  which replaced the separate drill (`startTrouble` was removed).
 - **Not sure** (research §8h): in round typing steps the EN key becomes
   **Not sure** (`kbUnsure`). Check = sure. Unsure + correct → Hard; SURE +
   wrong (no hint) → Again and "you were sure — this one comes back"
@@ -299,6 +299,113 @@ errors, backlog steady at 16–20.
   33 and got far more "choose" steps — self-pacing as intended.
 Verified: scripted feature checks, 375×667 fit, and a 21-day run (2 rounds/
 day, 15% misses, 15% Not sure, Trouble drill every 5 days): no errors.
+
+### Subject Tests and Learn sessions (2026-10-27, jw-v62)
+Spec: `ui-context/TESTS_SUBJECT_STUDY_SPEC.md`, written without the code; the
+Step 0 corrections and the owner's answers are below and win over it. A second
+way into the same engine: pick a subject, then **Learn** it or **Test** it. Both
+run on the round runner (`roundStep`/`roundNext`) with `ROUND.ctx` set.
+- **Subjects** `{type, ids}`: `cat`, `root` (the 57 families), `level`, `gram`
+  (`f<level>` = that level's sentence frames, `b:<binyan>` = verbs by binyan,
+  from the annotations; the Grammar tables are reference, not cards), `letters`
+  (`'ה|ח'`), `weak`. `subjectWords(sj)` = every word, met or not;
+  `subjectList(type)` adds met/secure counts for the hub.
+- **Contexts** (`sessionCtx()`): `round`, `checkpoint`, `practice`, `test`,
+  `learn`. In `reviewItem`, **Test follows Practice's rules** (never creates a
+  card; a correct answer on a card that is not due changes nothing, learning
+  steps included; a due card moves as in a round; a failure is always
+  recorded) and **Learn follows a round's**. Neither feeds `pace()`
+  (`ST.firsts`): a session you pick yourself would steer the controller.
+  Due reviews answered in a Test still count in `revlog` (they are real).
+- **Which card a format touches** (`testStep` sets `dim`; `gradeStep` routes):
+  Choose meaning → R; Choose from similar (`pickHTML`) → **R in a Test**, but on
+  the production ramp (P) in Learn and rounds; Type the Hebrew → P; Fill the
+  blank (the word's own example sentence, `blankHTML`, or a sentence frame for
+  `gram:f…`) → P only (in a Test `checkPattern` skips the frame's U card,
+  which a round still grades); Root link → logged only; Match (untimed warm-up, off by
+  default) → logged only. In a Test only the first attempt is graded: the
+  re-ask after a miss is `dim:null`.
+- **`buildTest`**: met words only, weakest first (`weakKey`: R then P
+  retrievability, lapses, mix-ups), at least half typed when typing is chosen
+  (half the words are drawn from those that can be typed, or the weakest would
+  all be words still in learning), each word at most twice and then in a
+  different format, typed before any multiple choice of the same word and 4+
+  apart, never 3 of a format in a row, sub-groups interleaved. The order is a
+  randomised greedy pass retried up to 40 times; a repeat that still lands
+  within 4 items of its pair is then dropped (only pools of 2–3 words force
+  it: a shorter test, not the answer shown straight back). 780 builds over
+  every subject with 2+ met words broke none of these rules. Length 10/20/30/All, capped at 40.
+- **Test builder** (`openTestBuilder`): subject (preset, or any mix within one
+  type), formats as chips (unavailable ones disabled with a one-line reason),
+  length, words (All met / Weak only). Remembered per subject in
+  `ST.testPrefs`; a subject with no saved setup keeps the choices already
+  made on screen (`tbPrefs`), so adding a second subject doesn't reset them. All 3,072 combinations on 6 subjects either start a valid
+  test or say why not. Defaults: every format but Match, length 20.
+- **Learn** (`buildLearn`): 12 items. Due words first, then weakest. A word
+  whose R or P card is **waiting on a learning step** (the 10 minutes after a
+  round) sits out, as in a round's top-up: Learn's round rules would
+  otherwise graduate it early (review fix, 2026-10-28). If every met word is
+  resting, the sheet says so (`SS.note`) instead of silently doing nothing. Each word
+  twice: recognised (mc), then its hardest unlocked format (mc again if R is
+  still learning, else the round's ramp via `typeFormat`: choose → letters lit
+  → cold); a block apart. Hints allowed (Again). **Include new words** (off by
+  default) adds up to 3 via `freshPick` (look-alikes kept apart, like
+  `freshList`, which now calls it), inside the daily cap and the load
+  governor; when either blocks, the sheet says so in one line.
+- **Results** (`subjectDone`): lists, not a score: Missed (with the typed
+  attempt), Shaky (right but Not sure), Solid; "17 of 20" at body size.
+  **Retry misses** = the same items now, logged only (`sid` starts `r`).
+  Results draw in Today's view but the tab bar shows **Practice** as current
+  (every session starts there); Done returns to Practice.
+  **Bring misses forward** = due set to now on the missed card (nothing else
+  changes), so they lead the next Start round. **Study this subject** opens
+  Learn; after Learn it reads **Another 12**. A Test stores
+  `ST.subjects[key] = {t, n, ok}`.
+- **Strict grading in Test**: `matchAnswer(t, w, strict)` = vowel-blind
+  equality only. Learn and rounds keep the 4+-letter slip allowance.
+- **Look-alikes**: `CONFUSABLE` gained ד/ר, ה/ח, ו/ז (owner's call; ג/נ left
+  out). This also changes round grading: those swaps are no longer "close".
+  `lookAlikePair(typed, want)` finds a single swapped look-alike; the
+  feedback says **"Almost: כ not ח"** (`almostNote`), and the pair is counted in
+  **`ST.confusions`** (`{"ח|כ": 3}`), beside `ST.mix`'s word pairs. Underlines
+  under differing letters are 2px, offset .3em, skip-ink off, so they clear
+  ק ך ן ף ץ.
+- **Wrong options** (`pickLures`): + same part of speech (and gender for
+  nouns) from the annotations where both words have them, + closeness in
+  frequency rank; and **untaught words are a last resort in both directions**
+  (−5), not only for Hebrew options. 60 sampled items: no shared meaning, all
+  met, 58 with 2+ strong lures.
+- **Weak words** (`weakWords`): `troubleWords()` (leeches at 8 lapses, mix-ups)
+  + 3+ lapses + missed in either of the last two tests + missed in more than 4
+  tests. It replaced the Trouble words drill (`startTrouble` is gone).
+- **Look-alike letters**: only ~38 minimal pairs exist in the vocabulary
+  (כל/קל, מחר/מהר, הם/חם, כן/בן…). A pair is a subject once BOTH words are
+  **recognised** (R graduated — research §8d: introduce apart, test together;
+  the spec said "met"), ordered by `ST.confusions`; its items are Choose from similar with the
+  partner always among the options (`st.lure`). The sheet shows the two
+  letters at 64px and a one-line cue (`LETTER_CUE`).
+- **`ST.studyLog`**: every Test/Learn answer `{t, he, f, ok, due, s[, r]}`
+  (format, was due, session id: `t…` test, `l…` learn, `r…` retry; `r:1` =
+  a re-ask). Last 2,000 kept. New `jw_progress` keys (all read with a
+  fallback): `studyLog`, `subjects`, `testPrefs`, `confusions`. No card shape
+  change. **Size**: after a scripted 21 days of rounds + a test + a learn
+  session a day, `jw_progress` was ~101 KB (623 log entries); a full 2,000-
+  entry log adds roughly another 110 KB.
+- **Round summary**: when 3+ misses share a category, a quiet "Test Food words"
+  link opens the builder on it.
+- **Layout notes**: the builder's sticky Start bar (`.tb-go`) is offset by the
+  layer's bottom padding (`--s5` + safe area) so nothing scrolls visibly under
+  it; the current subject type is a 2px bottom **border** (no shadows); with
+  five segments the labels drop to the 12px floor so "Categories" fits 375px.
+- Verified: console checks of the scheduling rule (due = same as a round;
+  not-due correct = card byte-identical; not-due miss = one lapse; Test never
+  creates cards), a 20-case grading table, every format at 375×812 and
+  375×667 in Dark and Paper (Continue always on screen, no overflow, no
+  focused field), Today identical to jw-v61 by markup and computed style, and
+  a 21-day scripted run (2 rounds + 1 test + 1 learn a day, 15% misses): no
+  errors, card shape intact, new words within the cap. Its backlog ran lower
+  than a rounds-only run of the same seed (63–101 vs 78–115): tests answer due
+  cards, and misses only ever pull intervals in.
 
 ### The round — one funnel
 `buildRound()` returns an array of steps; **it does not set `ROUND.steps`**
@@ -570,9 +677,24 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
   read right-to-left, state by **lightness only** so it survives any
   colour-vision deficiency), weekly quests, then per-level rows with four
   labelled R/P/U/C bars, can-dos and the checkpoint.
-- **Practice** — grouped by dimension (`MODE_DIM`), weakest first, with two
-  quiet filter buttons. Each mode has a line icon (`#i-m-<id>` in the
-  sprite, drawn in-house — no third-party set) instead of a Hebrew letter. The stat pills and three dropdowns were removed.
+- **Practice** — one study hub since 2026-10-27 (`renderModes()` →
+  `hubHTML()`): **Subjects** (a full-width segmented control: Categories ·
+  Roots · Levels · Grammar · Letters, then `.group-b` rows with name, "18 of
+  31 met" and Today's `.t-bar` at 4px: Secure in `--text2`, met in `--lv3`,
+  filling from the right — position and lightness, never hue; subjects not
+  started yet fold behind one row), **Tests** (Build a test, Weak words) and
+  **Tools** (Alphabet & look-alikes, Grammar tables, Dialogues, Sicha). A
+  subject opens a **sheet** in the Practice layer (`openLayer`,
+  `data-mode="sheet"`: top-aligned, no step animation on re-render): words by
+  state (can type it / recognise it / learning / a count of the unmet), tap a
+  word to browse it as a card (never graded), Learn and Test pinned at the
+  bottom. Flashcards, Multiple Choice, Match, Fill the Gap, Roots, Word
+  Families, Patterns and the old Test overlay are gone as modes (their
+  formats live in Test and Learn); **Type It stays** because Sicha's
+  "Practice these now" drills its focus words there. The Analytics overlay
+  stays, without "Practice missed words only". Selected chips and the
+  segmented control are neutral (`--surface2` + `--text2`), so the accent
+  stays on the one primary button.
 - **Me** — iOS inset grouped lists (`.group` / `.group-b` / `.row`): an
   identity block (secure count + `dimGlyph`), Progress, Display (real
   `.switch` controls — the one exception to the two-radii rule, because a
@@ -703,6 +825,15 @@ Four tabs: **Today · Map · Practice · Me** (the `Levels` view id is still
     After an edit, unregister it and clear caches again, or the browser keeps
     running the build from before the edit (it did, mid-test, on jw-v58).
 
+21. **…and its activate-reload cuts off console scripts.** After unregistering
+    and reloading, the freshly registered worker activates 1–4 s later and
+    reloads the page (the update flow in §8), killing any test script that is
+    still running ("the page navigated while this script was running"). Wait
+    ~4 s after a fresh load before running a scripted check. A placeholder
+    stub left later in the file also bit again here (trap 19: an empty
+    `buildLearn` below the real one made every Learn session empty):
+    `grep -c "^function name"` before trusting a new function.
+
 ---
 
 ## 8. Workflow
@@ -713,8 +844,8 @@ use the preview tool with name `jewuolingo`. Never run a dev server via Bash.
 
 ### Verify a change
 Always test at **375×812** (iPhone). The useful checks, run in the console:
-- All modes render: loop `MODES`, `setMode(m.id)`, check `#quizContent` non-empty
-  (`test` is expected to be empty — it draws into `#testOverlay`)
+- All modes render: loop `MODES` (Type It plus the four Tools), `openPractice(m.id)`,
+  check `#quizContent` non-empty; open a sheet for every `subjectList(t)` entry
 - No horizontal overflow: compare every element's `getBoundingClientRect().right`
   against `window.innerWidth`, skipping `position:fixed` and `.gram-wrap`
 - Tap targets ≥ ~40px
@@ -792,6 +923,8 @@ After either, re-audit `ROOT_OK` and re-check for duplicate English glosses.
   Practice by dimension, Me rebuilt, overlays restyled
 - Offline verified with fonts intact; fonts self-hosted, iOS launch screens
 - Niqqud verified in both print and cursive
+- Subject Tests and Learn sessions, the Practice hub, Weak words and
+  Look-alike letters subjects (§5, 2026-10-27; jw-v62 once deployed)
 
 ### Open / deliberately deferred
 - **Agreement drills — NOT viable as data stands.** 144 adjectives are
